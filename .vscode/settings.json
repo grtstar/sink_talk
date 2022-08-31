@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "headset_multi_talk.h": "c",
+        "sink_inquiry.h": "c",
+        "sink_inquiry_config_def.h": "c",
+        "sink_main_task.h": "c",
+        "sink_debug.h": "c",
+        "audio_plugin_voice_prompts_variants.h": "c",
+        "sink_audio_prompts_config_def.h": "c",
+        "config_store.h": "c",
+        "csrtypes.h": "c",
+        "print.h": "c",
+        "stdlib.h": "c",
+        "panic.h": "c",
+        "stream.h": "c",
+        "sink.h": "c",
+        "sink_audio.h": "c",
+        "kalimba.h": "c",
+        "bdaddr.h": "c"
+    }
+}
