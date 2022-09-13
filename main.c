@@ -141,6 +141,10 @@ Part of ADK_CSR867x.WIN. 4.4
 #include "headset_multi_talk.h"
 #endif
 
+#include "headset_ag.h"
+
+#include "headset_uart.h"
+
 #include <audio_plugin_voice_prompts_variants.h>
 
 #include <config_store.h>
@@ -279,6 +283,10 @@ static void handleCLMessage ( Task task, MessageId id, Message message )
 
 #ifdef ENABLE_MULTI_TALK
                 mtInit(task);
+#endif
+
+#ifdef ENABLE_AG
+                AgInit(&theSink.task);
 #endif
             }
             else
@@ -1722,6 +1730,10 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
 
         case EventSysBatteryCritical:
             MAIN_DEBUG(("HS: EventSysBatteryCritical\n")) ;
+            if(stateManagerGetState() == deviceLimbo)
+            {
+                lIndicateEvent = FALSE;
+            }
             /* Test code for HF indicator Battery Level */
 #ifdef TEST_HF_INDICATORS
             hfIndicatorNotify(hf_battery_level, 1);
@@ -1730,6 +1742,10 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
 
         case EventSysBatteryLow:
             MAIN_DEBUG(("HS: EventSysBatteryLow\n")) ;
+            if(stateManagerGetState() == deviceLimbo)
+            {
+                lIndicateEvent = FALSE;
+            }
             /* Test code for HF indicator Battery Level */
 #ifdef TEST_HF_INDICATORS
             hfIndicatorNotify(hf_battery_level, 10);
@@ -1741,10 +1757,18 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
         case EventSysGasGauge2 :
         case EventSysGasGauge3 :
             MAIN_DEBUG(("HS: EventSysGasGauge%d\n", id - EventSysGasGauge0)) ;
+            if(stateManagerGetState() == deviceLimbo)
+            {
+                lIndicateEvent = FALSE;
+            }
         break ;
 
         case EventSysBatteryOk:
             MAIN_DEBUG(("HS: EventSysBatteryOk\n")) ;
+            if(stateManagerGetState() == deviceLimbo)
+            {
+                lIndicateEvent = FALSE;
+            }
             /* Test code for HF indicator Battery Level */
 #ifdef TEST_HF_INDICATORS
             hfIndicatorNotify(hf_battery_level, 100);
@@ -3851,7 +3875,7 @@ static void handleHFPMessage  ( Task task, MessageId id, Message message )
 
     case HFP_UNRECOGNISED_AT_CMD_IND:
     {
-        sinkHandleUnrecognisedATCmd( (HFP_UNRECOGNISED_AT_CMD_IND_T*)message ) ;
+        sinkagHandleUnrecognisedATCmd( (HFP_UNRECOGNISED_AT_CMD_IND_T*)message ) ;
     }
     break ;
 
@@ -4545,6 +4569,8 @@ int main(void)
                 /* Initialise the Connection lib */
                 sinkConnectionInit();
             }
+            
+            UartInit(&theSink.task);
             MessageSendLater(&theSink.task, EventUsrPowerOn, NULL, D_SEC(1));
         }
         break;

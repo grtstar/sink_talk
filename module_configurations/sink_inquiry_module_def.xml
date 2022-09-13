@@ -157,12 +157,12 @@
             <StructElementConfigItem 
                 Id="Maximum Responses"
                 ShortId="max_responses" 
-                Desc="Specifies a limit for the number of devices found during an inquiry search, if 0 value there is no limit on the number of devices found."
+                Desc="Specifies A limit for the number of devices found during an inquiry search, if 0 value there is no limit on the number of devices found."
                 DefaultValue="16"  >
                 <BuildVariant
                     HwVariant="CNS10001v4"
                     SwVariant="Headset-Gaming"
-                    Value="32" />
+                    Value="8" />
             </StructElementConfigItem>
             <StructElementConfigItem 
                 Id="Inquiry Timeout [1.28*s]"

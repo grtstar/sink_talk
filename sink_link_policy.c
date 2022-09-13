@@ -39,6 +39,10 @@ Copyright (c) 2004 - 2016 Qualcomm Technologies International, Ltd.
 #include <app/bluestack/dm_prim.h>
 #endif
 
+#ifdef ENABLE_MULTI_TALK
+#include "headset_multi_talk.h"
+#endif
+
 
 /* Lower power table for HFP SLC */
 static const lp_power_table lp_powertable_default[2]=
@@ -148,7 +152,9 @@ static uint16 linkPolicyNumberPhysicalConnections (void)
     {
         connections++;
     }
-        
+ #ifdef ENABLE_MULTI_TALK
+    connections += mtGetConnectDevices();
+ #endif       
     LP_DEBUG(("LP: Number of physical connections = %u\n", connections ));    
     return connections;
 }
@@ -643,11 +649,22 @@ void linkPolicyHandleRoleCfm(const CL_DM_ROLE_CFM_T *cfm)
                 else
 #endif
                 {
-                    LP_DEBUG(("LP: Multipoint: Non-peer, require Master role\n")) ;
-                    requiredRole = hci_role_master;
-                    /* Set the link supervision timeout as the role switch will have reset it back
-                       to firmware defaults */
-                    ConnectionSetLinkSupervisionTimeout(cfm->sink, SINK_LINK_SUPERVISION_TIMEOUT);
+
+#ifdef ENABLE_MULTI_TALK
+                    if(mtIsOnlyChildConnect())
+                    {
+                        LP_DEBUG(("LP: MultiTalk: Perent Disconnect, require Slave role (inverted)\n")) ;
+                        requiredRole = hci_role_slave;
+                    }
+                    else   
+#endif
+                    {
+                            LP_DEBUG(("LP: Multipoint: Non-peer, require Master role\n")) ;
+                        requiredRole = hci_role_master;
+                        /* Set the link supervision timeout as the role switch will have reset it back
+                        to firmware defaults */
+                        ConnectionSetLinkSupervisionTimeout(cfm->sink, SINK_LINK_SUPERVISION_TIMEOUT);
+                    }
                 }
             }
         }

@@ -1717,6 +1717,150 @@
                         DefaultValue="False" />
                 </PatternArrayRow>
             </BuildVariant>
+            <BuildVariant
+                HwVariant="CNS10001v4"
+                SwVariant="Headset-Gaming" >
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Power On" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
+                        DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Power Off" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
+                        DefaultValue="1" />
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
+                        DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Battery Ok" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
+                        DefaultValue="2" />
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
+                        DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Battery Low" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
+                        DefaultValue="3" />
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
+                        DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Battery Low" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
+                        DefaultValue="4" />
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
+                        DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="SLC Connected" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
+                        DefaultValue="5" />
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
+                        DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="SLC Disconnected" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
+                        DefaultValue="6" />
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
+                        DefaultValue="Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+            </BuildVariant>
         </ConfigPatternArray>
     </ConfigGroup>
 </ModuleData>

@@ -37,14 +37,14 @@ image/cvc_headset/cvc_headset.kap :
 	$(mkdir) image/cvc_headset
 	$(copyfile) ../../kalimba/apps/cvc_headset/image/cvc_headset/cvc_headset.kap $@
 
-image.fs : image/cvc_headset/cvc_headset.kap
+#image.fs : image/cvc_headset/cvc_headset.kap
 
 # 2 mic cVc
 image/cvc_headset_2mic/cvc_headset_2mic.kap :
 	$(mkdir) image/cvc_headset_2mic
 	$(copyfile) ../../kalimba/apps/cvc_headset_2mic/image/cvc_headset_2mic/cvc_headset_2mic.kap $@
 
-image.fs : image/cvc_headset_2mic/cvc_headset_2mic.kap
+#image.fs : image/cvc_headset_2mic/cvc_headset_2mic.kap
 
 #  1 mic Handsfree cVc
 #image/cvc_handsfree/cvc_handsfree.kap :
@@ -101,7 +101,7 @@ image/one_mic_multitalk_cvsd/one_mic_multitalk_cvsd.kap :
 	$(copyfile) ./dsp/one_mic_example/image/one_mic_multitalk_cvsd/one_mic_multitalk_cvsd.kap $@
 
 image.fs : image/one_mic_example_cvsd/one_mic_example_cvsd.kap
-image.fs : image/one_mic_multitalk_cvsd/one_mic_multitalk_cvsd.kap
+#image.fs : image/one_mic_multitalk_cvsd/one_mic_multitalk_cvsd.kap
 image.fs : image/one_mic_example_2sco/one_mic_example_2sco.kap
 endif
 

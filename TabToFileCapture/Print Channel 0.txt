@@ -1,0 +1,57 @@
+BDADDR [1][0][0]
+AUDIO_PARAMS NONE FOUND !!
+MT: mt_handler id = 0x503a
+handleMTL2capRegisterCfm status=0, prim=0x55
+MT: mt_handler id = 0x500b
+AGHFP_INIT_CFM
+AP: Event conf available
+AP: EvPl[4001][4001][0][0]
+VP: Play prompt 1 of 7
+AudioPromptPlay 0  [lang:0][q:1][o.r.:0]
+AP: Event conf available
+AP: Event conf available
+AP: Event conf available
+AP: EvPl[470a][470a][2][0]
+VP: Play prompt 3 of 7
+AudioPromptPlay 2  [lang:0][q:1][o.r.:0]
+AP: Event conf available
+AP: EvPl[470a][470a][2][0]
+VP: Play prompt 3 of 7
+AudioPromptPlay 2  [lang:0][q:1][o.r.:0]
+Uart recv:
+AA Uart recv:
+55 03 00 40 02 42 UART: evnet = 0x4002
+AP: Event conf available
+AP: EvPl[4002][4002][1][0]
+VP: Play prompt 2 of 7
+AudioPromptPlay 1  [lang:0][q:1][o.r.:0]
+Uart recv:
+AA Uart recv:
+55 03 00 40 01 42 UART: evnet = 0x4001
+AP: Event conf available
+AP: EvPl[4001][4001][0][0]
+VP: Play prompt 1 of 7
+AudioPromptPlay 0  [lang:0][q:1][o.r.:0]
+AP: Event conf available
+AP: Event conf available
+AP: EvPl[470a][470a][2][0]
+VP: Play prompt 3 of 7
+AudioPromptPlay 2  [lang:0][q:1][o.r.:0]
+Uart recv:
+AA Uart recv:
+55 03 00 40 70 42 UART: evnet = 0x4070
+2T: Prepre Pair
+2T: Enter Pair
+VP: Play prompt 26 of 7
+AudioPromptPlay 25  [lang:0][q:1][o.r.:0]
+CL_SM_IO_CAPABILITY_REQ_IND
+auth: Sending IO Capability 
+CL_SM_IO_CAPABILITY_IND
+CL_SM_AUTHENTICATE_CFM
+Main Unhandled Message : 23328 , 0x5B20
+AGHFP_SLC_CONNECT_CFM
+success
+Main Unhandled Message : 23320 , 0x5B18
+Main Unhandled Message : 23321 , 0x5B19
+Main Unhandled Message : 23312 , 0x5B10
+Main Unhandled Message : 23326 , 0x5B1E

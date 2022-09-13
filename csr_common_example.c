@@ -300,7 +300,7 @@ static void connectKalimbaOutputs(audio_output_params_t* mch_params)
     {
         AudioOutputAddSourceOrPanic(StreamKalimbaSource(0), 
                                     audio_output_primary_left);
-        AudioOutputAddSourceOrPanic(StreamKalimbaSource(3), 
+        AudioOutputAddSourceOrPanic(StreamKalimbaSource(0),         /* maybe bug */
                                     audio_output_primary_right);
         AudioOutputConnectOrPanic(mch_params);
     }
@@ -340,8 +340,17 @@ static void connectAudio(const ExamplePluginTaskdata * const task)
 
         connectMicrophones(task, adc_rate);
 
-        connectKalimbaOutputs(&params);
-
+        if(CSR_COMMON_EXAMPLE->kap_type == 2)
+        {
+            Sink speaker_snk = StreamAudioSink(AUDIO_HARDWARE_CODEC, AUDIO_INSTANCE_0,  AUDIO_CHANNEL_A_AND_B);
+            PanicFalse(SinkConfigure(speaker_snk, STREAM_CODEC_OUTPUT_RATE, CSR_COMMON_EXAMPLE->dac_rate));
+            StreamConnect(StreamKalimbaSource(0), speaker_snk);   /* DSP->DAC */
+        }
+        else
+        {
+            connectKalimbaOutputs(&params);
+        }
+        
         
         if(CSR_COMMON_EXAMPLE->kap_type == 2)
         {

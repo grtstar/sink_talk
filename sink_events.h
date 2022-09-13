@@ -191,7 +191,7 @@ typedef enum sinkEventsTag
 /*0x4076*/    EventUsrGaiaUser7,
 /*0x4077*/    EventUsrGaiaUser8,
 #else
-              EventMultiTalk2DevicePairFinish,
+              Event2TalkPrepareEnter,
               EventMultiTalk3DevicePairFinish,
               EventMultiTalk4DevicePairFinish,
               EventMultiTalk5DevicePairFinish,
@@ -695,6 +695,16 @@ typedef enum sinkEventsTag
 /*0x47F3*/    EventSysUpgradeOptimisation,
 
 /*0x47F4*/    EventSysBAReceiverModeActive,
+
+              EventSysMultiTalkReconnect,
+              EventSysMultiTalkInquiryDevices,
+              EventSysMultiTalkDeviceConnected,
+              EventSysMultiTalkCurrentDevices,
+
+              EventSysAGConnect,
+              EventSysAGDisconnect,
+              EventSysAGAudioConnect,
+              EventSysAGAudioDisconnect,
 
               EventSysLast
 

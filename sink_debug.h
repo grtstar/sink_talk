@@ -26,7 +26,7 @@ DESCRIPTION
  /*end of DO_NOT_DOCUMENT*/
 
     /*The global debug enable*/ 
-    #define DEBUG_PRINT_ENABLEDx
+    #define DEBUG_PRINT_ENABLED
 
 #define DEBUG_VM_HATSx
 
@@ -52,7 +52,8 @@ void printVmLogsInTestSystem (const char *format, ...);
     #ifdef DEBUG_PRINT_ENABLED
 
         #ifndef DEBUG_VM_HATS
-            #define DEBUG(x) {printf x;}
+            int sinkEnableDebug(void);
+            #define DEBUG(x) {if(sinkEnableDebug()) printf x;}
         #endif
 
 
@@ -135,7 +136,7 @@ void printVmLogsInTestSystem (const char *format, ...);
         /* LED Manager Debug */
         #define DEBUG_LMx
         /* Sink Link Policy Debug */
-        #define DEBUG_LPx
+        #define DEBUG_LP
         /* Main System Messages Debug */
         #define DEBUG_MAINx
         #define DEBUG_MALLOCx 
@@ -217,6 +218,6 @@ void printVmLogsInTestSystem (const char *format, ...);
 #define HAVE_VBAT_SEL
 #define HAVE_FULL_USB_CHARGER_DETECTION
 
-#define LOG_ERROR(x) {printf x;}
+#define LOG_ERROR(x) {if(sinkEnableDebug()) printf x;}
 
 #endif /*_SINK_DEBUG_H_*/

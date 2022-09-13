@@ -1,4 +1,0 @@
-VM has panicked! Reason: 
-VM has panicked! Reason: 
-Read from illegal address (Context: 0x4)
-Read from illegal address (Context: 0x4)

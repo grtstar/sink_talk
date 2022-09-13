@@ -9646,52 +9646,6 @@
                     Id="Pattern Row" >
                     <PatternArrayConfigItem 
                         ShortId="pio_mask" 
-                        DefaultValue="" />
-                    <PatternArrayConfigItem 
-                        ShortId="vreg_enabled" 
-                        DefaultValue="True" />
-                    <PatternArrayConfigItem 
-                        ShortId="chg_enabled" 
-                        DefaultValue="False" />
-                    <PatternArrayConfigItem 
-                        ShortId="state_mask" 
-                        DefaultValue="Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
-                    <PatternArrayConfigItem 
-                        ShortId="user_event" 
-                        DefaultValue="Power Off" />
-                    <PatternArrayConfigItem 
-                        ShortId="type" 
-                        DefaultValue="VLONG" />
-                </PatternArrayRow>
-                <PatternArrayRow 
-                    Node="Basic" 
-                    ShortId="pattern_row" 
-                    Id="Pattern Row" >
-                    <PatternArrayConfigItem 
-                        ShortId="pio_mask" 
-                        DefaultValue="" />
-                    <PatternArrayConfigItem 
-                        ShortId="vreg_enabled" 
-                        DefaultValue="True" />
-                    <PatternArrayConfigItem 
-                        ShortId="chg_enabled" 
-                        DefaultValue="False" />
-                    <PatternArrayConfigItem 
-                        ShortId="state_mask" 
-                        DefaultValue="Powering On" />
-                    <PatternArrayConfigItem 
-                        ShortId="user_event" 
-                        DefaultValue="Power On" />
-                    <PatternArrayConfigItem 
-                        ShortId="type" 
-                        DefaultValue="LONG" />
-                </PatternArrayRow>
-                <PatternArrayRow 
-                    Node="Basic" 
-                    ShortId="pattern_row" 
-                    Id="Pattern Row" >
-                    <PatternArrayConfigItem 
-                        ShortId="pio_mask" 
                         DefaultValue="0." />
                     <PatternArrayConfigItem 
                         ShortId="vreg_enabled" 
@@ -9701,7 +9655,7 @@
                         DefaultValue="False" />
                     <PatternArrayConfigItem 
                         ShortId="state_mask" 
-                        DefaultValue="Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                        DefaultValue="Connectable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
                     <PatternArrayConfigItem 
                         ShortId="user_event" 
                         DefaultValue="MultiTalk Enter Pair" />
@@ -9747,13 +9701,13 @@
                         DefaultValue="False" />
                     <PatternArrayConfigItem 
                         ShortId="state_mask" 
-                        DefaultValue="Connectable | Connected" />
+                        DefaultValue="Connectable/Discoverable" />
                     <PatternArrayConfigItem 
                         ShortId="user_event" 
                         DefaultValue="MultiTalk End Pair" />
                     <PatternArrayConfigItem 
                         ShortId="type" 
-                        DefaultValue="SH SINGLE" />
+                        DefaultValue="LONG" />
                 </PatternArrayRow>
                 <PatternArrayRow 
                     Node="Basic" 
@@ -9983,7 +9937,53 @@
                         DefaultValue="MultiTalk Disconnect" />
                     <PatternArrayConfigItem 
                         ShortId="type" 
-                        DefaultValue="DOUBLE" />
+                        DefaultValue="SH SINGLE" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="pio_mask" 
+                        DefaultValue="0." />
+                    <PatternArrayConfigItem 
+                        ShortId="vreg_enabled" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="chg_enabled" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
+                        DefaultValue="Connectable" />
+                    <PatternArrayConfigItem 
+                        ShortId="user_event" 
+                        DefaultValue="MultiTalk Reconnect" />
+                    <PatternArrayConfigItem 
+                        ShortId="type" 
+                        DefaultValue="SH SINGLE" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="pio_mask" 
+                        DefaultValue="" />
+                    <PatternArrayConfigItem 
+                        ShortId="vreg_enabled" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="chg_enabled" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
+                        DefaultValue="" />
+                    <PatternArrayConfigItem 
+                        ShortId="user_event" 
+                        DefaultValue="..." />
+                    <PatternArrayConfigItem 
+                        ShortId="type" 
+                        DefaultValue="..." />
                 </PatternArrayRow>
                 <PatternArrayRow 
                     Node="Basic" 

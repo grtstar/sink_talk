@@ -333,8 +333,14 @@ void sinkEnableDiscoverable( void )
     sinkInquiryGetRadioConfig(&radioConfig);
     MAIN_DEBUG(("MP Enable Discoverable %cp\n", sinkIsConnectable() ? '+' : '-'));
     
+    
     /* Set inquiry access code to respond to */
-    if ((sinkInquiryIsInqSessionNormal()) || (!peerUseLiacForPairing()))
+    if(sinkInquiryIsInqSessionMuliTalk())
+    {
+        MAIN_DEBUG(("Discoverable LIAC\n"));
+        ConnectionWriteInquiryAccessCode(&theSink.task, &liac, 1);
+    }
+    else if ((sinkInquiryIsInqSessionNormal()) || (!peerUseLiacForPairing()))
     {
         MAIN_DEBUG(("Discoverable GIAC\n"));
         ConnectionWriteInquiryAccessCode(&theSink.task, &giac, 1);

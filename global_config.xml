@@ -237,7 +237,7 @@
                   value="0x6E"/>
             <enum key="Create Audio Connection"
                   value="0x6F"/>
-            <enum key="MultiTalk 2 Device Pair Finish"
+            <enum key="TwoTalk Prepare Enter"
                   value="0x70"/>
             <enum key="MultiTalk 3 Device Pair Finish"
                   value="0x71"/>

@@ -655,7 +655,7 @@
                 key="Create Audio Connection" 
                 value="0x6F" />
             <enum 
-                key="MultiTalk 2 Device Pair Finish" 
+                key="TwoTalk Prepare Enter" 
                 value="0x70" />
             <enum 
                 key="MultiTalk 3 Device Pair Finish" 
@@ -5876,7 +5876,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                     LocationItem="BlockId=425, Word=8, Bit=8, Size=8" 
                     Type="uint" 
                     Id="Maximum Responses" 
-                    Desc="Specifies a limit for the number of devices found during an inquiry search, if 0 value there is no limit on the number of devices found." />
+                    Desc="Specifies A limit for the number of devices found during an inquiry search, if 0 value there is no limit on the number of devices found." />
                 <ConfigItem 
                     LocationItem="BlockId=425, Word=8, Bit=0, Size=8" 
                     Type="uint" 

@@ -861,8 +861,8 @@ INFO : Generating file: ./pskey_map.xml
 INFO : Preparations before writing: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\config_definition.xml
 INFO : Creating ConfigPatternArray group user_event_set
 INFO : Generating file: ./config_definition.xml
-INFO : ./config_definition.gz contains 41538 bytes of compressed data
-INFO : ./config_definition.xml signature is f949e3047cb3b9e09064e8c4e8f4eaa0
+INFO : ./config_definition.gz contains 41553 bytes of compressed data
+INFO : ./config_definition.xml signature is 637f3ba84638343f033c88ba82e4c714
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\config_definition.c
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\config_definition.h
 INFO : ********************************************************************
@@ -870,4 +870,4 @@ INFO : ***                                                              ***
 INFO : *** Build Config Script - Processing Completed Successfully      ***
 INFO : ***                                                              ***
 INFO : ********************************************************************
-INFO : Execution time: 0:00:01.887000
+INFO : Execution time: 0:00:03.716000

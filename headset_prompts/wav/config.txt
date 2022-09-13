@@ -5,6 +5,7 @@ compression=adpcm,rate=8000,channels=mono,file=电池电量中等.wav
 compression=adpcm,rate=8000,channels=mono,file=电池电量低.wav
 compression=adpcm,rate=8000,channels=mono,file=多人对讲组网.wav
 compression=adpcm,rate=8000,channels=mono,file=多人对讲开始连接.wav
+compression=adpcm,rate=8000,channels=mono,file=组网人数1人.wav
 compression=adpcm,rate=8000,channels=mono,file=组网人数2人.wav
 compression=adpcm,rate=8000,channels=mono,file=组网人数3人.wav
 compression=adpcm,rate=8000,channels=mono,file=组网人数4人.wav
@@ -21,3 +22,18 @@ compression=adpcm,rate=8000,channels=mono,file=7人组网完成.wav
 compression=adpcm,rate=8000,channels=mono,file=8人组网完成.wav
 compression=adpcm,rate=8000,channels=mono,file=多人对讲.wav
 compression=adpcm,rate=8000,channels=mono,file=多人对讲已关闭.wav
+compression=adpcm,rate=8000,channels=mono,file=双人对讲.wav
+compression=adpcm,rate=8000,channels=mono,file=双人对讲配对.wav
+compression=adpcm,rate=8000,channels=mono,file=双人对讲配对成功.wav
+compression=adpcm,rate=8000,channels=mono,file=退出双人对讲配对.wav
+compression=adpcm,rate=8000,channels=mono,file=对讲已关闭.wav
+compression=adpcm,rate=8000,channels=mono,file=对讲已断开.wav
+compression=adpcm,rate=8000,channels=mono,file=当前人数1人.wav
+compression=adpcm,rate=8000,channels=mono,file=当前人数2人.wav
+compression=adpcm,rate=8000,channels=mono,file=当前人数3人.wav
+compression=adpcm,rate=8000,channels=mono,file=当前人数4人.wav
+compression=adpcm,rate=8000,channels=mono,file=当前人数5人.wav
+compression=adpcm,rate=8000,channels=mono,file=当前人数6人.wav
+compression=adpcm,rate=8000,channels=mono,file=当前人数7人.wav
+compression=adpcm,rate=8000,channels=mono,file=当前人数8人.wav
+compression=adpcm,rate=8000,channels=mono,file=取消组网.wav

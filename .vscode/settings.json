@@ -16,6 +16,12 @@
         "sink.h": "c",
         "sink_audio.h": "c",
         "kalimba.h": "c",
-        "bdaddr.h": "c"
+        "bdaddr.h": "c",
+        "sink_gatt_server.h": "c",
+        "algorithm": "c",
+        "xmemory": "c",
+        "xutility": "c",
+        "headset_ag.h": "c",
+        "connection.h": "c"
     }
 }

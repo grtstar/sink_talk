@@ -9,7 +9,7 @@ void mtACLDisconnect(int device);
 void mtScoConnect(Sink sink);
 void mtScoDisconnect(int device);
 
-void mtConnect(bdaddr *bd_addr);
+bool mtConnect(bdaddr *bd_addr);
 void mtReconnect(void);
 void mtDisconnect(void);
 
@@ -39,7 +39,7 @@ void mtTailConnect(void);
 int mtGetConnectDevices(void);
 
 bool mtCanPair(void);
-
+bool mtIsOnlyChildConnect(void);
 
 bool processEventMultiTalk(Task task, MessageId id, Message message);
 #endif

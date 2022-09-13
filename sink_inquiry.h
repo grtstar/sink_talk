@@ -55,7 +55,9 @@ typedef enum
 typedef enum
 {
     inquiry_session_normal,   /* Normal inquiry session, for finding AGs etc */
-    inquiry_session_peer      /* Peer inquiry session, for finding peer devices */
+    inquiry_session_peer,      /* Peer inquiry session, for finding peer devices */
+    inquiry_session_multi_talk,
+    inquiry_session_ag
 } inquiry_session;
 
 /* Inquiry action */
@@ -106,13 +108,15 @@ typedef struct
 
 typedef struct
 {
-    inquiry_session    session:1;             /* Inquiry session (normal/peer)       */
+    inquiry_session    session;               /* Inquiry session (normal/peer)       */
+    unsigned           nop:1;
     inquiry_action     action:2;              /* Inquiry Action (pairing/connecting)  */
     inquiry_state      state:2;               /* Inquiry State (searching/connecting) */
     unsigned           attempting:4;          /* Index of device being connected to   */
     supported_profiles remote_profiles:4;     /* Bitmask of profiles supported by a remote device */
     unsigned           profile_search_idx:3;  /* Index of current sdp service search */
     uint16             peer_version;          /* Indicates the Peer Device support version number of the device being connected to (as per 'attempting' field) */ 
+    uint8              result_count;
     inquiry_result_t*  results;               /* Array of inquiry results             */
 }inquiry_data_t;
 
@@ -479,6 +483,18 @@ RETURNS
     bool: TRUE if session is peer else FALSE
 ****************************************************************************/
 bool sinkInquiryIsInqSessionPeer(void);
+
+/****************************************************************************
+NAME	
+    sinkInquiryIsInqSessionMuliTalk
+
+DESCRIPTION
+    This interfaces could be used to check Inquiry session is multi talk or not
+    
+RETURNS
+    bool: TRUE if session is multi talk else FALSE
+****************************************************************************/
+bool sinkInquiryIsInqSessionMuliTalk(void);
 
 /****************************************************************************
 NAME	

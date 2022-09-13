@@ -1,4 +1,58 @@
 <project buildenvironment="{84faf732-1340-4049-9094-244167adf571}" buildenvironmentname="vm" executionenvironmentoption="" buildenvironmentoption="" executionenvironmentname="vm" executionenvironment="{2b2c6868-a56e-4266-962a-cddf1c979343}" >
+ <folder name="aghfp" >
+  <file path="aghfp/aghfp.h" />
+  <file path="aghfp/aghfp_audio.c" />
+  <file path="aghfp/aghfp_audio_handler.c" />
+  <file path="aghfp/aghfp_audio_handler.h" />
+  <file path="aghfp/aghfp_call.c" />
+  <file path="aghfp/aghfp_call.h" />
+  <file path="aghfp/aghfp_call_manager.c" />
+  <file path="aghfp/aghfp_call_manager.h" />
+  <file path="aghfp/aghfp_common.c" />
+  <file path="aghfp/aghfp_common.h" />
+  <file path="aghfp/aghfp_csr_features.c" />
+  <file path="aghfp/aghfp_csr_features.h" />
+  <file path="aghfp/aghfp_hf_indicators.c" />
+  <file path="aghfp/aghfp_hf_indicators.h" />
+  <file path="aghfp/aghfp_hfp_service_record.h" />
+  <file path="aghfp/aghfp_hsp_service_record.h" />
+  <file path="aghfp/aghfp_indicators.c" />
+  <file path="aghfp/aghfp_indicators.h" />
+  <file path="aghfp/aghfp_init.c" />
+  <file path="aghfp/aghfp_init.h" />
+  <file path="aghfp/aghfp_link_manager.c" />
+  <file path="aghfp/aghfp_misc_handler.c" />
+  <file path="aghfp/aghfp_misc_handler.h" />
+  <file path="aghfp/aghfp_ok.c" />
+  <file path="aghfp/aghfp_ok.h" />
+  <file path="aghfp/aghfp_parse.c" />
+  <file path="aghfp/aghfp_parse.h" />
+  <file path="aghfp/aghfp_parse.parse" />
+  <file path="aghfp/aghfp_parse_handler.c" />
+  <file path="aghfp/aghfp_private.h" />
+  <file path="aghfp/aghfp_profile_handler.c" />
+  <file path="aghfp/aghfp_profile_handler.h" />
+  <file path="aghfp/aghfp_receive_data.c" />
+  <file path="aghfp/aghfp_receive_data.h" />
+  <file path="aghfp/aghfp_rfc.c" />
+  <file path="aghfp/aghfp_rfc.h" />
+  <file path="aghfp/aghfp_sdp.c" />
+  <file path="aghfp/aghfp_sdp.h" />
+  <file path="aghfp/aghfp_send_data.c" />
+  <file path="aghfp/aghfp_send_data.h" />
+  <file path="aghfp/aghfp_shim.c" />
+  <file path="aghfp/aghfp_shim.h" />
+  <file path="aghfp/aghfp_slc.c" />
+  <file path="aghfp/aghfp_slc_handler.c" />
+  <file path="aghfp/aghfp_slc_handler.h" />
+  <file path="aghfp/aghfp_user_data.c" />
+  <file path="aghfp/aghfp_user_data_handler.c" />
+  <file path="aghfp/aghfp_user_data_handler.h" />
+  <file path="aghfp/aghfp_wbs.c" />
+  <file path="aghfp/aghfp_wbs.h" />
+  <file path="aghfp/aghfp_wbs_handler.c" />
+  <file path="aghfp/aghfp_wbs_handler.h" />
+ </folder>
  <folder name="C Files" >
   <extension name="c" />
   <file path="sink_gatt_client_ancs.c" />
@@ -116,9 +170,13 @@
   <file path="csr_common_example_plugin.c" />
   <file path="csr_common_example.c" />
   <file path="audio.c" />
+  <file path="protocol_hex.c" />
+  <file path="headset_ag.c" />
  </folder>
  <folder name="Header Files" >
   <extension name="h" />
+  <file path="sink_debug.h" />
+  <file path="sink_ble_gap.h" />
   <file path="sink_a2dp.h" />
   <file path="sink_anc.h" />
   <file path="sink_at_commands.h" />
@@ -133,7 +191,6 @@
   <file path="sink_avrcp_qualification.h" />
   <file path="sink_ble.h" />
   <file path="sink_ble_advertising.h" />
-  <file path="sink_ble_gap.h" />
   <file path="sink_ba_ble_gap.h" />
   <file path="sink_ble_scanning.h" />
   <file path="sink_buttonmanager.h" />
@@ -142,7 +199,6 @@
   <file path="sink_config.h" />
   <file path="sink_configmanager.h" />
   <file path="sink_csr_features.h" />
-  <file path="sink_debug.h" />
   <file path="sink_development.h" />
   <file path="sink_device_id.h" />
   <file path="sink_devicemanager.h" />
@@ -240,6 +296,8 @@
   <file path="sink_spp_qualification.h" />
   <file path="headset_uart.h" />
   <file path="headset_multi_talk.h" />
+  <file path="protocol_hex.h" />
+  <file path="headset_ag.h" />
  </folder>
  <folder name="GATT db files" >
   <extension name="*.db" />
@@ -261,6 +319,7 @@
    <property key="debugtransport" >[SPITRANS=USB SPIPORT=0]</property>
    <property key="defines" >TEST_HF_INDICATORS,ENABLE_AHI_TEST_WRAPPER</property>
    <property key="device_id_pskey" >1</property>
+   <property key="enable_ag" >1</property>
    <property key="enable_anc" >0</property>
    <property key="enable_ancs_client" >1</property>
    <property key="enable_avrcp" >1</property>
@@ -307,7 +366,7 @@
    <property key="include_aptx_acl_sprint" >0</property>
    <property key="include_cvc" >1</property>
    <property key="include_faststream" >1</property>
-   <property key="libs" >audio_plugin_common, ps_dynamic_config_store, ahi, config_store, display_plugin_cns10010_scroll, display_example_plugin, display, avrcp ,power, power_onchip, power_onchip_adapter, connection,bdaddr ,hfp_min_cfm ,region ,service ,gain_utils ,audio,csr_cvc_common_plugin_all ,csr_voice_prompts_plugin ,csr_a2dp_decoder_common_plugin_stereo_bidir ,a2dp ,obex ,sdp_parse ,md5 ,usb_device_class ,spp_common ,spps ,sppc ,pblock ,csr_dut_audio_plugin ,pio_common, pbapc, mapc, fm_rx_plugin, fm_rx_api,  swat, csr_i2s_audio_plugin, gaia, gatt, gatt_imm_alert_client, gatt_apple_notification_client,gatt_battery_client, gatt_device_info_client, gatt_hid_client, byte_utils, upgrade, gatt_manager, gatt_battery_server, gatt_server, gatt_gap_server, gatt_transmit_power_server, gatt_imm_alert_server, gatt_link_loss_server, audio_output, gatt_client, gatt_scan_params_client,gatt_heart_rate_server, gatt_device_info_server, gatt_heart_rate_client,vmal, audio_config, broadcast, scm, broadcast_stream_service_record, audio_plugin_music_variants, audio_instance, hid_upgrade, hid, audio_output_unused, audio_plugin_voice_variants, rwcp_server, csr_voice_assistant_plugin, voice_assistant_packetiser, local_device</property>
+   <property key="libs" >audio_plugin_common, ps_dynamic_config_store, ahi, config_store, display_plugin_cns10010_scroll, display_example_plugin, display, avrcp ,power, power_onchip, power_onchip_adapter, connection,bdaddr ,hfp_min_cfm ,region ,service ,gain_utils ,audio,csr_cvc_common_plugin_all ,csr_voice_prompts_plugin ,csr_a2dp_decoder_common_plugin_stereo_bidir ,a2dp ,obex ,sdp_parse ,md5 ,usb_device_class ,spp_common ,spps ,sppc ,pblock ,csr_dut_audio_plugin ,pio_common, pbapc, mapc, fm_rx_plugin, fm_rx_api,  swat, csr_i2s_audio_plugin, gaia, gatt, gatt_imm_alert_client, gatt_apple_notification_client,gatt_battery_client, gatt_device_info_client, gatt_hid_client, byte_utils, upgrade, gatt_manager, gatt_battery_server, gatt_server, gatt_gap_server, gatt_transmit_power_server, gatt_imm_alert_server, gatt_link_loss_server, audio_output, gatt_client, gatt_scan_params_client,gatt_heart_rate_server, gatt_device_info_server, gatt_heart_rate_client,vmal, audio_config, broadcast, scm, broadcast_stream_service_record, audio_plugin_music_variants, audio_instance, hid_upgrade, hid, audio_output_unused, audio_plugin_voice_variants, rwcp_server, csr_voice_assistant_plugin, voice_assistant_packetiser, local_device, tws_synchronised_control</property>
    <property key="messages" >1</property>
    <property key="output" ></property>
    <property key="panic" >1</property>

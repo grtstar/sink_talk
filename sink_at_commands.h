@@ -38,7 +38,7 @@ DESCRIPTION
     
     
 */
-void sinkHandleUnrecognisedATCmd( HFP_UNRECOGNISED_AT_CMD_IND_T *ind ) ;
+void sinkagHandleUnrecognisedATCmd( HFP_UNRECOGNISED_AT_CMD_IND_T *ind ) ;
 
 
 /****************************************************************************

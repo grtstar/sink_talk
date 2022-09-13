@@ -96,7 +96,7 @@ uint16 ConfigRetrieve(uint16 config_id, void* data, uint16 len)
                 }
                 break;
      }
-
+    DEBUG(("config_id = %d, key_len = %d, requested_words = %d, ret_len = %d\n", config_id, key_len, requested_words, ret_len));
     return ret_len;
 }
 
