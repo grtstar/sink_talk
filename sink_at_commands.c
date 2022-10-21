@@ -126,7 +126,7 @@ DESCRIPTION
 
 
 */
-void sinkagHandleUnrecognisedATCmd(HFP_UNRECOGNISED_AT_CMD_IND_T *ind)
+void sinkHandleUnrecognisedATCmd(HFP_UNRECOGNISED_AT_CMD_IND_T *ind)
 {
     char* pData;
     char *pAtCommandData;

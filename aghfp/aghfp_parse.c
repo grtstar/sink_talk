@@ -1331,7 +1331,7 @@ unrecognised:
       agHandleUnrecognised(s, (uint16) (p-s), task);
 #endif
 #ifdef TEST_HARNESS
-      printf("Called agHandleUnrecognised\n");
+      printf("Called handleUnrecognised\n");
 #endif
     }
   }

@@ -14,7 +14,6 @@ NOTES
 #ifndef _CSR_COMMON_EXAMPLE_H_
 #define _CSR_COMMON_EXAMPLE_H_
 
-#define DEBUG_PRINT_ENABLED
 #ifdef DEBUG_PRINT_ENABLED
 #define KALIMBA_SEND_MESSAGE(id, a, b, c, d) \
 if(!KalimbaSendMessage(id, a, b, c, d)) \

@@ -20,7 +20,7 @@ DESCRIPTION
 
 #include "config_definition.h"
 
-#define SINK_BLE_READONLY_CONFIG_BLK_ID 940
+#define SINK_BLE_READONLY_CONFIG_BLK_ID 925
 
 typedef struct {
     unsigned LeAuthenticatedPayloadTO_s;

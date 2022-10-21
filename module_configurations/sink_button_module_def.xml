@@ -9971,19 +9971,19 @@
                         DefaultValue="" />
                     <PatternArrayConfigItem 
                         ShortId="vreg_enabled" 
-                        DefaultValue="False" />
+                        DefaultValue="True" />
                     <PatternArrayConfigItem 
                         ShortId="chg_enabled" 
                         DefaultValue="False" />
                     <PatternArrayConfigItem 
                         ShortId="state_mask" 
-                        DefaultValue="" />
+                        DefaultValue="Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
                     <PatternArrayConfigItem 
                         ShortId="user_event" 
-                        DefaultValue="..." />
+                        DefaultValue="Power Off" />
                     <PatternArrayConfigItem 
                         ShortId="type" 
-                        DefaultValue="..." />
+                        DefaultValue="VLONG" />
                 </PatternArrayRow>
                 <PatternArrayRow 
                     Node="Basic" 

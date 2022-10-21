@@ -8,6 +8,8 @@ DESCRIPTION
      The main audio manager file
 
 */
+
+#define DEBUG_PRINT_ENABLEDx
 #include "audio.h"
 
 #include <stdlib.h>
@@ -161,7 +163,7 @@ static void audioDisconnectTask(Task audio_plugin, AUDIO_SINK_T sink_type)
 {
 
     PanicNull(AUDIO);
-
+    PRINT(("audio_plugin = 0x%x, number_of_audio_connections=%d, sink_type=%d\n", (uint16)audio_plugin, AUDIO->number_of_audio_connections, sink_type));
     if(audio_plugin
         && (AUDIO->number_of_audio_connections || (sink_type == AUDIO_SINK_SIDE_GRAPH)))
     {
@@ -501,10 +503,10 @@ void AudioPlayAudioPrompt ( Task plugin, FILE_INDEX prompt_index, FILE_INDEX pro
                of supporting tone mixing via kalimba port 3 (tone port) */
             /* OR if the audio plugin connect message is in the queue but not yet actioned, queue
                the Audio Prompt message until the audio plugin is loaded, then decide what to do with it */
-            if((GetCurrentDspStatus() || !IsAudioInUse()) &&
+            if((GetCurrentDspStatus() != DSP_LOADING) && (GetCurrentDspStatus() || !IsAudioInUse()) &&
                (CsrVoicePromptsIsMixable(prompt_header_index)))
             {
-                PRINT(("AUD play Audio Prompt via DSP mixing\n"));
+                PRINT(("AUD play Audio Prompt via DSP mixing DspStatus = %d\n", GetCurrentDspStatus()));
                 MessageSendConditionallyOnTask ( plugin , AUDIO_PLUGIN_PLAY_AUDIO_PROMPT_MSG ,message , AudioBusyPtr() ) ;
             }
             /* audio is connected via audio plugin and not using the DSP or not ADPCM voice prompts

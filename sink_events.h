@@ -700,6 +700,7 @@ typedef enum sinkEventsTag
               EventSysMultiTalkInquiryDevices,
               EventSysMultiTalkDeviceConnected,
               EventSysMultiTalkCurrentDevices,
+              EventSysMultiTalkWatiConnect,
 
               EventSysAGConnect,
               EventSysAGDisconnect,

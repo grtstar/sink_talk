@@ -92,6 +92,8 @@ Part of ADK_CSR867x.WIN. 4.4
 #include "sink_gatt_server_hrs.h"
 #include "sink_ble_sc.h"
 
+#include "audio_prompt.h"
+
 #ifdef ENABLE_IR_REMOTE
 #include "sink_ir_remote_control.h"
 #endif
@@ -1753,15 +1755,31 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
         break;
 
         case EventSysGasGauge0 :
+            AudioPlay(AP_BATTERY_LOW, TRUE);
+        break;
         case EventSysGasGauge1 :
         case EventSysGasGauge2 :
+            AudioPlay(AP_BATTERY_MID, TRUE);
+        break;
         case EventSysGasGauge3 :
             MAIN_DEBUG(("HS: EventSysGasGauge%d\n", id - EventSysGasGauge0)) ;
             if(stateManagerGetState() == deviceLimbo)
             {
                 lIndicateEvent = FALSE;
             }
+            AudioPlay(AP_BATTERY_HIGH, TRUE);
         break ;
+
+        case EventSysChargerGasGauge0 :
+             AudioPlay(AP_BATTERY_LOW, TRUE);
+        break;
+        case EventSysChargerGasGauge1 :
+        case EventSysChargerGasGauge2 :
+            AudioPlay(AP_BATTERY_MID, TRUE);
+        break;
+        case EventSysChargerGasGauge3 :
+            AudioPlay(AP_BATTERY_HIGH, TRUE);
+        break;
 
         case EventSysBatteryOk:
             MAIN_DEBUG(("HS: EventSysBatteryOk\n")) ;
@@ -3424,6 +3442,8 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
             {
                 MAIN_DEBUG(("Audio Free ,Fetch Event\n" ));
                 id = sinkEventQueueFetch();
+
+                AudioPlayFinish();
             }
             break;
 
@@ -3679,6 +3699,7 @@ static void handleHFPMessage  ( Task task, MessageId id, Message message )
                 if ( ((const HFP_INIT_CFM_T*)message)->status == hfp_success )
                 {
                     sinkAppInit( (const HFP_INIT_CFM_T*)message );
+                    MessageSendLater(&theSink.task, EventUsrPowerOn, NULL, D_SEC(1));
                 }
                 else
                 {
@@ -3875,7 +3896,7 @@ static void handleHFPMessage  ( Task task, MessageId id, Message message )
 
     case HFP_UNRECOGNISED_AT_CMD_IND:
     {
-        sinkagHandleUnrecognisedATCmd( (HFP_UNRECOGNISED_AT_CMD_IND_T*)message ) ;
+        sinkHandleUnrecognisedATCmd( (HFP_UNRECOGNISED_AT_CMD_IND_T*)message ) ;
     }
     break ;
 
@@ -4571,7 +4592,6 @@ int main(void)
             }
             
             UartInit(&theSink.task);
-            MessageSendLater(&theSink.task, EventUsrPowerOn, NULL, D_SEC(1));
         }
         break;
     }

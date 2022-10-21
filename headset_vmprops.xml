@@ -454,6 +454,15 @@
            ]]>
        </description>
    </property>
+   <property type="list" key="enable_debug" format="define" name="Enable DEBUG Print" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="DEBUG_PRINT_ENABLED">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable support for AG.
+           ]]>
+       </description>
+   </property>
    <property type="list" key="enable_bredr_sc" format="define" name="BR/EDR Secure Connection" defaultvalue="0">
        <option fake="">Disabled</option>
        <option internalval="ENABLE_BREDR_SC">Enabled</option>

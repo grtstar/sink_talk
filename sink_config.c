@@ -86,7 +86,7 @@ uint16 ConfigRetrieve(uint16 config_id, void* data, uint16 len)
             /* Config where it's ok for (ret_len != len) 
                 or where it doesn't matter if it exists */
             case CONFIG_UPGRADE_CONTEXT:
-            case 99:
+            case 3:
                 break;
             default:
                 if (ret_len != requested_words)

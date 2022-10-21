@@ -26,7 +26,7 @@ typedef struct {
     unsigned padding:8;
 } charger_progress_structure_t;
 
-#define CHARGER_PROGRESS_CONFIG_BLK_ID 1125
+#define CHARGER_PROGRESS_CONFIG_BLK_ID 1110
 
 typedef struct {
     charger_progress_structure_t chg_progress;

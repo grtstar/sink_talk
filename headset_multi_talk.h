@@ -1,6 +1,13 @@
 #ifndef _HEADSET_MULTI_TALK_
 #define _HEADSET_MULTI_TALK_
 
+enum
+{
+    MT_PARENT,
+    MT_CHILD,
+    MT_ALL
+};
+
 void mtInit(Task task);
 bool mtEnterPairing(void);
 void mtInquiry(void);
@@ -9,7 +16,7 @@ void mtACLDisconnect(int device);
 void mtScoConnect(Sink sink);
 void mtScoDisconnect(int device);
 
-bool mtConnect(bdaddr *bd_addr);
+bool mtConnect(int index);
 void mtReconnect(void);
 void mtDisconnect(void);
 
@@ -35,11 +42,13 @@ Sink mtGetActiveScoSink(void);
 bool isMTVoiceSink(Sink sink);
 
 bool mtRssiConnect(void);
-void mtTailConnect(void);
-int mtGetConnectDevices(void);
 
 bool mtCanPair(void);
 bool mtIsOnlyChildConnect(void);
+bool mtIsOnlyParentConnect(void);
+int mtGetConnectDevices(void);
+
+Sink mtGetSink(int type);
 
 bool processEventMultiTalk(Task task, MessageId id, Message message);
 #endif

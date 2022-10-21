@@ -20,7 +20,7 @@ DESCRIPTION
 
 #include "config_definition.h"
 
-#define AVRCP_READONLY_CONFIG_BLK_ID 935
+#define AVRCP_READONLY_CONFIG_BLK_ID 920
 
 typedef struct {
     unsigned avrcp_enabled:1;

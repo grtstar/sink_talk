@@ -26,19 +26,19 @@ typedef struct {
     unsigned padding:8;
 } tone_config_type_t;
 
-#define SINK_TONE_WRITEABLE_CONFIG_BLK_ID 636
+#define SINK_TONE_WRITEABLE_CONFIG_BLK_ID 621
 
 typedef struct {
     tone_config_type_t gEventTones[1];
 } sink_tone_writeable_config_def_t;
 
-#define CONFIGTONE_RDATA_CONFIG_BLK_ID 732
+#define CONFIGTONE_RDATA_CONFIG_BLK_ID 717
 
 typedef struct {
     unsigned gVariableTones[1];
 } configtone_rdata_config_def_t;
 
-#define SINK_TONE_READONLY_CONFIG_BLK_ID 737
+#define SINK_TONE_READONLY_CONFIG_BLK_ID 722
 
 typedef struct {
     unsigned FixedToneVolumeLevel:5;

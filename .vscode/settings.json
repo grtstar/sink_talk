@@ -22,6 +22,14 @@
         "xmemory": "c",
         "xutility": "c",
         "headset_ag.h": "c",
-        "connection.h": "c"
+        "connection.h": "c",
+        "stdio.h": "c",
+        "bit": "c",
+        "compare": "c",
+        "cstddef": "c",
+        "limits": "c",
+        "type_traits": "c",
+        "csr_common_example_plugin.h": "c",
+        "audio_prompt.h": "c"
     }
 }

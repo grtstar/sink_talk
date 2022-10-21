@@ -9,6 +9,8 @@ DESCRIPTION
     
 */
 
+/* 333333333 */
+
 #ifndef _SINK_DEBUG_H_
 #define _SINK_DEBUG_H_
 
@@ -26,7 +28,7 @@ DESCRIPTION
  /*end of DO_NOT_DOCUMENT*/
 
     /*The global debug enable*/ 
-    #define DEBUG_PRINT_ENABLED
+    #define DEBUG_PRINT_ENABLEDx
 
 #define DEBUG_VM_HATSx
 
@@ -52,7 +54,7 @@ void printVmLogsInTestSystem (const char *format, ...);
     #ifdef DEBUG_PRINT_ENABLED
 
         #ifndef DEBUG_VM_HATS
-            int sinkEnableDebug(void);
+            extern int sinkEnableDebug(void);
             #define DEBUG(x) {if(sinkEnableDebug()) printf x;}
         #endif
 
@@ -66,7 +68,7 @@ void printVmLogsInTestSystem (const char *format, ...);
         #define DEBUG_AOVx
         #define DEBUG_AT_COMMANDSx
         #define DEBUG_AUDIO_PROMPTSx
-        #define DEBUG_AUDIOx
+        #define DEBUG_AUDIO
         #define DEBUG_AUTHx
         #define DEBUG_AUTO_POWER_OFFx
         #define DEBUG_AVRCPx
@@ -136,7 +138,7 @@ void printVmLogsInTestSystem (const char *format, ...);
         /* LED Manager Debug */
         #define DEBUG_LMx
         /* Sink Link Policy Debug */
-        #define DEBUG_LP
+        #define DEBUG_LPx
         /* Main System Messages Debug */
         #define DEBUG_MAINx
         #define DEBUG_MALLOCx 
@@ -218,6 +220,6 @@ void printVmLogsInTestSystem (const char *format, ...);
 #define HAVE_VBAT_SEL
 #define HAVE_FULL_USB_CHARGER_DETECTION
 
-#define LOG_ERROR(x) {if(sinkEnableDebug()) printf x;}
+#define LOG_ERROR(x) DEBUG(x)
 
 #endif /*_SINK_DEBUG_H_*/

@@ -90,97 +90,97 @@
                 value="611" 
                 key="Event to Audio Prompt Mapping Table" />
             <enum 
-                value="636" 
+                value="621" 
                 key="Event Tones" />
             <enum 
-                value="732" 
+                value="717" 
                 key="ConfigToneData" />
             <enum 
-                value="737" 
+                value="722" 
                 key="Sink Tones Readonly" />
             <enum 
-                value="742" 
+                value="727" 
                 key="States" />
             <enum 
-                value="826" 
+                value="811" 
                 key="Events" />
             <enum 
-                value="855" 
+                value="840" 
                 key="Filters" />
             <enum 
-                value="923" 
+                value="908" 
                 key="LED Config Readable Block" />
             <enum 
-                value="930" 
+                value="915" 
                 key="LED Session Config Block" />
             <enum 
-                value="935" 
+                value="920" 
                 key="AVRCP Enable and Audio Switching Mask Bitfields" />
             <enum 
-                value="940" 
+                value="925" 
                 key="BLE" />
             <enum 
-                value="946" 
+                value="931" 
                 key="ANCS_readonly" />
             <enum 
-                value="951" 
+                value="936" 
                 key="Find Me Server" />
             <enum 
-                value="956" 
+                value="941" 
                 key="Find Me Common" />
             <enum 
-                value="961" 
+                value="946" 
                 key="Proximity_readonly" />
             <enum 
-                value="967" 
+                value="952" 
                 key="PBAP_readonly" />
             <enum 
-                value="972" 
+                value="957" 
                 key="GAIA_readonly" />
             <enum 
-                value="978" 
+                value="963" 
                 key="GAIA_pio_translation" />
             <enum 
-                value="985" 
+                value="970" 
                 key="USB RO" />
             <enum 
-                value="991" 
+                value="976" 
                 key="USB RW" />
             <enum 
-                value="997" 
+                value="982" 
                 key="USB Power RO" />
             <enum 
-                value="1023" 
+                value="1008" 
                 key="Sink Power Manager" />
             <enum 
-                value="1028" 
+                value="1013" 
                 key="Sink Gas Gauge Actions" />
             <enum 
-                value="1034" 
+                value="1019" 
                 key="PMU Charger Monitor" />
             <enum 
-                value="1045" 
+                value="1030" 
                 key="BC 1.2" />
             <enum 
-                value="1053" 
+                value="1038" 
                 key="Sink Power Readonly Vref" />
             <enum 
-                value="1059" 
+                value="1044" 
                 key="Sink Power Readonly Vbat" />
             <enum 
-                value="1084" 
+                value="1069" 
                 key="Sink Power Readonly Vthm" />
             <enum 
-                value="1099" 
+                value="1084" 
                 key="Charger Vthm Control" />
             <enum 
-                value="1119" 
+                value="1104" 
                 key="Sink Power Readonly Vchg" />
             <enum 
-                value="1125" 
+                value="1110" 
                 key="Charger Progress" />
             <enum 
-                value="1131" 
+                value="1116" 
                 key="Sink Upgrade Readonly" />
         </DefineBlockList>
         <DefineModule 
@@ -4754,7 +4754,7 @@
         Node="Expert" 
         Id="ConfigToneData" >
         <ConfigItem 
-            LocationItem="BlockId=732, Word=1, Bit=0, Size=16" 
+            LocationItem="BlockId=717, Word=1, Bit=0, Size=16" 
             Type="uint" 
             Id="Configtone value" 
             Desc="User defined Variable Tones initilization value" />
@@ -5279,17 +5279,17 @@
                 Node="Basic" 
                 Id="USB In" >
                 <ConfigItem 
-                    LocationItem="BlockId=985, Word=2, Bit=1, Size=1" 
+                    LocationItem="BlockId=970, Word=2, Bit=1, Size=1" 
                     Type="bool" 
                     Id="USB Audio Always Routed" 
                     Desc="When set the USB audio is routed even when it is not in use." />
                 <ConfigItem 
-                    LocationItem="BlockId=985, Word=2, Bit=0, Size=1" 
+                    LocationItem="BlockId=970, Word=2, Bit=0, Size=1" 
                     Type="bool" 
                     Id="USB Audio Paused When Source Switched" 
                     Desc="When set the USB audio is paused when switching from USB to another source." />
                 <ConfigItem 
-                    LocationItem="BlockId=985, Word=2, Bit=2, Size=2" 
+                    LocationItem="BlockId=970, Word=2, Bit=2, Size=2" 
                     Type="enum" 
                     Id="USB Plug-in Type" 
                     Desc="Sets the USB operating mode." >
@@ -5304,7 +5304,7 @@
                         value="2" />
                 </ConfigItem>
                 <ConfigItem 
-                    LocationItem="BlockId=985, Word=2, Bit=12, Size=4" 
+                    LocationItem="BlockId=970, Word=2, Bit=12, Size=4" 
                     Type="enum" 
                     Id="USB Voice Plug-in Index" 
                     Desc="Specifies the CVC plug-in to be used for Voice operating mode." >
@@ -5312,17 +5312,17 @@
                         use="cvc_plugins_available" />
                 </ConfigItem>
                 <ConfigItem 
-                    LocationItem="BlockId=985, Word=2, Bit=8, Size=4" 
+                    LocationItem="BlockId=970, Word=2, Bit=8, Size=4" 
                     Type="uint" 
                     Id="Attach Timeout [s]" 
                     Desc="If after attaching the USB it does not enumerate within the attach timeout, in seconds, the Sink will set low power boot mode." />
                 <ConfigItem 
-                    LocationItem="BlockId=985, Word=2, Bit=4, Size=4" 
+                    LocationItem="BlockId=970, Word=2, Bit=4, Size=4" 
                     Type="uint" 
                     Id="Deconfigure Timeout [s]" 
                     Desc="If the USB becomes deconfigured and no further action is taken within the deconfigured timeout period, in seconds, the Sink sets to low power boot mode." />
                 <ConfigItem 
-                    LocationItem="BlockId=985, Word=1, Bit=0, Size=16" 
+                    LocationItem="BlockId=970, Word=1, Bit=0, Size=16" 
                     Type="bitfield" 
                     Id="Class" 
                     Desc="USB Class of Device. Please note: if the device is being configured over USB HID AHI transport, changing this setting may cause the device to become temporarily unavailable for configuration. If this occurs, unplug and re-plug the device's USB connection to cause it to repeat enumeration with the Host. Then refresh the ADK Configuration Tool device list and reconnect the device to continue configuration." >
@@ -5346,12 +5346,12 @@
                         value="5" />
                 </ConfigItem>
                 <ConfigItem 
-                    LocationItem="BlockId=991, Word=1, Bit=0, Size=16" 
+                    LocationItem="BlockId=976, Word=1, Bit=0, Size=16" 
                     Type="uint" 
                     Id="USB Volume (Main)" 
                     Desc="Value is expressed in steps" />
                 <ConfigItem 
-                    LocationItem="BlockId=991, Word=2, Bit=0, Size=16" 
+                    LocationItem="BlockId=976, Word=2, Bit=0, Size=16" 
                     Type="uint" 
                     Id="USB Volume (Aux)" 
                     Desc="Value is expressed in steps" />
@@ -5755,7 +5755,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                     Id="PDL Size" 
                     Desc="The maximum number of entries that may be stored in the paired devices list." />
                 <ConfigItem 
-                    LocationItem="BlockId=940, Word=1, Bit=0, Size=16" 
+                    LocationItem="BlockId=925, Word=1, Bit=0, Size=16" 
                     Type="uint" 
                     Id="LE Authenticated Payload Timeout" 
                     Desc="The Authenticated_Payload_Timeout configuration parameter allows the Host to configure the maximum interval between packets containing a MIC received from the remote device when AES-CCM encryption is enabled on LE link." />
@@ -5931,12 +5931,12 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Node="Basic" 
                 Id="AVRCP" >
                 <ConfigItem 
-                    LocationItem="BlockId=935, Word=1, Bit=15, Size=1" 
+                    LocationItem="BlockId=920, Word=1, Bit=15, Size=1" 
                     Desc="When set enables AVRCP control. This feature is not supported on some ROM variants." 
                     Type="bool" 
                     Id="AVRCP Enabled" />
                 <ConfigItem 
-                    LocationItem="BlockId=935, Word=1, Bit=14, Size=1" 
+                    LocationItem="BlockId=920, Word=1, Bit=14, Size=1" 
                     Desc="If enabled AVRCP play status is used to speed up audio source switching." 
                     Type="bool" 
                     Id="AVRCP Audio Switching" />
@@ -6021,7 +6021,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Node="Basic" 
                 Id="PBAP" >
                 <ConfigItem 
-                    LocationItem="BlockId=967, Word=1, Bit=15, Size=1" 
+                    LocationItem="BlockId=952, Word=1, Bit=15, Size=1" 
                     Desc="When set enables Phone Book Application Profile (PBAP) functionality." 
                     Type="bool" 
                     Id="Enable PBAP" />
@@ -6404,7 +6404,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Node="Basic" 
                 Id="BLE Advertising Report Filters" >
                 <ConfigItem 
-                    LocationItem="BlockId=940, Word=2, Bit=9, Size=7" 
+                    LocationItem="BlockId=925, Word=2, Bit=9, Size=7" 
                     Type="bitfield" 
                     Id="BLE Advertising Filters" 
                     Desc="Only advertising reports that contain the selected service UUIDs will be processed in the sink application. This increases the chances of the sink application connecting to a remote device supporting the required services. Eg. If HID and IAS advertising report filters are selected, then only received advertising reports containing HID or IAS UUIDs will be handled in the sink application." >
@@ -6435,12 +6435,12 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Node="Basic" 
                 Id="Find Me" >
                 <ConfigItem 
-                    LocationItem="BlockId=951, Word=1, Bit=0, Size=16" 
+                    LocationItem="BlockId=936, Word=1, Bit=0, Size=16" 
                     Type="uint" 
                     Id="Alert Tone Period [s]" 
                     Desc="The time, in seconds, that the system waits before repeating the alert event" />
                 <ConfigItem 
-                    LocationItem="BlockId=956, Word=1, Bit=0, Size=16" 
+                    LocationItem="BlockId=941, Word=1, Bit=0, Size=16" 
                     Type="uint" 
                     Id="Alert Tone Timeout [s]" 
                     Desc="The time, in seconds, that the system waits before stopping the alert" />
@@ -6449,12 +6449,12 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Node="Basic" 
                 Id="Proximity" >
                 <ConfigItem 
-                    LocationItem="BlockId=961, Word=1, Bit=0, Size=16" 
+                    LocationItem="BlockId=946, Word=1, Bit=0, Size=16" 
                     Type="uint" 
                     Id="Proximity Tone Period [s]" 
                     Desc="The time, in seconds, that the system waits before repeating the alert event" />
                 <ConfigItem 
-                    LocationItem="BlockId=961, Word=2, Bit=0, Size=16" 
+                    LocationItem="BlockId=946, Word=2, Bit=0, Size=16" 
                     Type="uint" 
                     Id="Proximity Tone Timeout [s]" 
                     Desc="The time, in seconds, that the system waits before stopping the alert" />
@@ -6463,7 +6463,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Node="Basic" 
                 Id="ANCS" >
                 <ConfigItem 
-                    LocationItem="BlockId=946, Word=1, Bit=0, Size=16" 
+                    LocationItem="BlockId=931, Word=1, Bit=0, Size=16" 
                     Type="bitfield" 
                     Id="ANCS Notification Enable Mask" 
                     Desc="This bitmask specifies the notification categories to be enabled on the ANCS Server (Apple Device)" >
@@ -6506,12 +6506,12 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 </ConfigItem>
             </ConfigGroup>
             <ConfigItem 
-                LocationItem="BlockId=940, Word=2, Bit=7, Size=2" 
+                LocationItem="BlockId=925, Word=2, Bit=7, Size=2" 
                 Type="uint" 
                 Id="BLE Max Peripheral Connection" 
                 Desc="This field is used to specify maximum connection allowed in Peripheral role. If the user sets more than 2 and/or if combination of this and Maximum Central Connection is more than 2, then this value is restricted to 1" />
             <ConfigItem 
-                LocationItem="BlockId=940, Word=2, Bit=5, Size=2" 
+                LocationItem="BlockId=925, Word=2, Bit=5, Size=2" 
                 Type="uint" 
                 Id="BLE Max Central Connection" 
                 Desc="This field is used to specify maximum connection allowed in Central role. If the user sets more than 2 and/or if combination of this and Maximum Peripheral Connection is more than 2, then this value is restricted to 1" />
@@ -6525,42 +6525,42 @@ Where dBthresh is the threshold level (quoted as dBFS).
             Node="Basic" 
             Id="PMU Charger Monitor" >
             <ConfigItem 
-                LocationItem="BlockId=1034, Word=1, Bit=0, Size=16" 
+                LocationItem="BlockId=1019, Word=1, Bit=0, Size=16" 
                 Type="uint" 
                 Id="Minimum charge current [mA]" 
                 Desc="The charge current will not be decreased below this minimum level by the PMU Charger Monitor." />
             <ConfigItem 
-                LocationItem="BlockId=1034, Word=2, Bit=0, Size=16" 
+                LocationItem="BlockId=1019, Word=2, Bit=0, Size=16" 
                 Type="uint" 
                 Id="Maximum charge current [mA]" 
                 Desc="The charge current will not be increased above this maximum level by the PMU Charger Monitor." />
             <ConfigItem 
-                LocationItem="BlockId=1034, Word=6, Bit=8, Size=8" 
+                LocationItem="BlockId=1019, Word=6, Bit=8, Size=8" 
                 Type="uint" 
                 Id="Charger current step size [mA]" 
                 Desc="This is the amount by which the charge current will be altered when it is between the minimum and maximum charge levels based on the monitored temperature." />
             <ConfigItem 
-                LocationItem="BlockId=1034, Word=6, Bit=0, Size=8" 
+                LocationItem="BlockId=1019, Word=6, Bit=0, Size=8" 
                 Type="uint" 
                 Id="Temp Lower Bound [degC]" 
                 Desc="Temperature where current will not be increased. This forms the lower temperature bound for the PMU monitor. Below this temperature the current will not be increased." />
             <ConfigItem 
-                LocationItem="BlockId=1034, Word=7, Bit=8, Size=8" 
+                LocationItem="BlockId=1019, Word=7, Bit=8, Size=8" 
                 Type="uint" 
                 Id="Temp Upper Bound [degC]" 
                 Desc="Temperature where current will be decreased. This forms the upper limit of the tolerated temperature bound after which the charge current will be decreased." />
             <ConfigItem 
-                LocationItem="BlockId=1034, Word=3, Bit=0, Size=16" 
+                LocationItem="BlockId=1019, Word=3, Bit=0, Size=16" 
                 Type="uint" 
                 Id="Temp monitor period if charger active [ms]" 
                 Desc="Temperature monitoring period when the charger is active [ms]." />
             <ConfigItem 
-                LocationItem="BlockId=1034, Word=4, Bit=0, Size=16" 
+                LocationItem="BlockId=1019, Word=4, Bit=0, Size=16" 
                 Type="uint" 
                 Id="Temp monitor period if charger idle [ms]" 
                 Desc="Temperature monitoring period when the charger is idle [ms]." />
             <ConfigItem 
-                LocationItem="BlockId=1034, Word=5, Bit=0, Size=16" 
+                LocationItem="BlockId=1019, Word=5, Bit=0, Size=16" 
                 Type="uint" 
                 Id="Temp monitor period if charger has no power [ms]" 
                 Desc="Temperature monitoring period when the charger has no power [ms]." />
@@ -6570,7 +6570,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
             Id="USB Power" >
             <ConfigPatternArray 
                 Pattern="sink_charge_current" 
-                LocationPatternArray="BlockId=997, Word=1, PatternSize=2" 
+                LocationPatternArray="BlockId=982, Word=1, PatternSize=2" 
                 FixedNumPatterns="11" 
                 Presentation="ReadOnlyHeader" 
                 Id="USB Charger Configuration" />
@@ -6579,12 +6579,12 @@ Where dBthresh is the threshold level (quoted as dBFS).
             Node="Basic" 
             Id="Charger Configuration" >
             <ConfigItem 
-                LocationItem="BlockId=1125, Word=1, Bit=0, Size=16" 
+                LocationItem="BlockId=1110, Word=1, Bit=0, Size=16" 
                 Desc="Sets the default charger termination voltage threshold (USB VBUS). This is the charger termination voltage except when overridden by the battery temperature regions table. The charge current can be limited if Vchg voltages drops below this level." 
                 Type="uint" 
                 Id="Vchg Termination Voltage (Vfloat) [mV]" />
             <ConfigItem 
-                LocationItem="BlockId=1125, Word=2, Bit=8, Size=8" 
+                LocationItem="BlockId=1110, Word=2, Bit=8, Size=8" 
                 Desc="The current taken directly from the charger for external devices such as the backlight, when supplied by the charger. If external devices are supplied from the battery this setting should be 0mA. This value will be subtracted from the requested charger current before it is applied. This is done to ensure that the current drawn does not exceed the requested charge current. This is primarily used to ensure USB current limitations are met." 
                 Type="uint" 
                 Id="Current taken by external devices directly from charger [mA]" />
@@ -6596,7 +6596,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Node="Basic" 
                 Id="Reference ADC Configuration (Vref)" >
                 <ConfigItem 
-                    LocationItem="BlockId=1053, Word=2, Bit=8, Size=8" 
+                    LocationItem="BlockId=1038, Word=2, Bit=8, Size=8" 
                     Desc="The Vref input can be configured to use any of the available input sources given below." 
                     Type="enum" 
                     Id="Vref ADC Source" >
@@ -6604,12 +6604,12 @@ Where dBthresh is the threshold level (quoted as dBFS).
                         use="adc_sources" />
                 </ConfigItem>
                 <ConfigItem 
-                    LocationItem="BlockId=1053, Word=2, Bit=0, Size=8" 
+                    LocationItem="BlockId=1038, Word=2, Bit=0, Size=8" 
                     Desc="This configures the time interval between Vref updates in seconds while charging, 0 to disable." 
                     Type="uint" 
                     Id="Vref Read Period When Charging [s]" />
                 <ConfigItem 
-                    LocationItem="BlockId=1053, Word=1, Bit=0, Size=16" 
+                    LocationItem="BlockId=1038, Word=1, Bit=0, Size=16" 
                     Desc="This configures the timer interval between Vref updates in seconds while not charging, 0 to disable." 
                     Type="uint" 
                     Id="Vref Read Period When Not Charging [s]" />
@@ -6623,7 +6623,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Id="Vbat Threshold Settings" >
                 <ConfigPatternArray 
                     Pattern="vbat_battery_threshold_config" 
-                    LocationPatternArray="BlockId=1059, Word=4, PatternSize=3" 
+                    LocationPatternArray="BlockId=1044, Word=4, PatternSize=3" 
                     FixedNumPatterns="6" 
                     Id="Vbat Battery Voltage Monitoring Threshold Settings" />
             </ConfigGroup>
@@ -6631,7 +6631,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Node="Basic" 
                 Id="Battery ADC Configuration (Vbat)" >
                 <ConfigItem 
-                    LocationItem="BlockId=1059, Word=2, Bit=8, Size=8" 
+                    LocationItem="BlockId=1044, Word=2, Bit=8, Size=8" 
                     Desc="The Vbat input can be configured to use any of the available input sources given below." 
                     Type="enum" 
                     Id="Vbat ADC Source" >
@@ -6639,12 +6639,12 @@ Where dBthresh is the threshold level (quoted as dBFS).
                         use="adc_sources" />
                 </ConfigItem>
                 <ConfigItem 
-                    LocationItem="BlockId=1059, Word=2, Bit=0, Size=8" 
+                    LocationItem="BlockId=1044, Word=2, Bit=0, Size=8" 
                     Desc="This configures the time interval between Vbat updates in seconds while charging, 0 to disable." 
                     Type="uint" 
                     Id="Vbat Read Period When Charging [s]" />
                 <ConfigItem 
-                    LocationItem="BlockId=1059, Word=1, Bit=0, Size=16" 
+                    LocationItem="BlockId=1044, Word=1, Bit=0, Size=16" 
                     Desc="This configures the timer interval between Vbat updates in seconds while not charging, 0 to disable." 
                     Type="uint" 
                     Id="Vbat Read Period When Not Charging [s]" />
@@ -6653,7 +6653,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Node="Basic" 
                 Id="Gas Gauge Actions" >
                 <ConfigItem 
-                    LocationItem="BlockId=1028, Word=2, Bit=13, Size=3" 
+                    LocationItem="BlockId=1013, Word=2, Bit=13, Size=3" 
                     Type="enum" 
                     Id="Action to perform when streaming music and the battery level is getting low whilst charging" 
                     Desc="Action to prevent audio quality from deteriorating due to operating with battery at Gas Gauge 0 or Gas Gauge Low whilst charging." >
@@ -6668,13 +6668,13 @@ Where dBthresh is the threshold level (quoted as dBFS).
                         value="2" />
                 </ConfigItem>
                 <ConfigItem 
-                    LocationItem="BlockId=1028, Word=1, Bit=0, Size=16" 
+                    LocationItem="BlockId=1013, Word=1, Bit=0, Size=16" 
                     Range="Min=0,Max=100" 
                     Type="uint" 
                     Id="Maximum volume level limit whilst charging when the battery is getting low [%]" 
                     Desc="If 'Limit maximum volume level until charger is disconnected and level is above Gas Gauge 0' then this is the maximum volume level expressed as a percentage, e.g. 50% would represent step 8 out of 16 volume steps. This limit is maintained until battery level is above Gas Gauge 0 and the charger cable is disconnected. If level is 0% then the volume limitation is disabled." />
                 <ConfigItem 
-                    LocationItem="BlockId=1059, Word=3, Bit=15, Size=1" 
+                    LocationItem="BlockId=1044, Word=3, Bit=15, Size=1" 
                     Desc="When not charging the gas gauge is not updated when new Vbat readings are higher than the lowest previous reading." 
                     Type="bool" 
                     Id="Ignore Increasing Vbat Readings When Not Charging" />
@@ -6688,7 +6688,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Id="Temperature Regions" >
                 <ConfigPatternArray 
                     Pattern="charger_configuration_settings" 
-                    LocationPatternArray="BlockId=1099, Word=1, PatternSize=2" 
+                    LocationPatternArray="BlockId=1084, Word=1, PatternSize=2" 
                     FixedNumPatterns="8" 
                     Presentation="ReadOnlyHeader" 
                     Id="Temperature Regions Table" />
@@ -6697,7 +6697,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Node="Basic" 
                 Id="Thermistor ADC Configuration (Vthm)" >
                 <ConfigItem 
-                    LocationItem="BlockId=1084, Word=2, Bit=8, Size=8" 
+                    LocationItem="BlockId=1069, Word=2, Bit=8, Size=8" 
                     Desc="The Vthm input can be configured to use any of the available input sources given below." 
                     Type="enum" 
                     Id="Vthm ADC Source" >
@@ -6705,17 +6705,17 @@ Where dBthresh is the threshold level (quoted as dBFS).
                         use="adc_sources" />
                 </ConfigItem>
                 <ConfigItem 
-                    LocationItem="BlockId=1084, Word=2, Bit=0, Size=8" 
+                    LocationItem="BlockId=1069, Word=2, Bit=0, Size=8" 
                     Desc="This configures the time interval between Vthm updates in seconds while charging, 0 to disable." 
                     Type="uint" 
                     Id="Vthm Read Period When Charging [s]" />
                 <ConfigItem 
-                    LocationItem="BlockId=1084, Word=1, Bit=0, Size=16" 
+                    LocationItem="BlockId=1069, Word=1, Bit=0, Size=16" 
                     Desc="This configures the timer interval between Vthm updates in seconds while not charging, 0 to disable." 
                     Type="uint" 
                     Id="Vthm Read Period When Not Charging [s]" />
                 <ConfigItem 
-                    LocationItem="BlockId=1084, Word=10, Bit=8, Size=8" 
+                    LocationItem="BlockId=1069, Word=10, Bit=8, Size=8" 
                     Desc="This parameter sets the required PIO to be driven when a thermistor reading is taken." 
                     Type="enum" 
                     Id="Drive Thermistor Output PIO" >
@@ -6725,7 +6725,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                         use="pio_not_sel" />
                 </ConfigItem>
                 <ConfigItem 
-                    LocationItem="BlockId=1084, Word=11, Bit=12, Size=4" 
+                    LocationItem="BlockId=1069, Word=11, Bit=12, Size=4" 
                     Desc="Delay in milliseconds between activating the thermistor drive output and taking the ADC reading. This allows the voltage level to settle before the data is sampled." 
                     Type="uint" 
                     Id="Thermistor Drive Delay [ms]" />
@@ -6734,42 +6734,42 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Node="Basic" 
                 Id="Thermistor Thresholds" >
                 <ConfigItem 
-                    LocationItem="BlockId=1084, Word=11, Bit=11, Size=1" 
+                    LocationItem="BlockId=1069, Word=11, Bit=11, Size=1" 
                     Desc="When set, the limit thresholds need to be entered as raw ADC counts. When clear they need to be in mV." 
                     Type="bool" 
                     Id="Use Raw Limits" />
                 <ConfigItem 
-                    LocationItem="BlockId=1084, Word=3, Bit=0, Size=16" 
+                    LocationItem="BlockId=1069, Word=3, Bit=0, Size=16" 
                     Type="uint" 
                     Id="Limit Threshold 1" 
                     Desc="For NTC thermistors this is the threshold of the hottest temperature region. The values are in units of ADC counts or millivolts depending on the setting of vthm.raw_limits. If fewer than seven limits are specified, the terminating value is 65535 (-1)." />
                 <ConfigItem 
-                    LocationItem="BlockId=1084, Word=4, Bit=0, Size=16" 
+                    LocationItem="BlockId=1069, Word=4, Bit=0, Size=16" 
                     Type="uint" 
                     Id="Limit Threshold 2" 
                     Desc="For NTC thermistors this is the threshold of the next cooler temperature region. The list is ordered in ascending order of ADC counts or millivolts depending on the setting of vthm.raw_limits. If fewer than seven limits are specified, the terminating value is 65535 (-1)." />
                 <ConfigItem 
-                    LocationItem="BlockId=1084, Word=5, Bit=0, Size=16" 
+                    LocationItem="BlockId=1069, Word=5, Bit=0, Size=16" 
                     Type="uint" 
                     Id="Limit Threshold 3" 
                     Desc="For NTC thermistors this is the threshold of the next cooler temperature region. The list is ordered in ascending order of ADC counts or millivolts depending on the setting of vthm.raw_limits. If fewer than seven limits are specified, the terminating value is 65535 (-1)." />
                 <ConfigItem 
-                    LocationItem="BlockId=1084, Word=6, Bit=0, Size=16" 
+                    LocationItem="BlockId=1069, Word=6, Bit=0, Size=16" 
                     Type="uint" 
                     Id="Limit Threshold 4" 
                     Desc="For NTC thermistors this is the threshold of the next cooler temperature region. The list is ordered in ascending order of ADC counts or millivolts depending on the setting of vthm.raw_limits. If fewer than seven limits are specified, the terminating value is 65535 (-1)." />
                 <ConfigItem 
-                    LocationItem="BlockId=1084, Word=7, Bit=0, Size=16" 
+                    LocationItem="BlockId=1069, Word=7, Bit=0, Size=16" 
                     Type="uint" 
                     Id="Limit Threshold 5" 
                     Desc="For NTC thermistors this is the threshold of the next cooler temperature region. The list is ordered in ascending order of ADC counts or millivolts depending on the setting of vthm.raw_limits. If fewer than seven limits are specified, the terminating value is 65535 (-1)." />
                 <ConfigItem 
-                    LocationItem="BlockId=1084, Word=8, Bit=0, Size=16" 
+                    LocationItem="BlockId=1069, Word=8, Bit=0, Size=16" 
                     Type="uint" 
                     Id="Limit Threshold 6" 
                     Desc="For NTC thermistors this is the threshold of the next cooler temperature region. The list is ordered in ascending order of ADC counts or millivolts depending on the setting of vthm.raw_limits. If fewer than seven limits are specified, the terminating value is 65535 (-1)." />
                 <ConfigItem 
-                    LocationItem="BlockId=1084, Word=9, Bit=0, Size=16" 
+                    LocationItem="BlockId=1069, Word=9, Bit=0, Size=16" 
                     Type="uint" 
                     Id="Limit Threshold 7" 
                     Desc="For NTC thermistors this is the upper limit of the next cooler temperature region. The list is ordered in ascending order of ADC counts or millivolts depending on the setting of vthm.raw_limits. If fewer than seven limits are specified, the terminating value is 65535 (-1)." />
@@ -6782,7 +6782,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Node="Basic" 
                 Id="Charger ADC Configuration (Vchg)" >
                 <ConfigItem 
-                    LocationItem="BlockId=1119, Word=2, Bit=8, Size=8" 
+                    LocationItem="BlockId=1104, Word=2, Bit=8, Size=8" 
                     Desc="." 
                     Type="enum" 
                     Id="Vchg ADC Source" >
@@ -6790,12 +6790,12 @@ Where dBthresh is the threshold level (quoted as dBFS).
                         use="adc_sources" />
                 </ConfigItem>
                 <ConfigItem 
-                    LocationItem="BlockId=1119, Word=2, Bit=0, Size=8" 
+                    LocationItem="BlockId=1104, Word=2, Bit=0, Size=8" 
                     Desc="This configures the time interval between Vchg updates in seconds while charging, 0 to disable." 
                     Type="uint" 
                     Id="Vchg Read Period When Charging [s]" />
                 <ConfigItem 
-                    LocationItem="BlockId=1119, Word=1, Bit=0, Size=16" 
+                    LocationItem="BlockId=1104, Word=1, Bit=0, Size=16" 
                     Desc="This configures the timer interval between Vchg updates in seconds while not charging, 0 to disable." 
                     Type="uint" 
                     Id="Vchg Read Period When Not Charging [s]" />
@@ -6960,7 +6960,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                     use="pio_not_sel" />
             </ConfigItem>
             <ConfigItem 
-                LocationItem="BlockId=923, Word=3, Bit=8, Size=8" 
+                LocationItem="BlockId=908, Word=3, Bit=8, Size=8" 
                 Type="enum" 
                 Id="LED Enable PIO" 
                 Desc="Configures the PIO to drive when the LEDs are used." >
@@ -7740,7 +7740,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Id="Mute duration on Power down [ms]" 
                 Desc="The delay in milliseconds between the Audio Mute pin being driven and the Power state output pin indicating power down." />
             <ConfigItem 
-                LocationItem="BlockId=972, Word=1, Bit=0, Size=16" 
+                LocationItem="BlockId=957, Word=1, Bit=0, Size=16" 
                 Desc="The time in seconds elapsed after the last GAIA command has been received to store EQ settings into PS Store." 
                 Type="uint" 
                 Id="GAIA User Defined EQ Settings Persistent Store Timeout [s]" />
@@ -7817,37 +7817,37 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Id="Event Tones" >
                 <ConfigPatternArray 
                     Pattern="tone_config_type" 
-                    LocationPatternArray="BlockId=636, Word=1, PatternSize=2" 
+                    LocationPatternArray="BlockId=621, Word=1, PatternSize=2" 
                     MaxNumPatterns="66" 
                     Id="Event Tones definition" />
             </ConfigGroup>
             <ConfigItem 
-                LocationItem="BlockId=737, Word=1, Bit=10, Size=1" 
+                LocationItem="BlockId=722, Word=1, Bit=10, Size=1" 
                 Desc="If this item is set Tones (and audio prompts) are played at a nominal fixed volume regardless of the current Profile Volume level." 
                 Type="bool" 
                 Id="PlayTonesAtFixedVolume" />
             <ConfigItem 
-                LocationItem="BlockId=737, Word=1, Bit=9, Size=1" 
+                LocationItem="BlockId=722, Word=1, Bit=9, Size=1" 
                 Desc="When set the Sink plays a tone when the volume is changed using the remote device i.e. the AG." 
                 Type="bool" 
                 Id="PlayLocalVolumeTone" />
             <ConfigItem 
-                LocationItem="BlockId=737, Word=1, Bit=8, Size=1" 
+                LocationItem="BlockId=722, Word=1, Bit=8, Size=1" 
                 Desc="This allows volume tones to be queued in the Sink." 
                 Type="bool" 
                 Id="QueueVolumeTones" />
             <ConfigItem 
-                LocationItem="BlockId=737, Word=1, Bit=7, Size=1" 
+                LocationItem="BlockId=722, Word=1, Bit=7, Size=1" 
                 Desc="This allows event tones to be queued in the Sink." 
                 Type="bool" 
                 Id="QueueEventTones" />
             <ConfigItem 
-                LocationItem="BlockId=737, Word=1, Bit=6, Size=1" 
+                LocationItem="BlockId=722, Word=1, Bit=6, Size=1" 
                 Desc="When set the mute reminder tone is played at a fixed volume, set by the default volume level parameter 'Default Volume'." 
                 Type="bool" 
                 Id="MuteToneFixedVolume" />
             <ConfigItem 
-                LocationItem="BlockId=737, Word=1, Bit=11, Size=5" 
+                LocationItem="BlockId=722, Word=1, Bit=11, Size=5" 
                 Range="Min=0,Max=15" 
                 Type="uint" 
                 Id="FixedToneVolumeLevel" 
@@ -7967,7 +7967,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Id="Filters" >
                 <ConfigPatternArray 
                     Pattern="LEDFilter" 
-                    LocationPatternArray="BlockId=855, Word=1, PatternSize=4" 
+                    LocationPatternArray="BlockId=840, Word=1, PatternSize=4" 
                     MaxNumPatterns="25" 
                     Presentation="FixedOrder" 
                     Id="Event Filter" />
@@ -7977,7 +7977,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Id="Events" >
                 <ConfigPatternArray 
                     Pattern="LEDEventPattern" 
-                    LocationPatternArray="BlockId=826, Word=1, PatternSize=5" 
+                    LocationPatternArray="BlockId=811, Word=1, PatternSize=5" 
                     MaxNumPatterns="25" 
                     Presentation="FixedOrder" 
                     Id="Event Pattern" />
@@ -7987,7 +7987,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Id="States" >
                 <ConfigPatternArray 
                     Pattern="LEDStatePattern" 
-                    LocationPatternArray="BlockId=742, Word=1, PatternSize=5" 
+                    LocationPatternArray="BlockId=727, Word=1, PatternSize=5" 
                     MaxNumPatterns="16" 
                     Id="State Pattern" />
             </ConfigGroup>
@@ -7995,7 +7995,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Node="Basic" 
                 Id="Tri Colour LED Settings" >
                 <ConfigItem 
-                    LocationItem="BlockId=923, Word=1, Bit=8, Size=8" 
+                    LocationItem="BlockId=908, Word=1, Bit=8, Size=8" 
                     Type="enum" 
                     Id="Tri Colour Led A" 
                     Desc="Define PIO_x/LED_x (to specify the PIO or LED pin connected to TriCol_a LED pins)" >
@@ -8007,7 +8007,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                         use="pio_not_sel" />
                 </ConfigItem>
                 <ConfigItem 
-                    LocationItem="BlockId=923, Word=1, Bit=0, Size=8" 
+                    LocationItem="BlockId=908, Word=1, Bit=0, Size=8" 
                     Type="enum" 
                     Id="Tri Colour Led B" 
                     Desc="Define PIO_x/LED_x (to specify the PIO or LED pin connected to TriCol_b LED pins)" >
@@ -8019,7 +8019,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                         use="pio_not_sel" />
                 </ConfigItem>
                 <ConfigItem 
-                    LocationItem="BlockId=923, Word=2, Bit=8, Size=8" 
+                    LocationItem="BlockId=908, Word=2, Bit=8, Size=8" 
                     Type="enum" 
                     Id="Tri Colour Led C" 
                     Desc="Define PIO_x/LED_x (to specify the PIO or LED pin connected to TriCol_c LED pins)" >
@@ -8032,27 +8032,27 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 </ConfigItem>
             </ConfigGroup>
             <ConfigItem 
-                LocationItem="BlockId=923, Word=3, Bit=5, Size=1" 
+                LocationItem="BlockId=908, Word=3, Bit=5, Size=1" 
                 Type="bool" 
                 Id="Override Filter LED is Permanently On" 
                 Desc="If this item is set when displaying an override filter LED indication there will be no breaks in a solid colour display. Normal mode/event indications are suppressed for the LED chosen for the override LED filter." />
             <ConfigItem 
-                LocationItem="BlockId=923, Word=3, Bit=4, Size=1" 
+                LocationItem="BlockId=908, Word=3, Bit=4, Size=1" 
                 Type="bool" 
                 Id="Queue LED Event Indications" 
                 Desc="This allows LED indicator patterns to be queued in the Sink." />
             <ConfigItem 
-                LocationItem="BlockId=923, Word=3, Bit=3, Size=1" 
+                LocationItem="BlockId=908, Word=3, Bit=3, Size=1" 
                 Type="bool" 
                 Id="LED Disable State Reset after Boot" 
                 Desc="When set, after a reboot the LED enable/disable state is reset and the LEDs are enabled independently of the led_disable parameter. When cleared the LED enable/disable state is stored over a reboot." />
             <ConfigItem 
-                LocationItem="BlockId=923, Word=3, Bit=2, Size=1" 
+                LocationItem="BlockId=908, Word=3, Bit=2, Size=1" 
                 Type="bool" 
                 Id="Charging Complete Override LED Enable" 
                 Desc="When set The charger LED indications stay at trickle charge once reached, i.e. the indications only change when the charger is disconnected and reconnected. When cleared The charger indications toggles between fast and trickle charge indications as appropriate to the current state of the battery charge level." />
             <ConfigItem 
-                LocationItem="BlockId=923, Word=3, Bit=6, Size=2" 
+                LocationItem="BlockId=908, Word=3, Bit=6, Size=2" 
                 Type="enum" 
                 Id="LED Duty Cycle Time Multiplier" 
                 Desc="Applies a scaling factor to the times used for all LED on and off times. It can be used to lengthen LED on and off times beyond that of the 2.5 second limit." >
@@ -8078,24 +8078,24 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Id="GAIA_pio_translation" >
                 <ConfigPatternArray 
                     Pattern="gaia_pio_pattern" 
-                    LocationPatternArray="BlockId=978, Word=1, PatternSize=1" 
+                    LocationPatternArray="BlockId=963, Word=1, PatternSize=1" 
                     MaxNumPatterns="32" 
                     Id="GAIA PIO Array" />
             </ConfigGroup>
         </ConfigGroup>
         <ConfigItem 
-            LocationItem="BlockId=972, Word=2, Bit=11, Size=1" 
+            LocationItem="BlockId=957, Word=2, Bit=11, Size=1" 
             Desc="GAIA session enabled on connection." 
             Type="bool" 
             Id="Enable GAIA Session" />
         <ConfigItem 
-            LocationItem="BlockId=972, Word=2, Bit=12, Size=4" 
+            LocationItem="BlockId=957, Word=2, Bit=12, Size=4" 
             Range="Min=0,Max=14" 
             Desc="This specifies the SQIF partition to use for GAIA Over-the-Air Device Firmware Upgrade." 
             Type="uint" 
             Id="GAIA DFU Partition" />
         <ConfigItem 
-            LocationItem="BlockId=972, Word=2, Bit=10, Size=1" 
+            LocationItem="BlockId=957, Word=2, Bit=10, Size=1" 
             Desc="GAIA connection remains after power off." 
             Type="bool" 
             Id="Maintain Connection After Power Off" />
@@ -8109,18 +8109,18 @@ Where dBthresh is the threshold level (quoted as dBFS).
             Id="Logical Partitions" >
             <ConfigPatternArray 
                 Pattern="logical_partition_pattern" 
-                LocationPatternArray="BlockId=1131, Word=2, PatternSize=2" 
+                LocationPatternArray="BlockId=1116, Word=2, PatternSize=2" 
                 MaxNumPatterns="16" 
                 Presentation="FixedOrder" 
                 Id="Logical Partitions Array" />
         </ConfigGroup>
         <ConfigItem 
-            LocationItem="BlockId=1131, Word=1, Bit=15, Size=1" 
+            LocationItem="BlockId=1116, Word=1, Bit=15, Size=1" 
             Desc="If this is true then the application configuration will be reset to the default values built into the upgraded application when an upgrade is committed." 
             Type="bool" 
             Id="Enable Application Config Reset" />
         <ConfigItem 
-            LocationItem="BlockId=1131, Word=1, Bit=14, Size=1" 
+            LocationItem="BlockId=1116, Word=1, Bit=14, Size=1" 
             Desc="If Disabled, upgrade improvements will apply and ongoing audio streaming will be suspended on an upgrade. If Enabled, ongoing audio will continue streaming, while upgrade improvements will not be applicable." 
             Type="bool" 
             Id="Protect Audio During Upgrade" />
@@ -8133,7 +8133,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
             Node="Basic" 
             Id="BC 1.2 Required Operating Range" >
             <ConfigItem 
-                LocationItem="BlockId=1045, Word=1, Bit=0, Size=16" 
+                LocationItem="BlockId=1030, Word=1, Bit=0, Size=16" 
                 ShowOrdered="true" 
                 Desc="The fast charge current is increased until Vchg drops to this limiting threshold." 
                 Type="enum" 
@@ -8142,7 +8142,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                     use="vchg_current_limit_thresholds" />
             </ConfigItem>
             <ConfigItem 
-                LocationItem="BlockId=1045, Word=2, Bit=0, Size=16" 
+                LocationItem="BlockId=1030, Word=2, Bit=0, Size=16" 
                 ShowOrdered="true" 
                 Desc="If Vchg drops to the limiting threshold then the fast charge current is decreased until Vchg recovers to this higher threshold." 
                 Type="enum" 
@@ -8151,19 +8151,19 @@ Where dBthresh is the threshold level (quoted as dBFS).
                     use="vchg_current_limit_thresholds" />
             </ConfigItem>
             <ConfigItem 
-                LocationItem="BlockId=1045, Word=3, Bit=0, Size=16" 
+                LocationItem="BlockId=1030, Word=3, Bit=0, Size=16" 
                 Range="Min=0,Max=500" 
                 Desc="The period between reading Vchg when determining the charger current." 
                 Type="uint" 
                 Id="Vchg Current Limit Read Period [ms]" />
             <ConfigItem 
-                LocationItem="BlockId=1045, Word=4, Bit=8, Size=8" 
+                LocationItem="BlockId=1030, Word=4, Bit=8, Size=8" 
                 Range="Min=0,Max=50" 
                 Desc="The step size for increasing the charger current." 
                 Type="uint" 
                 Id="Positive current step [mA]" />
             <ConfigItem 
-                LocationItem="BlockId=1045, Word=4, Bit=0, Size=8" 
+                LocationItem="BlockId=1030, Word=4, Bit=0, Size=8" 
                 Range="Min=0,Max=50" 
                 Desc="The step size for decreasing the charger current." 
                 Type="uint" 
@@ -8173,7 +8173,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
             Node="Basic" 
             Id="LED Session Config Block" >
             <ConfigItem 
-                LocationItem="BlockId=930, Word=1, Bit=15, Size=1" 
+                LocationItem="BlockId=915, Word=1, Bit=15, Size=1" 
                 Type="bool" 
                 Id="LED Enabled" 
                 Desc="If LED is enabled." />
@@ -8309,7 +8309,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 Type="bool" 
                 Id="Volume Orientation button inverted state" />
             <ConfigItem 
-                LocationItem="BlockId=1023, Word=1, Bit=15, Size=1" 
+                LocationItem="BlockId=1008, Word=1, Bit=15, Size=1" 
                 Desc="1 = Enable Low Battery intelligent Power Management, 0 = Disable Low Battery intelligent Power Management." 
                 Type="bool" 
                 Id="LBIMP Enable" />
@@ -8408,7 +8408,7 @@ Where dBthresh is the threshold level (quoted as dBFS).
                 key="DUT I2S Input" />
         </ConfigItem>
         <ConfigItem 
-            LocationItem="BlockId=1084, Word=10, Bit=0, Size=8" 
+            LocationItem="BlockId=1069, Word=10, Bit=0, Size=8" 
             Desc="This parameter sets the required internal current source to be driven when a thermistor reading is taken." 
             Type="enum" 
             Id="Drive Thermistor Output ICS" >

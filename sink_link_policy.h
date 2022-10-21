@@ -27,6 +27,7 @@ RETURNS
 */
 void linkPolicyUseA2dpSettings(uint8 DeviceId, uint8 StreamId, Sink sink );
 
+void linkPolicyUseMultiTalkSettings(Sink sink);
 
 /****************************************************************************
 NAME	

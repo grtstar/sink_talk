@@ -20,7 +20,7 @@ DESCRIPTION
 
 #include "config_definition.h"
 
-#define SINK_GATT_ANCS_READONLY_CONFIG_BLK_ID 946
+#define SINK_GATT_ANCS_READONLY_CONFIG_BLK_ID 931
 
 typedef struct {
     unsigned ANCSNotificationEnableMask;

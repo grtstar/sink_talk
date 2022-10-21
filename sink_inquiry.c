@@ -622,9 +622,9 @@ void inquiryResume(void)
         }
         else if(sinkInquiryIsInqSessionMuliTalk())
         {
-            INQ_DEBUG(("INQ: Resume GIAC %d, %d, 0x%lX\n", 8, 20, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS));
+            INQ_DEBUG(("INQ: Resume GIAC %d, %d, 0x%lX\n", 16, 40, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS));
             /* Obtain upto 8 responses, using GIAC with 20*1.28sec=25.6 sec timeout */
-            ConnectionInquire(&theSink.task, LIAC, 8, 20, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS);
+            ConnectionInquire(&theSink.task, LIAC, 16, 40, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS);
         }
         else
         {
@@ -732,7 +732,15 @@ void inquiryStart(bool req_disc)
         if (InquiryTimeout_s)
         {
             MessageCancelAll(&theSink.task, EventSysRssiPairTimeout);
-            MessageSendLater(&theSink.task, EventSysRssiPairTimeout, 0, D_SEC(InquiryTimeout_s));
+
+            if(GINQDATA.inquiry.session == inquiry_session_multi_talk)
+            {
+                MessageSendLater(&theSink.task, EventSysRssiPairTimeout, 0, D_SEC(3600));
+            }
+            else
+            {
+                MessageSendLater(&theSink.task, EventSysRssiPairTimeout, 0, D_SEC(InquiryTimeout_s));
+            }
         }
     }
 }
@@ -947,7 +955,7 @@ static void inquiryConnect(uint8 index)
 #ifdef ENABLE_MULTI_TALK
                         if(GINQDATA.inquiry.session == inquiry_session_multi_talk)
                         {
-                            mtConnect(&device->bd_addr);
+                            /* mtConnect(&device->bd_addr); */
                             return;
                         }
 #endif
@@ -1595,6 +1603,7 @@ void inquiryHandleTalkResult(CL_DM_INQUIRE_RESULT_T *result)
 
                 if(count != GINQDATA.inquiry.result_count)
                 {
+                    /*
                     if(count > 1)
                     {
                          uint8 *c = PanicUnlessMalloc(sizeof(uint8));
@@ -1602,6 +1611,7 @@ void inquiryHandleTalkResult(CL_DM_INQUIRE_RESULT_T *result)
                         MessageCancelAll(&theSink.task, EventSysMultiTalkInquiryDevices);
                         MessageSendLater(&theSink.task, EventSysMultiTalkInquiryDevices, c, D_SEC(1));
                     }
+                    */
                     GINQDATA.inquiry.result_count = count;
                 }
                 GINQDATA.inquiry.state = inquiry_idle;

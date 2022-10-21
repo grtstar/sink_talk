@@ -20,7 +20,7 @@ DESCRIPTION
 
 #include "config_definition.h"
 
-#define GATT_LLS_READONLY_CONFIG_BLK_ID 961
+#define GATT_LLS_READONLY_CONFIG_BLK_ID 946
 
 typedef struct {
     unsigned LinkLossTimer_s;

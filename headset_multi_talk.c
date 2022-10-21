@@ -44,6 +44,7 @@
 #include <ps.h>
 
 #include "headset_multi_talk.h"
+#include "audio_prompt.h"
 #include "csr_common_example_plugin.h"
 
 #ifdef ENABLE_MT_DEBUG
@@ -52,49 +53,8 @@
 #else
 #define MT_DEBUG(X)
 #define MT_DEBUG_ADDR(x)
+int sinkEnableDebug(void);
 #endif
-
-/*
-Index 0: 欢迎使用蓝牙对讲�wav
-Index 1: 关机.wav
-Index 2: 电池电量�wav
-Index 3: 电池电量中等.wav
-Index 4: 电池电量�wav
-Index 5: 多人对讲组网.wav
-Index 6: 多人对讲开始连�wav
-Index 7: 组网人数1�wav
-Index 8: 组网人数2�wav
-Index 9: 组网人数3�wav
-Index 10: 组网人数4�wav
-Index 11: 组网人数5�wav
-Index 12: 组网人数6�wav
-Index 13: 组网人数7�wav
-Index 14: 组网人数8�wav
-Index 15: 2人组网完�wav
-Index 16: 3人组网完�wav
-Index 17: 4人组网完�wav
-Index 18: 5人组网完�wav
-Index 19: 6人组网完�wav
-Index 20: 7人组网完�wav
-Index 21: 8人组网完�wav
-Index 22: 多人对讲.wav
-Index 23: 多人对讲已关�wav
-Index 24: 双人对讲.wav
-Index 25: 双人对讲配对.wav
-Index 26: 双人对讲配对成功.wav
-Index 27: 退出双人对讲配�wav
-Index 28: 对讲已关�wav
-Index 29: 对讲已断开.wav
-Index 30: 当前人数1�wav
-Index 31: 当前人数2�wav
-Index 32: 当前人数3�wav
-Index 33: 当前人数4�wav
-Index 34: 当前人数5�wav
-Index 35: 当前人数6�wav
-Index 36: 当前人数7�wav
-Index 37: 当前人数8�wav
-Index 38: 取消组网.wav
-*/
 
 extern ExamplePluginTaskdata csr_cvsd_8k_1mic_plugin;
 extern ExamplePluginTaskdata csr_sbc_1mic_plugin;
@@ -106,9 +66,11 @@ extern ExamplePluginTaskdata csr_sbc_2mic_plugin;
 #define SBC1MIC_EXAMPLE (TaskData *)&csr_sbc_1mic_plugin
 #define CVSD2MIC_EXAMPLE (TaskData *)&csr_cvsd_8k_2mic_plugin
 #define SBC2MIC_EXAMPLE (TaskData *)&csr_sbc_2mic_plugin
- 
+
 #define MULTITALK_PSM 0x0055
 #define MULTITALK_PROTOCOL_PSM 0x0057
+
+#define PS_ROUTE_TABLE 3
 
 typedef enum MTType
 {
@@ -121,6 +83,8 @@ typedef struct RouteTable
 {
     uint8 count;
     uint8 nop;
+    uint8 reconnect_index;
+    uint8 nop2;
     bdaddr item[8];
 } RouteTable;
 
@@ -130,25 +94,31 @@ static void RouteTableAddChild(RouteTable *rt, uint8 ttl, bdaddr addr);
 static void BdaddrToArray(bdaddr *addr, uint8 *array);
 static bdaddr ArrayToBdaddr(const uint8 *array);
 
-
 static void RouteTablePushChild(RouteTable *rt, bdaddr addr);
 static bdaddr RouteTableGet(RouteTable *rt, uint8 index);
 static bool RouteTableIsNotSaved(RouteTable *rt);
 static uint8 RouteTableIsContain(RouteTable *rt, bdaddr *addr);
+#if 0
 static void RouteTableSetHead(RouteTable *rt, bdaddr addr);
 static void RouteTableSetTail(RouteTable *rt, bdaddr addr);
-
+#endif
+static void mtSendRouteTable(RouteTable *rt);
 static void mtClearRouteTable(RouteTable *rt);
-static void mtSaveRouteTable(RouteTable *rt, uint8 mt_type);
+static void mtSaveRouteTable(RouteTable *rt, uint8 mt_type, uint8 rt_idx);
 static void mtLoadRouteTable(RouteTable *rt);
+static void mtResetPairList(void);
+void mtRouteTableAdjust(bdaddr child_addr);
 
 static void ACLSend(Sink sink, const uint8_t *data, uint16 packet_size);
 static void ACLBroadcastEvent(Sink sink, uint16 event);
 
-static void mtBroadcastDisconnected(void);
+static void mtBroadcastDisconnected(int mt_device, bdaddr my_addr);
 static void mtSendFindTail(void);
 static void mtSendCheckTTL(uint8 ttl);
-static void mtBroadcastConnectedCount(uint8 count, bdaddr addr);
+static void mtBroadcastConnectedCount(uint8 count);
+
+#define PowerAmpOn() PioSetPio(14, pio_drive, TRUE)
+#define PowerAmpOff() PioSetPio(14, pio_drive, FALSE)
 
 void BdaddrToArray(bdaddr *addr, uint8 *d)
 {
@@ -187,7 +157,7 @@ uint8 RouteTableIsContain(RouteTable *rt, bdaddr *addr)
 
 bool RouteTableIsNotSaved(RouteTable *rt)
 {
-    return rt->nop == 0;
+    return rt->nop != 0xA5 && rt->nop != 0x55;
 }
 
 void RouteTablePushChild(RouteTable *rt, bdaddr addr)
@@ -195,7 +165,7 @@ void RouteTablePushChild(RouteTable *rt, bdaddr addr)
     MT_DEBUG(("MT: Push Child "));
     MT_DEBUG_ADDR(addr);
 
-    if(BdaddrIsZero(&addr))
+    if (BdaddrIsZero(&addr))
     {
         return;
     }
@@ -211,6 +181,7 @@ void RouteTablePushChild(RouteTable *rt, bdaddr addr)
     }
 }
 
+#if 0
 void RouteTableSetHead(RouteTable *rt, bdaddr addr)
 {
     uint8 idx = RouteTableIsContain(rt, &addr);
@@ -233,7 +204,6 @@ void RouteTableSetTail(RouteTable *rt, bdaddr addr)
     }
 }
 
-#if 0
 void RouteTableAddChild(RouteTable *rt, uint8 ttl, bdaddr addr)
 {
     MT_DEBUG(("MT: Add Child %d ", ttl));
@@ -268,7 +238,7 @@ bdaddr RouteTableGet(RouteTable *rt, uint8 index)
 }
 
 uint16 saved = 0;
-void mtSaveRouteTable(RouteTable *rt, uint8 mt_type)
+void mtSaveRouteTable(RouteTable *rt, uint8 mt_type, uint8 rt_idx)
 {
     if (mt_type == MT_HEAD)
     {
@@ -278,12 +248,13 @@ void mtSaveRouteTable(RouteTable *rt, uint8 mt_type)
     {
         rt->nop = 0x55;
     }
-    saved = ConfigStore(99, rt, sizeof(RouteTable)); /* DSP49 */
+    rt->reconnect_index = rt_idx;
+    saved = ConfigStore(PS_ROUTE_TABLE, rt, sizeof(RouteTable)); /* DSP49 */
 }
 
 void mtLoadRouteTable(RouteTable *rt)
 {
-    ConfigRetrieve(99, rt, sizeof(RouteTable)); /* DSP49 */
+    ConfigRetrieve(PS_ROUTE_TABLE, rt, sizeof(RouteTable)); /* DSP49 */
     if (rt->nop != 0x55 && rt->nop != 0xA5)
     {
         memset(rt, 0, sizeof(RouteTable));
@@ -293,7 +264,15 @@ void mtLoadRouteTable(RouteTable *rt)
 void mtClearRouteTable(RouteTable *rt)
 {
     memset(rt, 0, sizeof(RouteTable));
-    ConfigStore(99, rt, sizeof(RouteTable));
+    ConfigStore(PS_ROUTE_TABLE, rt, sizeof(RouteTable));
+}
+
+void mtResetPairList(void)
+{
+    uint16_t pl[2];
+    pl[0] = 0xFFFF;
+    pl[1] = 0xFFFF;
+    ConfigStore(141, NULL, 0);
 }
 
 typedef enum DevcieSate
@@ -303,16 +282,10 @@ typedef enum DevcieSate
     MT_L2CAP_Connected,
     MT_SYN_Connecting,
     MT_SYN_Connected,
+    MT_L2CAP_Disconnecting,
     MT_SYN_Disconnecting,
-    MT_SYN_Disconnected,
-    MT_L2CAP_Disconnecting
+    MT_SYN_Disconnected
 } DevcieSate;
-
-enum
-{
-    MT_PARENT,
-    MT_CHILD
-};
 
 typedef enum MTStatus
 {
@@ -321,6 +294,7 @@ typedef enum MTStatus
     MT_ST_CONNECTING,
     MT_ST_CONNECTED,
     MT_ST_LINKLOSS,
+    MT_ST_WAITING_CONNECT,
     MT_ST_RECONNECTING,
     MT_ST_STAY_DISCONNET
 } MTStatus;
@@ -332,18 +306,19 @@ typedef enum ACLMsg
     ACLMSG_ONE_DISCONNECTED,
     ACLMSG_FIND_TAIL,
     ACLMSG_CHECK_TTL,
-    ACLMSG_DEVICE_COUNT
+    ACLMSG_DEVICE_COUNT,
+    ACLMSG_ROUTE_TABLE
 } ACLMsg;
 
 typedef struct MTDevice
 {
     DevcieSate state : 4;
     sync_link_type link_type : 4;
-    BITFIELD    unused:8;
+    BITFIELD unused : 8;
     bdaddr bt_addr;
     Sink acl_sink;
     Sink audio_sink;
-    
+
 } MTDevice;
 
 typedef struct MTData
@@ -352,11 +327,12 @@ typedef struct MTData
     TaskData mt_task;
     MTDevice mt_device[2];
     hfp_common_plugin_params_t plugin_params;
-    MTType mt_type :2;
-    MTStatus status:4;
-    BITFIELD total_connected:4;
-    BITFIELD connect_idx:3;
-    BITFIELD reconnect_count:3;
+    MTType mt_type : 2;
+    MTStatus status : 4;
+    BITFIELD total_connected : 4;
+    BITFIELD connect_idx : 3;
+    BITFIELD reconnect_count : 3;
+    int8 index_rt;
     RouteTable route_table;
     bdaddr addr;
     bdaddr head_addr;
@@ -380,7 +356,7 @@ static MTData *mt;
 TaskData acl_parent_task = {acl_parent_handler};
 TaskData acl_child_task = {acl_child_handler};
 
-static int enableDebug = 0;
+static int enableDebug = 1;
 
 void mt_handler(Task task, MessageId id, Message message)
 {
@@ -426,6 +402,8 @@ void mt_handler(Task task, MessageId id, Message message)
     case CL_DM_SYNC_DISCONNECT_IND:
         /* code */
         handleMTSynDisconInd((CL_DM_SYNC_DISCONNECT_IND_T *)message);
+        break;
+    case CL_DM_SYNC_RENEGOTIATE_IND:
         break;
     default:
         break;
@@ -512,6 +490,8 @@ void mtInit(Task task)
     {
         mt->mt_type = MT_NODE;
     }
+    mt->index_rt = mt->route_table.reconnect_index;
+
     ConnectionL2capRegisterRequest(&mt->mt_task, MULTITALK_PSM, 0);
 
     if (mt->addr.lap == 0xA5A5)
@@ -539,32 +519,55 @@ bool mtRssiConnect(void)
 {
     bdaddr bd_addr = RouteTableGet(&mt->route_table, mt->connect_idx % mt->route_table.count);
 
-    MT_DEBUG(("MT: mtRssiConnect\n"));
-    if (!BdaddrIsSame(&bd_addr, &mt->head_addr) && !BdaddrIsSame(&bd_addr, &mt->addr))
+    MT_DEBUG(("MT: mtRssiConnect to "));
+    MT_DEBUG_ADDR(bd_addr);
+    if (!BdaddrIsSame(&bd_addr, &mt->head_addr) && !BdaddrIsSame(&bd_addr, &mt->addr) && !BdaddrIsSame(&bd_addr, &mt->mt_device[MT_PARENT].bt_addr))
     {
         deviceManagerRemoveDevice(&bd_addr);
-        mtConnect(&bd_addr);
-        return TRUE;
+        return mtConnect(mt->connect_idx);
     }
     return FALSE;
 }
 
 void mtDisconnect(void)
 {
-    mtScoDisconnect(MT_PARENT);
-    mtScoDisconnect(MT_CHILD);
-    mtACLDisconnect(MT_PARENT);
-    mtACLDisconnect(MT_CHILD);
+    if (mt->mt_device[MT_PARENT].state == MT_SYN_Connected)
+    {
+        mtScoDisconnect(MT_PARENT);
+    }
+    else
+    {
+        mtACLDisconnect(MT_PARENT);
+    }
+    if (mt->mt_device[MT_CHILD].state == MT_SYN_Connected)
+    {
+        mtScoDisconnect(MT_CHILD);
+    }
+    else
+    {
+        mtACLDisconnect(MT_CHILD);
+    }
 }
 
-bool mtConnect(bdaddr *bd_addr)
+bool mtConnect(int index)
 {
-    if (!BdaddrIsSame(bd_addr, &mt->head_addr) && !BdaddrIsSame(bd_addr, &mt->addr))
+    bdaddr *bd_addr = &mt->route_table.item[index];
+    MT_DEBUG(("MT: connect idx:%d, rt:%d\n", index, mt->index_rt));
+    if (index < mt->index_rt)
+    {
+        return FALSE;
+    }
+    if (!BdaddrIsSame(bd_addr, &mt->route_table.item[0]) && !BdaddrIsSame(bd_addr, &mt->head_addr) && !BdaddrIsSame(bd_addr, &mt->addr) && !BdaddrIsSame(bd_addr, &mt->mt_device[MT_PARENT].bt_addr))
     {
         mt->mt_device[MT_CHILD].bt_addr = *bd_addr;
         mt->mt_device[MT_CHILD].state = MT_L2CAP_Connecting;
         mtACLConnect(bd_addr);
         return TRUE;
+    }
+    else
+    {
+        mt->mt_device[MT_CHILD].state = MT_L2CAP_Disconnected;
+        BdaddrSetZero(&mt->mt_device[MT_CHILD].bt_addr);
     }
     return FALSE;
 }
@@ -585,9 +588,10 @@ void mtACLDisconnect(int device)
 {
     if (mt->mt_device[device].acl_sink != NULL)
     {
+        mt->mt_device[device].state = MT_L2CAP_Disconnecting;
         ConnectionL2capDisconnectRequest(&mt->mt_task, mt->mt_device[device].acl_sink);
     }
-    else if(mt->mt_device[device].state == MT_L2CAP_Connecting)
+    else
     {
         mt->mt_device[device].state = MT_L2CAP_Disconnected;
         BdaddrSetZero(&mt->mt_device[device].bt_addr);
@@ -616,9 +620,10 @@ void mtScoDisconnect(int device)
 {
     if (mt->mt_device[device].audio_sink != NULL)
     {
+        mt->mt_device[device].state = MT_SYN_Disconnecting;
         ConnectionSyncDisconnect(mt->mt_device[device].audio_sink, hci_error_oetc_user);
     }
-    else if(mt->mt_device[device].state == MT_SYN_Connecting)
+    else if (mt->mt_device[device].state == MT_SYN_Connecting)
     {
         mt->mt_device[device].state = MT_L2CAP_Connected;
     }
@@ -644,7 +649,7 @@ void handleMTL2capConnectInd(CL_L2CAP_CONNECT_IND_T *msg)
               msg->bd_addr.nap, msg->bd_addr.uap, msg->bd_addr.lap, msg->psm,
               msg->identifier, msg->connection_id));
 
-    if (mt->mt_device[MT_PARENT].state == MT_L2CAP_Disconnected)
+    if (mt->mt_device[MT_PARENT].state == MT_L2CAP_Disconnected || mt->mt_device[MT_PARENT].state >= MT_L2CAP_Disconnecting)
     {
         /* ?????????????? */
         MT_DEBUG(("MT: handleMTL2capConnectInd parant is disconnect\n"));
@@ -652,9 +657,13 @@ void handleMTL2capConnectInd(CL_L2CAP_CONNECT_IND_T *msg)
         {
             DEBUG(("MT: handleMTL2capConnectInd type=%d, status = %d\n", mt->mt_type, mt->status));
 
-            if (mt->mt_device[MT_CHILD].state >= MT_L2CAP_Connecting && BdaddrIsSame(&msg->bd_addr, &mt->mt_device[MT_CHILD].bt_addr))
+            /*if (mt->mt_device[MT_CHILD].state >= MT_L2CAP_Connecting && BdaddrIsSame(&msg->bd_addr, &mt->mt_device[MT_CHILD].bt_addr))*/
+            if (mt->mt_device[MT_CHILD].state >= MT_L2CAP_Connecting && mt->mt_device[MT_CHILD].state < MT_SYN_Connected)
             {
-                DEBUG(("MT: handleMTL2capConnectInd cannot allow child connected to parent\n"));
+                mt->status = MT_ST_WAITING_CONNECT;
+                MessageCancelAll(mt->app_task, EventSysMultiTalkReconnect);
+                MessageCancelAll(mt->app_task, EventMultiTalkReconnect);
+                MessageSendLater(mt->app_task, EventSysMultiTalkWatiConnect, NULL, D_SEC(5));
                 can_recv = FALSE;
             }
             else if (mt->status == MT_ST_NOCONNECT || mt->status == MT_ST_STAY_DISCONNET)
@@ -664,11 +673,19 @@ void handleMTL2capConnectInd(CL_L2CAP_CONNECT_IND_T *msg)
             }
             else if (mt->mt_type != MT_HEAD && mt->status != MT_ST_CONNECTED)
             {
-                MT_DEBUG(("MT: handleMTL2capConnectInd peer is my cai\n"))
-                mt->mt_device[MT_PARENT].state = MT_L2CAP_Connecting;
-                mt->mt_device[MT_PARENT].bt_addr = msg->bd_addr;
-                mt->mt_type = MT_NODE;
-                can_recv = TRUE;
+                if (BdaddrIsSame(&msg->bd_addr, &mt->mt_device[MT_CHILD].bt_addr))
+                {
+                    DEBUG(("MT: handleMTL2capConnectInd cannot allow child connected to parent\n"));
+                    can_recv = FALSE;
+                }
+                else
+                {
+                    MT_DEBUG(("MT: handleMTL2capConnectInd peer is my cai\n"))
+                    mt->mt_device[MT_PARENT].state = MT_L2CAP_Connecting;
+                    mt->mt_device[MT_PARENT].bt_addr = msg->bd_addr;
+                    mt->mt_type = MT_NODE;
+                    can_recv = TRUE;
+                }
             }
         }
     }
@@ -694,22 +711,49 @@ void handleMTL2capConnectCfm(CL_L2CAP_CONNECT_CFM_T *msg)
               msg->addr.nap, msg->addr.uap, msg->addr.lap, msg->status));
     if (BdaddrIsSame(&msg->addr, &mt->mt_device[MT_PARENT].bt_addr))
     {
+        MT_DEBUG(("MT: Parent\n"));
         if (msg->status == l2cap_connect_success)
         {
             mt->mt_device[MT_PARENT].state = MT_L2CAP_Connected;
             mt->mt_device[MT_PARENT].acl_sink = msg->sink;
 
+            ConnectionSetLinkSupervisionTimeout(msg->sink, 16000);
+            linkPolicyUseMultiTalkSettings(msg->sink);
+
             MessageSinkTask(msg->sink, &acl_parent_task);
+
+            linkPolicyCheckRoles();
         }
     }
     else if (BdaddrIsSame(&msg->addr, &mt->mt_device[MT_CHILD].bt_addr))
     {
+        MT_DEBUG(("MT: Child\n"));
         if (msg->status == l2cap_connect_success)
         {
             mt->mt_device[MT_CHILD].state = MT_L2CAP_Connected;
             mt->mt_device[MT_CHILD].acl_sink = msg->sink;
+
+            ConnectionSetLinkSupervisionTimeout(msg->sink, 16000);
+            linkPolicyUseMultiTalkSettings(msg->sink);
+
             MessageSinkTask(msg->sink, &acl_child_task);
+
+            linkPolicyCheckRoles();
+
+            mtRouteTableAdjust(msg->addr);
+            if (mt->status == MT_ST_CONNECTING || mt->status == MT_ST_PARING || mt->status == MT_ST_RECONNECTING || mt->status == MT_ST_WAITING_CONNECT)
+            {
+                mtSendRouteTable(&mt->route_table);
+            }
+
             mtScoConnect(msg->sink);
+        }
+        else if (mt->status == MT_ST_WAITING_CONNECT)
+        {
+            MessageCancelAll(mt->app_task, EventSysMultiTalkReconnect);
+            MessageCancelAll(mt->app_task, EventMultiTalkReconnect);
+            mt->mt_device[MT_CHILD].state = MT_L2CAP_Disconnected;
+            BdaddrSetZero(&mt->mt_device[MT_CHILD].bt_addr);
         }
         if (msg->status == l2cap_connect_failed) /* 128 */
         {
@@ -719,6 +763,7 @@ void handleMTL2capConnectCfm(CL_L2CAP_CONNECT_CFM_T *msg)
             if (mt->status == MT_ST_RECONNECTING)
             {
                 mt->reconnect_count++;
+                MessageCancelAll(mt->app_task, EventSysMultiTalkReconnect);
                 MessageSendLater(mt->app_task, EventSysMultiTalkReconnect, NULL, D_SEC(1));
             }
             if (mt->status == MT_ST_CONNECTING)
@@ -726,6 +771,7 @@ void handleMTL2capConnectCfm(CL_L2CAP_CONNECT_CFM_T *msg)
                 mt->connect_idx++;
                 {
                     uint8 *msg = PanicUnlessMalloc(sizeof(uint8));
+                    MessageCancelAll(mt->app_task, EventMultiTalkConnect);
                     MessageSendLater(mt->app_task, EventMultiTalkConnect, msg, D_SEC(1));
                 }
             }
@@ -737,6 +783,7 @@ void handleMTL2capConnectCfm(CL_L2CAP_CONNECT_CFM_T *msg)
             {
                 mt->reconnect_count++;
                 MT_DEBUG(("MT: RECONNECT Next\n"));
+                MessageCancelAll(mt->app_task, EventSysMultiTalkReconnect);
                 MessageSendLater(mt->app_task, EventSysMultiTalkReconnect, NULL, D_SEC(1));
             }
             if (mt->status == MT_ST_CONNECTING)
@@ -745,21 +792,26 @@ void handleMTL2capConnectCfm(CL_L2CAP_CONNECT_CFM_T *msg)
                 mt->connect_idx++;
                 {
                     uint8 *msg = PanicUnlessMalloc(sizeof(uint8));
+                    MessageCancelAll(mt->app_task, EventMultiTalkConnect);
                     MessageSendLater(mt->app_task, EventMultiTalkConnect, msg, D_SEC(1));
                 }
             }
         }
         if (msg->status == l2cap_connect_failed_security) /* 132 */
         {
+            linkPolicyCheckRoles();
+            deviceManagerRemoveDevice(&msg->addr);
             if (mt->status == MT_ST_CONNECTING)
             {
-                uint8 *msg = PanicUnlessMalloc(sizeof(uint8));
-                MessageSendLater(mt->app_task, EventMultiTalkConnect, msg, D_SEC(1));
+                uint8 *m = PanicUnlessMalloc(sizeof(uint8));
+                MessageCancelAll(mt->app_task, EventMultiTalkConnect);
+                MessageSendLater(mt->app_task, EventMultiTalkConnect, m, D_SEC(2));
             }
             if (mt->status == MT_ST_RECONNECTING)
             {
-                deviceManagerRemoveDevice(&msg->addr);
-                MessageSendLater(mt->app_task, EventSysMultiTalkReconnect, NULL, D_SEC(1));
+                mt->reconnect_count++;
+                MessageCancelAll(mt->app_task, EventSysMultiTalkReconnect);
+                MessageSendLater(mt->app_task, EventSysMultiTalkReconnect, NULL, D_SEC(2));
             }
         }
         if (msg->status == l2cap_connect_timeout) /* 136 */
@@ -769,29 +821,33 @@ void handleMTL2capConnectCfm(CL_L2CAP_CONNECT_CFM_T *msg)
                 mt->connect_idx++;
                 {
                     uint8 *msg = PanicUnlessMalloc(sizeof(uint8));
+                    MessageCancelAll(mt->app_task, EventMultiTalkConnect);
                     MessageSendLater(mt->app_task, EventMultiTalkConnect, msg, D_SEC(1));
                 }
-                if (mt->status == MT_ST_RECONNECTING)
-                {
-                    mt->reconnect_count++;
-                    MessageSendLater(mt->app_task, EventSysMultiTalkReconnect, NULL, D_SEC(1));
-                }
+            }
+            if (mt->status == MT_ST_RECONNECTING)
+            {
+                mt->reconnect_count++;
+                MessageCancelAll(mt->app_task, EventSysMultiTalkReconnect);
+                MessageSendLater(mt->app_task, EventSysMultiTalkReconnect, NULL, D_SEC(1));
             }
         }
         if (msg->status == l2cap_connect_error) /* 137 */
         {
+            linkPolicyCheckRoles();
+            deviceManagerRemoveDevice(&msg->addr);
             if (mt->status == MT_ST_RECONNECTING)
             {
-                deviceManagerRemoveDevice(&msg->addr);
-                MessageSendLater(mt->app_task, EventSysMultiTalkReconnect, NULL, D_SEC(1));
+                mt->reconnect_count++;
+                MessageCancelAll(mt->app_task, EventSysMultiTalkReconnect);
+                MessageSendLater(mt->app_task, EventSysMultiTalkReconnect, NULL, D_SEC(2));
             }
             if (mt->status == MT_ST_CONNECTING)
             {
-                deviceManagerRemoveDevice(&msg->addr);
                 {
-
                     uint8 *msg = PanicUnlessMalloc(sizeof(uint8));
-                    MessageSendLater(mt->app_task, EventMultiTalkConnect, msg, D_SEC(1));
+                    MessageCancelAll(mt->app_task, EventMultiTalkConnect);
+                    MessageSendLater(mt->app_task, EventMultiTalkConnect, msg, D_SEC(2));
                 }
             }
         }
@@ -806,21 +862,28 @@ void handleMTL2capDisconInd(CL_L2CAP_DISCONNECT_IND_T *msg)
         MT_DEBUG(("MT: handleMTL2capDisconInd: parent\n"));
         mt->mt_device[MT_PARENT].state = MT_L2CAP_Disconnected;
         mt->mt_device[MT_PARENT].acl_sink = NULL;
-        stateManagerEnterConnectableState(FALSE);
         mt->status = MT_ST_LINKLOSS;
+        stateManagerEnterConnectableState(FALSE);
 
         if (msg->status == l2cap_disconnect_link_loss)
         {
-            mtBroadcastDisconnected();
+            mtBroadcastDisconnected(MT_ALL, mt->addr);
 
             mt->total_connected--;
+            if (mt->total_connected < 1)
+            {
+                mt->total_connected = 1;
+            }
             MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
-                
         }
         else if (msg->status == l2cap_disconnect_successful)
         {
-            mtBroadcastDisconnected();
+            mtBroadcastDisconnected(MT_ALL, mt->addr);
             mt->total_connected--;
+            if (mt->total_connected < 1)
+            {
+                mt->total_connected = 1;
+            }
             MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
         }
         else
@@ -832,29 +895,41 @@ void handleMTL2capDisconInd(CL_L2CAP_DISCONNECT_IND_T *msg)
         MT_DEBUG(("MT: handleMTL2capDisconInd: child\n"));
         mt->mt_device[MT_CHILD].state = MT_L2CAP_Disconnected;
         mt->mt_device[MT_CHILD].acl_sink = NULL;
-        if (msg->status == l2cap_disconnect_link_loss)
+        if (msg->status == l2cap_disconnect_link_loss && (mt->mt_device[MT_PARENT].state == MT_SYN_Connected || mt->mt_type == MT_HEAD))
         {
-            mtBroadcastDisconnected();
+            mtBroadcastDisconnected(MT_ALL, mt->addr);
 
             mt->total_connected--;
+            if (mt->total_connected < 1)
+            {
+                mt->total_connected = 1;
+            }
             MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
 
             mt->reconnect_count = 1;
             MessageSendLater(mt->app_task, EventSysMultiTalkReconnect, NULL, D_SEC(1));
         }
-        else if (msg->status == l2cap_disconnect_successful)
+        else if (msg->status == l2cap_disconnect_successful && (mt->mt_device[MT_PARENT].state == MT_SYN_Connected || mt->mt_type == MT_HEAD))
         {
-            mtBroadcastDisconnected();
+            mtBroadcastDisconnected(MT_ALL, mt->addr);
             mt->total_connected--;
+            if (mt->total_connected < 1)
+            {
+                mt->total_connected = 1;
+            }
             MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
 
             mt->reconnect_count = 2;
             MessageSendLater(mt->app_task, EventSysMultiTalkReconnect, NULL, D_SEC(1));
         }
-        else
+        else if ((mt->mt_device[MT_PARENT].state == MT_SYN_Connected || mt->mt_type == MT_HEAD))
         {
-            mtBroadcastDisconnected();
+            mtBroadcastDisconnected(MT_ALL, mt->addr);
             mt->total_connected--;
+            if (mt->total_connected < 1)
+            {
+                mt->total_connected = 1;
+            }
             MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
 
             mt->reconnect_count = 2;
@@ -876,19 +951,16 @@ void handleMTL2capDisconCfm(CL_L2CAP_DISCONNECT_CFM_T *msg)
         mt->mt_device[MT_PARENT].state = MT_L2CAP_Disconnected;
         BdaddrSetZero(&mt->mt_device[MT_PARENT].bt_addr);
         mt->mt_device[MT_PARENT].acl_sink = NULL;
-
-        mtBroadcastDisconnected();
-        mt->total_connected--;
-        
     }
-    if (msg->sink == mt->mt_device[MT_CHILD].acl_sink)
+    else if (msg->sink == mt->mt_device[MT_CHILD].acl_sink)
     {
         mt->mt_device[MT_CHILD].state = MT_L2CAP_Disconnected;
         BdaddrSetZero(&mt->mt_device[MT_CHILD].bt_addr);
         mt->mt_device[MT_CHILD].acl_sink = NULL;
-
-        mtBroadcastDisconnected();
-        mt->total_connected--;
+    }
+    else
+    {
+        MT_DEBUG(("MT: not Now link\n"));
     }
 }
 
@@ -939,24 +1011,32 @@ void handleMTSynConnCfm(CL_DM_SYNC_CONNECT_CFM_T *msg)
 
             audioUpdateAudioRouting();
 
-            RouteTableSetTail(&mt->route_table, msg->bd_addr);
-            mtSaveRouteTable(&mt->route_table, mt->mt_type);
+            mtSaveRouteTable(&mt->route_table, mt->mt_type, mt->index_rt);
 
             if (mtGetConnectDevices() < 2)
             {
                 mtSendCheckTTL(1);
 
-                if (mt->status == MT_ST_RECONNECTING || mt->status == MT_ST_LINKLOSS || mt->status == MT_ST_PARING)
+                if (mt->status == MT_ST_RECONNECTING || mt->status == MT_ST_LINKLOSS || mt->status == MT_ST_PARING || mt->status == MT_ST_WAITING_CONNECT)
                 {
-                    mt->reconnect_count = 1;
+                    if (mt->mt_device[MT_CHILD].state <= MT_L2CAP_Connecting)
                     {
                         uint8 *msg = PanicUnlessMalloc(sizeof(uint8));
-                        MessageSendLater(mt->app_task, EventMultiTalkConnect, msg, D_SEC(1));
+                        if (mt->status == MT_ST_PARING)
+                        {
+                            MessageSendLater(mt->app_task, EventMultiTalkConnect, msg, D_SEC(1));
+                        }
+                        else
+                        {
+                            MessageCancelAll(mt->app_task, EventSysMultiTalkReconnect);
+                            MessageSendLater(mt->app_task, EventSysMultiTalkReconnect, NULL, D_SEC(1));
+                        }
                     }
                 }
             }
             else
             {
+                mtSendFindTail();
             }
 
             break;
@@ -971,6 +1051,8 @@ void handleMTSynConnCfm(CL_DM_SYNC_CONNECT_CFM_T *msg)
         case hci_error_max_nr_of_conns:
             break;
         case hci_error_max_nr_of_sco:
+            break;
+        case hci_error_rej_by_remote_no_res:
             break;
         default:
             break;
@@ -987,14 +1069,15 @@ void handleMTSynConnCfm(CL_DM_SYNC_CONNECT_CFM_T *msg)
 
             audioUpdateAudioRouting();
 
-            RouteTableSetHead(&mt->route_table, msg->bd_addr);
-            mtSaveRouteTable(&mt->route_table, mt->mt_type);
+            mtSaveRouteTable(&mt->route_table, mt->mt_type, mt->index_rt);
 
             sinkInquirySetInquiryState(inquiry_complete);
             inquiryStop();
-            /*if(mtGetConnectDevices() == 2)*/
-            stateManagerEnterConnectedState();
-            mt->status = MT_ST_CONNECTED;
+            if (mtGetConnectDevices() == 2 || mt->mt_type == MT_HEAD)
+            {
+                stateManagerEnterConnectedState();
+                mt->status = MT_ST_CONNECTED;
+            }
 
             MessageCancelAll(mt->app_task, EventMultiTalkConnect);
             MessageCancelAll(mt->app_task, EventSysMultiTalkReconnect);
@@ -1012,6 +1095,10 @@ void handleMTSynConnCfm(CL_DM_SYNC_CONNECT_CFM_T *msg)
             break;
         case hci_error_max_nr_of_sco:
             break;
+        case hci_error_rej_by_remote_no_res:
+            /* todo : delay to connect */
+            mtScoConnect(mt->mt_device[MT_CHILD].acl_sink);
+            break;
         default:
             break;
         }
@@ -1028,13 +1115,33 @@ void handleMTSynDisconInd(CL_DM_SYNC_DISCONNECT_IND_T *msg)
 
     if (msg->audio_sink == mt->mt_device[MT_PARENT].audio_sink)
     {
+        if (msg->reason == hci_success || mt->mt_device[MT_PARENT].state == MT_SYN_Disconnecting)
+        {
+            mtACLDisconnect(MT_PARENT);
+        }
+
         mt->mt_device[MT_PARENT].state = MT_SYN_Disconnected;
         mt->mt_device[MT_PARENT].audio_sink = NULL;
+
+        if (msg->reason == 0)
+        {
+            BdaddrSetZero(&mt->mt_device[MT_PARENT].bt_addr);
+        }
     }
     else if (msg->audio_sink == mt->mt_device[MT_CHILD].audio_sink)
     {
+        if (msg->reason == hci_success || mt->mt_device[MT_CHILD].state == MT_SYN_Disconnecting)
+        {
+            mtACLDisconnect(MT_CHILD);
+        }
+
         mt->mt_device[MT_CHILD].state = MT_SYN_Disconnected;
         mt->mt_device[MT_CHILD].audio_sink = NULL;
+
+        if (msg->reason == 0)
+        {
+            BdaddrSetZero(&mt->mt_device[MT_CHILD].bt_addr);
+        }
     }
 
     audioUpdateAudioRouting();
@@ -1059,12 +1166,20 @@ void mtBroadcastConnected(void)
 }
 #endif
 
-void mtBroadcastDisconnected(void)
+void mtBroadcastDisconnected(int mt_device, bdaddr my_addr)
 {
-    uint8 d[1];
+    uint8 d[8];
     d[0] = ACLMSG_ONE_DISCONNECTED;
-    ACLSend(mt->mt_device[MT_PARENT].acl_sink, d, sizeof(d));
-    ACLSend(mt->mt_device[MT_CHILD].acl_sink, d, sizeof(d));
+    BdaddrToArray(&my_addr, &d[1]);
+    if (mt_device == MT_ALL)
+    {
+        ACLSend(mt->mt_device[MT_PARENT].acl_sink, d, sizeof(d));
+        ACLSend(mt->mt_device[MT_CHILD].acl_sink, d, sizeof(d));
+    }
+    else
+    {
+        ACLSend(mt->mt_device[mt_device].acl_sink, d, sizeof(d));
+    }
 }
 
 void mtSendFindTail(void)
@@ -1083,14 +1198,70 @@ void mtSendCheckTTL(uint8 ttl)
     ACLSend(mt->mt_device[MT_PARENT].acl_sink, d, sizeof(d));
 }
 
-void mtBroadcastConnectedCount(uint8 count, bdaddr addr)
+void mtBroadcastConnectedCount(uint8 count)
 {
-    uint8 d[9];
+    uint8 d[3 + 8 * 7], i;
+    RouteTable *rt = &mt->route_table;
     MT_DEBUG(("MT: mtBroadcastConnectedCount %d\n", count));
+
+    if (mt->mt_device[MT_CHILD].state == MT_SYN_Connected)
+    {
+        mtRouteTableAdjust(mt->mt_device[MT_CHILD].bt_addr);
+    }
+
     d[0] = ACLMSG_DEVICE_COUNT;
     d[1] = count;
-    BdaddrToArray(&addr, &d[2]);
-    ACLSend(mt->mt_device[MT_CHILD].acl_sink, d, sizeof(d));
+    d[2] = rt->count;
+    for (i = 0; i < rt->count; i++)
+    {
+        BdaddrToArray(&rt->item[i], &d[3 + 7 * i]);
+    }
+    ACLSend(mt->mt_device[MT_CHILD].acl_sink, d, 3 + 7 * rt->count);
+}
+
+void mtRouteTableAdjust(bdaddr child_addr)
+{
+    RouteTable *rt = &mt->route_table;
+    uint8 i = 0, u = 0;
+    for (i = 0; i < rt->count; i++)
+    {
+        if (BdaddrIsSame(&(rt->item[i]), &mt->addr))
+        {
+            break;
+        }
+    }
+    if (i < rt->count - 1)
+    {
+        i++;
+        for (u = 0; u < rt->count; u++)
+        {
+            if (BdaddrIsSame(&(rt->item[u]), &child_addr))
+            {
+                break;
+            }
+        }
+        if (u < rt->count)
+        {
+            bdaddr t = rt->item[i];
+            rt->item[i] = rt->item[u];
+            rt->item[u] = t;
+        }
+    }
+}
+
+void mtSendRouteTable(RouteTable *rt)
+{
+#if 1
+    uint8 d[2 + 8 * 8] = {0};
+    uint8 i = 0;
+    d[0] = ACLMSG_ROUTE_TABLE;
+    d[1] = rt->count;
+    for (i = 0; i < rt->count; i++)
+    {
+        BdaddrToArray(&rt->item[i], &d[2 + 7 * i]);
+    }
+    ACLSend(mt->mt_device[MT_CHILD].acl_sink, d, 2 + 7 * rt->count);
+#endif
 }
 
 void ACLSend(Sink sink, const uint8_t *data, uint16 packet_size)
@@ -1142,16 +1313,16 @@ void ACLProcessChildData(const uint8_t *data, int size)
         break;
     case ACLMSG_ONE_DISCONNECTED:
     {
+        mtBroadcastDisconnected(MT_PARENT, ArrayToBdaddr(&data[1]));
         mt->total_connected--;
-        if (mt->total_connected > 1 && mt->total_connected < 8)
-            MessageSend(mt->app_task, EventMultiTalk2DevicePaired + mt->total_connected - 2, NULL);
+        MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
         break;
     }
     case ACLMSG_CHECK_TTL:
     {
         if (mt->mt_device[MT_PARENT].acl_sink == NULL)
         {
-            mtBroadcastConnectedCount(data[1] + 1, mt->addr);
+            mtBroadcastConnectedCount(data[1] + 1);
             mt->total_connected = data[1] + 1;
             MessageSend(mt->app_task, EventSysMultiTalkDeviceConnected, NULL);
         }
@@ -1194,8 +1365,10 @@ void ACLProcessParentData(const uint8_t *data, int size)
         break;
     case ACLMSG_ONE_DISCONNECTED:
     {
+        mtBroadcastDisconnected(MT_CHILD, ArrayToBdaddr(&data[1]));
+        mt->head_addr = ArrayToBdaddr(&data[1]);
         mt->total_connected--;
-        MessageSend(mt->app_task, EventSysMultiTalkInquiryDevices, NULL);
+        MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
     }
     break;
     case ACLMSG_FIND_TAIL:
@@ -1209,14 +1382,38 @@ void ACLProcessParentData(const uint8_t *data, int size)
     }
     break;
     case ACLMSG_DEVICE_COUNT:
+    {
+        int count = data[2];
+        mt->total_connected = data[1];
+        mt->route_table.count = data[2];
+        for (i = 0; i < count; i++)
         {
-            mt->head_addr = ArrayToBdaddr(&data[2]);
-            mt->total_connected = data[1];
-            mtBroadcastConnectedCount(data[1], mt->head_addr);
-            MessageSend(mt->app_task, EventSysMultiTalkDeviceConnected, NULL);
+            mt->route_table.item[i] = ArrayToBdaddr(&data[3 + 7 * i]);
+            if (BdaddrIsSame(&mt->route_table.item[i], &mt->addr))
+            {
+                mt->index_rt = mt->connect_idx = mt->reconnect_count = i + 1;
+            }
         }
-
-        break;
+        BdaddrSetZero(&mt->head_addr);
+        mtBroadcastConnectedCount(data[1]);
+        MessageSend(mt->app_task, EventSysMultiTalkDeviceConnected, NULL);
+    }
+    break;
+    case ACLMSG_ROUTE_TABLE:
+    {
+        int i, count = data[1];
+        mt->route_table.count = count;
+        for (i = 0; i < count; i++)
+        {
+            mt->route_table.item[i] = ArrayToBdaddr(&data[2 + 7 * i]);
+            if (BdaddrIsSame(&mt->route_table.item[i], &mt->addr))
+            {
+                mt->index_rt = mt->connect_idx = mt->reconnect_count = i + 1;
+            }
+        }
+        mtSaveRouteTable(&mt->route_table, MT_NODE, mt->index_rt);
+    }
+    break;
     default:
         break;
     }
@@ -1228,21 +1425,26 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
     switch (id)
     {
     case EventMultiTalkEnterPair:
-        {
-            MT_DEBUG(("MT: Enter Pair\n"));
-            mt->status = MT_ST_PARING;
-            AudioPromptPlay((TaskData *)&csr_voice_prompts_plugin, 5, TRUE, FALSE);
-            inquiryPair(inquiry_session_multi_talk, TRUE);
-        
-            mtDisconnect();
-            mtClearRouteTable(&mt->route_table);
-            mt->total_connected = 1;
-            mt->mt_type = MT_NODE;
-            MessageCancelAll(task, EventMultiTalkConnect);
-            MessageCancelAll(task, EventMultiTalkReconnect);
-        }
+    {
+        MT_DEBUG(("MT: Enter Pair\n"));
+        mt->status = MT_ST_PARING;
+        AudioPlay(AP_MULTI_TALK_PAIRING, TRUE);
+        inquiryPair(inquiry_session_multi_talk, TRUE);
 
-        break;
+        mtDisconnect();
+        mtClearRouteTable(&mt->route_table);
+        RouteTablePushChild(&mt->route_table, mt->addr);
+        mt->total_connected = 1;
+        mt->mt_type = MT_NODE;
+        MessageCancelAll(task, EventMultiTalkConnect);
+        MessageCancelAll(task, EventMultiTalkReconnect);
+        MessageCancelAll(task, EventSysMultiTalkReconnect);
+        deviceManagerRemoveAllDevices();
+        mtResetPairList();
+        PowerAmpOn();
+    }
+
+    break;
     case EventMultiTalkConnect: /* enter talk connect */
         MT_DEBUG(("MT: EventMultiTalkConnect\n"));
         sinkInquirySetInquiryState(inquiry_complete);
@@ -1250,39 +1452,55 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
 
         if (message == NULL)
         {
-            if(mt->status == MT_ST_PARING)
+            if (mt->status == MT_ST_PARING)
             {
                 mt->mt_type = MT_HEAD;
             }
-            if((mt->status == MT_ST_CONNECTING || mt->status == MT_ST_RECONNECTING) && mtGetConnectDevices() >= 1)
+            if ((mt->status == MT_ST_CONNECTING || mt->status == MT_ST_RECONNECTING || mt->status == MT_ST_LINKLOSS) && mtGetConnectDevices() >= 1)
             {
                 MessageSend(task, EventMultiTalkDisconnect, NULL);
                 break;
             }
+            if (mt->status == MT_ST_STAY_DISCONNET || mt->status == MT_ST_NOCONNECT)
+            {
+                MessageSend(task, EventMultiTalkReconnect, NULL);
+                break;
+            }
         }
-        if (mt->status == MT_ST_PARING || mt->total_connected < mt->route_table.count + 1)
+
+        PowerAmpOn();
+
+        if (mt->status == MT_ST_PARING || mt->status == MT_ST_CONNECTING)
         {
+            if (mt->total_connected == mt->route_table.count)
+            {
+                if (mt->mt_device[MT_CHILD].state != MT_SYN_Connected)
+                {
+                    mt->mt_device[MT_CHILD].state = MT_L2CAP_Disconnected;
+                    BdaddrSetZero(&mt->mt_device[MT_CHILD].bt_addr);
+                    mt->mt_type = MT_TAIL;
+                }
+                else
+                {
+                    mt->mt_type = MT_NODE;
+                }
+                mt->status = MT_ST_CONNECTED;
+                stateManagerEnterConnectedState();
+                MessageCancelAll(task, EventMultiTalkConnect);
+                break;
+            }
             mt->status = MT_ST_CONNECTING;
             if (!mtRssiConnect())
             {
                 mt->connect_idx++;
+                MT_DEBUG(("MT: Connect Next %d\n", mt->connect_idx));
                 {
                     uint8 *msg = PanicUnlessMalloc(sizeof(uint8));
-                    MessageSendLater(mt->app_task, EventMultiTalkConnect, msg, D_SEC(1));
+                    MessageSendLater(mt->app_task, EventMultiTalkConnect, msg, 300);
                 }
             }
         }
-        else if (mt->total_connected == mt->route_table.count + 1)
-        {
-            if(mt->mt_device[MT_CHILD].state != MT_SYN_Connected)
-            {
-                mt->mt_device[MT_CHILD].state = MT_L2CAP_Disconnected;
-                BdaddrSetZero(&mt->mt_device[MT_CHILD].bt_addr);
-            }
-            mt->status = MT_ST_CONNECTED;
-            stateManagerEnterConnectedState();
-            MessageCancelAll(task, EventMultiTalkConnect);
-        }
+
         break;
     case EventMultiTalkEndPair: /* talk pair finish */
         MT_DEBUG(("MT: EventMultiTalkQuitPair\n"));
@@ -1293,67 +1511,85 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
             inquiryStop();
             stateManagerEnterConnectableState(FALSE);
             MessageCancelAll(task, EventMultiTalkConnect);
-            AudioPromptPlay((TaskData *)&csr_voice_prompts_plugin, 38, TRUE, FALSE);
+            AudioPlay(AP_MULTI_TALK_QUIT_PAIR, TRUE);
         }
         break;
     case EventMultiTalkReconnect:
-        if(mt->is_2talk)
+        if (mt->is_2talk)
         {
             MT_DEBUG(("2T: Enter Pair\n"));
-            AudioPromptPlay((TaskData *)&csr_voice_prompts_plugin, 25, TRUE, FALSE);
+            AudioPlay(AP_TWO_TALK_PAIRING, TRUE);
+
             inquiryPair(inquiry_session_ag, TRUE);
             MessageCancelAll(task, EventMultiTalkConnect);
             MessageCancelAll(task, EventMultiTalkReconnect);
+            MessageCancelAll(task, EventSysMultiTalkReconnect);
         }
-        else        
+        else
         {
             MT_DEBUG(("MT: EventMultiTalkReconnect\n"));
-            
+
             if (RouteTableIsNotSaved(&mt->route_table))
             {
                 break;
             }
-            AudioPromptPlay((TaskData *)&csr_voice_prompts_plugin, 22, TRUE, FALSE);
-            if((mt->status == MT_ST_RECONNECTING || mt->status == MT_ST_CONNECTING) && mtGetConnectDevices() >= 1)
+            if (mt->status != MT_ST_NOCONNECT && mt->status != MT_ST_STAY_DISCONNET)
             {
                 MessageSend(task, EventMultiTalkDisconnect, NULL);
                 break;
             }
+            AudioPlay(AP_MULTI_TALK_ON, TRUE);
+
             if (mt->mt_type == MT_HEAD)
             {
                 MessageSend(task, EventSysMultiTalkReconnect, NULL);
             }
             else
             {
+                /*
                 mt->status = MT_ST_RECONNECTING;
+                */
                 stateManagerEnterConnectableState(FALSE);
+                MessageSendLater(task, EventSysMultiTalkReconnect, NULL, D_SEC(5));
             }
         }
         break;
     case EventSysMultiTalkReconnect:
-        {
-            uint8 index = (mt->reconnect_count) % mt->route_table.count;
-            bdaddr addr = RouteTableGet(&mt->route_table, index);
-            MT_DEBUG(("EventSysMultiTalkReconnect to index:%d\n", index));
-            mt->status = MT_ST_RECONNECTING;
-            if (mt->total_connected == mt->route_table.count + 1)
+    {
+        uint8 index = (mt->reconnect_count) % mt->route_table.count;
+        MT_DEBUG(("EventSysMultiTalkReconnect to index:%d\n", index));
+        /*
+            if(mt->status == MT_ST_WAITING_CONNECT)
             {
-                if(mt->mt_device[MT_CHILD].state != MT_SYN_Connected)
-                {
-                    mt->mt_device[MT_CHILD].state = MT_L2CAP_Disconnected;
-                    BdaddrSetZero(&mt->mt_device[MT_CHILD].bt_addr);
-                }
-                mt->status = MT_ST_CONNECTED;
-                stateManagerEnterConnectedState();
+                MT_DEBUG(("EventSysMultiTalkReconnect waiting connect, cancel reconnect\n"));
                 break;
             }
-            if (!mtConnect(&addr))
+        */
+
+        mt->status = MT_ST_RECONNECTING;
+        if (mt->route_table.count && mt->total_connected == mt->route_table.count)
+        {
+            if (mt->mt_device[MT_CHILD].state != MT_SYN_Connected)
             {
-                mt->reconnect_count++;
-                MessageSendLater(mt->app_task, EventSysMultiTalkReconnect, NULL, D_SEC(1));
+                mt->mt_device[MT_CHILD].state = MT_L2CAP_Disconnected;
+                BdaddrSetZero(&mt->mt_device[MT_CHILD].bt_addr);
+                mt->mt_type = MT_TAIL;
             }
+            else
+            {
+                mt->mt_type = MT_NODE;
+            }
+            mt->status = MT_ST_CONNECTED;
+            stateManagerEnterConnectedState();
+            break;
         }
-        break;
+        if (!mtConnect(index))
+        {
+            mt->reconnect_count++;
+            MessageSendLater(mt->app_task, EventSysMultiTalkReconnect, NULL, 300);
+        }
+    }
+    break;
     case EventMultiTalkDisconnect: /* quit talk */
         MT_DEBUG(("MT: EventMultiTalkDisconnect\n"));
         mt->status = MT_ST_STAY_DISCONNET;
@@ -1362,41 +1598,55 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
         mtDisconnect();
         MessageCancelAll(task, EventMultiTalkConnect);
         MessageCancelAll(task, EventMultiTalkReconnect);
-        AudioPromptPlay((TaskData *)&csr_voice_prompts_plugin, 23, TRUE, FALSE);
+        MessageCancelAll(task, EventSysMultiTalkReconnect);
+        AudioPlay(AP_MULTI_TALK_OFF, TRUE);
+        PowerAmpOff();
         break;
     case EventSysMultiTalkInquiryDevices:
-        /* AudioPromptPlayEvent(id, TRUE); */
+    {
+        uint8 count = *(uint8 *)message;
+        uint8 idx = 0;
+        inquiry_result_t *result = sinkinquiryGetInquiryResults();
+        if (count >= mt->route_table.count)
         {
-            uint8 count = *(uint8 *)message;
-            uint8 idx = 0;
-            inquiry_result_t *result = sinkinquiryGetInquiryResults();
-            if(count != mt->route_table.count)
-            {
-                AudioPromptPlay((TaskData *)&csr_voice_prompts_plugin, 7 + count, TRUE, FALSE);
-            }
-            if (result)
-            {
-                for (idx = 0; idx < count; idx++)
-                {
-                    RouteTablePushChild(&mt->route_table, result[idx].bd_addr);
-                }
-            }
-            
+            AudioPlay(AP_MULTI_TALK_1_DISCOVERD + count, TRUE);
         }
+        MT_DEBUG(("MT: searched %d-%d device", count, mt->route_table.count));
+        if (result)
+        {
+            for (idx = 0; idx < count; idx++)
+            {
+                RouteTablePushChild(&mt->route_table, result[idx].bd_addr);
+            }
+        }
+    }
         ret = TRUE;
         break;
     case EventSysMultiTalkDeviceConnected:
-        /* AudioPromptPlayEvent(id, TRUE); */        
-        if(mt->total_connected >= 2)
+        if (mt->total_connected >= 2)
         {
-            AudioPromptPlay((TaskData *)&csr_voice_prompts_plugin, 15 + mt->total_connected-2, TRUE, FALSE);
+            AudioPlay(AP_MULTI_TALK_2_CONNECTED + mt->total_connected - 2, TRUE);
+        }
+        if (mt->mt_type == MT_TAIL && mt->total_connected < mt->route_table.count)
+        {
+            MessageSendLater(task, EventSysMultiTalkReconnect, NULL, D_SEC(1));
         }
         ret = TRUE;
         break;
     case EventSysMultiTalkCurrentDevices:
     {
-        AudioPromptPlay((TaskData *)&csr_voice_prompts_plugin, 30 + mt->total_connected-1, TRUE, FALSE);
+        AudioPlay(AP_MULTI_TALK_1_PERSON + mt->total_connected - 1, TRUE);
     }
+    break;
+    case EventSysMultiTalkWatiConnect:
+        if(mt->status == MT_ST_WAITING_CONNECT)
+        {
+            if(mt->mt_device[MT_CHILD].state == MT_L2CAP_Connecting)
+            {
+                mt->mt_device[MT_CHILD].state = MT_L2CAP_Disconnected;
+                BdaddrSetZero(&mt->mt_device[MT_CHILD].bt_addr);
+            }
+        }
     break;
     case Event2TalkPrepareEnter:
         MT_DEBUG(("2T: Prepre Pair\n"));
@@ -1453,6 +1703,10 @@ bool mtVoicePopulateConnectParameters(audio_connect_parameters *connect_paramete
 Sink mtGetActiveScoSink(void)
 {
     uint16 sink_all = (uint16)mt->mt_device[MT_PARENT].audio_sink + (uint16)mt->mt_device[MT_CHILD].audio_sink;
+    if (mt->mt_device[MT_PARENT].audio_sink == NULL)
+    {
+        /*return NULL;*/
+    }
     return (Sink)sink_all;
 }
 
@@ -1468,30 +1722,44 @@ bool isMTVoiceSink(Sink sink)
 
 int mtGetConnectDevices(void)
 {
-    int count = (mt->mt_device[MT_PARENT].state >= MT_L2CAP_Connected) + (mt->mt_device[MT_CHILD].state >= MT_L2CAP_Connected);
+    int count = (mt->mt_device[MT_PARENT].state == MT_SYN_Connected) + (mt->mt_device[MT_CHILD].state == MT_SYN_Connected);
     MT_DEBUG(("MT: Connected Device %d\n", count));
     return count;
 }
 
 bool mtCanPair(void)
 {
-    if (mt->status == MT_ST_RECONNECTING || mt->status == MT_ST_LINKLOSS || mt->status == MT_ST_CONNECTING )
+    if (mt->status == MT_ST_RECONNECTING || mt->status == MT_ST_LINKLOSS || mt->status == MT_ST_CONNECTING || mt->status == MT_ST_WAITING_CONNECT)
     {
         return TRUE;
     }
     return FALSE;
+}
+
+bool mtIsOnlyChildConnect(void)
+{
+    if (mt->mt_device[MT_PARENT].state < MT_L2CAP_Connected && mt->mt_device[MT_CHILD].state >= MT_L2CAP_Connected)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool mtIsOnlyParentConnect(void)
+{
+    if (mt->mt_device[MT_CHILD].state < MT_L2CAP_Connected && mt->mt_device[MT_PARENT].state >= MT_L2CAP_Connected)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+Sink mtGetSink(int type)
+{
+    return mt->mt_device[type].acl_sink;
 }
 
 int sinkEnableDebug(void)
 {
     return enableDebug;
-}
-
-bool mtIsOnlyChildConnect(void)
-{
-    if(mt->mt_device[MT_PARENT].state < MT_L2CAP_Disconnected && mt->mt_device[MT_CHILD].state >= MT_L2CAP_Connected)
-    {
-        return TRUE;
-    }
-    return FALSE;
 }

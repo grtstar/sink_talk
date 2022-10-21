@@ -20,7 +20,7 @@ DESCRIPTION
 
 #include "config_definition.h"
 
-#define SINK_POWER_SETTINGS_VREF_CONFIG_BLK_ID 1053
+#define SINK_POWER_SETTINGS_VREF_CONFIG_BLK_ID 1038
 
 typedef struct {
     sink_power_config_vref_t config_p_vref;

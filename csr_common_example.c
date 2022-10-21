@@ -12,9 +12,7 @@ NOTES
 #ifndef SCO_DSP_BOUNDARIES
 #define SCO_DSP_BOUNDARIES
 #endif
-
 #define DEBUG_PRINT_ENABLEDx
-
 #include <stdio.h>
 #include <audio.h>
 #include <gain_utils.h>
@@ -91,7 +89,7 @@ static FILE_INDEX selectKapFile(const EXAMPLE_PLUGIN_TYPE_T example_plugin_varia
                 CSR_COMMON_EXAMPLE->kap_type = 1;
                 kap_file = "one_mic_example_2sco/one_mic_example_2sco.kap";
                 CSR_COMMON_EXAMPLE->kap_type = 2;
-                 PRINT(("CSR_COMMON_EXAMPLE: one_mic_example_2sco\n"));
+                PRINT(("CSR_COMMON_EXAMPLE: one_mic_example_2sco\n"));
             }
             else
             {
@@ -177,7 +175,7 @@ static void populatePluginFromAudioConnectData(const AUDIO_PLUGIN_CONNECT_MSG_T 
     CSR_COMMON_EXAMPLE->voice_mic_params = (params ? params->voice_mic_params : NULL);
     CSR_COMMON_EXAMPLE->audio_sink_parent = (params ? params->usb_params.usb_sink : NULL);
 
-    PRINT(("CSR_COMMON_EXAMPLE: connect [%x] [%x]\n", CSR_COMMON_EXAMPLE->running , (int)CSR_COMMON_EXAMPLE->audio_sink));
+    PRINT(("CSR_COMMON_EXAMPLE: connect [%x] [%x]\n", CSR_COMMON_EXAMPLE->running , (int)CSR_COMMON_EXAMPLE->audio_sink)); 
 }
 
 static void setMicrophoneInstanceGain(const audio_mic_params audio_mic, const audio_channel channel, const T_mic_gain gain)
@@ -394,7 +392,7 @@ static void connectAudio(const ExamplePluginTaskdata * const task)
         CsrExamplePluginDisconnect(task);
     }
 
-    SetCurrentDspStatus(DSP_RUNNING);
+    /*SetCurrentDspStatus(DSP_RUNNING);*/
 }
 
 void CsrExamplePluginConnect(const ExamplePluginTaskdata * const task, const AUDIO_PLUGIN_CONNECT_MSG_T * const connect_msg)
@@ -468,8 +466,17 @@ void CsrExamplePluginDisconnect(const ExamplePluginTaskdata * const task)
         return;
     }
 
-    /* Disconnect speakers */
-    PanicFalse(AudioOutputDisconnect());
+    if(CSR_COMMON_EXAMPLE->kap_type != 2)
+    {
+        /* Disconnect speakers */
+        PanicFalse(AudioOutputDisconnect());
+    }
+    else
+    {
+        Sink speaker_snk = StreamAudioSink(AUDIO_HARDWARE_CODEC, AUDIO_INSTANCE_0,  AUDIO_CHANNEL_A_AND_B);
+        StreamDisconnect(StreamKalimbaSource(0), speaker_snk);   /* DSP->DAC */
+        SinkClose(speaker_snk);
+    }
 
     PRINT(("CSR_COMMON_EXAMPLE: Streams disconnected (left)\n"));
 
@@ -518,6 +525,7 @@ void CsrExamplePluginDisconnect(const ExamplePluginTaskdata * const task)
 
 void CsrExamplePluginSetVolume(const uint16 volume)
 {
+    if(CSR_COMMON_EXAMPLE == NULL)  return;
     PanicNull(CSR_COMMON_EXAMPLE);
 
     CSR_COMMON_EXAMPLE->volume = ((volume > VOLUME_0DB) ? VOLUME_0DB : volume);
@@ -596,6 +604,13 @@ void CsrExamplePluginPlayTone(const ExamplePluginTaskdata * const task,
         return;
     }
 
+    if(CSR_COMMON_EXAMPLE->kap_type == 2)
+    {
+        PRINT(("CSR_COMMON_EXAMPLE: Tone Cannot Start\n"));
+        SetAudioBusy(NULL);
+        return;
+    }
+
     PRINT(("CSR_COMMON_EXAMPLE: Tone Start\n"));
    
     AudioSetAudioPromptPlayingTask((Task)task);
@@ -614,7 +629,6 @@ void CsrExamplePluginPlayTone(const ExamplePluginTaskdata * const task,
     
     /*request an indication that the tone has completed / been disconnected*/
     VmalMessageSinkTask (lSink, (TaskData*)task);
- 
     /*mix the tone to the CSR_COMMON_EXAMPLE*/
     PanicFalse(StreamConnectAndDispose(lSource, lSink));
 }
@@ -622,6 +636,7 @@ void CsrExamplePluginPlayTone(const ExamplePluginTaskdata * const task,
 
 void CsrExamplePluginStopTone(void)
 {
+    if(CSR_COMMON_EXAMPLE == NULL) return;
     PanicNull(CSR_COMMON_EXAMPLE);
         
     StreamDisconnect(0, StreamKalimbaSink(TONE_VP_MIXING_DSP_PORT)) ;

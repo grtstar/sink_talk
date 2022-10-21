@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "l2cap_handler.h": "c",
+        "connection.h": "c",
+        "connection_private.h": "c",
+        "system_message.h": "c"
+    }
+}

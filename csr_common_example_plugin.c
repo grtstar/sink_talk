@@ -7,7 +7,7 @@ DESCRIPTION
     Interface file for an audio_plugin
 NOTES
 */
-
+#define DEBUG_PRINT_ENABLEDx
 #include <audio.h>
 #include <stdlib.h>
 #include <print.h>
@@ -182,7 +182,7 @@ static void handleAudioMessage ( Task task , MessageId id, Message message )
         case (AUDIO_PLUGIN_STOP_TONE_AND_PROMPT_MSG ):
             if (IsAudioBusy())
             {
-                    CsrExamplePluginStopTone() ;
+                CsrExamplePluginStopTone() ;
             }
             break ;
         default:
