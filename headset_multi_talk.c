@@ -98,6 +98,7 @@ static void RouteTablePushChild(RouteTable *rt, bdaddr addr);
 static bdaddr RouteTableGet(RouteTable *rt, uint8 index);
 static bool RouteTableIsNotSaved(RouteTable *rt);
 static uint8 RouteTableIsContain(RouteTable *rt, bdaddr *addr);
+static void RouteTableSort(RouteTable *rt);
 #if 0
 static void RouteTableSetHead(RouteTable *rt, bdaddr addr);
 static void RouteTableSetTail(RouteTable *rt, bdaddr addr);
@@ -116,6 +117,8 @@ static void mtBroadcastDisconnected(int mt_device, bdaddr my_addr);
 static void mtSendFindTail(void);
 static void mtSendCheckTTL(uint8 ttl);
 static void mtBroadcastConnectedCount(uint8 count);
+
+static int BdaddrCompare(bdaddr *_1, bdaddr *_2);
 
 #define PowerAmpOn() PioSetPio(14, pio_drive, TRUE)
 #define PowerAmpOff() PioSetPio(14, pio_drive, FALSE)
@@ -153,6 +156,23 @@ uint8 RouteTableIsContain(RouteTable *rt, bdaddr *addr)
         }
     }
     return 0;
+}
+
+void RouteTableSort(RouteTable *rt)
+{
+    int i = 0, j = 0;
+    for(i=0; i<rt->count; i++)
+    {
+        for(j=i; j<rt->count; j++)
+        {
+            if(BdaddrCompare(&rt->item[i], &rt->item[j]) > 0)
+            {
+                bdaddr temp = rt->item[i];
+                rt->item[i] = rt->item[j];
+                rt->item[j] = temp;
+            }
+        }
+    }
 }
 
 bool RouteTableIsNotSaved(RouteTable *rt)
@@ -661,10 +681,24 @@ void handleMTL2capConnectInd(CL_L2CAP_CONNECT_IND_T *msg)
             if (mt->mt_device[MT_CHILD].state >= MT_L2CAP_Connecting && mt->mt_device[MT_CHILD].state < MT_SYN_Connected)
             {
                 mt->status = MT_ST_WAITING_CONNECT;
+                mt->mt_device[MT_CHILD].state = MT_L2CAP_Disconnected;
+                BdaddrSetZero(&mt->mt_device[MT_CHILD].bt_addr);
                 MessageCancelAll(mt->app_task, EventSysMultiTalkReconnect);
                 MessageCancelAll(mt->app_task, EventMultiTalkReconnect);
-                MessageSendLater(mt->app_task, EventSysMultiTalkWatiConnect, NULL, D_SEC(5));
-                can_recv = FALSE;
+                if (BdaddrIsSame(&msg->bd_addr, &mt->mt_device[MT_CHILD].bt_addr))
+                {
+                    DEBUG(("MT: handleMTL2capConnectInd cannot allow child connected to parent\n"));
+                    can_recv = FALSE;
+                }
+                else
+                {
+                    DEBUG(("MT: handleMTL2capConnectInd interupt child connecting\n"));
+                    mt->mt_device[MT_PARENT].state = MT_L2CAP_Connecting;
+                    mt->mt_device[MT_PARENT].bt_addr = msg->bd_addr;
+                    mt->mt_type = MT_NODE;
+                    can_recv = TRUE;
+                }
+                
             }
             else if (mt->status == MT_ST_NOCONNECT || mt->status == MT_ST_STAY_DISCONNET)
             {
@@ -741,7 +775,7 @@ void handleMTL2capConnectCfm(CL_L2CAP_CONNECT_CFM_T *msg)
             linkPolicyCheckRoles();
 
             mtRouteTableAdjust(msg->addr);
-            if (mt->status == MT_ST_CONNECTING || mt->status == MT_ST_PARING || mt->status == MT_ST_RECONNECTING || mt->status == MT_ST_WAITING_CONNECT)
+            if (mt->status == MT_ST_CONNECTING || mt->status == MT_ST_PARING || mt->status == MT_ST_RECONNECTING)
             {
                 mtSendRouteTable(&mt->route_table);
             }
@@ -851,6 +885,10 @@ void handleMTL2capConnectCfm(CL_L2CAP_CONNECT_CFM_T *msg)
                 }
             }
         }
+    }
+    else
+    {
+        MT_DEBUG(("MT: A loss conection, disconnect it?\n"));
     }
 }
 
@@ -1102,6 +1140,10 @@ void handleMTSynConnCfm(CL_DM_SYNC_CONNECT_CFM_T *msg)
         default:
             break;
         }
+    }
+    else
+    {
+        MT_DEBUG(("MT: A loss conection, disconnect it?\n"));
     }
 }
 
@@ -1546,11 +1588,13 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
             }
             else
             {
-                /*
                 mt->status = MT_ST_RECONNECTING;
-                */
+                /* 先搜索再连接 */
                 stateManagerEnterConnectableState(FALSE);
-                MessageSendLater(task, EventSysMultiTalkReconnect, NULL, D_SEC(5));
+                if(mtGetConnectDevices() == 0)
+                {
+                    sinkEnableDiscoverable();
+                }
             }
         }
         break;
@@ -1604,19 +1648,39 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
         break;
     case EventSysMultiTalkInquiryDevices:
     {
-        uint8 count = *(uint8 *)message;
-        uint8 idx = 0;
-        inquiry_result_t *result = sinkinquiryGetInquiryResults();
-        if (count >= mt->route_table.count)
+        if(mt->status == MT_ST_PARING)
         {
-            AudioPlay(AP_MULTI_TALK_1_DISCOVERD + count, TRUE);
-        }
-        MT_DEBUG(("MT: searched %d-%d device", count, mt->route_table.count));
-        if (result)
-        {
-            for (idx = 0; idx < count; idx++)
+            uint8 count = *(uint8 *)message;
+            uint8 idx = 0;
+            inquiry_result_t *result = sinkinquiryGetInquiryResults();
+            if (count >= mt->route_table.count)
             {
-                RouteTablePushChild(&mt->route_table, result[idx].bd_addr);
+                AudioPlay(AP_MULTI_TALK_1_DISCOVERD + count, TRUE);
+            }
+            MT_DEBUG(("MT: searched %d-%d device", count, mt->route_table.count));
+            if (result)
+            {
+                for (idx = 0; idx < count; idx++)
+                {
+                    RouteTablePushChild(&mt->route_table, result[idx].bd_addr);
+                }
+            }
+        }
+        if(mt->status == MT_ST_RECONNECTING)
+        {
+            uint8 count = *(uint8 *)message;
+            uint8 idx = 0;
+            inquiry_result_t *result = sinkinquiryGetInquiryResults();
+            if (result)
+            {
+                for (idx = 0; idx < count; idx++)
+                {
+                    /*连接比自己地址更小的*/
+                    if(BdaddrCompare(&mt->addr, &result[idx].bd_addr))
+                    {
+                        break;
+                    }
+                }
             }
         }
     }
@@ -1762,4 +1826,33 @@ Sink mtGetSink(int type)
 int sinkEnableDebug(void)
 {
     return enableDebug;
+}
+
+int BdaddrCompare(bdaddr *_1, bdaddr *_2)
+{
+    if(_1->lap > _2->lap)
+    {
+        return 1;
+    }
+    else if(_1->lap < _2->lap)
+    {
+        return -1;
+    }
+    if(_1->uap > _2->uap)
+    {
+        return 1;
+    }
+    else if(_1->uap < _2->uap)
+    {
+        return -1;
+    }
+    if(_1->nap > _2->nap)
+    {
+        return 1;
+    }
+    else if(_1->nap < _2->nap)
+    {
+        return -1;
+    }
+    return 0;
 }
