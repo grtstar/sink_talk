@@ -391,9 +391,9 @@
                   value="0xBB"/>
             <enum key="MultiTalk 3 Device Connected"
                   value="0xBC"/>
-            <enum key="MultiTalk 4 Device Connected"
+            <enum key="MultiTalk Key Click"
                   value="0xBD"/>
-            <enum key="MultiTalk 5 Device Connected"
+            <enum key="MultiTalk Key Press"
                   value="0xBE"/>
             <enum key="MultiTalk 6 Device Connected"
                   value="0xBF"/>
@@ -1485,6 +1485,14 @@
                   value="18"/>
             <enum key="Default Pattern"
                   value="19"/>
+            <enum key="MultiTalk Head/Tail Connnected"
+                  value="20"/>
+            <enum key="MultiTalk Node Connnected"
+                  value="21"/>
+            <enum key="MultiTalk Pairing"
+                  value="22"/>
+            <enum key="MultiTalk Connecting"
+                  value="23"/>
         </DefineList>
 
         <DefineList Id="LED Colour"

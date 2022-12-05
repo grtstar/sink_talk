@@ -503,7 +503,7 @@ void AudioPlayAudioPrompt ( Task plugin, FILE_INDEX prompt_index, FILE_INDEX pro
                of supporting tone mixing via kalimba port 3 (tone port) */
             /* OR if the audio plugin connect message is in the queue but not yet actioned, queue
                the Audio Prompt message until the audio plugin is loaded, then decide what to do with it */
-            if((GetCurrentDspStatus() != DSP_LOADING) && (GetCurrentDspStatus() || !IsAudioInUse()) &&
+            if((GetCurrentDspStatus() > DSP_LOADING || !IsAudioInUse()) &&
                (CsrVoicePromptsIsMixable(prompt_header_index)))
             {
                 PRINT(("AUD play Audio Prompt via DSP mixing DspStatus = %d\n", GetCurrentDspStatus()));

@@ -57,6 +57,7 @@ typedef enum
     inquiry_session_normal,   /* Normal inquiry session, for finding AGs etc */
     inquiry_session_peer,      /* Peer inquiry session, for finding peer devices */
     inquiry_session_multi_talk,
+    inquiry_session_nearby,
     inquiry_session_ag
 } inquiry_session;
 
@@ -495,6 +496,18 @@ RETURNS
     bool: TRUE if session is multi talk else FALSE
 ****************************************************************************/
 bool sinkInquiryIsInqSessionMuliTalk(void);
+
+/****************************************************************************
+NAME	
+    sinkInquiryIsInqSessionNearbyTalk
+
+DESCRIPTION
+    This interfaces could be used to check Inquiry session is nearby talk or not
+    
+RETURNS
+    bool: TRUE if session is nearby talk else FALSE
+****************************************************************************/
+bool sinkInquiryIsInqSessionNearbyTalk(void);
 
 /****************************************************************************
 NAME	

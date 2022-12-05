@@ -206,6 +206,10 @@ void stateManagerEnterConfigMode(void);
     @brief Function that updates the extended states, and indicates LED pattern.
 */
 void updateExtendedState ( sinkState pNewState );
+
+#ifdef ENABLE_MULTI_TALK
+void stateManagerUpdateState(void);
+#endif
         
 #endif
 

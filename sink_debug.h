@@ -54,8 +54,7 @@ void printVmLogsInTestSystem (const char *format, ...);
     #ifdef DEBUG_PRINT_ENABLED
 
         #ifndef DEBUG_VM_HATS
-            extern int sinkEnableDebug(void);
-            #define DEBUG(x) {if(sinkEnableDebug()) printf x;}
+        #define DEBUG(x) printf x
         #endif
 
 

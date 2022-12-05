@@ -59,7 +59,7 @@ DESCRIPTION
 */
 static void handleAudioMessage ( Task task , MessageId id, Message message )
 {
-    PRINT(("CSR handleAudioMessage id=0x%x\n", id));
+    PRINT(("CSR handleAudioMessage id=0x%x %d\n", id, id));
     switch (id)
     {
         case (AUDIO_PLUGIN_CONNECT_MSG ):

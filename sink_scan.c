@@ -335,7 +335,7 @@ void sinkEnableDiscoverable( void )
     
     
     /* Set inquiry access code to respond to */
-    if(sinkInquiryIsInqSessionMuliTalk())
+    if(sinkInquiryIsInqSessionMuliTalk() || sinkInquiryIsInqSessionNearbyTalk())
     {
         MAIN_DEBUG(("Discoverable LIAC\n"));
         ConnectionWriteInquiryAccessCode(&theSink.task, &liac, 1);

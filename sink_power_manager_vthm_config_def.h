@@ -33,13 +33,13 @@ typedef struct {
     unsigned padding:2;
 } charger_configuration_settings_t;
 
-#define SINK_POWER_SETTINGS_VTHM_CONFIG_BLK_ID 1069
+#define SINK_POWER_SETTINGS_VTHM_CONFIG_BLK_ID 1087
 
 typedef struct {
     sink_power_config_vthm_t config_p_vthm;
 } sink_power_settings_vthm_config_def_t;
 
-#define CHARGER_CONTROL_CONFIG_BLK_ID 1084
+#define CHARGER_CONTROL_CONFIG_BLK_ID 1102
 
 typedef struct {
     charger_configuration_settings_t temperature_regions[8];

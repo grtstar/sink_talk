@@ -601,6 +601,8 @@ void CsrExamplePluginPlayTone(const ExamplePluginTaskdata * const task,
         
     if(isPluginRunning() == FALSE)
     {
+        PRINT(("CSR_COMMON_EXAMPLE: DSP not running, Tone Cannot Start\n"));
+        SetAudioBusy(NULL);
         return;
     }
 

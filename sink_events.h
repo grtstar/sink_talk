@@ -304,9 +304,9 @@ typedef enum sinkEventsTag
               EventMultiTalkEndPair,
               EventMultiTalk2DevicePaired,
 
-              EventMultiTalk3DevicePaired,
-              EventMultiTalk4DevicePaired,
-              EventMultiTalk5DevicePaired,
+              EventMultiTalkUser1,
+              EventMultiTalkKeyClick,
+              EventMultiTalkKeyPress,
               EventMultiTalk6DevicePaired,
 
               EventMultiTalk7DevicePaired,
@@ -700,7 +700,16 @@ typedef enum sinkEventsTag
               EventSysMultiTalkInquiryDevices,
               EventSysMultiTalkDeviceConnected,
               EventSysMultiTalkCurrentDevices,
-              EventSysMultiTalkWatiConnect,
+              EventSysMultiTalkSendRouteTable,
+              EventSysMultiTalkEnterFriendMode,
+              EventSysMultiTalkLeaveFriendMode,
+              EventSysMultiTalkLeaveFriendModeDelay,
+              EventSysMultiTalkFriendModeLeaved,
+
+              EventSysMultiTalkEnterNearbyMode,
+              EventSysMultiTalkLeaveNearbyMode,
+              EventSysMultiTalkLeaveNearbyModeDelay,
+              EventSysMultiTalkNeabyModeLeaved,
 
               EventSysAGConnect,
               EventSysAGDisconnect,

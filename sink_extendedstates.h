@@ -75,6 +75,10 @@ typedef enum
 /*    
 * ADD EXTENDED STATE RIGHT HERE        
 */
+    sink_ext_state_mtHeadConnected,
+    sink_ext_state_mtNodeConnected,
+    sink_ext_state_mtPairing,
+    sink_ext_state_mtConnecting,
         /*! The maximum number of device extended states - must always be the last enum item */
     SINK_NUM_EXTENDED_STATES
 

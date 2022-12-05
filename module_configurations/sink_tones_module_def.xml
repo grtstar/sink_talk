@@ -203,14 +203,6 @@
                     ShortId="Tone"
                     DefaultValue="2 Note Falling Scale" />
             </PatternArrayRow>
-            <PatternArrayRow Id="Tone_Config_22" ShortId="tone_config_22" Node="Basic" >
-                <PatternArrayConfigItem
-                    ShortId="Event"
-                    DefaultValue="RSSI Pair"/>
-                <PatternArrayConfigItem
-                    ShortId="Tone"
-                    DefaultValue="V Long High" />
-            </PatternArrayRow>
             <PatternArrayRow Id="Tone_Config_23" ShortId="tone_config_23" Node="Basic" >
                 <PatternArrayConfigItem
                     ShortId="Event"
@@ -274,14 +266,6 @@
                 <PatternArrayConfigItem
                     ShortId="Tone"
                     DefaultValue="Short Double High" />
-            </PatternArrayRow>
-            <PatternArrayRow Id="Tone_Config_31" ShortId="tone_config_31" Node="Basic" >
-                <PatternArrayConfigItem
-                    ShortId="Event"
-                    DefaultValue="RSSI Pair Reminder"/>
-                <PatternArrayConfigItem
-                    ShortId="Tone"
-                    DefaultValue="Long Low" />
             </PatternArrayRow>
             <PatternArrayRow Id="Tone_Config_32" ShortId="tone_config_32" Node="Basic" >
                 <PatternArrayConfigItem
@@ -403,6 +387,41 @@
                     ShortId="Tone"
                     DefaultValue="Double Beep Error Tone" />
             </PatternArrayRow>
+            <BuildVariant
+                HwVariant="CNS10001v4"
+                SwVariant="Headset-Gaming" >
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="RSSI Pair Reminder" />
+                    <PatternArrayConfigItem 
+                        ShortId="tone" 
+                        DefaultValue="3 Note Descending" />
+                </PatternArrayRow>
+            </BuildVariant>
+            <BuildVariant
+                HwVariant="All"
+                SwVariant="All" >
+                <PatternArrayRow Id="Tone_Config_22" ShortId="tone_config_22" Node="Basic" >
+                    <PatternArrayConfigItem
+                        ShortId="Event"
+                        DefaultValue="RSSI Pair"/>
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="V Long High" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="Tone_Config_31" ShortId="tone_config_31" Node="Basic" >
+                    <PatternArrayConfigItem
+                        ShortId="Event"
+                        DefaultValue="RSSI Pair Reminder"/>
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Long Low" />
+                </PatternArrayRow>
+            </BuildVariant>
         </ConfigPatternArray>
     </ConfigGroup>
 

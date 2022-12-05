@@ -20,7 +20,7 @@ DESCRIPTION
 
 #include "config_definition.h"
 
-#define SINK_POWER_SETTINGS_VCHG_CONFIG_BLK_ID 1104
+#define SINK_POWER_SETTINGS_VCHG_CONFIG_BLK_ID 1122
 
 typedef struct {
     sink_power_config_vchg_t config_p_vchg;

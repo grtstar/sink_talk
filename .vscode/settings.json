@@ -30,6 +30,8 @@
         "limits": "c",
         "type_traits": "c",
         "csr_common_example_plugin.h": "c",
-        "audio_prompt.h": "c"
+        "audio_prompt.h": "c",
+        "connection_private.h": "c",
+        "l2cap_prim.h": "c"
     }
 }

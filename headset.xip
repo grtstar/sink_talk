@@ -323,6 +323,8 @@
   <file path="protocol_hex.c" />
   <file path="headset_ag.c" />
   <file path="audio_prompt.c" />
+  <file path="headset_friend_mode.c" />
+  <file path="headset_nearby_mode.c" />
  </folder>
  <folder name="Header Files" >
   <extension name="h" />

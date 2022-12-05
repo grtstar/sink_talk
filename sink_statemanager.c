@@ -47,6 +47,11 @@ Copyright (c) 2004 - 2017 Qualcomm Technologies International, Ltd.
 #include <bdaddr.h>
 #endif
 
+#ifdef ENABLE_MULTI_TALK
+#include "headset_multi_talk.h"    
+#include "headset_uart.h"
+#endif
+
 #include <stdlib.h>
 #include <boot.h>
 #include <ahi.h>
@@ -299,6 +304,21 @@ static sink_extended_state_t getConnDiscovExtendedStates(void)
     { /* For clarity, though no need to check */
         conndisc_ext_state = sink_ext_state_connDiscoverableToPeer;
     }
+    else if (sinkInquiryIsInqSessionMuliTalk())
+    {
+        conndisc_ext_state = sink_ext_state_mtPairing;
+    }
+    else if (sinkInquiryIsInqSessionNearbyTalk())
+    {
+        if(mtGetConnectDevices() == 1)
+        {
+            conndisc_ext_state = sink_ext_state_mtHeadConnected;
+        }
+        else
+        {
+            conndisc_ext_state = sink_ext_state_connectable;
+        }
+    }
 
     return conndisc_ext_state;
 
@@ -319,7 +339,16 @@ static sink_extended_state_t getConnectedExtendedStates(void)
 {
 
     sink_extended_state_t connected_ext_state = sink_ext_state_Default;
-
+#ifdef ENABLE_MULTI_TALK
+    if(mtHeadConnected())
+    {
+        return sink_ext_state_mtHeadConnected;
+    }
+    if(mtNodeConnected())
+    {
+        return sink_ext_state_mtNodeConnected;
+    }
+#endif
     if (deviceManagerIsBothAgSourceAndPeerConnected())
     {
         connected_ext_state = sink_ext_state_connectedToSourceAndPeer;
@@ -358,11 +387,33 @@ static sink_extended_state_t stateManagerFindExtendedStateFromState( sinkState p
 
     SM_DEBUG(("SM: Getting extended state from state %s IS[%d]\n",debug_state,pState));
 
+    switch(UartGetState())
+    {
+        case(deviceConnectable):
+        break;
+        case(deviceConnDiscoverable):
+        if(gTheSinkState != deviceConnDiscoverable)
+            return sink_ext_state_connDiscoverableToSource;
+        break;
+        case (deviceConnected):
+        if(gTheSinkState != deviceConnected)
+            return sink_ext_state_connectedToAG;
+        break;
+        default:
+        break;
+    }
+
     switch(pState)
     {
         case(deviceLimbo):
             return sink_ext_state_limbo;
         case(deviceConnectable):
+    #ifdef ENABLE_MULTI_TALK
+            if(mtHeadConnected())
+            {
+                return sink_ext_state_mtHeadConnected;
+            }
+    #endif
             return sink_ext_state_connectable;
         case(deviceConnDiscoverable):
             extended_state = getConnDiscovExtendedStates();
@@ -1490,3 +1541,9 @@ void stateManagerEnterConfigMode(void)
     LedManagerIndicateExtendedState();
 }
 
+#ifdef ENABLE_MULTI_TALK
+void stateManagerUpdateState(void)
+{
+    stateManagerSetState(stateManagerGetState());
+}
+#endif

@@ -331,7 +331,7 @@
             Id="State Pattern"
             ShortId="pStatePatterns"
             Pattern="LEDStatePattern"
-            MaxNumPatterns="16">
+            MaxNumPatterns="20">
 
             <BuildVariant HwVariant="CF376_CF212" SwVariant="All" >
                 <PatternArrayRow Node="Basic" ShortId="pattern_row" Id="Pattern Row" >
@@ -1205,6 +1205,1230 @@
                     </PatternArrayConfigItem>
                 </PatternArrayRow>
             </BuildVariant>
+            <BuildVariant
+                HwVariant="CNS10001v4"
+                SwVariant="Headset-Gaming" >
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="Default Pattern" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="15" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="15" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="6" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="5" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 2" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="BOTH" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="Connectable" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="40" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED B" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="Connectable/Discoverable to source" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="2" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="ALT" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="Connectable/Discoverable to peer" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="2" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 2" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="ALT" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="Connected to Source" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="40" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="2" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED B" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="Connected to peer" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="40" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="2" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 2" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED B" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="Connected to Source and Peer" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="40" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="2" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 2" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="BOTH" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="Ongoing Call with SCO" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="100" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="100" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="40" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="75" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED B" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="TWC Call Waiting" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="100" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="100" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED A" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="TWC Call On Hold" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="100" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="100" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED A" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="TWC Multi Party Call" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="100" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="100" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED A" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="Ongoing Call without SCO" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="100" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="100" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED A" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="Outgoing Call" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="50" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="50" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED B" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="Incoming Call" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="50" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="50" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED B" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="Streaming A2DP" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="50" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="100" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="2" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED B" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="Config Mode" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="2" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 2" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="ALT" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="MultiTalk Head/Tail Connnected" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="40" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="2" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED B" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="MultiTalk Node Connnected" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="20" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="20" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="40" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="3" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED B" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="MultiTalk Pairing" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="20" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="20" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="2" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED B" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="state" 
+                        DefaultValue="MultiTalk Connecting" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="20" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="20" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="2" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED B" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+            </BuildVariant>
         </ConfigPatternArray>
     </ConfigGroup>
 
@@ -1402,6 +2626,315 @@
                         <StructElementConfigItem  Id="LED B Row 5"  ShortId="ledB_r5" Desc="ledB_r5" DefaultValue="LED 1"/>
                         <StructElementConfigItem  Id="OverrideDisable Row 5"  ShortId="od_r5" Desc="od_r5" DefaultValue="true"/>
                         <StructElementConfigItem  Id="Colour Row 5"  ShortId="colour_r5" Desc="colour_r5" DefaultValue="ALT"/>
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+            </BuildVariant>
+            <BuildVariant
+                HwVariant="CNS10001v4"
+                SwVariant="Headset-Gaming" >
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Power On" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="100" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED B" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Power Off" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="100" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="1" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED A" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Reset Paired Device List" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="3" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="False" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="BOTH" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Enter DFU Mode" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="10" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="True" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="BOTH" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
+                    </PatternArrayConfigItem>
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Gaia Alert LEDs" />
+                    <PatternArrayConfigItem 
+                        ShortId="config_struct" >
+                        <StructElementConfigItem 
+                            DefaultValue="12" 
+                            Id="On Time [ms]" 
+                            ShortId="OnTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="12" 
+                            Id="Off Time [ms]" 
+                            ShortId="OffTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Repeat Delay [ms]" 
+                            ShortId="RepeatTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Timeout Count" 
+                            ShortId="TimeOut" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="0" 
+                            Id="Dim Time [ms]" 
+                            ShortId="DimTime" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="8" 
+                            Id="Number of Flashes" 
+                            ShortId="NumFlashes" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 0" 
+                            Id="LED A Mapping" 
+                            ShortId="LED_A" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="LED 1" 
+                            Id="LED B Mapping" 
+                            ShortId="LED_B" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="True" 
+                            Id="LED Override Disable" 
+                            ShortId="OverideDisable" 
+                            Desc=" " />
+                        <StructElementConfigItem 
+                            DefaultValue="ALT" 
+                            Id="Colour" 
+                            ShortId="Colour" 
+                            Desc=" " />
                     </PatternArrayConfigItem>
                 </PatternArrayRow>
             </BuildVariant>
@@ -1651,6 +3184,522 @@
                     <PatternArrayConfigItem ShortId="speedFactor_r16" DefaultValue="0" />
                     <PatternArrayConfigItem ShortId="override_r16" DefaultValue="false" />
                 </PatternArrayRow> 
+            </BuildVariant>
+            <BuildVariant
+                HwVariant="CNS10001v4"
+                SwVariant="Headset-Gaming" >
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="Battery Low" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="COLOUR" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="LED B" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="PIO 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="Charger Connected" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="CANCEL" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Filter 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="PIO 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="Battery Ok" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="CANCEL" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Filter 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="PIO 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="Charge In Progress" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="OVERRIDE" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="LED 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="Charge Complete" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="OVERRIDE" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="LED 1" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="Charge Complete" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="CANCEL" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Filter 3" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="PIO 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="Charge In Progress" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="CANCEL" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Filter 4" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="PIO 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="Charger Disconnected" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="CANCEL" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Filter 3" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="PIO 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="Charger Disconnected" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="CANCEL" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Filter 4" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="PIO 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="BA Receiver Not Associated" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="SPEED" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="PIO 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="3" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="BA Association Start" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="SPEED" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="PIO 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="2" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="BA Association Start" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="CANCEL" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Filter 9" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="PIO 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="BA Association End" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="CANCEL" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Filter 10" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="PIO 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="BA Mode Indication Start" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="OVERRIDE" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="LED 2" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="Normal Mode Active" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="CANCEL" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Filter 13" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="PIO 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="Event" 
+                        DefaultValue="BA Receiver Cancel Association Start" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterType" 
+                        DefaultValue="CANCEL" />
+                    <PatternArrayConfigItem 
+                        ShortId="Colour" 
+                        DefaultValue="Reserved" />
+                    <PatternArrayConfigItem 
+                        ShortId="FilterToCancel" 
+                        DefaultValue="Filter 9" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideLED" 
+                        DefaultValue="PIO 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="FollowerLEDDelay" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="SpeedAction" 
+                        DefaultValue="Multiply" />
+                    <PatternArrayConfigItem 
+                        ShortId="Speed" 
+                        DefaultValue="0" />
+                    <PatternArrayConfigItem 
+                        ShortId="OverideDisable" 
+                        DefaultValue="False" />
+                </PatternArrayRow>
             </BuildVariant> 
         </ConfigPatternArray>
     </ConfigGroup>

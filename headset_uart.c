@@ -16,6 +16,7 @@
 #include "sink_events.h"
 #include "sink_debug.h"
 #include "headset_uart.h"
+#include "sink_statemanager.h"
 
 
 #define UART_DEBUG(x) DEBUG(x)
@@ -26,7 +27,8 @@ be set to raw to use these functions.
 
 enum
 {
-    UTYPE_EVENT
+    UTYPE_EVENT,
+    UTYPE_STATE
 };
 
 enum
@@ -53,6 +55,8 @@ uint8 uart_buff[32];
 uint8 uart_index = 0;
 uint8 uart_stage = P_HEAD1;
 uint8 uart_data_len = 0;
+
+uint8 uart_state = 0;
 
 /* transmits data to UART */
 void UartTxData(const uint8 *data, uint16 packet_size)
@@ -180,11 +184,17 @@ void UartProcessData(const uint8_t *data, int size)
             break;      
             case P_CRC:
             {
-                if(uart_buff[4] == UTYPE_EVENT)
+                if(uart_buff[3] == UTYPE_EVENT)
                 {
-                    uint16 event = uart_buff[1]<<8 | uart_buff[2];
+                    uint16 event = uart_buff[4]<<8 | uart_buff[5];
                     UART_DEBUG(("UART: evnet = 0x%x\n", event));
                     MessageSend(app_task, event, NULL);
+                }
+                if(uart_buff[3] == UTYPE_STATE)
+                {
+                    uart_state= uart_buff[4];
+                    UART_DEBUG(("UART: state = 0x%x\n", uart_state));
+                    stateManagerUpdateState();
                 }
             }
             uart_stage = P_HEAD1;
@@ -214,7 +224,7 @@ void UartSendEvent(uint16 event)
         uint8 d[7] = {0xAA, 0x55, 3, UTYPE_EVENT};
         d[4] = event >> 8;
         d[5] = event;
-        d[6] = UartCalcCRC(d, 5);
+        d[6] = UartCalcCRC(d, 6);
         UartTxData(d, 7);
     }
         break;
@@ -222,4 +232,9 @@ void UartSendEvent(uint16 event)
         break;
     }
 
+}
+
+uint8 UartGetState(void)
+{
+    return uart_state;
 }
