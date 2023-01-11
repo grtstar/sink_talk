@@ -162,7 +162,12 @@
                 ShortId="PairModeTimeout_s"
                 Desc="The time in seconds that the Sink remains in the connectable / discoverable state (pairing mode). Setting this to 0 results in the Sink entering and immediately exiting discoverable mode, with the result that the device cannot be discovered. If the Sink is to always be discoverable while not connected, then the feature Remain Discoverable at All Times should be used in conjunction with this timeout."
                 DefaultValue="600"
-                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']"/>
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']" >
+                <BuildVariant
+                    HwVariant="CNS10001v4"
+                    SwVariant="Headset-Gaming"
+                    Value="0" />
+            </StructElementConfigItem>
             <StructElementConfigItem
                 Id="Connectable Timeout [s]"
                 ShortId="ConnectableTimeout_s"

@@ -1,6 +1,6 @@
 INFO : ********************************************************************
 INFO : ***                                                              ***
-INFO : *** Copyright (c) 2022 Qualcomm Technologies International, Ltd. ***
+INFO : *** Copyright (c) 2023 Qualcomm Technologies International, Ltd. ***
 INFO : ***                                                              ***
 INFO : ********************************************************************
 
@@ -870,4 +870,4 @@ INFO : ***                                                              ***
 INFO : *** Build Config Script - Processing Completed Successfully      ***
 INFO : ***                                                              ***
 INFO : ********************************************************************
-INFO : Execution time: 0:00:02.540000
+INFO : Execution time: 0:00:08.293000

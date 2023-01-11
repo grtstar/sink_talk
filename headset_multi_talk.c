@@ -61,6 +61,7 @@ extern ExamplePluginTaskdata csr_sbc_2mic_plugin;
 
 
 #define PS_ROUTE_TABLE 3
+#define PS_COUPLE_ADDR 4
 
 
 
@@ -200,6 +201,36 @@ void mtResetPairList(void)
     pl[0] = 0xFFFF;
     pl[1] = 0xFFFF;
     ConfigStore(141, NULL, 0);
+}
+
+typedef struct CoupleInfo
+{
+    bdaddr addr;
+    uint8 type;
+}CoupleInfo;
+
+void mtSaveCoupleAddr(bdaddr *addr, uint8 couple_type)
+{
+    CoupleInfo ci;
+    ci.addr = *addr;
+    ci.type = couple_type;
+    ConfigStore(PS_COUPLE_ADDR, &ci, sizeof(CoupleInfo));
+}
+
+bool mtLoadCoupleAddr(bdaddr *addr, uint8 * couple_type)
+{
+    uint16 len = 0;
+    CoupleInfo ci = {{0}};
+    len = ConfigRetrieve(PS_COUPLE_ADDR, &ci, sizeof(CoupleInfo));
+    *addr = ci.addr;
+    *couple_type = ci.type;
+    return len > 0;
+}
+
+void mtResetCoupleAddr(void)
+{
+    CoupleInfo ci = {{0}};
+    ConfigStore(PS_COUPLE_ADDR, &ci, sizeof(CoupleInfo));
 }
 
 
@@ -361,6 +392,9 @@ void mtInit(Task task)
     ConnectionL2capRegisterRequest(&mt->mt_task, MULTITALK_FRIEND_PSM, 0);
     ConnectionL2capRegisterRequest(&mt->mt_task, MULTITALK_NEARBY_PSM, 0);
 
+    BdaddrSetZero(&mt->couple_addr);
+    mtLoadCoupleAddr(&mt->couple_addr, &mt->couple_type);
+
     mt->mt_mode = CLOSE_MODE;
 }
 
@@ -411,6 +445,7 @@ bool mtConnect(bdaddr *bd_addr)
     mt->mt_device[MT_CHILD].state = MT_L2CAP_Disconnected;
     BdaddrSetZero(&mt->mt_device[MT_CHILD].bt_addr);
 
+#if 0
     if(mt->mt_device[MT_PARENT].state >= MT_L2CAP_Connected && BdaddrIsSame(&mt->mt_device[MT_PARENT].bt_addr, bd_addr))
     {
         MT_DEBUG(("MT: cannot connect to parent, omit\n"));
@@ -433,11 +468,15 @@ bool mtConnect(bdaddr *bd_addr)
         MT_DEBUG(("MT: child is connected [%02X], omit\n", mt->connected_device));
         return FALSE;
     }
-
-    mt->mt_device[MT_CHILD].bt_addr = *bd_addr;
-    mt->mt_device[MT_CHILD].state = MT_L2CAP_Connecting;
-    mtACLConnect(bd_addr, MULTITALK_FRIEND_PSM);
-    return TRUE;
+#endif
+    if(RouteTableIsNotSaved(&mt->route_table) || RouteTableIsContain(&mt->route_table, bd_addr))
+    {
+        mt->mt_device[MT_CHILD].bt_addr = *bd_addr;
+        mt->mt_device[MT_CHILD].state = MT_L2CAP_Connecting;
+        mtACLConnect(bd_addr, MULTITALK_FRIEND_PSM);
+        return TRUE;
+    }
+    return FALSE;
 }
 
 void mtACLConnect(bdaddr *bd_addr, uint16 psm)
@@ -506,7 +545,7 @@ void handleMTL2capConnectInd(CL_L2CAP_CONNECT_IND_T *msg)
 {
     bool can_recv = FALSE;
     uint16 psm = MULTITALK_FRIEND_PSM;
-    if(mt->mt_mode == FREIEND_MODE)
+    if(mt->mt_mode == FREIEND_MODE || mt->mt_mode == FREIEND_MODE_PAIRING)
     {
         can_recv = handleMTL2capConnectIndFriendMode(msg);
         psm = MULTITALK_FRIEND_PSM;
@@ -514,6 +553,11 @@ void handleMTL2capConnectInd(CL_L2CAP_CONNECT_IND_T *msg)
     if(mt->mt_mode == NEARBY_MODE)
     {
         can_recv = handleMTL2capConnectIndNearbyMode(msg);
+        psm = MULTITALK_NEARBY_PSM;
+    }
+    if(mt->mt_mode == COUPLE_MODE || mt->mt_mode == COUPLE_MODE_PAIRING)
+    {
+        can_recv = handleMTL2capConnectIndCoupleMode(msg);
         psm = MULTITALK_NEARBY_PSM;
     }
 
@@ -531,7 +575,7 @@ void handleMTL2capConnectInd(CL_L2CAP_CONNECT_IND_T *msg)
 
 void handleMTL2capConnectCfm(CL_L2CAP_CONNECT_CFM_T *msg)
 {
-    if(mt->mt_mode == FREIEND_MODE)
+    if(mt->mt_mode == FREIEND_MODE || mt->mt_mode == FREIEND_MODE_PAIRING)
     {
         handleMTL2capConnectCfmFriendMode(msg);
     }
@@ -539,11 +583,15 @@ void handleMTL2capConnectCfm(CL_L2CAP_CONNECT_CFM_T *msg)
     {
         handleMTL2capConnectCfmNearbyMode(msg);
     }
+    if(mt->mt_mode == COUPLE_MODE || mt->mt_mode == COUPLE_MODE_PAIRING)
+    {
+        handleMTL2capConnectCfmCoupleMode(msg);
+    }
 }
 
 void handleMTL2capDisconInd(CL_L2CAP_DISCONNECT_IND_T *msg)
 {
-    if(mt->mt_mode == FREIEND_MODE)
+    if(mt->mt_mode == FREIEND_MODE || mt->mt_mode == FREIEND_MODE_PAIRING)
     {
         handleMTL2capDisconIndFriendMode(msg);
     }
@@ -551,17 +599,25 @@ void handleMTL2capDisconInd(CL_L2CAP_DISCONNECT_IND_T *msg)
     {
         handleMTL2capDisconIndNearbyMode(msg);
     }
+    if(mt->mt_mode == COUPLE_MODE || mt->mt_mode == COUPLE_MODE_PAIRING)
+    {
+        handleMTL2capDisconIndCoupleMode(msg);
+    }
 }
 
 void handleMTL2capDisconCfm(CL_L2CAP_DISCONNECT_CFM_T *msg)
 {
-    if(mt->mt_mode == FREIEND_MODE)
+    if(mt->mt_mode == FREIEND_MODE || mt->mt_mode == FREIEND_MODE_PAIRING)
     {
         handleMTL2capDisconCfmFriendMode(msg);
     }
     if(mt->mt_mode == NEARBY_MODE)
     {
         handleMTL2capDisconCfmNearbyMode(msg);
+    }
+    if(mt->mt_mode == COUPLE_MODE || mt->mt_mode == COUPLE_MODE_PAIRING)
+    {
+        handleMTL2capDisconCfmCoupleMode(msg);
     }
 }
 
@@ -593,7 +649,7 @@ void handleMTSynConnInd(CL_DM_SYNC_CONNECT_IND_T *msg)
 
 void handleMTSynConnCfm(CL_DM_SYNC_CONNECT_CFM_T *msg)
 {
-    if(mt->mt_mode == FREIEND_MODE)
+    if(mt->mt_mode == FREIEND_MODE || mt->mt_mode == FREIEND_MODE_PAIRING)
     {
         handleMTSynConnCfmFriendMode(msg);
     }
@@ -601,17 +657,25 @@ void handleMTSynConnCfm(CL_DM_SYNC_CONNECT_CFM_T *msg)
     {
         handleMTSynConnCfmNearbyMode(msg);
     }
+    if(mt->mt_mode == COUPLE_MODE || mt->mt_mode == COUPLE_MODE_PAIRING)
+    {
+        handleMTSynConnCfmCoupleMode(msg);
+    }
 }
 
 void handleMTSynDisconInd(CL_DM_SYNC_DISCONNECT_IND_T *msg)
 {
-    if(mt->mt_mode == FREIEND_MODE)
+    if(mt->mt_mode == FREIEND_MODE || mt->mt_mode == FREIEND_MODE_PAIRING)
     {
         handleMTSynDisconIndFriendMode(msg);
     }
     if(mt->mt_mode == NEARBY_MODE)
     {
         handleMTSynDisconIndNearbyMode(msg);
+    }
+    if(mt->mt_mode == COUPLE_MODE || mt->mt_mode == COUPLE_MODE_PAIRING)
+    {
+        handleMTSynDisconIndCoupleMode(msg);
     }
 }
 
@@ -626,19 +690,19 @@ void ACLBroadcastEvent(Sink sink, uint16 event)
 
 bool mtBroadcastCurrentCount(int count)
 {
-    uint8 d[3];
+    uint8 d[2 + 8] = {0};
     MT_DEBUG(("MT: mtBroadcastCurrentCount %d\n", count));
-
     d[0] = ACLMSG_CURRENT_CONNECTED;
     d[1] = count;
-    d[2] = mt->connected_device;
+    BdaddrToArray(&mt->head_addr, &d[2]);
     return ACLSend(mt->mt_device[MT_CHILD].acl_sink, d, sizeof(d));
 }
 
-bool mtSendFindTail(void)
+bool mtSendFindTail(uint8 type)
 {
-    uint8 d[1];
+    uint8 d[2];
     d[0] = ACLMSG_FIND_TAIL;
+    d[1] = type;
     return ACLSend(mt->mt_device[MT_CHILD].acl_sink, d, sizeof(d));
 }
 
@@ -724,7 +788,7 @@ void mtRouteTableAdjust(bdaddr child_addr)
     }
 }
 
-void mtSendRouteTable(RouteTable *rt)
+bool mtReportRouteTable(RouteTable *rt)
 {
 #if 1
     uint8 d[2 + 8 * 8] = {0};
@@ -735,7 +799,22 @@ void mtSendRouteTable(RouteTable *rt)
     {
         BdaddrToArray(&rt->item[i], &d[2 + 7 * i]);
     }
-    ACLSend(mt->mt_device[MT_CHILD].acl_sink, d, 2 + 7 * rt->count);
+    return ACLSend(mt->mt_device[MT_PARENT].acl_sink, d, 2 + 7 * rt->count);
+#endif
+}
+
+bool mtSendRouteTable(RouteTable *rt)
+{
+#if 1
+    uint8 d[2 + 8 * 8] = {0};
+    uint8 i = 0;
+    d[0] = ACLMSG_ROUTE_TABLE;
+    d[1] = rt->count;
+    for (i = 0; i < rt->count; i++)
+    {
+        BdaddrToArray(&rt->item[i], &d[2 + 7 * i]);
+    }
+    return ACLSend(mt->mt_device[MT_CHILD].acl_sink, d, 2 + 7 * rt->count);
 #endif
 }
 
@@ -790,27 +869,29 @@ void ACLProcessChildData(const uint8_t *data, int size)
         break;
     case ACLMSG_CHECK_TTL:
     {
-        if (mt->mt_device[MT_PARENT].acl_sink == NULL)
+        if (!mtSendCheckTTL(data[1]+1))
         {
-            int count;
-            mt->connected_device = data[1] | RouteTableGetIndex(&mt->route_table, &mt->addr);
-            count = GetOnes(mt->connected_device);
-            mt->total_connected = count;
-            if(mt->total_connected == mt->route_table.count && mt->mt_type == MT_PAIRHEAD)
-            {
-                mt->mt_type = MT_HEAD;
-                mtBroadcastConnectedCount(count);
-                MessageSend(mt->app_task, EventSysMultiTalkDeviceConnected, NULL);
-            }
-            else
-            {
-                mtBroadcastCurrentCount(count);
-                MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
-            }
+            mt->total_connected = data[1]+1;
+            mtBroadcastCurrentCount(data[1]+1);
+            MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
         }
-        else
+    }
+    break;
+    case ACLMSG_ROUTE_TABLE:
+    {
+        int i, count = data[1];
+        mt->route_table.count = count;
+        for (i = 0; i < count; i++)
         {
-            mtSendCheckTTL(data[1] | RouteTableGetIndex(&mt->route_table, &mt->addr));
+            mt->route_table.item[i] = ArrayToBdaddr(&data[2 + 7 * i]);
+        }
+        RouteTablePushChild(&mt->route_table, mt->addr);
+        if(!mtReportRouteTable(&mt->route_table))
+        {
+            mt->total_connected = mt->route_table.count;
+            mtSaveRouteTable(&mt->route_table, MT_HEAD);
+            mtSendRouteTable(&mt->route_table);
+            MessageSend(mt->app_task, EventSysMultiTalkDeviceConnected, NULL);
         }
     }
     break;
@@ -849,53 +930,66 @@ void ACLProcessParentData(const uint8_t *data, int size)
     break;
     case ACLMSG_FIND_TAIL:
     {
-        if (mt->mt_device[MT_CHILD].acl_sink == NULL)
+        if(!mtSendFindTail(data[1]))
         {
-            mtSendCheckTTL(RouteTableGetIndex(&mt->route_table, &mt->addr));
+            if(data[1] == 0)
+            {
+                mtSendCheckTTL(1);
+            }
+            else
+            {
+                RouteTablePushChild(&mt->route_table, mt->addr);
+                mtReportRouteTable(&mt->route_table);
+            }
         }
-        else
-            mtSendFindTail();
     }
     break;
     case ACLMSG_DEVICE_COUNT:
     {
-        mt->connected_device = data[2] | RouteTableGetIndex(&mt->route_table, &mt->addr);
-        if(data[1] != 0)
-        {
-            mt->total_connected = data[1];
-            MessageSend(mt->app_task, EventSysMultiTalkDeviceConnected, NULL);
-        }
-        mtBroadcastConnectedCount(data[1]);
-
-    }
-    break;
-    case ACLMSG_CURRENT_CONNECTED:
-    {
-        mt->connected_device = data[2] | RouteTableGetIndex(&mt->route_table, &mt->addr);
         if(data[1] != 0)
         {
             mt->total_connected = data[1];
             MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
         }
-        mtBroadcastCurrentCount(data[1]);
+        if(mtBroadcastConnectedCount(data[1]))
+        {
+            if(mt->total_connected != mt->route_table.count)
+            {
+                inquiryPair(inquiry_session_nearby, FALSE);
+            }
+        }
+
+    }
+    break;
+    case ACLMSG_CURRENT_CONNECTED:
+    {
+        if(data[1] != 0)
+        {
+            mt->total_connected = data[1];
+            MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
+        }
+        mt->head_addr = ArrayToBdaddr(&data[2]);
+        if(!mtBroadcastCurrentCount(data[1]))
+        {
+            mt->status = MT_ST_SEARCHING;
+        }
     }
     break;
     case ACLMSG_ROUTE_TABLE:
     {
         int i, count = data[1];
-        mt->route_table.count = count;
+        mt->total_connected = mt->route_table.count = count;
         for (i = 0; i < count; i++)
         {
             mt->route_table.item[i] = ArrayToBdaddr(&data[2 + 7 * i]);
         }
-        if(RouteTableIsNotSaved(&mt->route_table))  /*    解决配网人数报错问题   */
-        {
-            if(mt->mt_device[MT_PARENT].state == MT_SYN_Connected && (mtGetConnectDevices() < 2))
-            {
-                mtSendCheckTTL(RouteTableGetIndex(&mt->route_table, &mt->addr));
-            }
-        }
+        mt->status = MT_ST_CONNECTED;
         mtSaveRouteTable(&mt->route_table, MT_NODE);
+        if(!mtSendRouteTable(&mt->route_table))
+        {
+            inquiryStop();
+        }
+        MessageSend(mt->app_task, EventSysMultiTalkDeviceConnected, NULL);
     }
     break;
     default:
@@ -906,6 +1000,20 @@ void ACLProcessParentData(const uint8_t *data, int size)
 
 bool processEventMultiTalk(Task task, MessageId id, Message message)
 {
+    if(id == EventMultiTalkUser0)
+    {
+        if(mt->mt_mode == CLOSE_MODE)
+        {
+            mt->mt_mode = COUPLE_MODE_PAIRING;
+        }
+    }
+    if(id == EventUsrEnterPairing)
+    {
+        if(mt->mt_mode == CLOSE_MODE)
+        {
+            mt->mt_mode = COUPLE_MODE_PAIRING;
+        }
+    }
     if(id == EventMultiTalkKeyClick)
     {
         if(mt->mt_mode == CLOSE_MODE)
@@ -920,19 +1028,22 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
         }
         else if(mt->mt_mode == FREIEND_MODE)
         {
-            if(mt->status == MT_ST_PARING)
-            {
-                MessageSend(task, EventMultiTalkConnect, NULL);
-            }
-            else
-            {
-                MessageSend(task, EventSysMultiTalkLeaveFriendMode, NULL);
-                return FALSE;
-            }
+            MessageSend(task, EventSysMultiTalkLeaveFriendMode, NULL);
+            return FALSE;
         } 
+        else if(mt->mt_mode == FREIEND_MODE_PAIRING)
+        {
+            MessageSend(task, EventMultiTalkConnect, NULL);
+            return FALSE;
+        }
         else if(mt->mt_mode == COUPLE_MODE)
         {
-
+            MessageSend(task, EventSysMultiTalkLeaveCoupleMode, NULL);
+            return FALSE;
+        }
+        else if(mt->mt_mode == COUPLE_MODE_PAIRING)
+        {
+            MessageSend(task, EventSysMultiTalkPairingCoupleMode, NULL);
         }
 
         switch (mt->mt_mode)
@@ -963,27 +1074,15 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
             {
             case deviceConnectable:
                 id = EventMultiTalkEnterPair;
-                mt->mt_mode = FREIEND_MODE;
+                mt->mt_mode = FREIEND_MODE_PAIRING;
                 break;
             default:
                 break;
             }
         }
-        else if(mt->mt_mode == FREIEND_MODE)
+        else if(mt->mt_mode == FREIEND_MODE_PAIRING)
         {
-            sinkState state = stateManagerGetState();
-            switch (state)
-            {
-            case deviceConnectable:
-                id = EventMultiTalkEnterPair;
-                break;
-            case deviceConnDiscoverable:
-                id = EventMultiTalkEndPair;
-                mt->mt_mode = CLOSE_MODE;
-                break;
-            default:
-                break;
-            }
+            id = EventMultiTalkEndPair;
         }
         else if(mt->mt_mode == NEARBY_MODE)
         {
@@ -997,6 +1096,13 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
             MessageSend(task, EventSysMultiTalkEnterFriendMode, NULL);
             AudioPlay(AP_MULTI_TALK_FRIEND_MODE, TRUE);
         }
+        else if(!BdaddrIsZero(&mt->couple_addr))   /* couple talk */
+        {
+            mt->mt_mode = COUPLE_MODE;
+            MessageSend(task, EventSysMultiTalkEnterCoupleMode, NULL);
+            AudioPlay(AP_TWO_TALK_ON, TRUE);
+            /*AudioPlay(AP_MULTI_TALK_COUPLE_MODE, TRUE);*/
+        }
         else 
         {
             mt->mt_mode = CLOSE_MODE;
@@ -1006,24 +1112,49 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
     }
     if(id == EventSysMultiTalkFriendModeLeaved)
     {
-        if(0)   /* couple talk */
+        if(!BdaddrIsZero(&mt->couple_addr))   /* couple talk */
         {
-
+            mt->mt_mode = COUPLE_MODE;
+            MessageSend(task, EventSysMultiTalkEnterCoupleMode, NULL);
+            AudioPlay(AP_TWO_TALK_ON, TRUE);
+            /*AudioPlay(AP_MULTI_TALK_COUPLE_MODE, TRUE);*/
         }
         else
         {
+            if(mt->mt_mode == FREIEND_MODE)
+            {
+                AudioPlay(AP_MULTI_TALK_OFF, TRUE);
+            }
             mt->mt_mode = CLOSE_MODE;
-            AudioPlay(AP_MULTI_TALK_OFF, TRUE);
             PowerAmpOff();
         }
     }
-    if(mt->mt_mode == FREIEND_MODE)
+    if(id == EventSysMultiTalkCoupleModeLeaved)
+    {
+        if(mt->mt_mode == COUPLE_MODE)
+        {
+            mt->mt_mode = CLOSE_MODE;
+            AudioPlay(AP_TWO_TALK_OFF, TRUE);
+        }
+        if(mt->mt_mode == COUPLE_MODE_PAIRING)
+        {
+            mt->mt_mode = CLOSE_MODE;
+            AudioPlay(AP_TWO_TALK_QUIT_PAIR, TRUE);
+        }
+        PowerAmpOff();
+    }
+
+    if(mt->mt_mode == FREIEND_MODE || mt->mt_mode == FREIEND_MODE_PAIRING)
     {
         processEventMultiTalkFriendMode(task, id, message);
     }
     if(mt->mt_mode == NEARBY_MODE)
     {
         processEventMultiTalkNearbyMode(task, id, message);
+    }
+    if(mt->mt_mode == COUPLE_MODE || mt->mt_mode == COUPLE_MODE_PAIRING)
+    {
+        processEventMultiTalkCoupleMode(task, id, message);
     }
     return FALSE;
 }
@@ -1188,4 +1319,9 @@ bool mtNodeConnected(void)
         return mtGetConnectDevices() >= 1;
     }
     return FALSE;
+}
+
+void mtSetHeadsetAddr(bdaddr *addr)
+{
+    mt->headset_addr = *addr;
 }

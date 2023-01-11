@@ -1,8 +1,14 @@
-compression=adpcm,rate=8000,channels=mono,file=欢迎使用蓝牙对讲机.wav
+compression=adpcm,rate=8000,channels=mono,file=欢迎使用蓝牙对讲系统.wav
 compression=adpcm,rate=8000,channels=mono,file=关机.wav
 compression=adpcm,rate=8000,channels=mono,file=电池电量高.wav
 compression=adpcm,rate=8000,channels=mono,file=电池电量中等.wav
 compression=adpcm,rate=8000,channels=mono,file=电池电量低.wav
+compression=adpcm,rate=8000,channels=mono,file=配对状态.wav
+compression=adpcm,rate=8000,channels=mono,file=手机1已连接.wav
+compression=adpcm,rate=8000,channels=mono,file=手机2已连接.wav
+compression=adpcm,rate=8000,channels=mono,file=语音呼叫.wav
+compression=adpcm,rate=8000,channels=mono,file=麦克风已打开.wav
+compression=adpcm,rate=8000,channels=mono,file=麦克风已关闭.wav
 compression=adpcm,rate=8000,channels=mono,file=多人对讲好友模式.wav
 compression=adpcm,rate=8000,channels=mono,file=多人对讲好友模式组网.wav
 compression=adpcm,rate=8000,channels=mono,file=组网人数1人.wav
@@ -37,3 +43,5 @@ compression=adpcm,rate=8000,channels=mono,file=当前人数6人.wav
 compression=adpcm,rate=8000,channels=mono,file=当前人数7人.wav
 compression=adpcm,rate=8000,channels=mono,file=当前人数8人.wav
 compression=adpcm,rate=8000,channels=mono,file=取消组网.wav
+compression=adpcm,rate=8000,channels=mono,file=音乐分享开启.wav
+compression=adpcm,rate=8000,channels=mono,file=音乐分享关闭.wav

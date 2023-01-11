@@ -1,4 +1,21 @@
 <project buildenvironment="{84faf732-1340-4049-9094-244167adf571}" buildenvironmentname="vm" executionenvironmentoption="" buildenvironmentoption="" executionenvironmentname="vm" executionenvironment="{2b2c6868-a56e-4266-962a-cddf1c979343}" >
+ <folder name="csr_cvc_common_plugin" >
+  <file path="csr_cvc_common_plugin/csr_cvc_common.c" />
+  <file path="csr_cvc_common_plugin/csr_cvc_common.h" />
+  <file path="csr_cvc_common_plugin/csr_cvc_common_ctx.h" />
+  <file path="csr_cvc_common_plugin/csr_cvc_common_dsp_if.c" />
+  <file path="csr_cvc_common_plugin/csr_cvc_common_dsp_if.h" />
+  <file path="csr_cvc_common_plugin/csr_cvc_common_dsp_message_handler.c" />
+  <file path="csr_cvc_common_plugin/csr_cvc_common_dsp_message_handler.h" />
+  <file path="csr_cvc_common_plugin/csr_cvc_common_if.h" />
+  <file path="csr_cvc_common_plugin/csr_cvc_common_io_if.c" />
+  <file path="csr_cvc_common_plugin/csr_cvc_common_io_if.h" />
+  <file path="csr_cvc_common_plugin/csr_cvc_common_plugin.c" />
+  <file path="csr_cvc_common_plugin/csr_cvc_common_plugin.h" />
+  <file path="csr_cvc_common_plugin/csr_cvc_common_state_kick.c" />
+  <file path="csr_cvc_common_plugin/csr_cvc_common_state_machine.c" />
+  <file path="csr_cvc_common_plugin/csr_cvc_common_state_machine.h" />
+ </folder>
  <folder name="connection" >
   <file path="connection/bluestack_handler.c" />
   <file path="connection/bluestack_handler.h" />
@@ -325,6 +342,7 @@
   <file path="audio_prompt.c" />
   <file path="headset_friend_mode.c" />
   <file path="headset_nearby_mode.c" />
+  <file path="headset_couple_mode.c" />
  </folder>
  <folder name="Header Files" >
   <extension name="h" />

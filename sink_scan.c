@@ -249,6 +249,9 @@ void sinkWriteEirData( const CL_DM_LOCAL_NAME_COMPLETE_T *message )
         p += sizeof(pbap_uuids);
     }
 #endif
+#ifdef ENABLE_MULTI_TALK
+
+#endif
 
     if(sinkHfpDataGetSupportedProfile() & hfp_handsfree_all)
     {
@@ -329,16 +332,22 @@ void sinkEnableDiscoverable( void )
 {
     const uint32 giac = 0x9E8B33;
     const uint32 liac = 0x9E8B00;
+    const uint32 miac = 0x9E8B01;
     radio_config_type radioConfig;
     sinkInquiryGetRadioConfig(&radioConfig);
     MAIN_DEBUG(("MP Enable Discoverable %cp\n", sinkIsConnectable() ? '+' : '-'));
     
     
     /* Set inquiry access code to respond to */
-    if(sinkInquiryIsInqSessionMuliTalk() || sinkInquiryIsInqSessionNearbyTalk())
+    if(sinkInquiryIsInqSessionMuliTalk())
     {
         MAIN_DEBUG(("Discoverable LIAC\n"));
         ConnectionWriteInquiryAccessCode(&theSink.task, &liac, 1);
+    }
+    else if(sinkInquiryIsInqSessionNearbyTalk())
+    {
+        MAIN_DEBUG(("Discoverable MIAC\n"));
+        ConnectionWriteInquiryAccessCode(&theSink.task, &miac, 1);
     }
     else if ((sinkInquiryIsInqSessionNormal()) || (!peerUseLiacForPairing()))
     {

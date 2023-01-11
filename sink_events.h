@@ -711,10 +711,21 @@ typedef enum sinkEventsTag
               EventSysMultiTalkLeaveNearbyModeDelay,
               EventSysMultiTalkNeabyModeLeaved,
 
+              EventSysMultiTalkEnterCoupleMode,
+              EventSysMultiTalkLeaveCoupleMode,
+              EventSysMultiTalkPairingCoupleMode,
+              EventSysMultiTalkLeaveCoupleModeDelay,
+              EventSysMultiTalkCoupleModeLeaved,
+              EventSysMultiTalkCoupleModeReconnect,
+
               EventSysAGConnect,
               EventSysAGDisconnect,
               EventSysAGAudioConnect,
               EventSysAGAudioDisconnect,
+              EventSysAGSlcConnectCfm,
+              EventSysAGSlcDisconnectInd,
+              EventSysAGAudioConnectCfm,
+
 
               EventSysLast
 

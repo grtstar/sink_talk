@@ -511,6 +511,18 @@ bool sinkInquiryIsInqSessionNearbyTalk(void);
 
 /****************************************************************************
 NAME	
+    sinkInquiryIsInqSessionNearbyTalk
+
+DESCRIPTION
+    This interfaces could be used to check Inquiry session is 2 talk or not
+    
+RETURNS
+    bool: TRUE if session is 2 talk else FALSE
+****************************************************************************/
+bool sinkInquiryIsInqSession2Talk(void);
+
+/****************************************************************************
+NAME	
     sinkInquiryGetConnAttemptingIndex
 
 DESCRIPTION

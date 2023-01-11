@@ -1340,12 +1340,12 @@
                     <PatternArrayConfigItem 
                         ShortId="config_struct" >
                         <StructElementConfigItem 
-                            DefaultValue="10" 
+                            DefaultValue="20" 
                             Id="On Time [ms]" 
                             ShortId="OnTime" 
                             Desc=" " />
                         <StructElementConfigItem 
-                            DefaultValue="10" 
+                            DefaultValue="20" 
                             Id="Off Time [ms]" 
                             ShortId="OffTime" 
                             Desc=" " />
@@ -1385,7 +1385,7 @@
                             ShortId="OverideDisable" 
                             Desc=" " />
                         <StructElementConfigItem 
-                            DefaultValue="ALT" 
+                            DefaultValue="LED B" 
                             Id="Colour" 
                             ShortId="Colour" 
                             Desc=" " />
@@ -1401,7 +1401,7 @@
                     <PatternArrayConfigItem 
                         ShortId="config_struct" >
                         <StructElementConfigItem 
-                            DefaultValue="10" 
+                            DefaultValue="20" 
                             Id="On Time [ms]" 
                             ShortId="OnTime" 
                             Desc=" " />
@@ -1446,7 +1446,7 @@
                             ShortId="OverideDisable" 
                             Desc=" " />
                         <StructElementConfigItem 
-                            DefaultValue="ALT" 
+                            DefaultValue="LED B" 
                             Id="Colour" 
                             ShortId="Colour" 
                             Desc=" " />

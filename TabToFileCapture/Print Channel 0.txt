@@ -1,0 +1,122 @@
+config_id = 4, key_len = 5, requested_words = 64, ret_len = 5
+config_id = 3, key_len = 36, requested_words = 36, ret_len = 36
+config_id = 4, key_len = 5, requested_words = 5, ret_len = 5
+BDADDR [1][0][0]
+AGHFP_INIT_CFM
+AP: Event conf available
+AP: EvPl[4001][4001][0][0]
+VP: Play prompt 1 of 7
+AudioPromptPlay 0  [lang:0][q:1][o.r.:0]
+AUP: queue 3
+AUP: queue play 3
+AUP: play 3
+VP: Play prompt 4 of 7
+AudioPromptPlay 3  [lang:0][q:1][o.r.:0]
+AUP: play 22
+VP: Play prompt 23 of 7
+AudioPromptPlay 22  [lang:0][q:1][o.r.:0]
+AUP: queue 5
+INQ: Inquiry Result 0 Addr 0000,00,000000 RSSI: 32767
+AUP: queue play 5
+AUP: play 5
+VP: Play prompt 6 of 7
+AudioPromptPlay 5  [lang:0][q:1][o.r.:0]
+INQ: Inquiry Result 1 Addr 0002,5b,00aba1 RSSI: 7
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+EIR Device Id data = vid_src(1), vid(7788), pid(414)
+INQ: inquiry devices 1
+INQ: Inquiry Result 1 Addr 0002,5b,00aba1 RSSI: 5
+INQ: [Addr 0002,5b,00aba1 RSSI: 7]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+EIR Device Id data = vid_src(1), vid(7788), pid(414)
+INQ: Inquiry Result 1 Addr 0002,5b,00aba1 RSSI: 7
+INQ: [Addr 0002,5b,00aba1 RSSI: 7]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+EIR Device Id data = vid_src(1), vid(7788), pid(414)
+INQ: Inquiry Result 1 Addr 0002,5b,00aba1 RSSI: 7
+INQ: [Addr 0002,5b,00aba1 RSSI: 7]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+EIR Device Id data = vid_src(1), vid(7788), pid(414)
+INQ: Inquiry Result 1 Addr 0002,5b,00aba1 RSSI: 7
+INQ: [Addr 0002,5b,00aba1 RSSI: 7]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+EIR Device Id data = vid_src(1), vid(7788), pid(414)
+INQ: Inquiry Result 0 Addr 0000,00,000000 RSSI: 32767
+INQ: [Addr 0002,5b,00aba1 RSSI: 7]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: Inquiry Result 0 Addr 0000,00,000000 RSSI: 32767
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: Inquiry Result 0 Addr 0000,00,000000 RSSI: 32767
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+INQ: [Addr 0000,00,000000 RSSI: -35]
+voice_sink = ba6b, sinkAudioGetRoutedVoiceSink = 0
+AUD:audioDisconnectRoutedVoice
+AUD: connected_instance = 752
+INQ: Inquiry Result 0 Addr 0000,00,000000 RSSI: 32767
+AUP: play 32
+VP: Play prompt 33 of 7
+AudioPromptPlay 32  [lang:0][q:1][o.r.:0]
+AUP: play 31
+VP: Play prompt 32 of 7
+AudioPromptPlay 31  [lang:0][q:1][o.r.:0]
+AUP: play 32
+VP: Play prompt 33 of 7
+AudioPromptPlay 32  [lang:0][q:1][o.r.:0]

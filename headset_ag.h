@@ -108,6 +108,8 @@ typedef struct
     /*not needed ?*/
 	audio_params_t audio_cvsd_params ;
 	audio_params_t audio_auristream_params ;
+
+	sync_link_type link_type;
 	
 	/* The RFCOMM sink for the SLC connection */
     Sink            rfcomm_sink;

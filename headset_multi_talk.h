@@ -106,10 +106,12 @@ typedef enum ACLMsg
     ACLMSG_CHECK_TTL,
     ACLMSG_DEVICE_COUNT,
     ACLMSG_ROUTE_TABLE,
+    ACLMSG_REPORT_TABLE,
     ACLMSG_HEAD_ADDR,
     ACLMSG_CHECK_TAIL,
     ACLMSG_CHECK_HEAD,
-    ACLMSG_NEARBY_DISCONNECT
+    ACLMSG_NEARBY_DISCONNECT,
+    ACLMSG_PEER_ADDR
 } ACLMsg;
 
 typedef struct MTDevice
@@ -133,6 +135,13 @@ typedef enum MTMode
     COUPLE_MODE_PAIRING
 }MTMode;
 
+enum
+{
+    COUPLE_MT_WITH_PEER,
+    COUPLE_MT_NO_PEER,
+    COUPLE_AG
+};
+
 typedef struct MTData
 {
     Task app_task;
@@ -150,6 +159,9 @@ typedef struct MTData
     bdaddr head_addr;
     MTMode mt_mode;
     uint8   nearby_connected;
+    bdaddr couple_addr;
+    bdaddr headset_addr;
+    uint8_t couple_type;
 } MTData;
 
 #define MULTITALK_FRIEND_PSM 0x0055
@@ -179,18 +191,25 @@ uint8 RouteTableIsContain(RouteTable *rt, bdaddr *addr);
 void RouteTableSort(RouteTable *rt);
 uint8 RouteTableGetIndex(RouteTable *rt, bdaddr *addr);
 
-void mtSendRouteTable(RouteTable *rt);
+bool mtReportRouteTable(RouteTable *rt);
+bool mtSendRouteTable(RouteTable *rt);
 void mtClearRouteTable(RouteTable *rt);
 void mtSaveRouteTable(RouteTable *rt, uint8 mt_type);
 void mtLoadRouteTable(RouteTable *rt);
 void mtResetPairList(void);
 void mtRouteTableAdjust(bdaddr child_addr);
 
+void mtSaveCoupleAddr(bdaddr *addr, uint8 couple_type);
+bool mtLoadCoupleAddr(bdaddr *addr, uint8 *couple_type);
+void mtResetCoupleAddr(void);
+
+void mtSetHeadsetAddr(bdaddr *addr);
+
 bool ACLSend(Sink sink, const uint8_t *data, uint16 packet_size);
 void ACLBroadcastEvent(Sink sink, uint16 event);
 
 bool mtBroadcastCurrentCount(int count);
-bool mtSendFindTail(void);
+bool mtSendFindTail(uint8 type);
 bool mtSendCheckTTL(uint8 ttl);
 bool mtBroadcastConnectedCount(uint8 count);
 
@@ -224,4 +243,18 @@ bool mtSendCheckHead(uint8 count);
 bool mtBroadcastHeadAddr(uint8 count);
 void ACLProcessParentDataNearby(const uint8_t *data, int size);
 void ACLProcessChildDataNearby(const uint8_t *data, int size);
+
+/* -------------- Couple Mode -------------------*/
+bool handleMTL2capConnectIndCoupleMode(CL_L2CAP_CONNECT_IND_T *msg);
+void handleMTL2capConnectCfmCoupleMode(CL_L2CAP_CONNECT_CFM_T *msg);
+void handleMTL2capDisconIndCoupleMode(CL_L2CAP_DISCONNECT_IND_T *msg);
+void handleMTL2capDisconCfmCoupleMode(CL_L2CAP_DISCONNECT_CFM_T *msg);
+void handleMTSynConnIndCoupleMode(CL_DM_SYNC_CONNECT_IND_T *msg);
+void handleMTSynConnCfmCoupleMode(CL_DM_SYNC_CONNECT_CFM_T *msg);
+void handleMTSynDisconIndCoupleMode(CL_DM_SYNC_DISCONNECT_IND_T *msg);
+bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message);
+void ACLProcessParentDataCouple(const uint8_t *data, int size);
+
+bool mtSendPeerAddr(bdaddr *addr);
+void mtPeerStateCoupleMode(uint8 state);
 #endif

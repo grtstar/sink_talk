@@ -9655,7 +9655,7 @@
                         DefaultValue="False" />
                     <PatternArrayConfigItem 
                         ShortId="state_mask" 
-                        DefaultValue="Connectable | Connectable/Discoverable" />
+                        DefaultValue="Connectable | Connectable/Discoverable | Connected" />
                     <PatternArrayConfigItem 
                         ShortId="user_event" 
                         DefaultValue="MultiTalk Key Press" />
@@ -9922,7 +9922,7 @@
                     Id="Pattern Row" >
                     <PatternArrayConfigItem 
                         ShortId="pio_mask" 
-                        DefaultValue="" />
+                        DefaultValue="0." />
                     <PatternArrayConfigItem 
                         ShortId="vreg_enabled" 
                         DefaultValue="False" />
@@ -9931,13 +9931,13 @@
                         DefaultValue="False" />
                     <PatternArrayConfigItem 
                         ShortId="state_mask" 
-                        DefaultValue="" />
+                        DefaultValue="Powering On | Connectable" />
                     <PatternArrayConfigItem 
                         ShortId="user_event" 
-                        DefaultValue="..." />
+                        DefaultValue="MultiTalk User0" />
                     <PatternArrayConfigItem 
                         ShortId="type" 
-                        DefaultValue="..." />
+                        DefaultValue="DOUBLE" />
                 </PatternArrayRow>
                 <PatternArrayRow 
                     Node="Basic" 

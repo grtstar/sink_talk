@@ -28,7 +28,11 @@ be set to raw to use these functions.
 enum
 {
     UTYPE_EVENT,
-    UTYPE_STATE
+    UTYPE_STATE,
+    UTYPE_PROMPT,
+    UTYPE_PEER_ADDR,
+    UTYPE_HEADSET_ADDR,
+    UTYPE_PEER_STATE
 };
 
 enum
@@ -40,6 +44,10 @@ enum
     P_CRC
 };
 
+extern void BdaddrToArray(bdaddr *addr, uint8 *d);
+extern bdaddr ArrayToBdaddr(const uint8 *data);
+extern void mtSetHeadsetAddr(bdaddr *addr);
+extern void mtPeerStateCoupleMode(uint8 state);
 
 static void UartMessageHandler( Task pTask, MessageId pId, Message pMessage);
 static void UartProcessData(const uint8 *data, int size);
@@ -154,6 +162,7 @@ void UartProcessData(const uint8_t *data, int size)
             UART_DEBUG(("\n"));
         }
     }
+    UART_DEBUG(("\n"));
     for(i=0; i<size; i++)
     {
         switch(uart_stage)
@@ -162,22 +171,25 @@ void UartProcessData(const uint8_t *data, int size)
             if(data[i] == 0xAA)
             {
                 uart_stage = P_HEAD2;
+                uart_index = 0;
+                uart_buff[uart_index++] = data[i];
             }
             break;
             case P_HEAD2:
             if(data[i] == 0x55)
             {
                 uart_stage = P_LEN;
+                uart_buff[uart_index++] = data[i];
             }
             break;
             case P_LEN:
             uart_data_len = data[i];
             uart_stage = P_DATA;
-            uart_index = 0;
+            uart_buff[uart_index++] = data[i];
             break;
             case P_DATA:
             uart_buff[uart_index++] = data[i];
-            if(uart_index == uart_data_len)
+            if(uart_index  == uart_data_len + 3)
             {
                 uart_stage = P_CRC;
             }
@@ -195,6 +207,16 @@ void UartProcessData(const uint8_t *data, int size)
                     uart_state= uart_buff[4];
                     UART_DEBUG(("UART: state = 0x%x\n", uart_state));
                     stateManagerUpdateState();
+                }
+                if(uart_buff[3] == UTYPE_HEADSET_ADDR)
+                {
+                    bdaddr addr = ArrayToBdaddr(&uart_buff[4]);
+                    mtSetHeadsetAddr(&addr);
+                    UART_DEBUG(("UART: headset addr: %x:%x:%lx\n", addr.nap, addr.uap, addr.lap));
+                }
+                if(uart_buff[3] == UTYPE_PEER_STATE)    /* 3024 peer connect state */
+                {
+                    mtPeerStateCoupleMode(uart_buff[4]);
                 }
             }
             uart_stage = P_HEAD1;
@@ -232,6 +254,14 @@ void UartSendEvent(uint16 event)
         break;
     }
 
+}
+
+void UartSendPeerAddr(bdaddr *addr)
+{
+    uint8 d[3+9] = {0xAA, 0x55, 9, UTYPE_PEER_ADDR};
+    BdaddrToArray(addr, &d[4]);
+    d[11] = UartCalcCRC(d, 11);
+    UartTxData(d, 12);
 }
 
 uint8 UartGetState(void)

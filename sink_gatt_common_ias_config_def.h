@@ -1,6 +1,6 @@
 
 /****************************************************************************
-Copyright (c) 2022 Qualcomm Technologies International, Ltd.
+Copyright (c) 2023 Qualcomm Technologies International, Ltd.
 
 FILE NAME
     sink_gatt_common_ias_config_def.h

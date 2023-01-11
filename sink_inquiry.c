@@ -93,6 +93,7 @@ static sink_inquiry_global_data_t gInquryData;
 
 #define LIAC 0x9E8B00
 #define GIAC 0x9E8B33
+#define MIAC 0x9E8B01
 
 /* Pack higher and lower uint16s to form Uint32 bitmask */
 #define PACK_UINT16_TO_UINT32(pio_low, pio_high) (((uint32)pio_high << 16) | ((uint32)(pio_low)&0x0000FFFFUL))
@@ -628,9 +629,15 @@ void inquiryResume(void)
         }
         else if(sinkInquiryIsInqSessionNearbyTalk())
         {
-            INQ_DEBUG(("INQ: Resume LIAC %d, %d, 0x%lX\n", 4, 46, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS));
-            /* Obtain upto 4 responses, using LIAC with 46*1.28sec=58.88sec timeout */
-            ConnectionInquire(&theSink.task, LIAC, 4, 46, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS);
+            INQ_DEBUG(("INQ: Resume MIAC %d, %d, 0x%lX\n", 4, 46, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS));
+            /* Obtain upto 4 responses, using MIAC with 46*1.28sec=58.88sec timeout */
+            ConnectionInquire(&theSink.task, MIAC, 4, 46, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS);
+        }
+        else if(sinkInquiryIsInqSession2Talk())
+        {
+            INQ_DEBUG(("INQ: Resume GIAC %d, %d, 0x%lX\n", 4, 46, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS));
+            /* Obtain upto 4 responses, using GIAC with 46*1.28sec=58.88sec timeout */
+            ConnectionInquire(&theSink.task, GIAC, 4, 46, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS);
         }
         else
         {
@@ -716,10 +723,7 @@ void inquiryStart(bool req_disc)
             MessageCancelAll(&theSink.task, EventUsrEstablishSLC);
             if(GINQDATA.inquiry.session == inquiry_session_nearby)
             {
-                if(req_disc)
-                {
-                    stateManagerEnterConnDiscoverableState(req_disc);
-                }
+                stateManagerEnterConnDiscoverableState(req_disc);
             }
             else
             {
@@ -1304,6 +1308,11 @@ bool sinkInquiryIsInqSessionNearbyTalk(void)
     return (GINQDATA.inquiry.session == inquiry_session_nearby) ? TRUE : FALSE;
 }
 
+bool sinkInquiryIsInqSession2Talk(void)
+{
+    return (GINQDATA.inquiry.session == inquiry_session_ag) ? TRUE : FALSE;
+}
+
 /****************************************************************************
 NAME
     sinkInquiryGetConnAttemptingIndex
@@ -1550,7 +1559,8 @@ void inquiryHandleTalkResult(CL_DM_INQUIRE_RESULT_T *result)
 #endif
     if (GINQDATA.inquiry.results != NULL && result->status == inquiry_status_result)
     {
-        if (mtCheckEirDeviceIdData(result->size_eir_data, result->eir_data))
+        bool is_mtalk_device = mtCheckEirDeviceIdData(result->size_eir_data, result->eir_data);
+        if (is_mtalk_device || GINQDATA.inquiry.session == inquiry_session_ag)
         {
             /* Check if device is in PDL */
             INQ_DEBUG(("RSSI_CHECK_PDL = %u\n", RSSI_CHECK_PDL(&result->bd_addr)));
@@ -1589,7 +1599,7 @@ void inquiryHandleTalkResult(CL_DM_INQUIRE_RESULT_T *result)
                         inquiryGetIndex(res.rssi, &new_index);
                     }
                 }
-                if(GINQDATA.inquiry.session == inquiry_session_nearby)
+                if(GINQDATA.inquiry.session == inquiry_session_nearby || GINQDATA.inquiry.session == inquiry_session_ag)
                 {
                     GINQDATA.inquiry.results[0] = res;
                 }
@@ -1611,6 +1621,10 @@ void inquiryHandleTalkResult(CL_DM_INQUIRE_RESULT_T *result)
                         {
                             uint8 *c = PanicUnlessMalloc(sizeof(uint8));
                             *c = count;
+                            if(!is_mtalk_device)
+                            {
+                                *c = 0;
+                            }
                             MessageCancelAll(&theSink.task, EventSysMultiTalkInquiryDevices);
                             MessageSendLater(&theSink.task, EventSysMultiTalkInquiryDevices, c, D_SEC(1));
                             GINQDATA.inquiry.result_count = count;
@@ -1634,7 +1648,7 @@ void inquiryHandleTalkResult(CL_DM_INQUIRE_RESULT_T *result)
                     count++;
                 }
             }
-            if(count < NUM_INQ_DEVS)
+            /* if(count < NUM_INQ_DEVS) forever inquiry*/
             {
                 /* 
                     未搜索到足够多设备，继续�
@@ -1656,12 +1670,6 @@ void inquiryHandleTalkResult(CL_DM_INQUIRE_RESULT_T *result)
                 GINQDATA.inquiry.state = inquiry_idle;
                 sinkInquiryGetRssiConfig(&rssiConfig);
                 MessageSendLater(&theSink.task, EventSysRssiResume, 0, D_SEC(2));
-            }
-            else
-            {
-                /* Attempt to connect to device */
-                /* inquiryConnectFirst(); */
-                GINQDATA.inquiry.state = inquiry_idle;
             }
         }
         INQ_DEBUG(("INQ: Inquiry Complete\n"));
@@ -1702,7 +1710,7 @@ RETURNS
 void inquiryHandleResult(CL_DM_INQUIRE_RESULT_T *result)
 {   
 #ifdef ENABLE_MULTI_TALK
-    if(GINQDATA.inquiry.session == inquiry_session_multi_talk || GINQDATA.inquiry.session == inquiry_session_nearby)
+    if(GINQDATA.inquiry.session == inquiry_session_multi_talk || GINQDATA.inquiry.session == inquiry_session_nearby || GINQDATA.inquiry.session == inquiry_session_ag)
     {
         inquiryHandleTalkResult(result);
         return;

@@ -50,6 +50,10 @@ Copyright (c) 2005 - 2017 Qualcomm Technologies International, Ltd.
 #include "headset_multi_talk.h"
 #endif
 
+#ifdef ENABLE_AG
+#include "headset_ag.h"
+#endif
+
 #include <connection.h>
 #include <a2dp.h>
 #include <hfp.h>
@@ -197,6 +201,9 @@ static void audioSuspendDisconnectVoiceSource(void);
 
 #ifdef ENABLE_MULTI_TALK
 static bool audioRouteMultiTalkScoIfAvailable(void);
+#endif
+#ifdef ENABLE_AG
+static bool audioRouteAGHfpScoIfAvailable(void);
 #endif
 
 /*************************************************************************
@@ -1773,7 +1780,7 @@ static bool activeFeaturesOverrideRouting(void)
 
 static void audioRouteVoiceSource(void)
 {
-    if((!audioRouteActiveCallScoIfAvailable()) && (!audioRouteMultiTalkScoIfAvailable()) && (!audioRouteUsbVoiceIfAvailable()))
+    if((!audioRouteActiveCallScoIfAvailable()) && (!audioRouteMultiTalkScoIfAvailable()) &&(!audioRouteAGHfpScoIfAvailable()) && (!audioRouteUsbVoiceIfAvailable()))
     {
         if(sinkAudioIsVoiceRouted())
         {
@@ -2142,6 +2149,22 @@ bool audioRouteMultiTalkScoIfAvailable(void)
 
 #endif
 
+#ifdef ENABLE_AG
+bool audioRouteAGHfpScoIfAvailable(void)
+{
+    Sink sco_sink_to_route = agGetActiveScoSink();
+    if(sco_sink_to_route)
+    {
+        if(audioRouteScoSink(sco_sink_to_route))
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+#endif
+
 static void audioGetVolumeConfigFromSource(audio_sources source, volume_info *volume)
 {
     switch(source)
@@ -2274,6 +2297,12 @@ static bool populateVoiceConnectParameters(Sink sink, audio_connect_parameters *
     else if(isMTVoiceSink(sink))
     {
         return mtVoicePopulateConnectParameters(connect_parameters);
+    }
+#endif
+#ifdef ENABLE_AG
+    else if(sink == agGetActiveScoSink())
+    {
+        return agVoicePopulateConnectParameters(connect_parameters);
     }
 #endif
     else
