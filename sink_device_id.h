@@ -47,6 +47,7 @@ void GetDeviceIdFullVersion(uint16 *buffer);
 
 #ifdef ENABLE_MULTI_TALK
 bool mtCheckEirDeviceIdData(uint16 size_eir_data, const uint8 *eir_data);
+bool mtCheckPeerDevice(uint16 size_eir_data, const uint8 *eir_data);
 #endif
 /****************************************************************************
 NAME	

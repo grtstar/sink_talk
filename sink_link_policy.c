@@ -887,8 +887,8 @@ void linkPolicyCheckRoles(void)
     if (mtGetConnectDevices() > 0)
     {
         Sink sink_parents, sink_child;
-        sink_parents = mtGetSink(MT_PARENT);
-        sink_child = mtGetSink(MT_CHILD);
+        sink_parents = mtGetSink(MT_LEFT);
+        sink_child = mtGetSink(MT_RIGHT);
         if (sink_parents)
         {
             linkPolicyGetRole(&sink_parents);

@@ -3,8 +3,8 @@
 
 enum
 {
-    MT_PARENT,
-    MT_CHILD
+    MT_LEFT,
+    MT_RIGHT
 };
 
 void mtInit(Task task);
@@ -76,6 +76,7 @@ typedef enum DevcieSate
 {
     MT_L2CAP_Disconnected,
     MT_L2CAP_Connecting,
+    MT_L2CAP_WaitConnect,
     MT_L2CAP_Connected,
     MT_SYN_Connecting,
     MT_SYN_Connected,
@@ -89,6 +90,7 @@ typedef enum MTStatus
     MT_ST_NOCONNECT,
     MT_ST_PARING,
     MT_ST_CONNECTING,
+    MT_ST_CHECKLOOP,
     MT_ST_CONNECTED,
     MT_ST_LINKLOSS,
     MT_ST_WAITING_CONNECT,
@@ -101,7 +103,7 @@ typedef enum ACLMsg
 {
     ACLMSG_EVENT,
     ACLMSG_CURRENT_CONNECTED,
-    ACLMSG_ONE_DISCONNECTED,
+    ACLMSG_ACK,
     ACLMSG_FIND_TAIL,
     ACLMSG_CHECK_TTL,
     ACLMSG_DEVICE_COUNT,
@@ -111,7 +113,8 @@ typedef enum ACLMsg
     ACLMSG_CHECK_TAIL,
     ACLMSG_CHECK_HEAD,
     ACLMSG_NEARBY_DISCONNECT,
-    ACLMSG_PEER_ADDR
+    ACLMSG_PEER_ADDR,
+    ACLMSG_CHECK_LOOP
 } ACLMsg;
 
 typedef struct MTDevice
@@ -162,6 +165,10 @@ typedef struct MTData
     bdaddr couple_addr;
     bdaddr headset_addr;
     uint8_t couple_type;
+
+    bdaddr header_addr[2];
+    uint8 sco_expend_dev;
+    uint8 connect_token;
 } MTData;
 
 #define MULTITALK_FRIEND_PSM 0x0055
@@ -191,8 +198,8 @@ uint8 RouteTableIsContain(RouteTable *rt, bdaddr *addr);
 void RouteTableSort(RouteTable *rt);
 uint8 RouteTableGetIndex(RouteTable *rt, bdaddr *addr);
 
-bool mtReportRouteTable(RouteTable *rt);
-bool mtSendRouteTable(RouteTable *rt);
+bool mtReportRouteTable(int ch, RouteTable *rt);
+bool mtSendRouteTable(int ch, RouteTable *rt);
 void mtClearRouteTable(RouteTable *rt);
 void mtSaveRouteTable(RouteTable *rt, uint8 mt_type);
 void mtLoadRouteTable(RouteTable *rt);
@@ -209,9 +216,11 @@ bool ACLSend(Sink sink, const uint8_t *data, uint16 packet_size);
 void ACLBroadcastEvent(Sink sink, uint16 event);
 
 bool mtBroadcastCurrentCount(int count);
-bool mtSendFindTail(uint8 type);
+bool mtSendFindTail(int ch, uint8 type);
 bool mtSendCheckTTL(uint8 ttl);
 bool mtBroadcastConnectedCount(uint8 count);
+bool mtCheckLoop(uint8 ttl ,bdaddr *addr);
+bool mtSendAck(int ch, int id);
 
 int BdaddrCompare(bdaddr *_1, bdaddr *_2);
 int GetOnes(uint8 v);

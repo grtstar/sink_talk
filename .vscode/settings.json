@@ -32,6 +32,7 @@
         "csr_common_example_plugin.h": "c",
         "audio_prompt.h": "c",
         "connection_private.h": "c",
-        "l2cap_prim.h": "c"
+        "l2cap_prim.h": "c",
+        "headset_uart.h": "c"
     }
 }

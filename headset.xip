@@ -343,6 +343,7 @@
   <file path="headset_friend_mode.c" />
   <file path="headset_nearby_mode.c" />
   <file path="headset_couple_mode.c" />
+  <file path="headset_multi_comm.c" />
  </folder>
  <folder name="Header Files" >
   <extension name="h" />

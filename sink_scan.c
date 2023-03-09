@@ -333,6 +333,7 @@ void sinkEnableDiscoverable( void )
     const uint32 giac = 0x9E8B33;
     const uint32 liac = 0x9E8B00;
     const uint32 miac = 0x9E8B01;
+    const uint32 fiac = 0x9E8B02;
     radio_config_type radioConfig;
     sinkInquiryGetRadioConfig(&radioConfig);
     MAIN_DEBUG(("MP Enable Discoverable %cp\n", sinkIsConnectable() ? '+' : '-'));
@@ -343,6 +344,11 @@ void sinkEnableDiscoverable( void )
     {
         MAIN_DEBUG(("Discoverable LIAC\n"));
         ConnectionWriteInquiryAccessCode(&theSink.task, &liac, 1);
+    }
+    else if(sinkInquiryIsInqSessionFriend())
+    {
+        MAIN_DEBUG(("Discoverable FIAC\n"));
+        ConnectionWriteInquiryAccessCode(&theSink.task, &fiac, 1);
     }
     else if(sinkInquiryIsInqSessionNearbyTalk())
     {

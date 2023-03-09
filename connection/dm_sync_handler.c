@@ -530,9 +530,13 @@ void connectionHandleSyncDisconnectReq(
 {
     /* Send a SCO disconnect request to BlueStack */
     MAKE_PRIM_T(DM_SYNC_DISCONNECT_REQ);
-    prim->handle = PanicZero(SinkGetScoHandle(req->audio_sink));;
+    /* prim->handle = PanicZero(SinkGetScoHandle(req->audio_sink)); */
+    prim->handle = SinkGetScoHandle(req->audio_sink);
     prim->reason = (uint16)req->reason;
-    VmSendDmPrim(prim);
+    if(prim->handle != 0)
+    {
+        VmSendDmPrim(prim);
+    }
 }
 
 

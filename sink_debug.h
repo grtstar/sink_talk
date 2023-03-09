@@ -28,7 +28,7 @@ DESCRIPTION
  /*end of DO_NOT_DOCUMENT*/
 
     /*The global debug enable*/ 
-    #define DEBUG_PRINT_ENABLED
+    #define DEBUG_PRINT_ENABLEDx
 
 #define DEBUG_VM_HATSx
 
@@ -173,7 +173,7 @@ void printVmLogsInTestSystem (const char *format, ...);
         #define DEBUG_AOVx
         #define DEBUG_AUDIO_CLOCKx
 
-        #define ENABLE_MT_DEBUGx
+        #define ENABLE_MT_DEBUG
 
     #else
         #ifndef DEBUG_VM_HATS

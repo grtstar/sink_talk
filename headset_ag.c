@@ -503,6 +503,7 @@ static void profile_handler(Task task, MessageId id, Message message)
 
 	case AGHFP_SLC_CONNECT_IND:
 	{
+		AGHFP_SLC_CONNECT_IND_T *msg = (AGHFP_SLC_CONNECT_IND_T *)message;
 		DEBUG(("AGHFP_SLC_CONNECT_IND\n"));
 		if(mt != NULL && (mt->mt_mode == COUPLE_MODE || mt->mt_mode == COUPLE_MODE_PAIRING))
 		{
@@ -510,7 +511,8 @@ static void profile_handler(Task task, MessageId id, Message message)
 		}
 		else
 		{
-			DEBUG(("AG: not in couple mode, reject\n"));
+			DEBUG(("AG: not in couple mode, reject %x:%x:%lx\n", msg->bd_addr.nap, msg->bd_addr.uap, msg->bd_addr.lap));
+			if(msg->aghfp == SIMPLE->aghfp){}
 			AghfpSlcConnectResponse(SIMPLE->aghfp, FALSE);
 		}
 	}

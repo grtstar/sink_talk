@@ -308,7 +308,7 @@ static sink_extended_state_t getConnDiscovExtendedStates(void)
     {
         conndisc_ext_state = sink_ext_state_mtPairing;
     }
-    else if (sinkInquiryIsInqSessionNearbyTalk())
+    else if (sinkInquiryIsInqSessionNearbyTalk() || sinkInquiryIsInqSessionFriend())
     {
         if(mtGetConnectDevices() == 1)
         {

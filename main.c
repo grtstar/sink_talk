@@ -1201,6 +1201,7 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
 
         /*case (EventSysEnterPairingEmptyPDL):*/
         case (EventUsrEnterPairing):
+            #ifndef ENABLE_MULTI_TALK
             MAIN_DEBUG(("HS: EnterPair [%d]\n" , lState )) ;
 
             /*go into pairing mode*/
@@ -1214,6 +1215,9 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
             {
                 lIndicateEvent = FALSE ;
             }
+            #else
+            lIndicateEvent = FALSE ;
+            #endif
         break ;
         case EventUsrBAStartAssociation:
             {
@@ -4660,7 +4664,9 @@ static void IndicateEvent(MessageId id)
     {
         LedManagerIndicateEvent(id);
     }
+#ifndef PROMPT_REMOTE
     sinkAudioIndicationPlayEvent(id);
+#endif
     ATCommandPlayEvent(id);
 }
 /**  \} */ /* End sink_app group */

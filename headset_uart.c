@@ -32,7 +32,8 @@ enum
     UTYPE_PROMPT,
     UTYPE_PEER_ADDR,
     UTYPE_HEADSET_ADDR,
-    UTYPE_PEER_STATE
+    UTYPE_PEER_STATE,
+    UTYPE_GET_HEADSET_ADDR
 };
 
 enum
@@ -256,12 +257,28 @@ void UartSendEvent(uint16 event)
 
 }
 
+void UartGetHeadsetAddr(void)
+{
+    uint8 d[3+2] = {0xAA, 0x55, 1, UTYPE_GET_HEADSET_ADDR};
+    d[4] = UartCalcCRC(d, 4);
+    UartTxData(d, sizeof(d));
+}
+
 void UartSendPeerAddr(bdaddr *addr)
 {
     uint8 d[3+9] = {0xAA, 0x55, 9, UTYPE_PEER_ADDR};
     BdaddrToArray(addr, &d[4]);
     d[11] = UartCalcCRC(d, 11);
     UartTxData(d, 12);
+}
+
+void UartSendPrompt(int prompt, uint8 queue)
+{
+    uint8 d[3+4] = {0xAA, 0x55, 3, UTYPE_PROMPT};
+    d[4] = prompt;
+    d[5] = queue;
+    d[6] = UartCalcCRC(d, 6);
+    UartTxData(d, sizeof(d));
 }
 
 uint8 UartGetState(void)

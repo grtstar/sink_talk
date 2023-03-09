@@ -9,6 +9,9 @@
 #include <audio.h>
 #include <stddef.h>
 
+#include "headset_uart.h"
+
+
 uint8 prompt_queue[8] = {0};
 uint32 head = 0, tail = 0;
 
@@ -24,6 +27,15 @@ void AudioPlayFinish(void)
 
 void AudioPlay(int event, bool queue)
 {
+    if(event < 0 || event >= AP_END)
+    {
+        DEBUG(("AUP: error %d\n", event));
+        return;
+    }
+#ifdef PROMPT_REMOTE
+    DEBUG(("AUP: Send %d\n", event));
+    UartSendPrompt(event, queue);
+#else
     if(!stateManagerIsReadyForAudio())
     {
         return;
@@ -32,11 +44,7 @@ void AudioPlay(int event, bool queue)
     {
         return;
     }
-    if(event < 0 || event >= AP_END)
-    {
-        DEBUG(("AUP: error %d\n", event));
-        return;
-    }
+    
     if(IsAudioBusy())
     {
         if(queue)
@@ -60,4 +68,5 @@ void AudioPlay(int event, bool queue)
     MessageCancelAll(&theSink.task, EventSysPromptsTonesQueueCheck);
     MessageSendConditionally ( &theSink.task, EventSysPromptsTonesQueueCheck,
                                NULL ,(const uint16 *)AudioBusyPtr());
+#endif
 }
