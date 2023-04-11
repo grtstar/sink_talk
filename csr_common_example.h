@@ -31,7 +31,7 @@ void CsrExamplePluginConnect(const ExamplePluginTaskdata * const task, const AUD
 void CsrExamplePluginDisconnect(const ExamplePluginTaskdata * const task);
 void CsrExamplePluginSetVolume(const uint16 volume);
 void CsrExamplePluginSetMode(const AUDIO_MODE_T mode);
-void CsrExamplePluginSetSoftMute(const AUDIO_PLUGIN_SET_SOFT_MUTE_MSG_T * const message);
+void CsrExamplePluginSetSoftMute(const ExamplePluginTaskdata * const task, const AUDIO_PLUGIN_SET_SOFT_MUTE_MSG_T * const message);
 void CsrExamplePluginPlayTone(const ExamplePluginTaskdata * const task, const AUDIO_PLUGIN_PLAY_TONE_MSG_T * const tone_message);
 void CsrExamplePluginStopTone(void);
 

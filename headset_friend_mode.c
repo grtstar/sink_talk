@@ -27,6 +27,7 @@
 #include "sink_audio_prompts.h"
 #include "sink_statemanager.h"
 #include "sink_scan.h"
+#include "sink_tones.h"
 
 #include <connection.h>
 #include <a2dp.h>
@@ -50,7 +51,6 @@
 #include "csr_common_example_plugin.h"
 
 extern MTData *mt;
-extern const uint16 syn_conftab[];
 extern TaskData acl_parent_task;
 extern TaskData acl_child_task;
 
@@ -140,13 +140,12 @@ bool handleMTL2capConnectIndFriendMode(CL_L2CAP_CONNECT_IND_T *msg)
     {
         /* ?????????????? */
         MT_DEBUG(("MT: handleMTL2capConnectInd parant is disconnect\n"));
-        if (RouteTableIsNotSaved(&mt->route_table) || RouteTableIsContain(&mt->route_table, &msg->bd_addr))
+        if (mt->mt_mode == FREIEND_MODE_PAIRING || RouteTableIsContain(&mt->route_table, &msg->bd_addr))
         {
             DEBUG(("MT: handleMTL2capConnectInd type=%d, status = %d\n", mt->mt_type, mt->status));
 
             if (mt->mt_mode == CLOSE_MODE)
             {
-                DEBUG(("MT: handleMTL2capConnectInd cannot allow connected in close mode \n"));
                 return FALSE;
             }
             else
@@ -299,7 +298,7 @@ void handleMTL2capConnectCfmFriendMode(CL_L2CAP_CONNECT_CFM_T *msg)
                 mt->status = MT_ST_SEARCHING;
             }
 
-            if (msg->status == l2cap_connect_error) /* 137 */
+            if (msg->status == l2cap_connect_error || msg->status ==  l2cap_connect_failed_security) /* 137 */
             {
                 deviceManagerRemoveDevice(&msg->addr);
             }
@@ -604,18 +603,22 @@ void handleMTSynDisconIndFriendMode(CL_DM_SYNC_DISCONNECT_IND_T *msg)
 
 bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
 {
-    bool ret = FALSE;
+    if(mt->mt_mode != FREIEND_MODE && mt->mt_mode != FREIEND_MODE_PAIRING)
+    {
+        return FALSE;
+    }
     switch (id)
     {
     case EventMultiTalkEnterPair:
         MT_DEBUG(("MT: Enter Pair\n"));
         mt->status = MT_ST_PARING;
-        AudioPlay(AP_MULTI_TALK_FRIEND_MODE_PAIR, TRUE);
-        inquiryPair(inquiry_session_multi_talk, TRUE);
         mtDisconnect();
+        AudioPlay(AP_MULTI_TALK_FRIEND_MODE_PAIR, TRUE);
+        inquiryStop();
+        inquiryPair(inquiry_session_multi_talk, TRUE);
+        memset(&mt->route_table, 0, sizeof(RouteTable));
         mt->header_addr[0] = mt->addr;
         BdaddrSetZero(&mt->header_addr[1]);
-        mtClearRouteTable(&mt->route_table);
         mt->total_connected = 1;
         mt->mt_type = MT_NODE;
         deviceManagerRemoveAllDevices();
@@ -631,6 +634,7 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
                 {
                     RouteTablePushChild(&mt->route_table, mt->addr);
                     mtReportRouteTable(MT_LEFT, &mt->route_table);
+                    MessageSendLater(task, EventSysMultiTalkFriendSaveListDelay, NULL, D_SEC(10));
                 }
             }
             else
@@ -652,6 +656,7 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
             MessageSendLater(task, EventSysMultiTalkLeaveFriendModeDelay, NULL, D_SEC(1));
             AudioPlay(AP_MULTI_TALK_QUIT_PAIR, TRUE);
             mt->connect_token = TOKEN_IDLE;
+            mtLoadRouteTable(&mt->route_table);
         }
         break;
     case EventSysMultiTalkEnterFriendMode:
@@ -708,7 +713,7 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
                 if (mt->status == MT_ST_SEARCHING)
                 {
                     inquiry_result_t *result = sinkinquiryGetInquiryResults();
-                    if (result)
+                    if (result && sinkInquiryIsInqSessionFriend())
                     {
                         if (RouteTableIsContain(&mt->route_table, &result[0].bd_addr))
                         {
@@ -733,16 +738,16 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
                             }
                             else
                             {
-                                MT_DEBUG(("MT: search %x:%x:%lx, but header is [%x:%x:%lx] [%x:%x:%lx]\n",
-                                          result[0].bd_addr.nap,
+                                MT_DEBUG(("MT: search %x:%x:%lx", result[0].bd_addr.nap,
                                           result[0].bd_addr.uap,
-                                          result[0].bd_addr.lap,
-                                          mt->header_addr[0].nap,
-                                          mt->header_addr[0].uap,
-                                          mt->header_addr[0].lap,
-                                          mt->header_addr[1].nap,
-                                          mt->header_addr[1].uap,
-                                          mt->header_addr[1].lap));
+                                          result[0].bd_addr.lap));
+                                MT_DEBUG(("but header is [%x:%x:%lx] [%x:%x:%lx]\n",
+                                      mt->header_addr[0].nap,
+                                      mt->header_addr[0].uap,
+                                      mt->header_addr[0].lap,
+                                      mt->header_addr[1].nap,
+                                      mt->header_addr[1].uap,
+                                      mt->header_addr[1].lap));
                             }
                         }
                         else
@@ -768,17 +773,14 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
         {
             if (mt->status == MT_ST_PARING || mt->status == MT_ST_SEARCHING)
             {
-                uint8 i = 0;
-                uint8 *count = (uint8 *)message;
                 inquiry_result_t *result = sinkinquiryGetInquiryResults();
-                if (result)
+                if (result &&  sinkInquiryIsInqSessionMuliTalk())
                 {
                     if (mt->mt_device[MT_RIGHT].state != MT_L2CAP_Disconnected)
                     {
                         MT_DEBUG(("MT: right is connected, dont pair\n"));
                         break;
                     }
-                    for (i = 0; i < *count; i++)
                     {
                         /* 连接比自己地址更大的设  */
                         bdaddr head = mt->addr;
@@ -790,11 +792,11 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
                         {
                             head = mt->header_addr[1];
                         }
-                        if (BdaddrCompare(&head, &result[i].bd_addr) == -1 &&
-                            !BdaddrIsSame(&mt->header_addr[0], &result[i].bd_addr) &&
-                            !BdaddrIsSame(&mt->header_addr[1], &result[i].bd_addr) &&
-                            !BdaddrIsSame(&mt->mt_device[MT_LEFT].bt_addr, &result[i].bd_addr) &&
-                            !BdaddrIsSame(&mt->mt_device[MT_RIGHT].bt_addr, &result[i].bd_addr))
+                        if (BdaddrCompare(&head, &result[0].bd_addr) == -1 &&
+                            !BdaddrIsSame(&mt->header_addr[0], &result[0].bd_addr) &&
+                            !BdaddrIsSame(&mt->header_addr[1], &result[0].bd_addr) &&
+                            !BdaddrIsSame(&mt->mt_device[MT_LEFT].bt_addr, &result[0].bd_addr) &&
+                            !BdaddrIsSame(&mt->mt_device[MT_RIGHT].bt_addr, &result[0].bd_addr))
                         {
                             if (mt->mt_device[0].state >= MT_L2CAP_Connected)
                             {
@@ -804,16 +806,16 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
                             {
                                 mtSendConnectToken(1, TOKEN_HELD);
                             }
-                            mtConnect(&result[i].bd_addr);
+                            mtConnect(&result[0].bd_addr);
                             mt->status = MT_ST_CONNECTING;
                             break;
                         }
                         else
                         {
-                            MT_DEBUG(("MT: search %x:%x:%lx, but header is [%x:%x:%lx] [%x:%x:%lx]\n",
-                                      result[i].bd_addr.nap,
-                                      result[i].bd_addr.uap,
-                                      result[i].bd_addr.lap,
+                            MT_DEBUG(("MT: search %x:%x:%lx", result[0].bd_addr.nap,
+                                          result[0].bd_addr.uap,
+                                          result[0].bd_addr.lap));
+                            MT_DEBUG(("but header is [%x:%x:%lx] [%x:%x:%lx]\n",
                                       mt->header_addr[0].nap,
                                       mt->header_addr[0].uap,
                                       mt->header_addr[0].lap,
@@ -825,8 +827,7 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
                 }
             }
         }
-        ret = TRUE;
-        break;
+        return TRUE;
     }
     case EventSysMultiTalkDeviceConnected:
         if (mt->total_connected >= 2)
@@ -834,15 +835,16 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
             AudioPlay(AP_MULTI_TALK_2_CONNECTED + mt->total_connected - 2, TRUE);
         }
         inquiryStop();
-        /*
-            if (mtGetConnectDevices() == 1)
-            {
-                inquiryPair(inquiry_session_friend, FALSE);
-            }
-        */
+        if (mtGetConnectDevices() == 1)
+        {
+            inquiryPair(inquiry_session_friend, FALSE);
+        }
+        MessageCancelAll(task, EventSysMultiTalkFriendSaveListDelay);
         mt->mt_mode = FREIEND_MODE;
-        ret = TRUE;
-        break;
+        stateManagerUpdateState();
+        /* adjust volume */
+        AudioSetVolume(sinkHfpDataGetDefaultVolume(), (int16)TonesGetToneVolume());
+        return TRUE;
     case EventSysMultiTalkCurrentDevices:
     {
         if (mt->total_connected < 1)
@@ -864,10 +866,15 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
         {
             MessageSendLater(mt->app_task, EventSysMultiTalkCheckLoop, NULL, D_SEC(5));
         }
+        break;
+    }
+    case EventSysMultiTalkFriendSaveListDelay:
+    {
+        AudioPlay(AP_SAVE_FREIND_FAILED, TRUE);
     }
     break;
     default:
         break;
     }
-    return ret;
+    return FALSE;
 }

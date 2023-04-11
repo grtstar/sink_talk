@@ -606,6 +606,7 @@ void inquiryResume(void)
 
     if (GINQDATA.inquiry.state == inquiry_idle)
     {
+        DEBUG(("INQ:inquiryResume\n"));
         inquiryReset();
         GINQDATA.inquiry.state = inquiry_searching;
 
@@ -624,27 +625,32 @@ void inquiryResume(void)
         }
         else if(sinkInquiryIsInqSessionMuliTalk())
         {
-            INQ_DEBUG(("INQ: Resume LIAC %d, %d, 0x%lX\n", 16, 40, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS));
+            INQ_DEBUG(("INQ: Resume LIAC %d, %d, 0x%lX\n", 8, 16, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS));
             /* Obtain upto 8 responses, using GIAC with 20*1.28sec=25.6 sec timeout */
-            ConnectionInquire(&theSink.task, LIAC, 16, 40, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS);
+            ConnectionInquire(&theSink.task, LIAC, 8, 16, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS);
         }
         else if( sinkInquiryIsInqSessionFriend())
         {
-            INQ_DEBUG(("INQ: Resume FIAC %d, %d, 0x%lX\n", 16, 40, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS));
+            INQ_DEBUG(("INQ: Resume FIAC %d, %d, 0x%lX\n", 8, 16, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS));
             /* Obtain upto 8 responses, using GIAC with 20*1.28sec=25.6 sec timeout */
-            ConnectionInquire(&theSink.task, FIAC, 16, 40, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS);
+            ConnectionInquire(&theSink.task, FIAC, 8, 16, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS);
         }
         else if(sinkInquiryIsInqSessionNearbyTalk())
         {
-            INQ_DEBUG(("INQ: Resume MIAC %d, %d, 0x%lX\n", 4, 46, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS));
-            /* Obtain upto 4 responses, using MIAC with 46*1.28sec=58.88sec timeout */
-            ConnectionInquire(&theSink.task, MIAC, 4, 46, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS);
+            sink_inquiry_readonly_config_def_t *inq_config_data;
+            if (configManagerGetReadOnlyConfig(SINK_INQUIRY_READONLY_CONFIG_BLK_ID, (const void **)&inq_config_data))
+            {
+                INQ_DEBUG(("INQ: Resume MIAC %d, %d, 0x%lX\n", inq_config_data->rssi.max_responses, inq_config_data->rssi.timeout, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS));
+                /* Obtain upto 4 responses, using MIAC with 46*1.28sec=58.88sec timeout */
+                ConnectionInquire(&theSink.task, MIAC, inq_config_data->rssi.max_responses, inq_config_data->rssi.timeout, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS); 
+                configManagerReleaseConfig(SINK_INQUIRY_READONLY_CONFIG_BLK_ID);
+            }
         }
         else if(sinkInquiryIsInqSession2Talk())
         {
-            INQ_DEBUG(("INQ: Resume GIAC %d, %d, 0x%lX\n", 4, 46, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS));
+            INQ_DEBUG(("INQ: Resume GIAC %d, %d, 0x%lX\n", 4, 16, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS));
             /* Obtain upto 4 responses, using GIAC with 46*1.28sec=58.88sec timeout */
-            ConnectionInquire(&theSink.task, GIAC, 4, 46, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS);
+            ConnectionInquire(&theSink.task, GIAC, 4, 16, AUDIO_MAJOR_SERV_CLASS | AV_MAJOR_DEVICE_CLASS);
         }
         else
         {
@@ -746,7 +752,7 @@ void inquiryStart(bool req_disc)
 
         /* Send a reminder event */
         MessageCancelAll(&theSink.task, EventSysRssiPairReminder);
-        if(GINQDATA.inquiry.session != inquiry_session_nearby)
+        if(GINQDATA.inquiry.session == inquiry_session_normal)
         {
             MessageSendLater(&theSink.task, EventSysRssiPairReminder, 0, D_SEC(INQUIRY_REMINDER_TIMEOUT_SECS));
         }
@@ -1559,8 +1565,16 @@ void inquiryHandleTalkResult(CL_DM_INQUIRE_RESULT_T *result)
     if (GINQDATA.inquiry.results != NULL && result->status == inquiry_status_result)
     {
         bool is_mtalk_device = mtCheckEirDeviceIdData(result->size_eir_data, result->eir_data);
-        bool is_peer_device = mtCheckPeerDevice(result->size_eir_data, result->eir_data);
-        if ((is_mtalk_device && GINQDATA.inquiry.session != inquiry_session_ag) || (GINQDATA.inquiry.session == inquiry_session_ag && !is_peer_device))
+        bool is_peer_device = mtCheckPeerDevice(&result->bd_addr);
+        DEBUG(("inquiry.session = %d, eir_size = %d, is_peer_device = %d, addr = %04x,%02x,%06lx\n", GINQDATA.inquiry.session, result->size_eir_data, is_peer_device, result->bd_addr.nap, result->bd_addr.uap, result->bd_addr.lap));
+        if(GINQDATA.inquiry.session == inquiry_session_ag)
+        {
+            if(!is_mtalk_device && is_peer_device)
+            {
+                return;
+            }
+        }
+        if ((is_mtalk_device && GINQDATA.inquiry.session != inquiry_session_ag) || (GINQDATA.inquiry.session == inquiry_session_ag))
         {
             /* Check if device is in PDL */
             INQ_DEBUG(("RSSI_CHECK_PDL = %u\n", RSSI_CHECK_PDL(&result->bd_addr)));
@@ -1574,7 +1588,7 @@ void inquiryHandleTalkResult(CL_DM_INQUIRE_RESULT_T *result)
                 inquiryGetIndex(res.rssi, &new_index);
                 INQ_DEBUG(("INQ: new_index = %u\n", new_index));
 
-                if(GINQDATA.inquiry.session == inquiry_session_multi_talk)
+                if(GINQDATA.inquiry.session == inquiry_session_normal)
                 {
                     /* Check if an entry exists for this device */
                     if (inquiryCheckBdaddr(&res.bd_addr, &old_index))
@@ -1599,7 +1613,7 @@ void inquiryHandleTalkResult(CL_DM_INQUIRE_RESULT_T *result)
                         inquiryGetIndex(res.rssi, &new_index);
                     }
                 }
-                if(GINQDATA.inquiry.session == inquiry_session_nearby || GINQDATA.inquiry.session == inquiry_session_friend || GINQDATA.inquiry.session == inquiry_session_ag)
+                if(GINQDATA.inquiry.session == inquiry_session_multi_talk || GINQDATA.inquiry.session == inquiry_session_nearby || GINQDATA.inquiry.session == inquiry_session_friend || GINQDATA.inquiry.session == inquiry_session_ag)
                 {
                     GINQDATA.inquiry.results[0] = res;
                 }

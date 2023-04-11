@@ -576,5 +576,7 @@ RETURNS
 */
 AUDIO_MUTE_STATE_T volumeGetMuteState(AUDIO_MUTE_GROUP_T mute_group);
 
+void volumeSetMuteState(AUDIO_MUTE_GROUP_T mute_group, AUDIO_MUTE_STATE_T state);
+
 #endif
 

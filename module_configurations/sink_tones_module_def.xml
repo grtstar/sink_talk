@@ -211,22 +211,14 @@
                     ShortId="Tone"
                     DefaultValue="G Major Arp Up" />
             </PatternArrayRow>
-            <PatternArrayRow Id="Tone_Config_24" ShortId="tone_config_24" Node="Basic" >
-                <PatternArrayConfigItem
-                    ShortId="Event"
-                    DefaultValue="Reset Paired Device List"/>
-                <PatternArrayConfigItem
-                    ShortId="Tone"
-                    DefaultValue="Long Double Low" />
-            </PatternArrayRow>
-            <PatternArrayRow Id="Tone_Config_25" ShortId="tone_config_25" Node="Basic" >
-                <PatternArrayConfigItem
-                    ShortId="Event"
-                    DefaultValue="Pairing Fail"/>
-                <PatternArrayConfigItem
-                    ShortId="Tone"
-                    DefaultValue="Long Low" />
-            </PatternArrayRow>
+                <PatternArrayRow Id="Tone_Config_24" ShortId="tone_config_24" Node="Basic" >
+                    <PatternArrayConfigItem
+                        ShortId="Event"
+                        DefaultValue="Reset Paired Device List"/>
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Long Double Low" />
+                </PatternArrayRow>
             <PatternArrayRow Id="Tone_Config_26" ShortId="tone_config_26" Node="Basic" >
                 <PatternArrayConfigItem
                     ShortId="Event"
@@ -266,14 +258,6 @@
                 <PatternArrayConfigItem
                     ShortId="Tone"
                     DefaultValue="Short Double High" />
-            </PatternArrayRow>
-            <PatternArrayRow Id="Tone_Config_32" ShortId="tone_config_32" Node="Basic" >
-                <PatternArrayConfigItem
-                    ShortId="Event"
-                    DefaultValue="RSSI Pair Timeout"/>
-                <PatternArrayConfigItem
-                    ShortId="Tone"
-                    DefaultValue="Long Low" />
             </PatternArrayRow>
             <PatternArrayRow Id="Tone_Config_33" ShortId="tone_config_33" Node="Basic" >
                 <PatternArrayConfigItem
@@ -401,6 +385,28 @@
                         ShortId="tone" 
                         DefaultValue="3 Note Descending" />
                 </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Main Output Volume Up" />
+                    <PatternArrayConfigItem 
+                        ShortId="tone" 
+                        DefaultValue="Short 3" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Main Output Volume Down" />
+                    <PatternArrayConfigItem 
+                        ShortId="tone" 
+                        DefaultValue="Short 2" />
+                </PatternArrayRow>
             </BuildVariant>
             <BuildVariant
                 HwVariant="All"
@@ -421,6 +427,22 @@
                         ShortId="Tone"
                         DefaultValue="Long Low" />
                 </PatternArrayRow>
+                            <PatternArrayRow Id="Tone_Config_25" ShortId="tone_config_25" Node="Basic" >
+                                <PatternArrayConfigItem
+                                    ShortId="Event"
+                                    DefaultValue="Pairing Fail"/>
+                                <PatternArrayConfigItem
+                                    ShortId="Tone"
+                                    DefaultValue="Long Low" />
+                            </PatternArrayRow>
+                    <PatternArrayRow Id="Tone_Config_32" ShortId="tone_config_32" Node="Basic" >
+                        <PatternArrayConfigItem
+                            ShortId="Event"
+                            DefaultValue="RSSI Pair Timeout"/>
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Long Low" />
+                    </PatternArrayRow>
             </BuildVariant>
         </ConfigPatternArray>
     </ConfigGroup>

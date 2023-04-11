@@ -1,6 +1,8 @@
 #ifndef _HEADSET_MULTI_TALK_
 #define _HEADSET_MULTI_TALK_
 
+#include "sink_volume.h"
+
 enum
 {
     MT_LEFT,
@@ -135,6 +137,7 @@ typedef enum MTMode
     FREIEND_MODE,
     COUPLE_MODE,
     FREIEND_MODE_PAIRING,
+    COUPLE_MODE_PRE_PAIRING,
     COUPLE_MODE_PAIRING
 }MTMode;
 
@@ -169,10 +172,12 @@ typedef struct MTData
     bdaddr header_addr[2];
     uint8 sco_expend_dev;
     uint8 connect_token;
+    uint8 prepare_paring;
 } MTData;
 
 #define MULTITALK_FRIEND_PSM 0x0055
 #define MULTITALK_NEARBY_PSM 0x0057
+#define MULTITALK_COUPLE_PSM 0x0059
 
 
 #ifdef ENABLE_MT_DEBUG
@@ -264,6 +269,12 @@ void handleMTSynDisconIndCoupleMode(CL_DM_SYNC_DISCONNECT_IND_T *msg);
 bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message);
 void ACLProcessParentDataCouple(const uint8_t *data, int size);
 
-bool mtSendPeerAddr(bdaddr *addr);
+bool mtSendPeerAddr(int ch, bdaddr *addr);
 void mtPeerStateCoupleMode(uint8 state);
+void MTResetDeviceList(void);
+bool mtCheckPeerDevice(bdaddr *addr);
+void mtMicMute(uint8 mic_gain);
+
+void sinkGetMTVolume(volume_info * volume);
+void sinkSetMTVolume(volume_info * volume);
 #endif

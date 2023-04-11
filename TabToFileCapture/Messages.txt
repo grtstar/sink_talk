@@ -1,671 +1,1963 @@
-17:10:38.573 Send (due -1ms) task 0552 id 0001
-17:10:38.574 Send (due -1ms) task 06e5 id 7d00 message 0000 adea
-17:10:38.574 Send (due 30000ms) task 06e5 id 47b3
-17:10:38.574 Deliver (due -2ms) task 0552 id 0001
-17:10:38.574 Send (due 10000ms) task 0552 id 0000
-17:10:38.574 Free
-17:10:38.574 Deliver (due -1ms) task 06e5 id 7d00 message 0000 adea
-17:10:38.575 Free
-17:10:38.575 Send (due -1ms) task 0552 id 8004 message 0340 0010 0400 0000
-17:10:38.575 Deliver (due -1ms) task 0552 id 8004 message 0340 0010 0400 0000
-17:10:38.575 Send (due -1ms) task 0552 id 0002 message 0001 adea
-17:10:38.655 Free
-17:10:38.655 Deliver (due -81ms) task 0552 id 0002 message 0001 adea
-17:10:38.655 Free
-17:10:38.656 Send (due -1ms) task 0552 id 8006 message 0680 0010
-17:10:38.662 Deliver (due -7ms) task 0552 id 8006 message 0680 0010
-17:10:38.662 Send (due -1ms) task 0552 id 0002 message 0002 adea
-17:10:38.663 Free
-17:10:38.663 Deliver (due -2ms) task 0552 id 0002 message 0002 adea
-17:10:38.663 Send (due -1ms) task 0552 id 0002 message 0003 0010
-17:10:38.663 Free
-17:10:38.670 Deliver (due -8ms) task 0552 id 0002 message 0003 0010
-17:10:38.670 Send (due -1ms) task 0552 id 0002 message 0004 adea
-17:10:38.671 Free
-17:10:38.671 Deliver (due -2ms) task 0552 id 0002 message 0004 adea
-17:10:38.671 Send (due -1ms) task 0552 id 0002 message 0005 0010
-17:10:38.671 Free
-17:10:38.679 Deliver (due -9ms) task 0552 id 0002 message 0005 0010
-17:10:38.679 Send (due -1ms) task 0552 id 0002 message 0006 adea
-17:10:38.680 Free
-17:10:38.680 Deliver (due -2ms) task 0552 id 0002 message 0006 adea
-17:10:38.680 Send (due -1ms) task 0552 id 003f message 0552 0010
-17:10:38.680 Free
-17:10:38.687 Deliver (due -8ms) task 0552 id 003f message 0552 0010
-17:10:38.687 Free
-17:10:38.688 Send (due -1ms) task 0552 id 8004 message 1201 0010 0000 0009 36aa 0009 000a 36aa
-17:10:38.688 Deliver (due -1ms) task 0552 id 8004 message 1201 0010 0000 0009 36aa 0009 000a 36aa
-17:10:38.688 Send (due -1ms) task 0552 id 003c message 0552 0007
-17:10:38.694 Free
-17:10:38.694 Deliver (due -7ms) task 0552 id 003c message 0552 0007
-17:10:38.694 Free
-17:10:38.698 Send (due -1ms) task 0552 id 8004 message 0341 0010 0007 0000
-17:10:38.703 Deliver (due -6ms) task 0552 id 8004 message 0341 0010 0007 0000
-17:10:38.703 Send (due -1ms) task 0552 id 0002 message 0007 ae82
-17:10:38.704 Free
-17:10:38.704 Deliver (due -2ms) task 0552 id 0002 message 0007 ae82
-17:10:38.711 Send (due -1ms) task 0552 id 0012 message 1659 01c7 0004 0000 0002 0002
-17:10:38.711 Free
-17:10:38.711 Deliver (due -1ms) task 0552 id 0012 message 1659 01c7 0004 0000 0002 0002
-17:10:38.712 Send (due -1ms) task 0552 id 8004 message 03c0 0010 0004 0937 0000 000f 0000 0000 7df7 af3b a01e 048b 0e15 6d3f d74b 60ee 473f 1b58 6861 3849 7223 f60a 9b6f 288b 0001 0000 0000 0000
-17:10:38.734 Free
-17:10:38.734 Deliver (due -23ms) task 0552 id 8004 message 03c0 0010 0004 0937 0000 000f 0000 0000 7df7 af3b a01e 048b 0e15 6d3f d74b 60ee 473f 1b58 6861 3849 7223 f60a 9b6f 288b 0001 0000 0000 0000
-17:10:38.742 Send (due -1ms) task 0552 id 0002 message 0008 ae7e
-17:10:38.742 Free
-17:10:38.742 Deliver (due -1ms) task 0552 id 0002 message 0008 ae7e
-17:10:38.749 Free
-17:10:38.749 Send (due -1ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a9 005b 0002 0000
-17:10:38.755 Deliver (due -7ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a9 005b 0002 0000
-17:10:38.755 Send (due -1ms) task 0552 id 0002 message 0009 ae7e
-17:10:38.756 Free
-17:10:38.762 Deliver (due -8ms) task 0552 id 0002 message 0009 ae7e
-17:10:38.763 Send (due -1ms) task 06e5 id 5000 message 0000 0007
-17:10:38.763 Cancel (due 9811ms) task 0552 id 0000
-17:10:38.763 Free
-17:10:38.763 Deliver (due -1ms) task 06e5 id 5000 message 0000 0007
-17:10:38.763 Send (due -1ms) task 0552 id 8004 message 0a0f 0010 0000 0000
-17:10:38.770 Send (due -1ms) task 0552 id 0077 message b5a3 adf2
-17:10:38.770 Send (due -1ms) task 1000 id 0001
-17:10:38.770 Send (due -1ms) task 0552 id 004b message 1101 0055 0000 0000
-17:10:38.777 Send (due -1ms) task 0552 id 004b message 1101 0057 0000 0000
-17:10:38.777 Send (due -1ms) task 1300 id 0000
-17:10:38.778 Free
-17:10:38.778 Deliver (due -16ms) task 0552 id 8004 message 0a0f 0010 0000 0000
-17:10:38.778 Free
-17:10:38.781 Send (due -1ms) task 0504 id 8022 message ba5d 0007
-17:10:38.790 Send (due -1ms) task 0504 id 8021 message 2ea2 adf2
-17:10:38.798 Deliver (due -29ms) task 0552 id 0077 message b5a3 adf2
-17:10:38.798 Free
-17:10:38.798 Deliver (due -29ms) task 1000 id 0001
-17:10:38.799 Send (due -1ms) task 0552 id 8004 message 2207 0010 0000 0008
-17:10:38.800 Send (due -1ms) task 0504 id 8021 message 2ea2 0001
-17:10:38.805 Send (due -1ms) task 06e5 id 7480 message 0001 adf2
-17:10:38.805 Free
-17:10:38.805 Deliver (due -36ms) task 0552 id 004b message 1101 0055 0000 0000
-17:10:38.810 Send (due -1ms) task 0504 id 8021 message 2ea2 acb4
-17:10:38.812 Free
-17:10:38.812 Deliver (due -36ms) task 0552 id 004b message 1101 0057 0000 0000
-17:10:38.813 Send (due -1ms) task 0552 id 8005 message 0540 0010 0055 1101 0019 0000 0000 0000
-17:10:38.813 Send (due -1ms) task 0552 id 8005 message 0540 0010 0057 1101 0019 0000 0000 0000
-17:10:38.826 Free
-17:10:38.826 Deliver (due -50ms) task 1300 id 0000
-17:10:38.826 Send (due -1ms) task 0552 id 0054 message 1300 0000
-17:10:38.826 Free
-17:10:38.826 Deliver (due -46ms) task 0504 id 8022 message ba5d 0007
-17:10:38.826 Free
-17:10:38.832 Deliver (due -43ms) task 0504 id 8021 message 2ea2 adf2
-17:10:38.833 Free
-17:10:38.833 Deliver (due -35ms) task 0552 id 8004 message 2207 0010 0000 0008
-17:10:38.833 Send (due -1ms) task b5a3 id 5071 message 0008 0000
-17:10:38.833 Free
-17:10:38.833 Deliver (due -34ms) task 0504 id 8021 message 2ea2 0001
-17:10:38.839 Free
-17:10:38.839 Deliver (due -35ms) task 06e5 id 7480 message 0001 adf2
-17:10:38.840 Send (due -1ms) task 0552 id 0054 message 1000 0001
-17:10:38.840 Free
-17:10:38.840 Deliver (due -31ms) task 0504 id 8021 message 2ea2 acb4
-17:10:38.840 Free
-17:10:38.840 Deliver (due -28ms) task 0552 id 8005 message 0540 0010 0055 1101 0019 0000 0000 0000
-17:10:38.847 Send (due -1ms) task 1101 id 503a message 0000 0055
-17:10:38.847 Free
-17:10:38.847 Deliver (due -35ms) task 0552 id 8005 message 0540 0010 0057 1101 0019 0000 0000 0000
-17:10:38.847 Send (due -1ms) task 1101 id 503a message 0000 0057
-17:10:38.862 Free
-17:10:38.862 Deliver (due -37ms) task 0552 id 0054 message 1300 0000
-17:10:38.863 Free
-17:10:38.863 Deliver (due -31ms) task b5a3 id 5071 message 0008 0000
-17:10:38.863 Send (due -1ms) task 06e5 id 7f70
-17:10:38.863 Free
-17:10:38.863 Send (due -1ms) task 0552 id 8006 message 0681 0010 0001 0001 1300 0000
-17:10:38.869 Deliver (due -30ms) task 0552 id 0054 message 1000 0001
-17:10:38.869 Free
-17:10:38.869 Deliver (due -23ms) task 1101 id 503a message 0000 0055
-17:10:38.870 Send (due -1ms) task 0552 id 8006 message 0681 0010 0002 0001 1000 0000
-17:10:38.876 Send (due -1ms) task 0552 id 005e message 1101 0001
-17:10:38.876 Free
-17:10:38.876 Deliver (due -30ms) task 1101 id 503a message 0000 0057
-17:10:38.883 Free
-17:10:38.883 Deliver (due -21ms) task 06e5 id 7f70
-17:10:38.885 Send (due -1ms) task 0552 id 0054 message 1500 000a
-17:10:38.885 Send (due -1ms) task 0552 id 005e message 1500 0055
-17:10:38.885 Free
-17:10:38.890 Deliver (due -28ms) task 0552 id 8006 message 0681 0010 0001 0001 1300 0000
-17:10:38.890 Send (due -1ms) task 1300 id 5044 message 0000 0001
-17:10:38.891 Free
-17:10:38.891 Deliver (due -22ms) task 0552 id 8006 message 0681 0010 0002 0001 1000 0000
-17:10:38.891 Send (due -1ms) task 1000 id 5044 message 0000 0002
-17:10:38.897 Free
-17:10:38.897 Deliver (due -22ms) task 0552 id 005e message 1101 0001
-17:10:38.898 Send (due 1000ms) task 0552 id 0064 message 1101 0007
-17:10:38.898 Free
-17:10:38.898 Deliver (due -14ms) task 0552 id 0054 message 1500 000a
-17:10:38.898 Send (due -1ms) task 0552 id 8004 message 02c0 0010 1101 0000
-17:10:38.905 Free
-17:10:38.905 Deliver (due -21ms) task 0552 id 005e message 1500 0055
-17:10:38.906 Send (due -1ms) task 0552 id 8004 message 02c0 0010 1500 0000
-17:10:38.906 Send (due -1ms) task 0552 id 8006 message 0681 0010 000a 0001 1500 0000
-17:10:38.912 Send (due 1000ms) task 0552 id 0064 message 1500 000a
-17:10:38.912 Free
-17:10:38.927 Deliver (due -38ms) task 1300 id 5044 message 0000 0001
-17:10:38.928 Send (due -1ms) task 1300 id 0001 message 0000 0001
-17:10:38.928 Free
-17:10:38.928 Deliver (due -38ms) task 1000 id 5044 message 0000 0002
-17:10:38.929 Send (due -1ms) task 0552 id 0041 message 1000 003b 1900 0000
-17:10:38.935 Free
-17:10:38.935 Deliver (due -38ms) task 0552 id 8004 message 02c0 0010 1101 0000
-17:10:38.936 Cancel (due 962ms) task 0552 id 0064 message 1101 0007
-17:10:38.936 Send (due -1ms) task 1101 id 500b message 0000 0007
-17:10:38.936 Free
-17:10:38.942 Deliver (due -37ms) task 0552 id 8004 message 02c0 0010 1500 0000
-17:10:38.942 Cancel (due 970ms) task 0552 id 0064 message 1500 000a
-17:10:38.942 Send (due -1ms) task 1500 id 500b message 0000 000a
-17:10:38.942 Free
-17:10:38.942 Deliver (due -37ms) task 0552 id 8006 message 0681 0010 000a 0001 1500 0000
-17:10:38.942 Send (due -1ms) task 1500 id 5044 message 0000 000a
-17:10:38.948 Free
-17:10:38.948 Deliver (due -21ms) task 1300 id 0001 message 0000 0001
-17:10:38.949 Send (due -1ms) task 0552 id 0041 message 1300 0046 1a00 0000
-17:10:38.949 Free
-17:10:38.949 Deliver (due -21ms) task 0552 id 0041 message 1000 003b 1900 0000
-17:10:38.956 Free
-17:10:38.956 Deliver (due -21ms) task 1101 id 500b message 0000 0007
-17:10:38.956 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0000 0000
-17:10:38.962 Free
-17:10:38.962 Deliver (due -21ms) task 1500 id 500b message 0000 000a
-17:10:38.962 Free
-17:10:38.969 Deliver (due -28ms) task 1500 id 5044 message 0000 000a
-17:10:38.969 Send (due -1ms) task 0552 id 0041 message 1500 0051 a2d6 0000
-17:10:38.969 Send (due -1ms) task 0552 id 0054 message 1500 000c
-17:10:38.969 Free
-17:10:38.969 Deliver (due -21ms) task 0552 id 0041 message 1300 0046 1a00 0000
-17:10:38.969 Send (due -1ms) task 0552 id 0041 message 1300 0046 1a00 0000
-17:10:38.976 Free
-17:10:38.976 Deliver (due -21ms) task 0552 id 8007 message 0840 0010 0000 0001 0000 0000
-17:10:38.977 Send (due -1ms) task 1000 id 5030 message 0000 0001 0000 0000
-17:10:38.977 Free
-17:10:38.977 Deliver (due -9ms) task 0552 id 0041 message 1500 0051 a2d6 0000
-17:10:38.997 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0001 0000
-17:10:39.003 Free
-17:10:39.003 Deliver (due -35ms) task 0552 id 0054 message 1500 000c
-17:10:39.003 Free
-17:10:39.004 Send (due -2ms) task 0552 id 8006 message 0681 0010 000c 0001 1500 0000
-17:10:39.012 Deliver (due -36ms) task 1000 id 5030 message 0000 0001 0000 0000
-17:10:39.012 Send (due -1ms) task 06e5 id 7485 message 0001 0000 0001 0000
-17:10:39.019 Free
-17:10:39.019 Deliver (due -23ms) task 0552 id 8007 message 0840 0010 0000 0001 0001 0000
-17:10:39.019 Send (due -1ms) task 1500 id 5030 message 0000 0001 0001 0000
-17:10:39.019 Free
-17:10:39.019 Deliver (due -51ms) task 0552 id 0041 message 1300 0046 1a00 0000
-17:10:39.026 Free
-17:10:39.026 Deliver (due -24ms) task 0552 id 8006 message 0681 0010 000c 0001 1500 0000
-17:10:39.027 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0002 0000
-17:10:39.033 Send (due -1ms) task 1500 id 5044 message 0000 000c
-17:10:39.033 Free
-17:10:39.033 Deliver (due -22ms) task 06e5 id 7485 message 0001 0000 0001 0000
-17:10:39.040 Free
-17:10:39.040 Deliver (due -22ms) task 1500 id 5030 message 0000 0001 0001 0000
-17:10:39.040 Free
-17:10:39.040 Deliver (due -14ms) task 0552 id 8007 message 0840 0010 0000 0001 0002 0000
-17:10:39.040 Send (due -1ms) task 1300 id 5030 message 0000 0001 0002 0000
-17:10:39.047 Free
-17:10:39.047 Deliver (due -15ms) task 1500 id 5044 message 0000 000c
-17:10:39.047 Send (due -1ms) task 0552 id 0054 message 1500 000b
-17:10:39.047 Free
-17:10:39.047 Deliver (due -8ms) task 1300 id 5030 message 0000 0001 0002 0000
-17:10:39.061 Send (due -1ms) task 1300 id 0002 message 0000 000c
-17:10:39.061 Free
-17:10:39.061 Deliver (due -15ms) task 0552 id 0054 message 1500 000b
-17:10:39.061 Free
-17:10:39.061 Deliver (due -1ms) task 1300 id 0002 message 0000 000c
-17:10:39.062 Send (due -1ms) task 0552 id 8006 message 0681 0010 000b 0001 1500 0000
-17:10:39.068 Send (due -1ms) task 1300 id 0001 message 0000 0000
-17:10:39.068 Free
-17:10:39.068 Deliver (due -7ms) task 0552 id 8006 message 0681 0010 000b 0001 1500 0000
-17:10:39.075 Send (due -1ms) task 1500 id 5044 message 0000 000b
-17:10:39.075 Free
-17:10:39.075 Deliver (due -8ms) task 1300 id 0001 message 0000 0000
-17:10:39.075 Send (due -1ms) task 0552 id 005e message 1300 0007
-17:10:39.075 Free
-17:10:39.082 Deliver (due -8ms) task 1500 id 5044 message 0000 000b
-17:10:39.082 Send (due -1ms) task 0552 id 0041 message 1500 004b a240 0000
-17:10:39.082 Send (due -1ms) task 0552 id 0054 message 1500 000d
-17:10:39.082 Free
-17:10:39.082 Deliver (due -8ms) task 0552 id 005e message 1300 0007
-17:10:39.083 Send (due -1ms) task 0552 id 8004 message 02c0 0010 1300 0000
-17:10:39.089 Send (due 1000ms) task 0552 id 0064 message 1300 000b
-17:10:39.089 Free
-17:10:39.090 Deliver (due -9ms) task 0552 id 0041 message 1500 004b a240 0000
-17:10:39.091 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0003 0000
-17:10:39.103 Free
-17:10:39.103 Deliver (due -22ms) task 0552 id 0054 message 1500 000d
-17:10:39.104 Free
-17:10:39.104 Deliver (due -22ms) task 0552 id 8004 message 02c0 0010 1300 0000
-17:10:39.104 Send (due -1ms) task 0552 id 8006 message 0681 0010 000d 0001 1500 0000
-17:10:39.110 Cancel (due 979ms) task 0552 id 0064 message 1300 000b
-17:10:39.110 Send (due -1ms) task 1300 id 500b message 0000 000b
-17:10:39.111 Free
-17:10:39.111 Deliver (due -21ms) task 0552 id 8007 message 0840 0010 0000 0001 0003 0000
-17:10:39.124 Send (due -1ms) task 1500 id 5030 message 0000 0001 0003 0000
-17:10:39.124 Free
-17:10:39.125 Deliver (due -22ms) task 0552 id 8006 message 0681 0010 000d 0001 1500 0000
-17:10:39.125 Send (due -1ms) task 1500 id 5044 message 0000 000d
-17:10:39.125 Free
-17:10:39.131 Deliver (due -22ms) task 1300 id 500b message 0000 000b
-17:10:39.132 Send (due -1ms) task 1200 id 5b00 message 1300 0000
-17:10:39.132 Free
-17:10:39.132 Deliver (due -9ms) task 1500 id 5030 message 0000 0001 0003 0000
-17:10:39.132 Free
-17:10:39.138 Deliver (due -14ms) task 1500 id 5044 message 0000 000d
-17:10:39.139 Send (due -1ms) task 06e5 id 5a00 message 0000 000b
-17:10:39.139 Free
-17:10:39.139 Deliver (due -8ms) task 1200 id 5b00 message 1300 0000
-17:10:39.139 Send (due -1ms) task 0552 id 0030 message 0003 000d
-17:10:39.145 Free
-17:10:39.145 Deliver (due -7ms) task 06e5 id 5a00 message 0000 000b
-17:10:39.153 Send (due -1ms) task 06e5 id 4095
-17:10:39.157 Send (due -1ms) task 0552 id 0041 message 1b00 0030 a913 0002
-17:10:39.162 Send (due 0ms) task 1e00 id 0000
-17:10:39.162 Send (due 0ms) task 1e00 id 0006
-17:10:39.162 Send (due 0ms) task 1e00 id 0002
-17:10:39.162 Send (due 0ms) task 1e00 id 0001
-17:10:39.165 Send (due 0ms) task 1e00 id 0008
-17:10:39.165 Send (due 1000ms) task 1e00 id 0004
-17:10:39.171 Send (due 30000ms) task 06e5 id 4718
-17:10:39.171 Send (due 3000ms) task 06e5 id 4785
-17:10:39.171 Send (due -1ms) task 1500 id 0005 message 0000 0000
-17:10:39.173 Send (due -1ms) task 1500 id 0005 message 0000 0001
-17:10:39.174 Cancel (due -36ms) task 0552 id 0030 message 0003 000d
-17:10:39.174 Send (due -1ms) task 0552 id 0030 message 0000 000d
-17:10:39.174 Cancel (due -1ms) task 0552 id 0030 message 0000 000d
-17:10:39.174 Send (due -1ms) task 0552 id 0030 message 0000 000d
-17:10:39.181 Send (due -1ms) task 0552 id 002b message 0024 0418
-17:10:39.181 Send (due -1ms) task 0552 id 0018 message 0000 0001 0000 0001 0000 0000
-17:10:39.181 Send (due -1ms) task 0552 id 0019 message 06e5 0001 0000 0001
-17:10:39.182 Send (due -1ms) task 0552 id 0041 message 06e5 002b 2100 0000
-17:10:39.199 Send (due -1ms) task 9a35 id 0002 message 06e5 0003 0001 0002 0063 0000
-17:10:39.199 Send (due -1ms) task 2200 id 0000
-17:10:39.207 Send (due -1ms) task 06e5 id 7485 message 0003 0000 0001 0000
-17:10:39.207 Send (due -1ms) task 0552 id 0041 message 2300 0028 2700 0000
-17:10:39.214 Send (due -1ms) task 0552 id 0041 message 2300 0028 2800 0000
-17:10:39.215 Send (due 1000ms) task 06e5 id 4001
-17:10:39.215 Free
-17:10:39.215 Deliver (due -63ms) task 06e5 id 4095
-17:10:39.215 Send (due -1ms) task 2900 id 8012 message 0980 0010 0000 0000
-17:10:39.221 Cancel (due 944ms) task 1e00 id 0004
-17:10:39.221 Send (due 1000ms) task 1e00 id 0004
-17:10:39.221 Cancel (due 29950ms) task 06e5 id 4718
-17:10:39.221 Send (due 30000ms) task 06e5 id 4718
-17:10:39.222 Free
-17:10:39.222 Deliver (due -66ms) task 0552 id 0041 message 1b00 0030 a913 0002
-17:10:39.229 Free
-17:10:39.229 Deliver (due -67ms) task 1e00 id 0000
-17:10:39.229 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0004 0000
-17:10:39.236 Send (due 20000ms) task 1e00 id 0000
-17:10:39.236 Free
-17:10:39.236 Deliver (due -74ms) task 1e00 id 0006
-17:10:39.236 Send (due 0ms) task 1e00 id 0003
-17:10:39.236 Send (due -1ms) task 1e00 id 8025 message 0004 020b
-17:10:39.242 Free
-17:10:39.242 Deliver (due -80ms) task 1e00 id 0002
-17:10:39.243 Send (due 0ms) task 1e00 id 0002
-17:10:39.243 Free
-17:10:39.243 Deliver (due -81ms) task 1e00 id 0001
-17:10:39.243 Send (due 0ms) task 1e00 id 0001
-17:10:39.243 Free
-17:10:39.243 Deliver (due -78ms) task 1e00 id 0008
-17:10:39.249 Free
-17:10:39.249 Deliver (due -79ms) task 1500 id 0005 message 0000 0000
-17:10:39.250 Send (due -1ms) task 06e5 id 5a04 message 0000 0000 0000 0000 0000 0002
-17:10:39.250 Free
-17:10:39.250 Deliver (due -78ms) task 1500 id 0005 message 0000 0001
-17:10:39.264 Send (due -1ms) task 06e5 id 5a04 message 0000 0000 0000 0000 0000 0002
-17:10:39.264 Free
-17:10:39.264 Deliver (due -91ms) task 0552 id 0030 message 0000 000d
-17:10:39.264 Free
-17:10:39.265 Send (due -1ms) task 0552 id 8004 message 0e1a 0010 0000 0000
-17:10:39.271 Deliver (due -91ms) task 0552 id 002b message 0024 0418
-17:10:39.271 Free
-17:10:39.271 Deliver (due -91ms) task 0552 id 0018 message 0000 0001 0000 0001 0000 0000
-17:10:39.272 Send (due -1ms) task 0552 id 8004 message 0e24 0010 0000 0418
-17:10:39.278 Free
-17:10:39.278 Deliver (due -98ms) task 0552 id 0019 message 06e5 0001 0000 0001
-17:10:39.285 Free
-17:10:39.285 Deliver (due -104ms) task 0552 id 0041 message 06e5 002b 2100 0000
-17:10:39.292 Send (due -1ms) task 0552 id 0041 message 06e5 002b 2100 0001
-17:10:39.292 Free
-17:10:39.292 Deliver (due -94ms) task 9a35 id 0002 message 06e5 0003 0001 0002 0063 0000
-17:10:39.292 Send (due -1ms) task 0552 id 004b message 9a35 0017 0000 0000
-17:10:39.292 Free
-17:10:39.292 Deliver (due -94ms) task 2200 id 0000
-17:10:39.299 Send (due -1ms) task 0552 id 0041 message 2200 0025 b2a1 0001
-17:10:39.299 Free
-17:10:39.300 Deliver (due -94ms) task 06e5 id 7485 message 0003 0000 0001 0000
-17:10:39.300 Free
-17:10:39.300 Deliver (due -94ms) task 0552 id 0041 message 2300 0028 2700 0000
-17:10:39.300 Send (due -1ms) task 0552 id 0041 message 2300 0028 2700 0000
-17:10:39.306 Free
-17:10:39.306 Deliver (due -93ms) task 0552 id 0041 message 2300 0028 2800 0000
-17:10:39.307 Send (due -1ms) task 0552 id 0041 message 2300 0028 2800 0000
-17:10:39.307 Free
-17:10:39.307 Deliver (due -93ms) task 2900 id 8012 message 0980 0010 0000 0000
-17:10:39.307 Send (due -1ms) task 0552 id 8004 message 03d5 0010 0078 0002 0001 0001 0000 0000
-17:10:39.335 Free
-17:10:39.335 Deliver (due -107ms) task 0552 id 8007 message 0840 0010 0000 0001 0004 0000
-17:10:39.335 Send (due -1ms) task 0552 id 8004 message 03c0 0010 0004 0937 0008 0001 0000 0000 7df7 af3b a01e 048b 0e15 6d3f d74b 60ee 473f 1b58 6861 3849 7223 f60a 9b6f 288b 0001 0000 0000 0000
-17:10:39.348 Send (due -1ms) task 1b00 id 5030 message 0000 0001 0004 0000
-17:10:39.348 Free
-17:10:39.349 Deliver (due -114ms) task 1e00 id 8025 message 0004 020b
-17:10:39.349 Free
-17:10:39.349 Deliver (due -113ms) task 1e00 id 0003
-17:10:39.356 Send (due 20000ms) task 1e00 id 0006
-17:10:39.356 Free
-17:10:39.356 Deliver (due -113ms) task 1e00 id 0002
-17:10:39.356 Send (due 0ms) task 1e00 id 0002
-17:10:39.356 Free
-17:10:39.356 Deliver (due -113ms) task 1e00 id 0001
-17:10:39.356 Send (due 0ms) task 1e00 id 0001
-17:10:39.356 Free
-17:10:39.356 Send (due -1ms) task 1e00 id 8025 message 0001 005e
-17:10:39.362 Deliver (due -113ms) task 06e5 id 5a04 message 0000 0000 0000 0000 0000 0002
-17:10:39.362 Send (due -1ms) task 06e5 id 47bd
-17:10:39.363 Free
-17:10:39.363 Deliver (due -100ms) task 06e5 id 5a04 message 0000 0000 0000 0000 0000 0002
-17:10:39.363 Send (due -1ms) task 06e5 id 47bd
-17:10:39.369 Free
-17:10:39.369 Deliver (due -105ms) task 0552 id 8004 message 0e1a 0010 0000 0000
-17:10:39.370 Free
-17:10:39.370 Deliver (due -99ms) task 0552 id 8004 message 0e24 0010 0000 0418
-17:10:39.370 Free
-17:10:39.370 Deliver (due -79ms) task 0552 id 0041 message 06e5 002b 2100 0001
-17:10:39.370 Send (due -1ms) task 2900 id 8012 message 0982 0010 0000 0000
-17:10:39.377 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0005 0000
-17:10:39.395 Free
-17:10:39.395 Deliver (due -104ms) task 0552 id 004b message 9a35 0017 0000 0000
-17:10:39.402 Free
-17:10:39.402 Deliver (due -104ms) task 0552 id 0041 message 2200 0025 b2a1 0001
-17:10:39.402 Send (due -1ms) task 0552 id 0041 message 2200 0025 b2a1 0000
-17:10:39.402 Free
-17:10:39.402 Deliver (due -96ms) task 0552 id 8004 message 03d5 0010 0078 0002 0001 0001 0000 0000
-17:10:39.403 Send (due -1ms) task 0552 id 8005 message 0540 0010 0017 9a35 0019 0000 0000 0000
-17:10:39.409 Free
-17:10:39.409 Deliver (due -75ms) task 0552 id 8004 message 03c0 0010 0004 0937 0008 0001 0000 0000 7df7 af3b a01e 048b 0e15 6d3f d74b 60ee 473f 1b58 6861 3849 7223 f60a 9b6f 288b 0001 0000 0000 0000
-17:10:39.416 Send (due -1ms) task 06e5 id 5024 message 0001 0001 0000 0000
-17:10:39.416 Free
-17:10:39.416 Deliver (due -69ms) task 1b00 id 5030 message 0000 0001 0004 0000
-17:10:39.416 Send (due -1ms) task 0552 id 004b message 1b00 0019 0000 0001
-17:10:39.423 Free
-17:10:39.423 Deliver (due -68ms) task 1e00 id 8025 message 0001 005e
-17:10:39.424 Free
-17:10:39.424 Deliver (due -68ms) task 1e00 id 0002
-17:10:39.424 Send (due -1ms) task 1e00 id 8025 message 0006 0f0f
-17:10:39.424 Send (due 20000ms) task 1e00 id 0002
-17:10:39.430 Free
-17:10:39.430 Deliver (due -74ms) task 1e00 id 0001
-17:10:39.431 Send (due -1ms) task 1e00 id 8025 message 0005 0a00
-17:10:39.431 Send (due 20000ms) task 1e00 id 0001
-17:10:39.431 Free
-17:10:39.431 Deliver (due -70ms) task 06e5 id 47bd
-17:10:39.431 Free
-17:10:39.432 Deliver (due -70ms) task 06e5 id 47bd
-17:10:39.438 Free
-17:10:39.438 Deliver (due -69ms) task 2900 id 8012 message 0982 0010 0000 0000
-17:10:39.438 Send (due -1ms) task 2400 id 5800 message 0000 adee
-17:10:39.438 Free
-17:10:39.438 Deliver (due -62ms) task 0552 id 8007 message 0840 0010 0000 0001 0005 0000
-17:10:39.438 Send (due -1ms) task 06e5 id 5030 message 0000 0001 0005 0000
-17:10:39.444 Free
-17:10:39.444 Deliver (due -145ms) task 0552 id 0041 message 2300 0028 2700 0000
-17:10:39.445 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0006 0000
-17:10:39.460 Free
-17:10:39.460 Deliver (due -58ms) task 0552 id 8005 message 0540 0010 0017 9a35 0019 0000 0000 0000
-17:10:39.460 Send (due -1ms) task 9a35 id 503a message 0000 0017
-17:10:39.467 Free
-17:10:39.467 Deliver (due -52ms) task 06e5 id 5024 message 0001 0001 0000 0000
-17:10:39.467 Free
-17:10:39.467 Deliver (due -52ms) task 0552 id 004b message 1b00 0019 0000 0001
-17:10:39.468 Send (due -1ms) task 0552 id 8005 message 0540 0010 0019 1b00 0019 0000 0000 0000
-17:10:39.474 Free
-17:10:39.474 Deliver (due -51ms) task 1e00 id 8025 message 0006 0f0f
-17:10:39.474 Free
-17:10:39.481 Deliver (due -51ms) task 1e00 id 8025 message 0005 0a00
-17:10:39.481 Cancel (due 19755ms) task 1e00 id 0000
-17:10:39.481 Cancel (due 19875ms) task 1e00 id 0006
-17:10:39.481 Cancel (due 19943ms) task 1e00 id 0002
-17:10:39.481 Cancel (due 19950ms) task 1e00 id 0001
-17:10:39.481 Send (due 0ms) task 1e00 id 0000
-17:10:39.482 Send (due 0ms) task 1e00 id 0006
-17:10:39.488 Send (due 0ms) task 1e00 id 0002
-17:10:39.488 Send (due 0ms) task 1e00 id 0001
-17:10:39.488 Send (due 0ms) task 1e00 id 0008
-17:10:39.488 Send (due -1ms) task 06e5 id 7800 message 0001 007d 0000 0d2f 0004 13da 0001 0001
-17:10:39.488 Free
-17:10:39.488 Deliver (due -51ms) task 2400 id 5800 message 0000 adee
-17:10:39.495 Send (due -1ms) task 2300 id 6400 message 0000 0a00
-17:10:39.495 Free
-17:10:39.495 Deliver (due -58ms) task 06e5 id 5030 message 0000 0001 0005 0000
-17:10:39.495 Free
-17:10:39.495 Deliver (due -51ms) task 0552 id 8007 message 0840 0010 0000 0001 0006 0000
-17:10:39.502 Send (due -1ms) task 2300 id 5030 message 0000 0001 0006 0000
-17:10:39.502 Free
-17:10:39.502 Deliver (due -196ms) task 0552 id 0041 message 2300 0028 2800 0000
-17:10:39.503 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0007 0000
-17:10:39.508 Free
-17:10:39.508 Deliver (due -49ms) task 9a35 id 503a message 0000 0017
-17:10:39.523 Send (due -1ms) task 0552 id 0041 message 9a35 0033 9c19 0000
-17:10:39.523 Free
-17:10:39.523 Deliver (due -56ms) task 0552 id 8005 message 0540 0010 0019 1b00 0019 0000 0000 0000
-17:10:39.523 Send (due -1ms) task 1b00 id 503a message 0000 0019
-17:10:39.523 Free
-17:10:39.523 Deliver (due -42ms) task 1e00 id 0000
-17:10:39.530 Send (due 20000ms) task 1e00 id 0000
-17:10:39.530 Free
-17:10:39.530 Deliver (due -48ms) task 1e00 id 0006
-17:10:39.530 Send (due 0ms) task 1e00 id 0003
-17:10:39.531 Free
-17:10:39.531 Deliver (due -44ms) task 06e5 id 7800 message 0001 007d 0000 0d2f 0004 13da 0001 0001
-17:10:39.531 Send (due -1ms) task 06e5 id 470a
-17:10:39.531 Send (due -1ms) task 1e00 id 8025 message 0004 0209
-17:10:39.537 Send (due -1ms) task 06e5 id 4713
-17:10:39.538 Send (due -1ms) task 1500 id 0024 message 0000 0007
-17:10:39.538 Send (due -1ms) task 1500 id 0024 message 0000 0007
-17:10:39.545 Send (due -1ms) task 06e5 id 470c
-17:10:39.545 Free
-17:10:39.545 Deliver (due -57ms) task 1e00 id 0002
-17:10:39.546 Send (due -1ms) task 1e00 id 8025 message 0006 0f28
-17:10:39.546 Send (due 20000ms) task 1e00 id 0002
-17:10:39.546 Free
-17:10:39.546 Deliver (due -58ms) task 1e00 id 0001
-17:10:39.546 Send (due -1ms) task 1e00 id 8025 message 0005 0a00
-17:10:39.552 Send (due 20000ms) task 1e00 id 0001
-17:10:39.552 Free
-17:10:39.553 Deliver (due -65ms) task 1e00 id 0008
-17:10:39.553 Free
-17:10:39.553 Deliver (due -59ms) task 2300 id 6400 message 0000 0a00
-17:10:39.553 Send (due -1ms) task 2300 id 0000
-17:10:39.553 Free
-17:10:39.559 Deliver (due -58ms) task 2300 id 5030 message 0000 0001 0006 0000
-17:10:39.559 Free
-17:10:39.559 Deliver (due -57ms) task 0552 id 8007 message 0840 0010 0000 0001 0007 0000
-17:10:39.559 Send (due -1ms) task 2300 id 5030 message 0000 0001 0007 0000
-17:10:39.559 Free
-17:10:39.559 Deliver (due -158ms) task 0552 id 0041 message 2200 0025 b2a1 0000
-17:10:39.566 Free
-17:10:39.566 Deliver (due -44ms) task 0552 id 0041 message 9a35 0033 9c19 0000
-17:10:39.566 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0008 0000
-17:10:39.572 Send (due -1ms) task 0552 id 0041 message 9a35 0033 9c19 0000
-17:10:39.572 Free
-17:10:39.572 Deliver (due -50ms) task 1b00 id 503a message 0000 0019
-17:10:39.590 Send (due -1ms) task 06e5 id 5d00 message 0000 0a00
-17:10:39.590 Free
-17:10:39.590 Deliver (due -60ms) task 1e00 id 0003
-17:10:39.591 Send (due 20000ms) task 1e00 id 0006
-17:10:39.591 Free
-17:10:39.591 Deliver (due -61ms) task 06e5 id 470a
-17:10:39.591 Free
-17:10:39.591 Send (due -1ms) task 1e00 id 8025 message 0001 0064
-17:10:39.596 Deliver (due -66ms) task 1e00 id 8025 message 0004 0209
-17:10:39.596 Free
-17:10:39.597 Deliver (due -61ms) task 06e5 id 4713
-17:10:39.597 Free
-17:10:39.597 Deliver (due -60ms) task 1500 id 0024 message 0000 0007
-17:10:39.598 Free
-17:10:39.603 Send (due -1ms) task 0504 id 8022 message ba5d 0007
-17:10:39.603 Deliver (due -66ms) task 1500 id 0024 message 0000 0007
-17:10:39.603 Free
-17:10:39.604 Deliver (due -60ms) task 06e5 id 470c
-17:10:39.604 Free
-17:10:39.604 Deliver (due -59ms) task 1e00 id 8025 message 0006 0f28
-17:10:39.604 Free
-17:10:39.610 Deliver (due -65ms) task 1e00 id 8025 message 0005 0a00
-17:10:39.610 Free
-17:10:39.611 Deliver (due -59ms) task 2300 id 0000
-17:10:39.611 Free
-17:10:39.611 Deliver (due -53ms) task 2300 id 5030 message 0000 0001 0007 0000
-17:10:39.611 Free
-17:10:39.617 Deliver (due -52ms) task 0552 id 8007 message 0840 0010 0000 0001 0008 0000
-17:10:39.617 Send (due -1ms) task 2200 id 5030 message 0000 0001 0008 0000
-17:10:39.617 Free
-17:10:39.617 Deliver (due -46ms) task 0552 id 0041 message 9a35 0033 9c19 0000
-17:10:39.618 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0009 0000
-17:10:39.624 Free
-17:10:39.631 Deliver (due -42ms) task 06e5 id 5d00 message 0000 0a00
-17:10:39.631 Free
-17:10:39.631 Deliver (due -41ms) task 1e00 id 8025 message 0001 0064
-17:10:39.631 Free
-17:10:39.631 Deliver (due -29ms) task 0504 id 8022 message ba5d 0007
-17:10:39.632 Free
-17:10:39.638 Deliver (due -22ms) task 2200 id 5030 message 0000 0001 0008 0000
-17:10:39.639 Send (due -1ms) task 06e5 id 5600 message 0000 0001 0008 0000
-17:10:39.639 Send (due -1ms) task 2200 id 0002
-17:10:39.639 Free
-17:10:39.639 Deliver (due -22ms) task 0552 id 8007 message 0840 0010 0000 0001 0009 0000
-17:10:39.653 Send (due -1ms) task 9a35 id 5030 message 0000 0001 0009 0000
-17:10:39.653 Free
-17:10:39.654 Deliver (due -16ms) task 06e5 id 5600 message 0000 0001 0008 0000
-17:10:39.654 Send (due -1ms) task 0552 id 0008 message 0000 0000
-17:10:39.654 Send (due -1ms) task 0552 id 000b message 06e5 0002
-17:10:39.661 Free
-17:10:39.661 Deliver (due -23ms) task 2200 id 0002
-17:10:39.661 Free
-17:10:39.661 Deliver (due -9ms) task 9a35 id 5030 message 0000 0001 0009 0000
-17:10:39.661 Send (due -1ms) task 0552 id 0041 message 9a35 0030 9c4c 0000
-17:10:39.661 Free
-17:10:39.661 Deliver (due -8ms) task 0552 id 0008 message 0000 0000
-17:10:39.667 Free
-17:10:39.668 Deliver (due -15ms) task 0552 id 000b message 06e5 0002
-17:10:39.668 Free
-17:10:39.668 Deliver (due -8ms) task 0552 id 0041 message 9a35 0030 9c4c 0000
-17:10:39.669 Send (due -1ms) task 0552 id 8004 message 0e59 0010 0000 0000
-17:10:39.669 Send (due -1ms) task 0552 id 8004 message 0e45 0010 0000 0000
-17:10:39.675 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 000a 0000
-17:10:39.681 Free
-17:10:39.681 Deliver (due -13ms) task 0552 id 8004 message 0e59 0010 0000 0000
-17:10:39.689 Free
-17:10:39.689 Deliver (due -21ms) task 0552 id 8004 message 0e45 0010 0000 0000
-17:10:39.689 Send (due -1ms) task 06e5 id 5055 message 0000 adde
-17:10:39.689 Free
-17:10:39.689 Deliver (due -15ms) task 0552 id 8007 message 0840 0010 0000 0001 000a 0000
-17:10:39.696 Send (due -1ms) task 9a35 id 5030 message 0000 0001 000a 0000
-17:10:39.696 Free
-17:10:39.696 Deliver (due -8ms) task 06e5 id 5055 message 0000 adde
-17:10:39.696 Send (due -1ms) task 0552 id 0009 message 06e5 adde
-17:10:39.696 Free
-17:10:39.696 Deliver (due -1ms) task 9a35 id 5030 message 0000 0001 000a 0000
-17:10:39.703 Send (due -1ms) task 06e5 id 5e00 message 0000 0000 0000 0000
-17:10:39.703 Free
-17:10:39.703 Deliver (due -8ms) task 0552 id 0009 message 06e5 adde
-17:10:39.703 Free
-17:10:39.704 Send (due -1ms) task 0552 id 8004 message 0e58 0010 0000 0004
-17:10:39.719 Deliver (due -17ms) task 06e5 id 5e00 message 0000 0000 0000 0000
-17:10:39.719 Free
-17:10:39.719 Deliver (due -16ms) task 0552 id 8004 message 0e58 0010 0000 0004
-17:10:39.719 Send (due -1ms) task 06e5 id 5008 message 0000 0004
-17:10:39.726 Free
-17:10:39.726 Deliver (due -8ms) task 06e5 id 5008 message 0000 0004
-17:10:39.726 Send (due -1ms) task 0552 id 0007 message 06e5 acb4
-17:10:39.726 Free
-17:10:39.726 Deliver (due -1ms) task 0552 id 0007 message 06e5 acb4
-17:10:39.727 Send (due -1ms) task 0552 id 8004 message 0e14 0010 0000 c572 0000 0000 0000 0000 0000 0000 0000 01a6 0000 000f 0000 0000
-17:10:39.733 Free
-17:10:39.733 Deliver (due -7ms) task 0552 id 8004 message 0e14 0010 0000 c572 0000 0000 0000 0000 0000 0000 0000 01a6 0000 000f 0000 0000
-17:10:39.741 Send (due -1ms) task 06e5 id 5007 message 0000 0009 0043 0053 0052 0038 0036 0037 0030 002d 0035 0000 0000 0000 0000 0000
-17:10:39.747 Free
-17:10:39.747 Deliver (due -7ms) task 06e5 id 5007 message 0000 0009 0043 0053 0052 0038 0036 0037 0030 002d 0035 0000 0000 0000 0000 0000
-17:10:39.749 Send (due -1ms) task 0552 id 000d message 0000 002d 2200 0000
-17:10:39.755 Free
-17:10:39.755 Deliver (due -7ms) task 0552 id 000d message 0000 002d 2200 0000
-17:10:39.756 Send (due -1ms) task 0552 id 8004 message 0e52 0010 0000 0000
-17:10:39.763 Free
-17:10:39.770 Deliver (due -15ms) task 0552 id 8004 message 0e52 0010 0000 0000
-17:10:39.770 Free
-17:10:40.215 Deliver (due 0ms) task 06e5 id 4001
-17:10:40.216 Cancel (due 29005ms) task 06e5 id 4718
-17:10:40.216 Cancel (due 1955ms) task 06e5 id 4785
-17:10:40.217 Send (due -1ms) task 0552 id 002c message 0800 0012
-17:10:40.217 Send (due -1ms) task 0552 id 0030 message 0002 b90e
-17:10:40.217 Send (due -1ms) task 06e5 id 4786
-17:10:40.227 Send (due -1ms) task 068c id 0060
-17:10:40.228 Send (due -1ms) task 06e5 id 470a
-17:10:40.228 Send (due -1ms) task 06e5 id 4713
-17:10:40.228 Send (due -1ms) task 1500 id 0024 message 0000 0007
-17:10:40.229 Send (due -1ms) task 1500 id 0024 message 0000 0007
-17:10:40.229 Send (due 900000ms) task 06e5 id 4737
-17:10:40.427 Send (due 3000ms) task 06e5 id 4720
-17:10:40.427 Send (due -1ms) task 06e5 id 47e1
-17:10:40.428 Send (due -1ms) task 06e5 id 47bd
-17:10:40.428 Free
-17:10:40.428 Deliver (due -212ms) task 0552 id 002c message 0800 0012
-17:10:40.429 Send (due -1ms) task 0552 id 8004 message 0e1c 0010 0000 0012
-17:10:40.434 Free
-17:10:40.434 Deliver (due -218ms) task 0552 id 0030 message 0002 b90e
-17:10:40.435 Free
-17:10:40.435 Deliver (due -219ms) task 06e5 id 4786
-17:10:40.436 Send (due -1ms) task 0552 id 8004 message 0e1a 0010 0000 0000
-17:10:40.442 Free
-17:10:40.442 Deliver (due -221ms) task 1e00 id 0004
-17:10:40.442 Send (due -1ms) task 06e5 id 7805 message 0001 adde
-17:10:40.442 Send (due 1000ms) task 1e00 id 0004
-17:10:40.448 Free
-17:10:40.449 Deliver (due -223ms) task 068c id 0060
-17:10:40.451 Send (due 1000ms) task 068c id 0060
-17:10:40.452 Free
-17:10:40.452 Deliver (due -225ms) task 06e5 id 470a
-17:10:40.452 Free
-17:10:40.452 Deliver (due -225ms) task 06e5 id 4713
-17:10:40.453 Free
-17:10:40.453 Deliver (due -226ms) task 1500 id 0024 message 0000 0007
-17:10:40.456 Free
-17:10:40.456 Deliver (due -228ms) task 1500 id 0024 message 0000 0007
-17:10:40.457 Free
-17:10:40.457 Deliver (due -31ms) task 06e5 id 47e1
-17:10:40.457 Free
-17:10:40.457 Deliver (due -30ms) task 06e5 id 47bd
-17:10:40.458 Free
-17:10:40.458 Deliver (due -30ms) task 0552 id 8004 message 0e1c 0010 0000 0012
-17:10:40.459 Send (due -1ms) task 0504 id 8022 message ba5d 0007
-17:10:40.464 Free
-17:10:40.464 Deliver (due -29ms) task 0552 id 8004 message 0e1a 0010 0000 0000
-17:10:40.465 Free
-17:10:40.465 Deliver (due -24ms) task 06e5 id 7805 message 0001 adde
-17:10:40.465 Send (due -1ms) task 06e5 id 470c
-17:10:40.472 Free
-17:10:40.472 Deliver (due -14ms) task 0504 id 8022 message ba5d 0007
-17:10:40.472 Free
-17:10:40.472 Deliver (due -8ms) task 06e5 id 470c
-17:10:40.473 Free
-17:10:41.442 Deliver (due 0ms) task 1e00 id 0004
-17:10:41.442 Send (due 1000ms) task 1e00 id 0004
-17:10:41.442 Free
-17:10:41.451 Deliver (due 0ms) task 068c id 0060
-17:10:41.454 Send (due -1ms) task 06e5 id 4706 message 4001 0001
-17:10:41.454 Free
-17:10:41.454 Deliver (due -1ms) task 06e5 id 4706 message 4001 0001
-17:10:41.456 Send (due 300ms) task 068c id 0060
-17:10:41.457 Free
-17:10:41.756 Deliver (due 0ms) task 068c id 0060
-17:10:41.759 Send (due 100ms) task 068c id 0060
-17:10:41.759 Free
-17:10:41.859 Deliver (due 0ms) task 068c id 0060
-17:10:41.862 Send (due 2000ms) task 068c id 0060
-17:10:41.862 Free
-17:10:40.472 Free
+22:19:07.178 Send (due -1ms) task 0552 id 0001
+22:19:07.178 Send (due 100000ms) task 06bd id 40bc
+22:19:07.179 Send (due -1ms) task 06bd id 7d00 message 0000 adea
+22:19:07.179 Send (due 30000ms) task 06bd id 47b3
+22:19:07.179 Deliver (due -2ms) task 0552 id 0001
+22:19:07.180 Send (due 9999ms) task 0552 id 0000
+22:19:07.180 Free
+22:19:07.180 Deliver (due -2ms) task 06bd id 7d00 message 0000 adea
+22:19:07.180 Free
+22:19:07.180 Send (due -1ms) task 0552 id 8004 message 0340 0010 0400 0000
+22:19:07.308 Deliver (due -129ms) task 0552 id 8004 message 0340 0010 0400 0000
+22:19:07.308 Send (due -1ms) task 0552 id 0002 message 0001 adea
+22:19:07.308 Free
+22:19:07.308 Deliver (due -1ms) task 0552 id 0002 message 0001 adea
+22:19:07.309 Free
+22:19:07.309 Send (due -1ms) task 0552 id 8006 message 0680 0010
+22:19:07.316 Deliver (due -8ms) task 0552 id 8006 message 0680 0010
+22:19:07.316 Send (due -1ms) task 0552 id 0002 message 0002 adea
+22:19:07.316 Free
+22:19:07.316 Deliver (due -1ms) task 0552 id 0002 message 0002 adea
+22:19:07.316 Send (due -1ms) task 0552 id 0002 message 0003 0010
+22:19:07.323 Free
+22:19:07.323 Deliver (due -8ms) task 0552 id 0002 message 0003 0010
+22:19:07.323 Send (due -1ms) task 0552 id 0002 message 0004 adea
+22:19:07.323 Free
+22:19:07.323 Deliver (due -1ms) task 0552 id 0002 message 0004 adea
+22:19:07.323 Send (due -1ms) task 0552 id 0002 message 0005 0010
+22:19:07.330 Free
+22:19:07.330 Deliver (due -8ms) task 0552 id 0002 message 0005 0010
+22:19:07.330 Send (due -1ms) task 0552 id 0002 message 0006 adea
+22:19:07.330 Free
+22:19:07.330 Deliver (due -1ms) task 0552 id 0002 message 0006 adea
+22:19:07.330 Send (due -1ms) task 0552 id 003f message 0552 0010
+22:19:07.337 Free
+22:19:07.337 Deliver (due -8ms) task 0552 id 003f message 0552 0010
+22:19:07.338 Free
+22:19:07.338 Send (due -1ms) task 0552 id 8004 message 1201 0010 0000 0009 36aa 0009 000a 36aa
+22:19:07.344 Deliver (due -7ms) task 0552 id 8004 message 1201 0010 0000 0009 36aa 0009 000a 36aa
+22:19:07.344 Send (due -1ms) task 0552 id 003c message 0552 0007
+22:19:07.344 Free
+22:19:07.344 Deliver (due -1ms) task 0552 id 003c message 0552 0007
+22:19:07.349 Send (due -1ms) task 0552 id 8004 message 0341 0010 0007 0000
+22:19:07.354 Free
+22:19:07.354 Deliver (due -6ms) task 0552 id 8004 message 0341 0010 0007 0000
+22:19:07.354 Send (due -1ms) task 0552 id 0002 message 0007 0007
+22:19:07.355 Free
+22:19:07.361 Deliver (due -8ms) task 0552 id 0002 message 0007 0007
+22:19:07.361 Send (due -1ms) task 0552 id 0012 message 4f5f 01c7 0004 0000 0002 0002
+22:19:07.361 Free
+22:19:07.362 Deliver (due -2ms) task 0552 id 0012 message 4f5f 01c7 0004 0000 0002 0002
+22:19:07.362 Send (due -1ms) task 0552 id 8004 message 03c0 0010 0004 0937 0000 000f 0000 0000 7df7 af3b a01e 048b 0e15 6d3f d74b 60ee 473f 1b58 6861 3849 7223 f60a 9b6f 288b 0001 0000 0000 0000
+22:19:07.389 Free
+22:19:07.389 Deliver (due -28ms) task 0552 id 8004 message 03c0 0010 0004 0937 0000 000f 0000 0000 7df7 af3b a01e 048b 0e15 6d3f d74b 60ee 473f 1b58 6861 3849 7223 f60a 9b6f 288b 0001 0000 0000 0000
+22:19:07.396 Send (due -1ms) task 0552 id 0002 message 0008 ae82
+22:19:07.396 Free
+22:19:07.396 Deliver (due -1ms) task 0552 id 0002 message 0008 ae82
+22:19:07.403 Send (due -1ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a4 005b 0002 0000
+22:19:07.410 Send (due -1ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a4 005b 0002 0000
+22:19:07.425 Send (due -1ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a5 005b 0002 0000
+22:19:07.425 Send (due -1ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a4 005b 0002 0000
+22:19:07.473 Free
+22:19:07.473 Deliver (due -71ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a4 005b 0002 0000
+22:19:07.473 Free
+22:19:07.474 Deliver (due -65ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a4 005b 0002 0000
+22:19:07.474 Free
+22:19:07.474 Send (due -1ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a5 005b 0002 0000
+22:19:07.474 Send (due -1ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a5 005b 0002 0000
+22:19:07.487 Deliver (due -63ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a5 005b 0002 0000
+22:19:07.487 Free
+22:19:07.487 Deliver (due -63ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a4 005b 0002 0000
+22:19:07.488 Free
+22:19:07.488 Deliver (due -15ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a5 005b 0002 0000
+22:19:07.488 Send (due -1ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a4 005b 0002 0000
+22:19:07.488 Send (due -1ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a4 005b 0002 0000
+22:19:07.508 Free
+22:19:07.508 Deliver (due -35ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a5 005b 0002 0000
+22:19:07.508 Free
+22:19:07.508 Deliver (due -21ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a4 005b 0002 0000
+22:19:07.515 Free
+22:19:07.515 Deliver (due -28ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a4 005b 0002 0000
+22:19:07.515 Send (due -1ms) task 0552 id 0002 message 0009 ae82
+22:19:07.516 Free
+22:19:07.516 Deliver (due -2ms) task 0552 id 0002 message 0009 ae82
+22:19:07.522 Send (due -1ms) task 06bd id 5000 message 0000 0007
+22:19:07.522 Cancel (due 9657ms) task 0552 id 0000
+22:19:07.522 Free
+22:19:07.523 Deliver (due -2ms) task 06bd id 5000 message 0000 0007
+22:19:07.523 Send (due -1ms) task 0552 id 0077 message b402 ae82
+22:19:07.523 Send (due -1ms) task 0552 id 8004 message 0a0f 0010 0000 0000
+22:19:07.529 Send (due -1ms) task 1100 id 0001
+22:19:07.529 Send (due -1ms) task 0552 id 004b message 1201 0055 0000 0000
+22:19:07.530 Send (due -1ms) task 0552 id 004b message 1201 0057 0000 0000
+22:19:07.537 Send (due -1ms) task 0552 id 004b message 1201 0059 0000 0000
+22:19:07.537 Send (due -1ms) task 1400 id 0000
+22:19:07.537 Free
+22:19:07.537 Deliver (due -15ms) task 0552 id 0077 message b402 ae82
+22:19:07.538 Free
+22:19:07.538 Send (due -1ms) task 0552 id 8004 message 2207 0010 0000 0008
+22:19:07.541 Send (due -1ms) task 0504 id 8022 message ba5d 0001
+22:19:07.544 Deliver (due -22ms) task 0552 id 8004 message 0a0f 0010 0000 0000
+22:19:07.544 Free
+22:19:07.544 Deliver (due -16ms) task 1100 id 0001
+22:19:07.551 Send (due -1ms) task 06bd id 7480 message 0001 acc0
+22:19:07.551 Free
+22:19:07.552 Deliver (due -24ms) task 0552 id 004b message 1201 0055 0000 0000
+22:19:07.552 Send (due -1ms) task 0504 id 8021 message 2ea2 0000
+22:19:07.552 Send (due -1ms) task 0552 id 8005 message 0540 0010 0055 1201 0019 0000 0000 0000
+22:19:07.558 Free
+22:19:07.558 Deliver (due -29ms) task 0552 id 004b message 1201 0057 0000 0000
+22:19:07.562 Send (due -1ms) task 0504 id 8021 message 2ea2 acc0
+22:19:07.578 Free
+22:19:07.578 Deliver (due -42ms) task 0552 id 004b message 1201 0059 0000 0000
+22:19:07.579 Send (due -1ms) task 0552 id 8005 message 0540 0010 0057 1201 0019 0000 0000 0000
+22:19:07.579 Send (due -1ms) task 0552 id 8005 message 0540 0010 0059 1201 0019 0000 0000 0000
+22:19:07.592 Free
+22:19:07.592 Deliver (due -56ms) task 1400 id 0000
+22:19:07.592 Send (due -1ms) task 0552 id 0054 message 1400 0000
+22:19:07.592 Free
+22:19:07.593 Deliver (due -56ms) task 0552 id 8004 message 2207 0010 0000 0008
+22:19:07.593 Send (due -1ms) task b402 id 5071 message 0008 0000
+22:19:07.593 Free
+22:19:07.600 Deliver (due -60ms) task 0504 id 8022 message ba5d 0001
+22:19:07.600 Free
+22:19:07.600 Deliver (due -50ms) task 06bd id 7480 message 0001 acc0
+22:19:07.600 Send (due -1ms) task 0552 id 0054 message 1100 0001
+22:19:07.600 Free
+22:19:07.600 Deliver (due -49ms) task 0504 id 8021 message 2ea2 0000
+22:19:07.607 Free
+22:19:07.607 Deliver (due -56ms) task 0552 id 8005 message 0540 0010 0055 1201 0019 0000 0000 0000
+22:19:07.607 Send (due -1ms) task 1201 id 503a message 0000 0055
+22:19:07.607 Free
+22:19:07.608 Deliver (due -47ms) task 0504 id 8021 message 2ea2 acc0
+22:19:07.614 Free
+22:19:07.614 Deliver (due -36ms) task 0552 id 8005 message 0540 0010 0057 1201 0019 0000 0000 0000
+22:19:07.614 Send (due -1ms) task 1201 id 503a message 0000 0057
+22:19:07.614 Free
+22:19:07.614 Deliver (due -36ms) task 0552 id 8005 message 0540 0010 0059 1201 0019 0000 0000 0000
+22:19:07.622 Send (due -1ms) task 1201 id 503a message 0000 0059
+22:19:07.622 Free
+22:19:07.622 Deliver (due -31ms) task 0552 id 0054 message 1400 0000
+22:19:07.623 Free
+22:19:07.623 Deliver (due -31ms) task b402 id 5071 message 0008 0000
+22:19:07.623 Send (due -1ms) task 0552 id 8006 message 0681 0010 0001 0001 1400 0000
+22:19:07.630 Send (due -1ms) task 06bd id 7f70
+22:19:07.630 Free
+22:19:07.630 Deliver (due -31ms) task 0552 id 0054 message 1100 0001
+22:19:07.630 Send (due -1ms) task 0552 id 8006 message 0681 0010 0002 0001 1100 0000
+22:19:07.643 Free
+22:19:07.643 Deliver (due -37ms) task 1201 id 503a message 0000 0055
+22:19:07.643 Send (due -1ms) task 0552 id 005e message 1201 0001
+22:19:07.644 Free
+22:19:07.651 Deliver (due -38ms) task 1201 id 503a message 0000 0057
+22:19:07.651 Free
+22:19:07.651 Deliver (due -30ms) task 1201 id 503a message 0000 0059
+22:19:07.651 Free
+22:19:07.651 Deliver (due -29ms) task 0552 id 8006 message 0681 0010 0001 0001 1400 0000
+22:19:07.651 Send (due -1ms) task 1400 id 5044 message 0000 0001
+22:19:07.658 Free
+22:19:07.658 Deliver (due -29ms) task 06bd id 7f70
+22:19:07.666 Send (due -1ms) task 0552 id 0054 message 1000 000a
+22:19:07.666 Send (due -1ms) task 0552 id 005e message 1000 0055
+22:19:07.667 Free
+22:19:07.667 Deliver (due -38ms) task 0552 id 8006 message 0681 0010 0002 0001 1100 0000
+22:19:07.667 Send (due -1ms) task 1100 id 5044 message 0000 0002
+22:19:07.673 Free
+22:19:07.673 Deliver (due -31ms) task 0552 id 005e message 1201 0001
+22:19:07.673 Send (due 1000ms) task 0552 id 0064 message 1201 0000
+22:19:07.674 Free
+22:19:07.674 Deliver (due -24ms) task 1400 id 5044 message 0000 0001
+22:19:07.674 Send (due -1ms) task 0552 id 8004 message 02c0 0010 1201 0000
+22:19:07.680 Send (due -1ms) task 1400 id 0001 message 0000 0001
+22:19:07.680 Free
+22:19:07.680 Deliver (due -15ms) task 0552 id 0054 message 1000 000a
+22:19:07.681 Send (due -1ms) task 0552 id 8006 message 0681 0010 000a 0001 1000 0000
+22:19:07.688 Free
+22:19:07.688 Deliver (due -23ms) task 0552 id 005e message 1000 0055
+22:19:07.688 Send (due -1ms) task 0552 id 8004 message 02c0 0010 1000 0000
+22:19:07.703 Send (due 1000ms) task 0552 id 0064 message 1000 000a
+22:19:07.703 Free
+22:19:07.703 Deliver (due -37ms) task 1100 id 5044 message 0000 0002
+22:19:07.704 Send (due -1ms) task 0552 id 0041 message 1100 003b 1a00 0000
+22:19:07.710 Free
+22:19:07.710 Deliver (due -37ms) task 0552 id 8004 message 02c0 0010 1201 0000
+22:19:07.710 Cancel (due 963ms) task 0552 id 0064 message 1201 0000
+22:19:07.710 Send (due -1ms) task 1201 id 500b message 0000 0000
+22:19:07.711 Free
+22:19:07.717 Deliver (due -38ms) task 1400 id 0001 message 0000 0001
+22:19:07.718 Send (due -1ms) task 0552 id 0041 message 1400 0046 1b00 0000
+22:19:07.718 Free
+22:19:07.718 Deliver (due -38ms) task 0552 id 8006 message 0681 0010 000a 0001 1000 0000
+22:19:07.718 Send (due -1ms) task 1000 id 5044 message 0000 000a
+22:19:07.724 Free
+22:19:07.724 Deliver (due -37ms) task 0552 id 8004 message 02c0 0010 1000 0000
+22:19:07.724 Cancel (due 979ms) task 0552 id 0064 message 1000 000a
+22:19:07.725 Send (due -2ms) task 1000 id 500b message 0000 000a
+22:19:07.725 Free
+22:19:07.725 Deliver (due -22ms) task 0552 id 0041 message 1100 003b 1a00 0000
+22:19:07.731 Free
+22:19:07.731 Deliver (due -22ms) task 1201 id 500b message 0000 0000
+22:19:07.732 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0000 0000
+22:19:07.738 Free
+22:19:07.738 Deliver (due -21ms) task 0552 id 0041 message 1400 0046 1b00 0000
+22:19:07.738 Send (due -1ms) task 0552 id 0041 message 1400 0046 1b00 0000
+22:19:07.745 Free
+22:19:07.745 Deliver (due -28ms) task 1000 id 5044 message 0000 000a
+22:19:07.745 Send (due -1ms) task 0552 id 0041 message 1000 0051 a14b 0000
+22:19:07.745 Send (due -1ms) task 0552 id 0054 message 1000 000c
+22:19:07.746 Free
+22:19:07.753 Deliver (due -30ms) task 1000 id 500b message 0000 000a
+22:19:07.753 Free
+22:19:07.753 Deliver (due -22ms) task 0552 id 8007 message 0840 0010 0000 0001 0000 0000
+22:19:07.753 Send (due -1ms) task 1100 id 5030 message 0000 0001 0000 0000
+22:19:07.753 Free
+22:19:07.753 Deliver (due -16ms) task 0552 id 0041 message 1400 0046 1b00 0000
+22:19:07.771 Free
+22:19:07.771 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0001 0000
+22:19:07.778 Deliver (due -34ms) task 0552 id 0041 message 1000 0051 a14b 0000
+22:19:07.778 Send (due -1ms) task 0552 id 0041 message 1000 0051 a14b 0000
+22:19:07.778 Free
+22:19:07.785 Deliver (due -41ms) task 0552 id 0054 message 1000 000c
+22:19:07.785 Free
+22:19:07.786 Deliver (due -34ms) task 1100 id 5030 message 0000 0001 0000 0000
+22:19:07.786 Send (due -1ms) task 06bd id 7485 message 0001 0000 0001 0000
+22:19:07.786 Send (due -1ms) task 0552 id 8006 message 0681 0010 000c 0001 1000 0000
+22:19:07.793 Free
+22:19:07.793 Deliver (due -23ms) task 0552 id 8007 message 0840 0010 0000 0001 0001 0000
+22:19:07.793 Send (due -1ms) task 1400 id 5030 message 0000 0001 0001 0000
+22:19:07.800 Free
+22:19:07.800 Deliver (due -23ms) task 0552 id 0041 message 1000 0051 a14b 0000
+22:19:07.801 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0002 0000
+22:19:07.807 Free
+22:19:07.807 Deliver (due -22ms) task 06bd id 7485 message 0001 0000 0001 0000
+22:19:07.815 Free
+22:19:07.815 Deliver (due -30ms) task 0552 id 8006 message 0681 0010 000c 0001 1000 0000
+22:19:07.815 Send (due -1ms) task 1000 id 5044 message 0000 000c
+22:19:07.815 Free
+22:19:07.815 Deliver (due -23ms) task 1400 id 5030 message 0000 0001 0001 0000
+22:19:07.822 Send (due -1ms) task 1400 id 0002 message 0000 000a
+22:19:07.822 Free
+22:19:07.822 Deliver (due -22ms) task 0552 id 8007 message 0840 0010 0000 0001 0002 0000
+22:19:07.822 Send (due -1ms) task 1000 id 5030 message 0000 0001 0002 0000
+22:19:07.837 Free
+22:19:07.837 Deliver (due -23ms) task 1000 id 5044 message 0000 000c
+22:19:07.837 Send (due -1ms) task 1000 id 0000 message 1803 000a
+22:19:07.838 Send (due -1ms) task 0552 id 0054 message 1000 000b
+22:19:07.838 Free
+22:19:07.838 Deliver (due -17ms) task 1400 id 0002 message 0000 000a
+22:19:07.845 Send (due -1ms) task 1400 id 0001 message 0000 0000
+22:19:07.845 Free
+22:19:07.845 Deliver (due -24ms) task 1000 id 5030 message 0000 0001 0002 0000
+22:19:07.845 Free
+22:19:07.845 Deliver (due -9ms) task 1000 id 0000 message 1803 000a
+22:19:07.852 Free
+22:19:07.852 Deliver (due -15ms) task 0552 id 0054 message 1000 000b
+22:19:07.852 Free
+22:19:07.852 Deliver (due -8ms) task 1400 id 0001 message 0000 0000
+22:19:07.852 Send (due -1ms) task 0552 id 005e message 1400 000b
+22:19:07.853 Send (due -1ms) task 0552 id 8006 message 0681 0010 000b 0001 1000 0000
+22:19:07.859 Free
+22:19:07.859 Deliver (due -8ms) task 0552 id 005e message 1400 000b
+22:19:07.859 Send (due 1000ms) task 0552 id 0064 message 1400 0000
+22:19:07.860 Send (due -1ms) task 0552 id 8004 message 02c0 0010 1400 0000
+22:19:07.866 Free
+22:19:07.866 Deliver (due -14ms) task 0552 id 8006 message 0681 0010 000b 0001 1000 0000
+22:19:07.866 Send (due -1ms) task 1000 id 5044 message 0000 000b
+22:19:07.873 Free
+22:19:07.873 Deliver (due -14ms) task 0552 id 8004 message 02c0 0010 1400 0000
+22:19:07.873 Cancel (due 986ms) task 0552 id 0064 message 1400 0000
+22:19:07.873 Send (due -1ms) task 1400 id 500b message 0000 0000
+22:19:07.874 Free
+22:19:07.874 Deliver (due -9ms) task 1000 id 5044 message 0000 000b
+22:19:07.880 Send (due -1ms) task 0552 id 0041 message 1000 004b a0b5 0000
+22:19:07.880 Send (due -1ms) task 0552 id 0054 message 1000 000d
+22:19:07.880 Free
+22:19:07.880 Deliver (due -8ms) task 1400 id 500b message 0000 0000
+22:19:07.881 Send (due -1ms) task 1300 id 5b00 message 1400 0000
+22:19:07.887 Free
+22:19:07.887 Deliver (due -8ms) task 0552 id 0041 message 1000 004b a0b5 0000
+22:19:07.888 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0003 0000
+22:19:07.903 Free
+22:19:07.903 Deliver (due -24ms) task 0552 id 0054 message 1000 000d
+22:19:07.910 Free
+22:19:07.910 Deliver (due -30ms) task 1300 id 5b00 message 1400 0000
+22:19:07.910 Send (due -1ms) task 0552 id 0030 message 0003 000d
+22:19:07.911 Free
+22:19:07.911 Deliver (due -24ms) task 0552 id 8007 message 0840 0010 0000 0001 0003 0000
+22:19:07.911 Send (due -1ms) task 0552 id 8006 message 0681 0010 000d 0001 1000 0000
+22:19:07.918 Send (due -1ms) task 1000 id 5030 message 0000 0001 0003 0000
+22:19:07.918 Free
+22:19:07.918 Deliver (due -9ms) task 0552 id 0030 message 0003 000d
+22:19:07.925 Free
+22:19:07.925 Deliver (due -15ms) task 0552 id 8006 message 0681 0010 000d 0001 1000 0000
+22:19:07.925 Send (due -1ms) task 1000 id 5044 message 0000 000d
+22:19:07.926 Free
+22:19:07.926 Deliver (due -9ms) task 1000 id 5030 message 0000 0001 0003 0000
+22:19:07.926 Send (due -1ms) task 0552 id 8004 message 0e1a 0010 0000 0000
+22:19:07.933 Free
+22:19:07.933 Deliver (due -9ms) task 1000 id 5044 message 0000 000d
+22:19:07.933 Send (due -1ms) task 06bd id 5a00 message 0000 ade6
+22:19:07.940 Free
+22:19:07.940 Deliver (due -15ms) task 0552 id 8004 message 0e1a 0010 0000 0000
+22:19:07.940 Free
+22:19:07.940 Deliver (due -8ms) task 06bd id 5a00 message 0000 ade6
+22:19:07.947 Send (due -1ms) task 06bd id 4095
+22:19:07.952 Send (due -1ms) task 0552 id 0041 message 1c00 0030 a788 0002
+22:19:07.957 Send (due 0ms) task 1f00 id 0000
+22:19:07.959 Send (due 0ms) task 1f00 id 0006
+22:19:07.959 Send (due 0ms) task 1f00 id 0002
+22:19:07.959 Send (due 0ms) task 1f00 id 0001
+22:19:07.959 Send (due 0ms) task 1f00 id 0008
+22:19:07.959 Send (due 1000ms) task 1f00 id 0004
+22:19:07.965 Send (due 30000ms) task 06bd id 4718
+22:19:07.979 Send (due 3000ms) task 06bd id 4785
+22:19:07.980 Send (due -1ms) task 1000 id 0005 message 0000 002f
+22:19:07.980 Send (due -1ms) task 1000 id 0005 message 0000 000d
+22:19:07.980 Send (due -1ms) task 0552 id 0030 message 0000 000a
+22:19:07.987 Cancel (due -8ms) task 0552 id 0030 message 0000 000a
+22:19:07.987 Send (due -1ms) task 0552 id 0030 message 0000 000a
+22:19:07.987 Send (due -1ms) task 0552 id 002b message 0024 0418
+22:19:07.987 Send (due -1ms) task 0552 id 0018 message 0000 0001 0000 0001 0000 0000
+22:19:07.988 Send (due -1ms) task 0552 id 0019 message 06bd 0001 0000 0001
+22:19:07.994 Send (due -1ms) task 0552 id 0041 message 06bd 002b 2200 0000
+22:19:07.995 Send (due -2ms) task 98aa id 0002 message 06bd 0003 0001 0002 0063 0000
+22:19:07.995 Send (due -1ms) task 2300 id 0000
+22:19:07.997 Send (due 1000ms) task 06bd id 4001
+22:19:08.002 Free
+22:19:08.002 Deliver (due -56ms) task 06bd id 4095
+22:19:08.002 Cancel (due 957ms) task 1f00 id 0004
+22:19:08.003 Send (due 999ms) task 1f00 id 0004
+22:19:08.003 Cancel (due 29962ms) task 06bd id 4718
+22:19:08.003 Send (due 30000ms) task 06bd id 4718
+22:19:08.005 Free
+22:19:08.005 Deliver (due -54ms) task 0552 id 0041 message 1c00 0030 a788 0002
+22:19:08.011 Free
+22:19:08.011 Deliver (due -54ms) task 1f00 id 0000
+22:19:08.012 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0004 0000
+22:19:08.018 Send (due 20000ms) task 1f00 id 0000
+22:19:08.018 Free
+22:19:08.018 Deliver (due -59ms) task 1f00 id 0006
+22:19:08.018 Send (due 0ms) task 1f00 id 0003
+22:19:08.018 Free
+22:19:08.018 Send (due -1ms) task 1f00 id 8025 message 0004 020a
+22:19:08.025 Deliver (due -66ms) task 1f00 id 0002
+22:19:08.025 Send (due 0ms) task 1f00 id 0002
+22:19:08.025 Free
+22:19:08.025 Deliver (due -66ms) task 1f00 id 0001
+22:19:08.025 Send (due 0ms) task 1f00 id 0001
+22:19:08.025 Free
+22:19:08.025 Deliver (due -66ms) task 1f00 id 0008
+22:19:08.032 Free
+22:19:08.032 Deliver (due -53ms) task 1000 id 0005 message 0000 002f
+22:19:08.032 Send (due -1ms) task 06bd id 5a04 message 0000 0000 0000 0000 0000 0002
+22:19:08.033 Free
+22:19:08.033 Deliver (due -54ms) task 1000 id 0005 message 0000 000d
+22:19:08.046 Send (due -1ms) task 06bd id 5a04 message 0000 0000 0000 0000 0000 0002
+22:19:08.046 Free
+22:19:08.046 Deliver (due -60ms) task 0552 id 0030 message 0000 000a
+22:19:08.046 Free
+22:19:08.046 Deliver (due -60ms) task 0552 id 002b message 0024 0418
+22:19:08.047 Send (due -1ms) task 0552 id 8004 message 0e1a 0010 0000 0000
+22:19:08.053 Free
+22:19:08.053 Deliver (due -67ms) task 0552 id 0018 message 0000 0001 0000 0001 0000 0000
+22:19:08.053 Send (due -1ms) task 0552 id 8004 message 0e24 0010 0000 0418
+22:19:08.060 Free
+22:19:08.060 Deliver (due -73ms) task 0552 id 0019 message 06bd 0001 0000 0001
+22:19:08.060 Send (due -1ms) task 0552 id 8004 message 03d5 0010 0078 0002 0001 0001 0000 0000
+22:19:08.075 Free
+22:19:08.075 Deliver (due -82ms) task 0552 id 0041 message 06bd 002b 2200 0000
+22:19:08.075 Send (due -1ms) task 0552 id 0041 message 06bd 002b 2200 0001
+22:19:08.075 Free
+22:19:08.075 Deliver (due -82ms) task 98aa id 0002 message 06bd 0003 0001 0002 0063 0000
+22:19:08.082 Send (due -1ms) task 0552 id 004b message 98aa 0017 0000 0000
+22:19:08.082 Free
+22:19:08.082 Deliver (due -88ms) task 2300 id 0000
+22:19:08.082 Send (due -1ms) task 0552 id 0041 message 2300 0025 b116 0418
+22:19:08.082 Free
+22:19:08.082 Deliver (due -71ms) task 0552 id 8007 message 0840 0010 0000 0001 0004 0000
+22:19:08.082 Send (due -1ms) task 0552 id 8004 message 03c0 0010 0004 0937 0008 0001 0000 0000 7df7 af3b a01e 048b 0e15 6d3f d74b 60ee 473f 1b58 6861 3849 7223 f60a 9b6f 288b 0001 0000 0000 0000
+22:19:08.096 Send (due -1ms) task 1c00 id 5030 message 0000 0001 0004 0418
+22:19:08.096 Free
+22:19:08.096 Deliver (due -79ms) task 1f00 id 8025 message 0004 020a
+22:19:08.097 Free
+22:19:08.097 Deliver (due -79ms) task 1f00 id 0003
+22:19:08.114 Send (due 20000ms) task 1f00 id 0006
+22:19:08.114 Free
+22:19:08.114 Deliver (due -89ms) task 1f00 id 0002
+22:19:08.114 Send (due 0ms) task 1f00 id 0002
+22:19:08.114 Free
+22:19:08.114 Deliver (due -89ms) task 1f00 id 0001
+22:19:08.115 Send (due 0ms) task 1f00 id 0001
+22:19:08.115 Free
+22:19:08.115 Send (due -1ms) task 1f00 id 8025 message 0001 005f
+22:19:08.121 Deliver (due -90ms) task 06bd id 5a04 message 0000 0000 0000 0000 0000 0002
+22:19:08.121 Send (due -1ms) task 06bd id 47bd
+22:19:08.121 Free
+22:19:08.122 Deliver (due -77ms) task 06bd id 5a04 message 0000 0000 0000 0000 0000 0002
+22:19:08.128 Send (due -1ms) task 06bd id 47bd
+22:19:08.128 Free
+22:19:08.128 Deliver (due -82ms) task 0552 id 8004 message 0e1a 0010 0000 0000
+22:19:08.129 Free
+22:19:08.129 Deliver (due -77ms) task 0552 id 8004 message 0e24 0010 0000 0418
+22:19:08.129 Free
+22:19:08.129 Deliver (due -70ms) task 0552 id 8004 message 03d5 0010 0078 0002 0001 0001 0000 0000
+22:19:08.135 Free
+22:19:08.135 Deliver (due -61ms) task 0552 id 0041 message 06bd 002b 2200 0001
+22:19:08.136 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0005 0000
+22:19:08.143 Free
+22:19:08.143 Deliver (due -62ms) task 0552 id 004b message 98aa 0017 0000 0000
+22:19:08.150 Free
+22:19:08.150 Deliver (due -69ms) task 0552 id 0041 message 2300 0025 b116 0418
+22:19:08.150 Send (due -1ms) task 0552 id 0041 message 2300 0025 b116 0000
+22:19:08.151 Free
+22:19:08.151 Deliver (due -70ms) task 0552 id 8004 message 03c0 0010 0004 0937 0008 0001 0000 0000 7df7 af3b a01e 048b 0e15 6d3f d74b 60ee 473f 1b58 6861 3849 7223 f60a 9b6f 288b 0001 0000 0000 0000
+22:19:08.151 Send (due -1ms) task 0552 id 8005 message 0540 0010 0017 98aa 0019 0000 0000 0000
+22:19:08.165 Send (due -1ms) task 06bd id 5024 message 0001 0001 0000 0000
+22:19:08.165 Free
+22:19:08.165 Deliver (due -70ms) task 1c00 id 5030 message 0000 0001 0004 0418
+22:19:08.165 Send (due -1ms) task 0552 id 004b message 1c00 0019 0000 0001
+22:19:08.165 Free
+22:19:08.187 Deliver (due -73ms) task 1f00 id 0002
+22:19:08.187 Send (due -1ms) task 1f00 id 8025 message 0006 0f00
+22:19:08.187 Send (due 20000ms) task 1f00 id 0002
+22:19:08.187 Free
+22:19:08.187 Deliver (due -73ms) task 1f00 id 8025 message 0001 005f
+22:19:08.187 Free
+22:19:08.187 Deliver (due -72ms) task 1f00 id 0001
+22:19:08.194 Send (due -1ms) task 1f00 id 8025 message 0005 0a00
+22:19:08.194 Send (due 20000ms) task 1f00 id 0001
+22:19:08.194 Free
+22:19:08.194 Deliver (due -74ms) task 06bd id 47bd
+22:19:08.195 Free
+22:19:08.196 Deliver (due -69ms) task 06bd id 47bd
+22:19:08.197 Free
+22:19:08.197 Deliver (due -62ms) task 0552 id 8007 message 0840 0010 0000 0001 0005 0000
+22:19:08.202 Send (due -1ms) task 06bd id 5030 message 0000 0001 0005 0418
+22:19:08.202 Free
+22:19:08.202 Deliver (due -53ms) task 0552 id 0041 message 2300 0025 b116 0000
+22:19:08.203 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0006 0000
+22:19:08.209 Free
+22:19:08.209 Deliver (due -59ms) task 0552 id 8005 message 0540 0010 0017 98aa 0019 0000 0000 0000
+22:19:08.216 Send (due -1ms) task 98aa id 503a message 0000 0017
+22:19:08.216 Free
+22:19:08.216 Deliver (due -52ms) task 06bd id 5024 message 0001 0001 0000 0000
+22:19:08.217 Free
+22:19:08.217 Deliver (due -53ms) task 0552 id 004b message 1c00 0019 0000 0001
+22:19:08.217 Send (due -1ms) task 0552 id 8005 message 0540 0010 0019 1c00 0019 0000 0000 0000
+22:19:08.223 Free
+22:19:08.223 Deliver (due -37ms) task 1f00 id 8025 message 0006 0f00
+22:19:08.223 Free
+22:19:08.230 Deliver (due -37ms) task 1f00 id 8025 message 0005 0a00
+22:19:08.230 Cancel (due 19788ms) task 1f00 id 0000
+22:19:08.230 Cancel (due 19884ms) task 1f00 id 0006
+22:19:08.230 Cancel (due 19957ms) task 1f00 id 0002
+22:19:08.231 Cancel (due 19963ms) task 1f00 id 0001
+22:19:08.231 Send (due 0ms) task 1f00 id 0000
+22:19:08.231 Send (due 0ms) task 1f00 id 0006
+22:19:08.237 Send (due 0ms) task 1f00 id 0002
+22:19:08.237 Send (due 0ms) task 1f00 id 0001
+22:19:08.237 Send (due 0ms) task 1f00 id 0008
+22:19:08.237 Send (due -1ms) task 06bd id 7800 message 0001 007f 0000 0d2f 0004 13c6 0001 0001
+22:19:08.238 Free
+22:19:08.238 Deliver (due -37ms) task 06bd id 5030 message 0000 0001 0005 0418
+22:19:08.252 Free
+22:19:08.252 Deliver (due -50ms) task 0552 id 8007 message 0840 0010 0000 0001 0006 0000
+22:19:08.252 Send (due -1ms) task 2300 id 5030 message 0000 0001 0006 0418
+22:19:08.253 Free
+22:19:08.253 Deliver (due -38ms) task 98aa id 503a message 0000 0017
+22:19:08.259 Send (due -1ms) task 0552 id 0041 message 98aa 0033 9a8e 0001
+22:19:08.259 Free
+22:19:08.259 Deliver (due -43ms) task 0552 id 8005 message 0540 0010 0019 1c00 0019 0000 0000 0000
+22:19:08.259 Send (due -1ms) task 1c00 id 503a message 0000 0019
+22:19:08.260 Free
+22:19:08.266 Deliver (due -35ms) task 1f00 id 0000
+22:19:08.266 Send (due 20000ms) task 1f00 id 0000
+22:19:08.267 Free
+22:19:08.267 Deliver (due -36ms) task 1f00 id 0006
+22:19:08.267 Send (due 0ms) task 1f00 id 0003
+22:19:08.267 Free
+22:19:08.267 Deliver (due -31ms) task 06bd id 7800 message 0001 007f 0000 0d2f 0004 13c6 0001 0001
+22:19:08.267 Send (due -1ms) task 1f00 id 8025 message 0004 020a
+22:19:08.273 Send (due -1ms) task 06bd id 470a
+22:19:08.273 Send (due -1ms) task 06bd id 4713
+22:19:08.274 Send (due -1ms) task 1000 id 0024 message 0000 0007
+22:19:08.274 Send (due -1ms) task 1000 id 0024 message 0000 0007
+22:19:08.282 Send (due -1ms) task 06bd id 470c
+22:19:08.282 Free
+22:19:08.282 Deliver (due -45ms) task 1f00 id 0002
+22:19:08.282 Send (due -1ms) task 1f00 id 8025 message 0006 0f00
+22:19:08.282 Send (due 20000ms) task 1f00 id 0002
+22:19:08.282 Free
+22:19:08.282 Deliver (due -45ms) task 1f00 id 0001
+22:19:08.289 Send (due -1ms) task 1f00 id 8025 message 0005 0a00
+22:19:08.289 Send (due 20000ms) task 1f00 id 0001
+22:19:08.289 Free
+22:19:08.289 Deliver (due -52ms) task 1f00 id 0008
+22:19:08.289 Free
+22:19:08.289 Deliver (due -38ms) task 2300 id 5030 message 0000 0001 0006 0418
+22:19:08.289 Send (due -1ms) task 06bd id 5600 message 0000 0001 0006 0000
+22:19:08.296 Send (due -1ms) task 2300 id 0002
+22:19:08.296 Free
+22:19:08.296 Deliver (due -38ms) task 0552 id 0041 message 98aa 0033 9a8e 0001
+22:19:08.297 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0007 0000
+22:19:08.303 Free
+22:19:08.303 Deliver (due -45ms) task 1c00 id 503a message 0000 0019
+22:19:08.331 Send (due -1ms) task 06bd id 5d00 message 0000 b0de
+22:19:08.331 Free
+22:19:08.331 Deliver (due -65ms) task 1f00 id 8025 message 0004 020a
+22:19:08.332 Free
+22:19:08.332 Deliver (due -65ms) task 1f00 id 0003
+22:19:08.332 Send (due 20000ms) task 1f00 id 0006
+22:19:08.332 Send (due -1ms) task 1f00 id 8025 message 0001 005f
+22:19:08.339 Free
+22:19:08.339 Deliver (due -67ms) task 06bd id 470a
+22:19:08.339 Free
+22:19:08.339 Deliver (due -67ms) task 06bd id 4713
+22:19:08.340 Free
+22:19:08.340 Deliver (due -67ms) task 1000 id 0024 message 0000 0007
+22:19:08.341 Free
+22:19:08.347 Deliver (due -74ms) task 1000 id 0024 message 0000 0007
+22:19:08.347 Free
+22:19:08.347 Deliver (due -66ms) task 06bd id 470c
+22:19:08.348 Free
+22:19:08.348 Deliver (due -67ms) task 1f00 id 8025 message 0006 0f00
+22:19:08.349 Free
+22:19:08.349 Deliver (due -61ms) task 1f00 id 8025 message 0005 0a00
+22:19:08.355 Free
+22:19:08.355 Deliver (due -67ms) task 06bd id 5600 message 0000 0001 0006 0000
+22:19:08.355 Send (due -1ms) task 0552 id 0008 message 0000 0000
+22:19:08.355 Send (due -1ms) task 0552 id 000b message 06bd 0002
+22:19:08.356 Free
+22:19:08.356 Deliver (due -61ms) task 2300 id 0002
+22:19:08.362 Free
+22:19:08.362 Deliver (due -66ms) task 0552 id 8007 message 0840 0010 0000 0001 0007 0000
+22:19:08.362 Send (due -1ms) task 98aa id 5030 message 0000 0001 0007 0000
+22:19:08.363 Free
+22:19:08.363 Deliver (due -33ms) task 06bd id 5d00 message 0000 b0de
+22:19:08.370 Free
+22:19:08.370 Deliver (due -39ms) task 1f00 id 8025 message 0001 005f
+22:19:08.370 Free
+22:19:08.370 Deliver (due -16ms) task 0552 id 0008 message 0000 0000
+22:19:08.370 Free
+22:19:08.370 Deliver (due -16ms) task 0552 id 000b message 06bd 0002
+22:19:08.371 Send (due -1ms) task 0552 id 8004 message 0e59 0010 0000 0001
+22:19:08.378 Free
+22:19:08.378 Deliver (due -17ms) task 98aa id 5030 message 0000 0001 0007 0000
+22:19:08.378 Send (due -1ms) task 0552 id 0041 message 98aa 0030 9ac1 0000
+22:19:08.378 Send (due -1ms) task 0552 id 8004 message 0e45 0010 0000 0001
+22:19:08.385 Free
+22:19:08.385 Deliver (due -15ms) task 0552 id 8004 message 0e59 0010 0000 0001
+22:19:08.385 Free
+22:19:08.385 Deliver (due -8ms) task 0552 id 0041 message 98aa 0030 9ac1 0000
+22:19:08.401 Free
+22:19:08.401 Deliver (due -24ms) task 0552 id 8004 message 0e45 0010 0000 0001
+22:19:08.402 Send (due -1ms) task 0552 id 8007 message 0840 0010 0000 0001 0008 0000
+22:19:08.408 Send (due -1ms) task 06bd id 5055 message 0000 ae7e
+22:19:08.408 Free
+22:19:08.408 Deliver (due -7ms) task 0552 id 8007 message 0840 0010 0000 0001 0008 0000
+22:19:08.416 Send (due -1ms) task 98aa id 5030 message 0000 0001 0008 0001
+22:19:08.416 Free
+22:19:08.416 Deliver (due -9ms) task 06bd id 5055 message 0000 ae7e
+22:19:08.416 Send (due -1ms) task 0552 id 0009 message 06bd ae7e
+22:19:08.416 Free
+22:19:08.416 Deliver (due -1ms) task 98aa id 5030 message 0000 0001 0008 0001
+22:19:08.423 Send (due -1ms) task 06bd id 5e00 message 0000 0000 0000 0000
+22:19:08.423 Free
+22:19:08.423 Deliver (due -8ms) task 0552 id 0009 message 06bd ae7e
+22:19:08.423 Free
+22:19:08.424 Send (due -1ms) task 0552 id 8004 message 0e58 0010 0000 0004
+22:19:08.430 Deliver (due -8ms) task 06bd id 5e00 message 0000 0000 0000 0000
+22:19:08.430 Free
+22:19:08.430 Deliver (due -7ms) task 0552 id 8004 message 0e58 0010 0000 0004
+22:19:08.437 Send (due -1ms) task 06bd id 5008 message 0000 0004
+22:19:08.437 Free
+22:19:08.437 Deliver (due -1ms) task 06bd id 5008 message 0000 0004
+22:19:08.437 Send (due -1ms) task 0552 id 0007 message 06bd acb6
+22:19:08.438 Free
+22:19:08.438 Deliver (due -2ms) task 0552 id 0007 message 06bd acb6
+22:19:08.444 Free
+22:19:08.445 Send (due -1ms) task 0552 id 8004 message 0e14 0010 0000 c572 0000 0000 0000 0000 0000 0000 0000 01b2 0000 000f 0000 0000
+22:19:08.451 Deliver (due -7ms) task 0552 id 8004 message 0e14 0010 0000 c572 0000 0000 0000 0000 0000 0000 0000 01b2 0000 000f 0000 0000
+22:19:08.451 Send (due -1ms) task 06bd id 5007 message 0000 0009 0043 0053 0052 0038 0036 0037 0030 002d 0035 0000 0000 0000 0000 0000
+22:19:08.468 Free
+22:19:08.468 Deliver (due -18ms) task 06bd id 5007 message 0000 0009 0043 0053 0052 0038 0036 0037 0030 002d 0035 0000 0000 0000 0000 0000
+22:19:08.470 Send (due -1ms) task 0552 id 000d message 0000 002d 2300 0004
+22:19:08.476 Free
+22:19:08.476 Deliver (due -7ms) task 0552 id 000d message 0000 002d 2300 0004
+22:19:08.477 Send (due -1ms) task 0552 id 8004 message 0e52 0010 0000 0001
+22:19:08.484 Free
+22:19:08.491 Deliver (due -15ms) task 0552 id 8004 message 0e52 0010 0000 0001
+22:19:08.491 Free
+22:19:08.997 Deliver (due 0ms) task 06bd id 4001
+22:19:08.997 Cancel (due 29006ms) task 06bd id 4718
+22:19:08.997 Cancel (due 1982ms) task 06bd id 4785
+22:19:08.999 Send (due -1ms) task 0552 id 002c message 0800 0012
+22:19:08.999 Send (due -1ms) task 0552 id 0030 message 0002 b92e
+22:19:08.999 Send (due -1ms) task 06bd id 4786
+22:19:09.008 Send (due -1ms) task 06bd id 470a
+22:19:09.008 Send (due -1ms) task 06bd id 4713
+22:19:09.009 Send (due -1ms) task 1000 id 0024 message 0000 0007
+22:19:09.009 Send (due -1ms) task 1000 id 0024 message 0000 0007
+22:19:09.156 Send (due 900000ms) task 06bd id 4737
+22:19:09.157 Send (due 3000ms) task 06bd id 4720
+22:19:09.157 Send (due -1ms) task 06bd id 47e1
+22:19:09.157 Send (due -1ms) task 06bd id 47bd
+22:19:09.157 Free
+22:19:09.158 Deliver (due -160ms) task 0552 id 002c message 0800 0012
+22:19:09.164 Free
+22:19:09.164 Deliver (due -166ms) task 0552 id 0030 message 0002 b92e
+22:19:09.164 Free
+22:19:09.164 Deliver (due -166ms) task 06bd id 4786
+22:19:09.166 Free
+22:19:09.166 Deliver (due -164ms) task 1f00 id 0004
+22:19:09.167 Send (due -1ms) task 0552 id 8004 message 0e1c 0010 0000 0004
+22:19:09.167 Send (due -1ms) task 0552 id 8004 message 0e1a 0010 0000 0012
+22:19:09.170 Send (due -1ms) task 0504 id 8022 message ba5d adda
+22:19:09.172 Send (due -1ms) task 06bd id 7805 message 0001 0007
+22:19:09.179 Send (due 1000ms) task 1f00 id 0004
+22:19:09.179 Free
+22:19:09.179 Deliver (due -172ms) task 06bd id 470a
+22:19:09.180 Free
+22:19:09.181 Deliver (due -174ms) task 06bd id 4713
+22:19:09.182 Free
+22:19:09.183 Deliver (due -175ms) task 1000 id 0024 message 0000 0007
+22:19:09.183 Free
+22:19:09.187 Deliver (due -179ms) task 1000 id 0024 message 0000 0007
+22:19:09.187 Free
+22:19:09.187 Deliver (due -31ms) task 06bd id 47e1
+22:19:09.189 Free
+22:19:09.189 Deliver (due -33ms) task 06bd id 47bd
+22:19:09.191 Free
+22:19:09.191 Deliver (due -25ms) task 0552 id 8004 message 0e1c 0010 0000 0004
+22:19:09.195 Free
+22:19:09.195 Deliver (due -29ms) task 0552 id 8004 message 0e1a 0010 0000 0012
+22:19:09.195 Free
+22:19:09.195 Deliver (due -26ms) task 0504 id 8022 message ba5d adda
+22:19:09.196 Free
+22:19:09.196 Deliver (due -25ms) task 06bd id 7805 message 0001 0007
+22:19:09.202 Send (due -1ms) task 06bd id 470c
+22:19:09.203 Free
+22:19:09.203 Deliver (due -2ms) task 06bd id 470c
+22:19:09.205 Free
+22:19:10.179 Deliver (due 0ms) task 1f00 id 0004
+22:19:10.179 Send (due 1000ms) task 1f00 id 0004
+22:19:10.179 Free
+22:19:11.179 Deliver (due 0ms) task 1f00 id 0004
+22:19:11.179 Send (due 1000ms) task 1f00 id 0004
+22:19:11.179 Free
+22:19:12.157 Deliver (due 0ms) task 06bd id 4720
+22:19:12.159 Free
+22:19:12.179 Deliver (due 0ms) task 1f00 id 0004
+22:19:12.179 Send (due 1000ms) task 1f00 id 0004
+22:19:12.179 Free
+22:19:13.179 Deliver (due 0ms) task 1f00 id 0004
+22:19:13.179 Send (due 1000ms) task 1f00 id 0004
+22:19:13.179 Free
+22:19:14.180 Deliver (due -1ms) task 1f00 id 0004
+22:19:14.180 Send (due 1000ms) task 1f00 id 0004
+22:19:14.180 Free
+22:19:15.180 Deliver (due 0ms) task 1f00 id 0004
+22:19:15.181 Send (due 1000ms) task 1f00 id 0004
+22:19:15.181 Free
+22:19:16.181 Deliver (due 0ms) task 1f00 id 0004
+22:19:16.182 Send (due 1000ms) task 1f00 id 0004
+22:19:16.182 Free
+22:19:17.182 Deliver (due 0ms) task 1f00 id 0004
+22:19:17.182 Send (due 1000ms) task 1f00 id 0004
+22:19:17.182 Free
+22:19:18.182 Deliver (due 0ms) task 1f00 id 0004
+22:19:18.182 Send (due 1000ms) task 1f00 id 0004
+22:19:18.182 Free
+22:19:19.037 Send (due -1ms) task 1a00 id 8023 message 0008 0000 6da9 0000
+22:19:19.037 Deliver (due -1ms) task 1a00 id 8023 message 0008 0000 6da9 0000
+22:19:19.038 Send (due -1ms) task 0552 id 002c message 0800 0012
+22:19:19.038 Send (due -1ms) task 0552 id 0030 message 0002 adda
+22:19:19.039 Send (due 60000ms) task 06bd id 472f
+22:19:19.039 Send (due 1000ms) task 1a00 id 0002
+22:19:19.039 Send (due 800ms) task 1a00 id 0003
+22:19:19.039 Free
+22:19:19.039 Deliver (due -2ms) task 0552 id 002c message 0800 0012
+22:19:19.039 Free
+22:19:19.040 Deliver (due -3ms) task 0552 id 0030 message 0002 adda
+22:19:19.040 Send (due -1ms) task 0552 id 8004 message 0e1c 0010 0000 0012
+22:19:19.041 Send (due -1ms) task 0552 id 8004 message 0e1a 0010 0000 0012
+22:19:19.136 Free
+22:19:19.136 Deliver (due -97ms) task 0552 id 8004 message 0e1c 0010 0000 0012
+22:19:19.143 Free
+22:19:19.143 Deliver (due -103ms) task 0552 id 8004 message 0e1a 0010 0000 0012
+22:19:19.144 Free
+22:19:19.182 Deliver (due 0ms) task 1f00 id 0004
+22:19:19.182 Send (due 1000ms) task 1f00 id 0004
+22:19:19.183 Free
+22:19:19.400 Send (due -1ms) task 1a00 id 8023 message 0000 0000 6f14 0000
+22:19:19.400 Deliver (due -1ms) task 1a00 id 8023 message 0000 0000 6f14 0000
+22:19:19.401 Send (due 500ms) task 1a00 id 0001
+22:19:19.402 Cancel (due 637ms) task 1a00 id 0002
+22:19:19.402 Cancel (due 437ms) task 1a00 id 0003
+22:19:19.402 Free
+22:19:19.901 Deliver (due 0ms) task 1a00 id 0001
+22:19:19.901 Send (due -1ms) task 06bd id 40bd
+22:19:19.902 Free
+22:19:19.902 Deliver (due -2ms) task 06bd id 40bd
+22:19:19.904 Send (due -1ms) task 06bd id 4800
+22:19:19.908 Send (due -1ms) task a438 id 7009 message 004e 001f 0001 06bd fc7c 4002
+22:19:19.908 Send (due -1ms) task 06bd id 4757
+22:19:19.908 Send (due -1ms) task 06bd id 47b2
+22:19:19.908 Free
+22:19:19.908 Deliver (due -5ms) task 06bd id 4800
+22:19:19.910 Send (due -1ms) task 0552 id 002c message 0800 0012
+22:19:19.911 Send (due -1ms) task 0552 id 0030 message 0002 ade2
+22:19:19.911 Send (due -1ms) task 0552 id 0036 message 06bd 0001 009e 8b01 0000 0000
+22:19:19.911 Send (due -1ms) task 0504 id 8022 message ba5d ade2
+22:19:20.054 Send (due -1ms) task 0552 id 002d message 0800 0012
+22:19:20.054 Cancel (due -144ms) task 0552 id 0030 message 0002 ade2
+22:19:20.054 Send (due -1ms) task 0552 id 0030 message 0003 ade2
+22:19:20.062 Send (due -1ms) task 0552 id 006b message 4000 0032
+22:19:20.066 Send (due -1ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0000
+22:19:20.066 Send (due 5000ms) task 06bd id 473d
+22:19:20.069 Free
+22:19:20.069 Deliver (due -162ms) task a438 id 7009 message 004e 001f 0001 06bd fc7c 4002
+22:19:20.072 Free
+22:19:20.072 Deliver (due -163ms) task 0552 id 002c message 0800 0012
+22:19:20.072 Free
+22:19:20.074 Send (due -1ms) task 0552 id 8004 message 0e1c 0010 0000 0012
+22:19:20.077 Deliver (due -167ms) task 0552 id 0036 message 06bd 0001 009e 8b01 0000 0000
+22:19:20.078 Send (due -1ms) task 0552 id 8004 message 0e3a 0010 0000 0012
+22:19:20.084 Free
+22:19:20.084 Deliver (due -174ms) task 0504 id 8022 message ba5d ade2
+22:19:20.084 Free
+22:19:20.084 Deliver (due -31ms) task 0552 id 002d message 0800 0012
+22:19:20.091 Free
+22:19:20.091 Deliver (due -38ms) task 0552 id 0030 message 0003 ade2
+22:19:20.091 Free
+22:19:20.092 Deliver (due -31ms) task 0552 id 006b message 4000 0032
+22:19:20.093 Send (due -1ms) task 0552 id 8004 message 0e1e 0010 0000 0000
+22:19:20.093 Send (due -1ms) task 0552 id 8004 message 0e1a 0010 0000 0012
+22:19:20.099 Free
+22:19:20.099 Deliver (due -34ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0000
+22:19:20.106 Free
+22:19:20.106 Deliver (due -33ms) task 0552 id 8004 message 0e1c 0010 0000 0012
+22:19:20.106 Send (due -1ms) task 0552 id 8004 message 0e18 0010 0000 0012
+22:19:20.125 Free
+22:19:20.125 Deliver (due -48ms) task 0552 id 8004 message 0e3a 0010 0000 0012
+22:19:20.125 Send (due -1ms) task 06bd id 5054 message 0000 b084
+22:19:20.125 Free
+22:19:20.126 Send (due -1ms) task 0552 id 8004 message 0e05 0010 0000 0012
+22:19:20.133 Deliver (due -41ms) task 0552 id 8004 message 0e1e 0010 0000 0000
+22:19:20.133 Free
+22:19:20.133 Deliver (due -41ms) task 0552 id 8004 message 0e1a 0010 0000 0012
+22:19:20.133 Free
+22:19:20.141 Deliver (due -36ms) task 0552 id 8004 message 0e18 0010 0000 0012
+22:19:20.141 Free
+22:19:20.141 Deliver (due -17ms) task 06bd id 5054 message 0000 b084
+22:19:20.141 Free
+22:19:20.141 Deliver (due -16ms) task 0552 id 8004 message 0e05 0010 0000 0012
+22:19:20.142 Free
+22:19:20.182 Deliver (due 0ms) task 1f00 id 0004
+22:19:20.182 Send (due 1000ms) task 1f00 id 0004
+22:19:20.182 Free
+22:19:21.182 Deliver (due 0ms) task 1f00 id 0004
+22:19:21.183 Send (due 1000ms) task 1f00 id 0004
+22:19:21.183 Free
+22:19:21.417 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a5 005b 0002 0001 0002 0024 0418 495e ffd3 c572 c552 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:21.417 Deliver (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a5 005b 0002 0001 0002 0024 0418 495e ffd3 c572 c552 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:21.476 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a5 005b 0002 0024 0418 495e 0001 0000 ffd3 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:21.491 Free
+22:19:21.491 Deliver (due -16ms) task 06bd id 5005 message 0001 0000 a1a5 005b 0002 0024 0418 495e 0001 0000 ffd3 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:21.505 Send (due 1000ms) task 06bd id 47f7 message 0001 0059
+22:19:21.507 Free
+22:19:21.868 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a5 005b 0002 0001 0002 0024 0418 495e ffd6 c552 c532 0000 0000 0000 0000 0000 0000 f60a 9b6f 288b 0001 0000 0000 0000
+22:19:21.868 Deliver (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a5 005b 0002 0001 0002 0024 0418 495e ffd6 c552 c532 0000 0000 0000 0000 0000 0000 f60a 9b6f 288b 0001 0000 0000 0000
+22:19:21.908 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a7 005b 0002 0001 0002 0024 0418 49f7 ffd4 c572 c512 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:21.975 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a5 005b 0002 0024 0418 495e 0001 0000 ffd6 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:21.990 Free
+22:19:21.991 Deliver (due -84ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a7 005b 0002 0001 0002 0024 0418 49f7 ffd4 c572 c512 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:21.999 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a7 005b 0002 0024 0418 49f7 0001 0000 ffd4 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:22.007 Free
+22:19:22.007 Deliver (due -33ms) task 06bd id 5005 message 0001 0000 a1a5 005b 0002 0024 0418 495e 0001 0000 ffd6 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:22.039 Cancel (due 466ms) task 06bd id 47f7 message 0001 0059
+22:19:22.039 Send (due 1000ms) task 06bd id 47f7 message 0001 03e0
+22:19:22.039 Free
+22:19:22.039 Deliver (due -41ms) task 06bd id 5005 message 0001 0000 a1a7 005b 0002 0024 0418 49f7 0001 0000 ffd4 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:22.056 Cancel (due 983ms) task 06bd id 47f7 message 0001 03e0
+22:19:22.056 Send (due 1000ms) task 06bd id 47f7 message 0001 0059
+22:19:22.056 Free
+22:19:22.183 Deliver (due 0ms) task 1f00 id 0004
+22:19:22.183 Send (due 1000ms) task 1f00 id 0004
+22:19:22.183 Free
+22:19:22.254 Send (due -1ms) task a438 id 8026 message 2ea6 ba54
+22:19:22.255 Deliver (due -2ms) task a438 id 8026 message 2ea6 ba54
+22:19:22.255 Send (due -1ms) task 06bd id 7307
+22:19:22.256 Free
+22:19:22.256 Deliver (due -2349ms) task 06bd id 4757
+22:19:22.258 Free
+22:19:22.258 Deliver (due -2351ms) task 06bd id 47b2
+22:19:22.260 Free
+22:19:22.260 Deliver (due -6ms) task 06bd id 7307
+22:19:22.261 Free
+22:19:22.539 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a7 005b 0002 0001 0002 0024 0418 49f7 ffd4 c512 c532 0000 0000 0000 0000 0000 0000 f60a 9b6f 288b 0001 0000 0000 0000
+22:19:22.539 Deliver (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a7 005b 0002 0001 0002 0024 0418 49f7 ffd4 c512 c532 0000 0000 0000 0000 0000 0000 f60a 9b6f 288b 0001 0000 0000 0000
+22:19:22.734 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a7 005b 0002 0024 0418 49f7 0001 0000 ffd4 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0001 03e0 221a 0000 0000 1300 7963 0000 0317 1300 7963 0000 8b15 bd00 0506 3a50 0079
+22:19:22.747 Free
+22:19:22.747 Deliver (due -14ms) task 06bd id 5005 message 0001 0000 a1a7 005b 0002 0024 0418 49f7 0001 0000 ffd4 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0001 03e0 221a 0000 0000 1300 7963 0000 0317 1300 7963 0000 8b15 bd00 0506 3a50 0079
+22:19:22.759 Cancel (due 297ms) task 06bd id 47f7 message 0001 0059
+22:19:22.762 Send (due 1000ms) task 06bd id 47f7 message 0001 05d0
+22:19:22.762 Free
+22:19:23.183 Deliver (due 0ms) task 1f00 id 0004
+22:19:23.184 Send (due 1000ms) task 1f00 id 0004
+22:19:23.184 Free
+22:19:23.762 Deliver (due 0ms) task 06bd id 47f7 message 0001 05d0
+22:19:23.764 Free
+22:19:24.185 Deliver (due -1ms) task 1f00 id 0004
+22:19:24.185 Send (due 1000ms) task 1f00 id 0004
+22:19:24.185 Free
+22:19:25.066 Deliver (due 0ms) task 06bd id 473d
+22:19:25.066 Send (due 5000ms) task 06bd id 473d
+22:19:25.070 Send (due -1ms) task a438 id 7007 message 968f 0001 0000 4002
+22:19:25.070 Send (due -1ms) task 06bd id 4757
+22:19:25.070 Free
+22:19:25.070 Deliver (due -1ms) task a438 id 7007 message 968f 0001 0000 4002
+22:19:25.074 Free
+22:19:25.185 Deliver (due 0ms) task 1f00 id 0004
+22:19:25.185 Send (due 1000ms) task 1f00 id 0004
+22:19:25.185 Free
+22:19:25.311 Send (due -1ms) task 0552 id 8004 message 001e 0010
+22:19:25.312 Deliver (due -2ms) task 0552 id 8004 message 001e 0010
+22:19:25.312 Free
+22:19:25.563 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a7 005b 0002 0001 0002 0024 0418 49f7 ffd4 c532 c572 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:25.563 Deliver (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a7 005b 0002 0001 0002 0024 0418 49f7 ffd4 c532 c572 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:25.603 Send (due -1ms) task a438 id 8026 message 2eb1 ba4c
+22:19:25.670 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a7 005b 0002 0024 0418 49f7 0001 0000 ffd4 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:25.677 Free
+22:19:25.677 Deliver (due -75ms) task a438 id 8026 message 2eb1 ba4c
+22:19:25.678 Free
+22:19:25.684 Deliver (due -615ms) task 06bd id 4757
+22:19:25.686 Free
+22:19:25.687 Deliver (due -18ms) task 06bd id 5005 message 0001 0000 a1a7 005b 0002 0024 0418 49f7 0001 0000 ffd4 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:25.697 Send (due 1000ms) task 06bd id 47f7 message 0001 ba4c
+22:19:25.697 Free
+22:19:25.733 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a7 005b 0002 0001 0002 0024 0418 49f8 ffd0 c572 c512 0000 0000 0000 0000 0000 0000 f60a 9b6f 288b 0001 0000 0000 0000
+22:19:25.733 Deliver (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a7 005b 0002 0001 0002 0024 0418 49f8 ffd0 c572 c512 0000 0000 0000 0000 0000 0000 f60a 9b6f 288b 0001 0000 0000 0000
+22:19:25.955 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a7 005b 0002 0024 0418 49f8 0001 0000 ffd0 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0087 1500 000f a438 8026 874e 0000 2eb1 ba4c 241a 0000 0000 1a00 0023 0000 0000 221a 0000
+22:19:25.971 Free
+22:19:25.971 Deliver (due -17ms) task 06bd id 5005 message 0001 0000 a1a7 005b 0002 0024 0418 49f8 0001 0000 ffd0 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0087 1500 000f a438 8026 874e 0000 2eb1 ba4c 241a 0000 0000 1a00 0023 0000 0000 221a 0000
+22:19:25.983 Cancel (due 714ms) task 06bd id 47f7 message 0001 ba4c
+22:19:25.987 Send (due 1000ms) task 06bd id 47f7 message 0001 09b0
+22:19:25.987 Free
+22:19:26.090 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a5 005b 0002 0001 0002 0024 0418 495e ffa8 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:26.090 Deliver (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a5 005b 0002 0001 0002 0024 0418 495e ffa8 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:26.090 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a5 005b 0002 0024 0418 495e 0001 0000 ffa8 0000 0000 ade6 0000 0000
+22:19:26.233 Free
+22:19:26.233 Deliver (due -144ms) task 06bd id 5005 message 0001 0000 a1a5 005b 0002 0024 0418 495e 0001 0000 ffa8 0000 0000 ade6 0000 0000
+22:19:26.233 Free
+22:19:26.233 Deliver (due -48ms) task 1f00 id 0004
+22:19:26.240 Send (due 1000ms) task 1f00 id 0004
+22:19:26.240 Free
+22:19:26.582 Send (due -1ms) task 0552 id 8004 message 001e 0010
+22:19:26.582 Deliver (due -1ms) task 0552 id 8004 message 001e 0010
+22:19:26.582 Free
+22:19:26.666 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a7 005b 0002 0001 0002 0024 0418 49f8 ffd5 c512 c532 0000 0000 0000 0000 0000 0000 f60a 9b6f 288b 0001 0000 0000 0000
+22:19:26.670 Send (due -1ms) task 0552 id 8004 message 0601 0010 0000 0000 0000 0000 0000 0000
+22:19:26.689 Deliver (due -24ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a7 005b 0002 0001 0002 0024 0418 49f8 ffd5 c512 c532 0000 0000 0000 0000 0000 0000 f60a 9b6f 288b 0001 0000 0000 0000
+22:19:26.697 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a7 005b 0002 0024 0418 49f8 0001 0000 ffd5 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:26.710 Free
+22:19:26.710 Deliver (due -41ms) task 0552 id 8004 message 0601 0010 0000 0000 0000 0000 0000 0000
+22:19:26.710 Send (due -1ms) task 06bd id 5005 message 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 7fff 0000 0000 000f 0000 0000
+22:19:26.717 Free
+22:19:26.717 Deliver (due -21ms) task 06bd id 5005 message 0001 0000 a1a7 005b 0002 0024 0418 49f8 0001 0000 ffd5 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:26.718 Send (due -1ms) task 0552 id 8004 message 0e05 0010 0000 004e
+22:19:26.733 Cancel (due 254ms) task 06bd id 47f7 message 0001 09b0
+22:19:26.734 Send (due 999ms) task 06bd id 47f7 message 0001 b5e6
+22:19:26.734 Free
+22:19:26.734 Deliver (due -25ms) task 06bd id 5005 message 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 7fff 0000 0000 000f 0000 0000
+22:19:26.741 Send (due 2000ms) task 06bd id 473f
+22:19:26.742 Free
+22:19:26.742 Deliver (due -25ms) task 0552 id 8004 message 0e05 0010 0000 004e
+22:19:26.742 Free
+22:19:27.240 Deliver (due 0ms) task 1f00 id 0004
+22:19:27.240 Send (due 1000ms) task 1f00 id 0004
+22:19:27.240 Free
+22:19:27.733 Deliver (due 0ms) task 06bd id 47f7 message 0001 b5e6
+22:19:27.734 Free
+22:19:28.240 Deliver (due 0ms) task 1f00 id 0004
+22:19:28.240 Send (due 1000ms) task 1f00 id 0004
+22:19:28.240 Free
+22:19:28.267 Deliver (due -1ms) task 1f00 id 0000
+22:19:28.267 Send (due 20000ms) task 1f00 id 0000
+22:19:28.267 Free
+22:19:28.267 Send (due -1ms) task 1f00 id 8025 message 0004 020b
+22:19:28.267 Deliver (due -1ms) task 1f00 id 8025 message 0004 020b
+22:19:28.268 Free
+22:19:28.282 Deliver (due 0ms) task 1f00 id 0002
+22:19:28.282 Send (due -1ms) task 1f00 id 8025 message 0006 0efb
+22:19:28.282 Send (due 20000ms) task 1f00 id 0002
+22:19:28.282 Free
+22:19:28.282 Deliver (due -1ms) task 1f00 id 8025 message 0006 0efb
+22:19:28.282 Free
+22:19:28.314 Deliver (due -25ms) task 1f00 id 0001
+22:19:28.314 Send (due -1ms) task 1f00 id 8025 message 0005 09f4
+22:19:28.314 Send (due 20000ms) task 1f00 id 0001
+22:19:28.314 Free
+22:19:28.314 Deliver (due -1ms) task 1f00 id 8025 message 0005 09f4
+22:19:28.314 Free
+22:19:28.332 Deliver (due 0ms) task 1f00 id 0006
+22:19:28.332 Send (due 0ms) task 1f00 id 0003
+22:19:28.332 Free
+22:19:28.332 Deliver (due 0ms) task 1f00 id 0003
+22:19:28.332 Send (due 20000ms) task 1f00 id 0006
+22:19:28.332 Free
+22:19:28.333 Send (due -1ms) task 1f00 id 8025 message 0001 0062
+22:19:28.333 Deliver (due -1ms) task 1f00 id 8025 message 0001 0062
+22:19:28.333 Free
+22:19:28.442 Send (due -1ms) task 0552 id 8004 message 0347 0010 0000 0000 a1a7 005b 0002 0001 0024 0418 0000 0000 0000 0000 0000 0000
+22:19:28.442 Deliver (due -1ms) task 0552 id 8004 message 0347 0010 0000 0000 a1a7 005b 0002 0001 0024 0418 0000 0000 0000 0000 0000 0000
+22:19:28.442 Send (due -1ms) task 06bd id 501a message 0000 0000 a1a7 005b 0002 0001 0024 0418 0000 0001 0000 0000 0000 0000 0000 0000
+22:19:28.442 Free
+22:19:28.443 Deliver (due -2ms) task 06bd id 501a message 0000 0000 a1a7 005b 0002 0001 0024 0418 0000 0001 0000 0000 0000 0000 0000 0000
+22:19:28.484 Send (due -1ms) task 0552 id 8004 message 03cb 0010 0000 0000 a1a7 005b 0002 0000 0003 0000 0004 0000 0000 0000 0000 0000
+22:19:28.485 Send (due -1ms) task 0552 id 8004 message 03cc 0010 0000 0000 a1a7 005b 0002 0000 0024 0418 0004 0188 0000 000c 0000 0000
+22:19:28.589 Free
+22:19:28.589 Deliver (due -106ms) task 0552 id 8004 message 03cb 0010 0000 0000 a1a7 005b 0002 0000 0003 0000 0004 0000 0000 0000 0000 0000
+22:19:28.597 Send (due -1ms) task 06bd id 5027 message 0004 0003 0000 0000 0000 a1a7 005b 0002 0000 0000
+22:19:28.597 Free
+22:19:28.597 Deliver (due -113ms) task 0552 id 8004 message 03cc 0010 0000 0000 a1a7 005b 0002 0000 0024 0418 0004 0188 0000 000c 0000 0000
+22:19:28.606 Send (due -1ms) task 06bd id 5026 message 0000 0000 a1a7 005b 0002 0000 0000 0000
+22:19:28.606 Free
+22:19:28.607 Deliver (due -11ms) task 06bd id 5027 message 0004 0003 0000 0000 0000 a1a7 005b 0002 0000 0000
+22:19:28.607 Free
+22:19:28.607 Deliver (due -2ms) task 06bd id 5026 message 0000 0000 a1a7 005b 0002 0000 0000 0000
+22:19:28.618 Send (due -1ms) task 0552 id 0022 message 0000 0000 a1a7 005b 0002 0000 0003 0001 0000 0000 0000 0000 0000 000c 0000 0000
+22:19:28.618 Free
+22:19:28.618 Deliver (due -1ms) task 0552 id 0022 message 0000 0000 a1a7 005b 0002 0000 0003 0001 0000 0000 0000 0000 0000 000c 0000 0000
+22:19:28.628 Free
+22:19:28.741 Deliver (due 0ms) task 06bd id 473f
+22:19:28.746 Send (due -1ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0004
+22:19:28.749 Free
+22:19:28.749 Deliver (due -4ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0004
+22:19:28.749 Free
+22:19:28.752 Send (due -1ms) task 0552 id 8004 message 0e05 0010 0000 0000
+22:19:28.753 Deliver (due -2ms) task 0552 id 8004 message 0e05 0010 0000 0000
+22:19:28.753 Free
+22:19:29.106 Send (due -1ms) task 0552 id 8004 message 03cd 0010 0000 0000 a1a7 005b 0002 0000 0000 0000
+22:19:29.107 Deliver (due -2ms) task 0552 id 8004 message 03cd 0010 0000 0000 a1a7 005b 0002 0000 0000 0000
+22:19:29.107 Free
+22:19:29.107 Send (due -1ms) task 0552 id 8004 message 03c6 0010 0000 0000 a1a7 005b 0002 4000 0000 0001 b596 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:29.144 Deliver (due -38ms) task 0552 id 8004 message 03c6 0010 0000 0000 a1a7 005b 0002 4000 0000 0001 b596 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:29.144 Send (due -1ms) task 06bd id 5022 message 0000 a1a7 005b 0002 0000 0003 0001 930d
+22:19:29.145 Send (due -1ms) task 0552 id 8004 message 03ca 0010 0000 0000 a1a7 005b 0002 0000 0001 0001
+22:19:29.164 Free
+22:19:29.164 Send (due -1ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a7 005b 0002 0000
+22:19:29.168 Deliver (due -25ms) task 06bd id 5022 message 0000 a1a7 005b 0002 0000 0003 0001 930d
+22:19:29.168 Send (due -1ms) task 0552 id 0029 message 06bd 0000 a1a7 005b 0002 0001
+22:19:29.173 Send (due -1ms) task 0552 id 8004 message 03c7 0010 0002 0057 0000 0000 a1a7 005b 0002 0001
+22:19:29.176 Send (due -1ms) task 06bd id 4701
+22:19:29.185 Free
+22:19:29.185 Deliver (due -41ms) task 0552 id 8004 message 03ca 0010 0000 0000 a1a7 005b 0002 0000 0001 0001
+22:19:29.191 Send (due -1ms) task 06bd id 502f message 0000 0001 0001 0000 0000 a1a7 005b 0002 0000 0000
+22:19:29.191 Free
+22:19:29.192 Deliver (due -29ms) task 0552 id 8004 message 03c2 0010 0000 0000 a1a7 005b 0002 0000
+22:19:29.199 Free
+22:19:29.199 Deliver (due -32ms) task 0552 id 0029 message 06bd 0000 a1a7 005b 0002 0001
+22:19:29.199 Send (due -1ms) task 06bd id 505c message 0001 0000 a1a7 005b 0002 0000
+22:19:29.214 Free
+22:19:29.214 Deliver (due -42ms) task 0552 id 8004 message 03c7 0010 0002 0057 0000 0000 a1a7 005b 0002 0001
+22:19:29.214 Send (due -1ms) task 06bd id 502c message 0000 a1a7 005b 0002 0000 0000 0057 0001
+22:19:29.214 Free
+22:19:29.214 Deliver (due -39ms) task 06bd id 4701
+22:19:29.224 Send (due -1ms) task a438 id 7007 message 9452 0001 0000 4002
+22:19:29.224 Send (due -1ms) task 06bd id 4757
+22:19:29.224 Free
+22:19:29.224 Deliver (due -34ms) task 06bd id 502f message 0000 0001 0001 0000 0000 a1a7 005b 0002 0000 0000
+22:19:29.224 Free
+22:19:29.230 Deliver (due -32ms) task 06bd id 505c message 0001 0000 a1a7 005b 0002 0000
+22:19:29.230 Free
+22:19:29.230 Deliver (due -17ms) task 06bd id 502c message 0000 a1a7 005b 0002 0000 0000 0057 0001
+22:19:29.230 Send (due -1ms) task 0552 id 0020 message 0000 a1a7 005b 0002 0000 0000 0057 0001 0001 0000
+22:19:29.237 Free
+22:19:29.237 Deliver (due -14ms) task a438 id 7007 message 9452 0001 0000 4002
+22:19:29.240 Free
+22:19:29.240 Deliver (due -11ms) task 0552 id 0020 message 0000 a1a7 005b 0002 0000 0000 0057 0001 0001 0000
+22:19:29.241 Send (due -1ms) task 0552 id 8004 message 03d4 0010 0002 0057 0000 0000 a1a7 005b 0002 0001 0000 00c0 0000 0000 0000 0000
+22:19:29.242 Send (due -1ms) task 0552 id 8005 message 0542 0010 00c0 1201 0001 0000 a1a7 005b 0002 0057 0000 0000 0000 0000 0000 0000
+22:19:29.253 Free
+22:19:29.253 Deliver (due -13ms) task 1f00 id 0004
+22:19:29.253 Send (due 1000ms) task 1f00 id 0004
+22:19:29.260 Free
+22:19:29.260 Deliver (due -20ms) task 0552 id 8004 message 03d4 0010 0002 0057 0000 0000 a1a7 005b 0002 0001 0000 00c0 0000 0000 0000 0000
+22:19:29.260 Free
+22:19:29.260 Deliver (due -19ms) task 0552 id 8005 message 0542 0010 00c0 1201 0001 0000 a1a7 005b 0002 0057 0000 0000 0000 0000 0000 0000
+22:19:29.268 Send (due -1ms) task 1201 id 503d message 0000 a1a7 005b 0002 0057 0001 00c0 875b
+22:19:29.268 Free
+22:19:29.268 Deliver (due -1ms) task 1201 id 503d message 0000 a1a7 005b 0002 0057 0001 00c0 875b
+22:19:29.268 Send (due -1ms) task 0552 id 004e message 1201 0001 0001 0057 00c0 0000 0000 0000
+22:19:29.288 Free
+22:19:29.288 Deliver (due -21ms) task 0552 id 004e message 1201 0001 0001 0057 00c0 0000 0000 0000
+22:19:29.288 Free
+22:19:29.330 Send (due -1ms) task 0552 id 8005 message 0541 0010 00c0 1201 1201 0000 a1a7 005b 0002 0057 0000 0000 0000 0000 0000 02a0 ffff 0000 0000 0000 0000 0000 0000 0000 2b64 395f 0000 0000
+22:19:29.330 Deliver (due -1ms) task 0552 id 8005 message 0541 0010 00c0 1201 1201 0000 a1a7 005b 0002 0057 0000 0000 0000 0000 0000 02a0 ffff 0000 0000 0000 0000 0000 0000 0000 2b64 395f 0000 0000
+22:19:29.331 Send (due -1ms) task 1201 id 503c message 0000 0057 ba42 00c0 0000 a1a7 005b 0002 02a0 ffff 0001 0000 0000 0000 0000 0000 0000 ffff ffff ffff ffff 0000 0000 0000 0000 0000 0000 0000
+22:19:29.335 Send (due -1ms) task 0552 id 8004 message 0016 0010 0000 a1a7 005b 0002 0fa0 0000
+22:19:29.381 Send (due -1ms) task a438 id 8026 message 2eb7 ba46
+22:19:29.393 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a5 005b 0002 0001 0002 0024 0418 495e ffca c512 c572 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:29.535 Free
+22:19:29.542 Deliver (due -212ms) task 1201 id 503c message 0000 0057 ba42 00c0 0000 a1a7 005b 0002 02a0 ffff 0001 0000 0000 0000 0000 0000 0000 ffff ffff ffff ffff 0000 0000 0000 0000 0000 0000 0000
+22:19:29.542 Send (due -1ms) task 0552 id 0068 message ba42 0fa0
+22:19:29.542 Send (due -1ms) task 0552 id 0069 message ba42 0001 93b6 0001
+22:19:29.549 Free
+22:19:29.549 Deliver (due -215ms) task 0552 id 8004 message 0016 0010 0000 a1a7 005b 0002 0fa0 0000
+22:19:29.549 Send (due -1ms) task 06bd id 5003 message 0000 a1a7 005b 0002 0fa0 0000
+22:19:29.550 Free
+22:19:29.550 Deliver (due -170ms) task a438 id 8026 message 2eb7 ba46
+22:19:29.558 Free
+22:19:29.558 Deliver (due -335ms) task 06bd id 4757
+22:19:29.560 Free
+22:19:29.560 Deliver (due -168ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a5 005b 0002 0001 0002 0024 0418 495e ffca c512 c572 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:29.567 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a5 005b 0002 0024 0418 495e 0001 0000 ffca 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:29.588 Free
+22:19:29.588 Deliver (due -47ms) task 0552 id 0068 message ba42 0fa0
+22:19:29.588 Free
+22:19:29.588 Deliver (due -47ms) task 0552 id 0069 message ba42 0001 93b6 0001
+22:19:29.589 Send (due -1ms) task 0552 id 8004 message 0c37 0010 000c 0000 a1a7 005b 0002 0fa0
+22:19:29.596 Send (due -1ms) task 0552 id 8004 message 0345 0010 0000 0000 a1a7 005b 0002 0001
+22:19:29.603 Free
+22:19:29.603 Deliver (due -55ms) task 06bd id 5003 message 0000 a1a7 005b 0002 0fa0 0000
+22:19:29.603 Free
+22:19:29.610 Deliver (due -44ms) task 06bd id 5005 message 0001 0000 a1a5 005b 0002 0024 0418 495e 0001 0000 ffca 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:29.622 Send (due 1000ms) task 06bd id 47f7 message 0001 b36c
+22:19:29.622 Free
+22:19:29.622 Deliver (due -34ms) task 0552 id 8004 message 0c37 0010 000c 0000 a1a7 005b 0002 0fa0
+22:19:29.625 Free
+22:19:29.625 Deliver (due -30ms) task 0552 id 8004 message 0345 0010 0000 0000 a1a7 005b 0002 0001
+22:19:29.625 Free
+22:19:29.780 Send (due -1ms) task 0552 id 8005 message 0543 0010 00c0 1201 1201 0003 0000 0000
+22:19:29.780 Deliver (due -1ms) task 0552 id 8005 message 0543 0010 00c0 1201 1201 0003 0000 0000
+22:19:29.780 Send (due -1ms) task 1201 id 5041 message 0003 0000 ba42 0001
+22:19:29.780 Free
+22:19:29.781 Deliver (due -2ms) task 1201 id 5041 message 0003 0000 ba42 0001
+22:19:29.781 Send (due -1ms) task 0552 id 0053 message 0003 ba42
+22:19:29.781 Send (due -1ms) task 0552 id 0004 message 06bd 0078
+22:19:29.781 Cancel (due 285ms) task 06bd id 473d
+22:19:29.781 Send (due -1ms) task 0552 id 006b message 2000 01f8
+22:19:29.852 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd8 c572 c4f2 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:29.878 Send (due -1ms) task 0552 id 002c message 0800 0012
+22:19:29.878 Send (due -1ms) task 0552 id 0030 message 0003 02b0
+22:19:29.885 Send (due -1ms) task 0552 id 0036 message 06bd 0001 009e 8b01 5233 0000
+22:19:29.885 Send (due -1ms) task 0552 id 002d message 0800 0012
+22:19:29.885 Cancel (due -8ms) task 0552 id 0030 message 0003 02b0
+22:19:29.885 Send (due -1ms) task 0552 id 0030 message 0003 02b0
+22:19:29.894 Send (due -1ms) task 0552 id 006b message 4000 b39c
+22:19:29.899 Send (due -1ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0001
+22:19:29.899 Send (due 5000ms) task 06bd id 473d
+22:19:29.901 Send (due -1ms) task 06bd id 47f9
+22:19:29.901 Free
+22:19:29.901 Deliver (due -121ms) task 0552 id 0053 message 0003 ba42
+22:19:29.902 Send (due -1ms) task 0500 id 8029 message 2ebd 0000
+22:19:29.902 Free
+22:19:29.902 Deliver (due -122ms) task 0552 id 0004 message 06bd 0078
+22:19:29.909 Free
+22:19:29.909 Deliver (due -129ms) task 0552 id 006b message 2000 01f8
+22:19:29.909 Free
+22:19:29.909 Deliver (due -58ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd8 c572 c4f2 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:29.911 Send (due -1ms) task 0552 id 8004 message 0602 0010 0000 0001
+22:19:29.911 Send (due -1ms) task 0552 id 8004 message 0e18 0010 0000 0001
+22:19:29.924 Send (due -2ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd8 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 1500 0017 06bd 5003 96b8 0000 0000 a1a7 005b 0002 0fa0 0000 221a 0000 0000 1300 96ef 0000
+22:19:29.944 Free
+22:19:29.944 Deliver (due -67ms) task 0552 id 002c message 0800 0012
+22:19:29.944 Free
+22:19:29.944 Deliver (due -60ms) task 0552 id 0036 message 06bd 0001 009e 8b01 5233 0000
+22:19:29.945 Send (due -1ms) task 0552 id 8004 message 0e1c 0010 0000 0012
+22:19:29.951 Free
+22:19:29.951 Deliver (due -67ms) task 0552 id 002d message 0800 0012
+22:19:29.952 Send (due -1ms) task 0552 id 8004 message 0e3a 0010 0000 0012
+22:19:29.958 Free
+22:19:29.958 Deliver (due -74ms) task 0552 id 0030 message 0003 02b0
+22:19:29.965 Free
+22:19:29.965 Deliver (due -72ms) task 0552 id 006b message 4000 b39c
+22:19:29.966 Free
+22:19:29.966 Deliver (due -68ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0001
+22:19:29.972 Send (due -1ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0004
+22:19:29.972 Free
+22:19:29.972 Deliver (due -72ms) task 06bd id 47f9
+22:19:29.979 Send (due -1ms) task a438 id 7009 message 0056 0027 0001 06bd fc7c 4002
+22:19:29.980 Send (due -1ms) task 06bd id 4757
+22:19:29.981 Send (due -1ms) task 0504 id 8022 message ba5d ada6
+22:19:29.981 Send (due -1ms) task 06bd id 47b2
+22:19:29.981 Free
+22:19:29.982 Deliver (due -81ms) task 0500 id 8029 message 2ebd 0000
+22:19:29.982 Free
+22:19:29.982 Deliver (due -72ms) task 0552 id 8004 message 0602 0010 0000 0001
+22:19:29.982 Send (due -1ms) task 0552 id 8004 message 0e1e 0010 0000 0000
+22:19:29.989 Send (due -1ms) task 06bd id 5005 message 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 7fff 0000 0000 000f 0000 0000
+22:19:30.008 Free
+22:19:30.008 Deliver (due -98ms) task 0552 id 8004 message 0e18 0010 0000 0001
+22:19:30.009 Free
+22:19:30.009 Deliver (due -87ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd8 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 1500 0017 06bd 5003 96b8 0000 0000 a1a7 005b 0002 0fa0 0000 221a 0000 0000 1300 96ef 0000
+22:19:30.009 Send (due -1ms) task 0552 id 8004 message 0e1a 0010 0000 0012
+22:19:30.026 Cancel (due 596ms) task 06bd id 47f7 message 0001 b36c
+22:19:30.027 Send (due 1000ms) task 06bd id 47f7 message 0001 b596
+22:19:30.027 Free
+22:19:30.027 Deliver (due -83ms) task 0552 id 8004 message 0e1c 0010 0000 0012
+22:19:30.027 Send (due -1ms) task 0552 id 8004 message 0e18 0010 0000 0012
+22:19:30.030 Free
+22:19:30.030 Deliver (due -79ms) task 0552 id 8004 message 0e3a 0010 0000 0012
+22:19:30.030 Send (due -1ms) task 06bd id 5054 message 0000 b596
+22:19:30.030 Send (due -1ms) task 0552 id 8004 message 0e05 0010 0000 0012
+22:19:30.037 Free
+22:19:30.037 Deliver (due -66ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0004
+22:19:30.044 Free
+22:19:30.044 Deliver (due -66ms) task a438 id 7009 message 0056 0027 0001 06bd fc7c 4002
+22:19:30.048 Free
+22:19:30.048 Deliver (due -68ms) task 0504 id 8022 message ba5d ada6
+22:19:30.052 Free
+22:19:30.052 Deliver (due -71ms) task 0552 id 8004 message 0e1e 0010 0000 0000
+22:19:30.052 Free
+22:19:30.053 Deliver (due -65ms) task 06bd id 5005 message 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 7fff 0000 0000 000f 0000 0000
+22:19:30.054 Send (due -1ms) task 0552 id 8004 message 0e05 0010 0000 0012
+22:19:30.061 Send (due 2000ms) task 06bd id 473f
+22:19:30.061 Free
+22:19:30.061 Deliver (due -53ms) task 0552 id 8004 message 0e1a 0010 0000 0012
+22:19:30.062 Free
+22:19:30.062 Deliver (due -36ms) task 0552 id 8004 message 0e18 0010 0000 0012
+22:19:30.076 Free
+22:19:30.076 Deliver (due -47ms) task 06bd id 5054 message 0000 b596
+22:19:30.076 Free
+22:19:30.077 Deliver (due -48ms) task 0552 id 8004 message 0e05 0010 0000 0012
+22:19:30.077 Free
+22:19:30.077 Deliver (due -24ms) task 0552 id 8004 message 0e05 0010 0000 0012
+22:19:30.083 Free
+22:19:30.253 Deliver (due 0ms) task 1f00 id 0004
+22:19:30.254 Send (due 1000ms) task 1f00 id 0004
+22:19:30.254 Free
+22:19:30.269 Send (due -1ms) task 0552 id 8004 message 0348 0010 0000 0000 a1a7 005b 0002 0013 0001 0000
+22:19:30.269 Deliver (due -1ms) task 0552 id 8004 message 0348 0010 0000 0000 a1a7 005b 0002 0013 0001 0000
+22:19:30.270 Send (due -1ms) task 06bd id 501b message 0000 0000 a1a7 005b 0002 0013
+22:19:30.270 Free
+22:19:30.270 Deliver (due -1ms) task 06bd id 501b message 0000 0000 a1a7 005b 0002 0013
+22:19:30.270 Free
+22:19:30.343 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd5 c592 c572 0000 0000 0000 0000 0000 0000 0042 0004 c5e7 3b92 14df 0000 0000
+22:19:30.343 Deliver (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd5 c592 c572 0000 0000 0000 0000 0000 0000 0042 0004 c5e7 3b92 14df 0000 0000
+22:19:30.565 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd5 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:30.579 Free
+22:19:30.579 Deliver (due -15ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd5 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:30.592 Cancel (due 435ms) task 06bd id 47f7 message 0001 b596
+22:19:30.595 Send (due 1000ms) task 06bd id 47f7 message 0001 1200
+22:19:30.595 Free
+22:19:30.944 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd4 c572 c532 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:30.944 Deliver (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd4 c572 c532 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:30.984 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd3 c592 c512 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:31.072 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd4 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:31.087 Free
+22:19:31.087 Deliver (due -104ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd3 c592 c512 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:31.096 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd3 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:31.102 Free
+22:19:31.102 Deliver (due -31ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd4 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:31.133 Cancel (due 462ms) task 06bd id 47f7 message 0001 1200
+22:19:31.133 Send (due 1000ms) task 06bd id 47f7 message 0001 15e0
+22:19:31.134 Free
+22:19:31.134 Deliver (due -39ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd3 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:31.148 Cancel (due 985ms) task 06bd id 47f7 message 0001 15e0
+22:19:31.148 Send (due 1000ms) task 06bd id 47f7 message 0001 1200
+22:19:31.149 Free
+22:19:31.254 Deliver (due 0ms) task 1f00 id 0004
+22:19:31.254 Send (due 1000ms) task 1f00 id 0004
+22:19:31.254 Free
+22:19:31.405 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd0 c512 c532 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:31.405 Deliver (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd0 c512 c532 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:31.576 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd2 c592 c552 0000 0000 0000 0000 0000 0000 0042 0004 c5e7 3b92 14df 0000 0000
+22:19:31.640 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd0 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0001 15e0 221a 0000 0000 1300 9cea 0000 0317 1300 9cea 0000 8b15 bd00 0506 c350 009c
+22:19:31.656 Free
+22:19:31.656 Deliver (due -81ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd2 c592 c552 0000 0000 0000 0000 0000 0000 0042 0004 c5e7 3b92 14df 0000 0000
+22:19:31.664 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd2 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:31.672 Free
+22:19:31.672 Deliver (due -33ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd0 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0001 15e0 221a 0000 0000 1300 9cea 0000 0317 1300 9cea 0000 8b15 bd00 0506 c350 009c
+22:19:31.699 Cancel (due 449ms) task 06bd id 47f7 message 0001 1200
+22:19:31.699 Send (due 1000ms) task 06bd id 47f7 message 0001 0044
+22:19:31.700 Free
+22:19:31.700 Deliver (due -37ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd2 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:31.714 Cancel (due 985ms) task 06bd id 47f7 message 0001 0044
+22:19:31.715 Send (due 1000ms) task 06bd id 47f7 message 0001 1200
+22:19:31.715 Free
+22:19:31.831 Send (due -1ms) task a438 id 8026 message 2ebf ba7f
+22:19:31.832 Deliver (due -2ms) task a438 id 8026 message 2ebf ba7f
+22:19:31.832 Send (due -1ms) task 06bd id 7307
+22:19:31.833 Free
+22:19:31.833 Deliver (due -1854ms) task 06bd id 4757
+22:19:31.835 Free
+22:19:31.835 Deliver (due -1855ms) task 06bd id 47b2
+22:19:31.837 Free
+22:19:31.837 Deliver (due -6ms) task 06bd id 7307
+22:19:31.837 Free
+22:19:32.037 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd3 c552 c532 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:32.037 Deliver (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd3 c552 c532 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:32.194 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd3 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0001 0044 221a 0000 0000 1300 9f20 0000 0317 1300 9f20 0000 8b15 bd00 0506 fb50 009e
+22:19:32.208 Free
+22:19:32.208 Deliver (due -147ms) task 06bd id 473f
+22:19:32.213 Send (due -1ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0004
+22:19:32.215 Free
+22:19:32.217 Deliver (due -24ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd3 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0001 0044 221a 0000 0000 1300 9f20 0000 0317 1300 9f20 0000 8b15 bd00 0506 fb50 009e
+22:19:32.229 Cancel (due 486ms) task 06bd id 47f7 message 0001 1200
+22:19:32.230 Send (due 1000ms) task 06bd id 47f7 message 0001 1bb0
+22:19:32.230 Free
+22:19:32.230 Deliver (due -18ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0004
+22:19:32.233 Send (due -1ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0000
+22:19:32.233 Free
+22:19:32.254 Deliver (due 0ms) task 1f00 id 0004
+22:19:32.254 Send (due 1000ms) task 1f00 id 0004
+22:19:32.254 Free
+22:19:33.231 Deliver (due -1ms) task 06bd id 47f7 message 0001 1bb0
+22:19:33.233 Free
+22:19:33.254 Deliver (due 0ms) task 1f00 id 0004
+22:19:33.254 Send (due 1000ms) task 1f00 id 0004
+22:19:33.254 Free
+22:19:34.254 Deliver (due 0ms) task 1f00 id 0004
+22:19:34.254 Send (due 1000ms) task 1f00 id 0004
+22:19:34.254 Free
+22:19:34.899 Deliver (due 0ms) task 06bd id 473d
+22:19:34.899 Send (due 5000ms) task 06bd id 473d
+22:19:34.902 Send (due -1ms) task a438 id 7007 message 968f 0001 0000 4002
+22:19:34.903 Send (due -1ms) task 06bd id 4757
+22:19:34.903 Free
+22:19:34.903 Deliver (due -2ms) task a438 id 7007 message 968f 0001 0000 4002
+22:19:34.906 Free
+22:19:35.255 Deliver (due -1ms) task 1f00 id 0004
+22:19:35.255 Send (due 1000ms) task 1f00 id 0004
+22:19:35.255 Free
+22:19:35.432 Send (due -1ms) task a438 id 8026 message 2e86 ba77
+22:19:35.432 Deliver (due -1ms) task a438 id 8026 message 2e86 ba77
+22:19:35.433 Free
+22:19:35.433 Deliver (due -531ms) task 06bd id 4757
+22:19:35.435 Free
+22:19:35.499 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd3 c532 c592 0000 0000 0000 0000 0000 0000 0042 0004 c5e7 3b92 14df 0000 0000
+22:19:35.561 Deliver (due -63ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd3 c532 c592 0000 0000 0000 0000 0000 0000 0042 0004 c5e7 3b92 14df 0000 0000
+22:19:35.570 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd3 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:35.584 Free
+22:19:35.584 Deliver (due -15ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd3 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:35.596 Send (due 1000ms) task 06bd id 47f7 message 0001 1da0
+22:19:35.596 Free
+22:19:35.791 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd2 c592 c552 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:35.791 Deliver (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd2 c592 c552 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:35.795 Send (due -1ms) task 0552 id 8004 message 0601 0010 0000 0000 0000 0000 0000 875b
+22:19:35.858 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd2 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 1100 0800 1100 3100 1100 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:35.864 Free
+22:19:35.865 Deliver (due -71ms) task 0552 id 8004 message 0601 0010 0000 0000 0000 0000 0000 875b
+22:19:35.872 Send (due -1ms) task 06bd id 5005 message 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 7fff 0000 0000 000c 0000 0000
+22:19:35.872 Free
+22:19:35.873 Send (due -1ms) task 0552 id 8004 message 0e05 0010 0000 002b
+22:19:35.879 Deliver (due -3647ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0000
+22:19:35.880 Send (due -1ms) task 0552 id 8004 message 0e05 0010 0000 0001
+22:19:35.887 Free
+22:19:35.888 Deliver (due -31ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd2 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 1100 0800 1100 3100 1100 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:35.904 Cancel (due 692ms) task 06bd id 47f7 message 0001 1da0
+22:19:35.904 Send (due 1000ms) task 06bd id 47f7 message 0001 b06c
+22:19:35.904 Free
+22:19:35.904 Deliver (due -33ms) task 06bd id 5005 message 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 7fff 0000 0000 000c 0000 0000
+22:19:35.920 Send (due 2000ms) task 06bd id 473f
+22:19:35.920 Free
+22:19:35.921 Deliver (due -49ms) task 0552 id 8004 message 0e05 0010 0000 002b
+22:19:35.921 Free
+22:19:35.921 Deliver (due -42ms) task 0552 id 8004 message 0e05 0010 0000 0001
+22:19:35.921 Free
+22:19:36.256 Deliver (due -1ms) task 1f00 id 0004
+22:19:36.256 Send (due 1000ms) task 1f00 id 0004
+22:19:36.256 Free
+22:19:36.332 Send (due -2ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd0 c4f2 c592 0000 0000 0000 0000 0000 0000 0042 0004 c5e7 3b92 14df 0000 0000
+22:19:36.376 Deliver (due -46ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd0 c4f2 c592 0000 0000 0000 0000 0000 0000 0042 0004 c5e7 3b92 14df 0000 0000
+22:19:36.384 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd0 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 1100 0800 1100 3100 1100 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:36.391 Free
+22:19:36.392 Deliver (due -9ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd0 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 1100 0800 1100 3100 1100 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:36.412 Cancel (due 492ms) task 06bd id 47f7 message 0001 b06c
+22:19:36.412 Send (due 1000ms) task 06bd id 47f7 message 0001 0180
+22:19:36.412 Free
+22:19:36.943 Send (due -1ms) task 0552 id 8004 message 001e 0010
+22:19:36.943 Deliver (due -1ms) task 0552 id 8004 message 001e 0010
+22:19:36.943 Free
+22:19:36.991 Send (due -1ms) task 0552 id 8004 message 0347 0010 0000 0000 a1a4 005b 0002 0001 0024 0418 0000 0000 0000 0000 0000 0000
+22:19:36.991 Deliver (due -1ms) task 0552 id 8004 message 0347 0010 0000 0000 a1a4 005b 0002 0001 0024 0418 0000 0000 0000 0000 0000 0000
+22:19:36.991 Send (due -1ms) task 06bd id 501a message 0000 0000 a1a4 005b 0002 0001 0024 0418 0000 0001 0000 0000 0000 0000 0000 0000
+22:19:37.076 Free
+22:19:37.076 Deliver (due -86ms) task 06bd id 501a message 0000 0000 a1a4 005b 0002 0001 0024 0418 0000 0001 0000 0000 0000 0000 0000 0000
+22:19:37.077 Free
+22:19:37.077 Send (due -1ms) task 0552 id 8004 message 03ca 0010 0000 0000 a1a4 005b 0002 0000 0001 0001
+22:19:37.083 Deliver (due -7ms) task 0552 id 8004 message 03ca 0010 0000 0000 a1a4 005b 0002 0000 0001 0001
+22:19:37.084 Send (due -1ms) task 06bd id 502f message 0000 0001 0001 0000 0000 a1a4 005b 0002 0000 0000
+22:19:37.091 Free
+22:19:37.091 Deliver (due -8ms) task 06bd id 502f message 0000 0001 0001 0000 0000 a1a4 005b 0002 0000 0000
+22:19:37.091 Free
+22:19:37.106 Send (due -1ms) task 0552 id 8004 message 03d4 0010 0002 0057 0000 0000 a1a4 005b 0002 0001 0000 0100 0000 0000 0000 0000
+22:19:37.106 Deliver (due -1ms) task 0552 id 8004 message 03d4 0010 0002 0057 0000 0000 a1a4 005b 0002 0001 0000 0100 0000 0000 0000 0000
+22:19:37.106 Free
+22:19:37.107 Send (due -1ms) task 0552 id 8005 message 0542 0010 0100 1201 0001 0000 a1a4 005b 0002 0057 0000 01b2 0000 000f 0000 0000
+22:19:37.107 Deliver (due -1ms) task 0552 id 8005 message 0542 0010 0100 1201 0001 0000 a1a4 005b 0002 0057 0000 01b2 0000 000f 0000 0000
+22:19:37.114 Send (due -1ms) task 1201 id 503d message 0000 a1a4 005b 0002 0057 0001 0100 0000
+22:19:37.114 Free
+22:19:37.115 Deliver (due -2ms) task 1201 id 503d message 0000 a1a4 005b 0002 0057 0001 0100 0000
+22:19:37.122 Send (due -1ms) task 0552 id 004e message 1201 0001 0001 0057 0100 0000 0000 b06c
+22:19:37.122 Free
+22:19:37.122 Deliver (due -1ms) task 0552 id 004e message 1201 0001 0001 0057 0100 0000 0000 b06c
+22:19:37.123 Free
+22:19:37.169 Send (due -1ms) task 0552 id 8005 message 0541 0010 0100 1201 1201 0000 a1a4 005b 0002 0057 0000 0000 0000 0000 0000 02a0 ffff 0000 0000 0000 0000 0000 0000 0000 3b92 14df 0000 0000
+22:19:37.170 Deliver (due -2ms) task 0552 id 8005 message 0541 0010 0100 1201 1201 0000 a1a4 005b 0002 0057 0000 0000 0000 0000 0000 02a0 ffff 0000 0000 0000 0000 0000 0000 0000 3b92 14df 0000 0000
+22:19:37.170 Send (due -1ms) task 1201 id 503c message 0000 0057 ba73 0100 0000 a1a4 005b 0002 02a0 ffff 0001 0000 0000 0000 0000 0000 0000 ffff ffff ffff ffff 0000 0000 0000 0000 0000 0000 0000
+22:19:37.182 Send (due -1ms) task 0552 id 8004 message 0016 0010 0000 a1a4 005b 0002 0fa0 0004
+22:19:37.387 Free
+22:19:37.387 Deliver (due -218ms) task 1201 id 503c message 0000 0057 ba73 0100 0000 a1a4 005b 0002 02a0 ffff 0001 0000 0000 0000 0000 0000 0000 ffff ffff ffff ffff 0000 0000 0000 0000 0000 0000 0000
+22:19:37.387 Send (due -1ms) task 0552 id 0068 message ba73 0fa0
+22:19:37.394 Send (due -1ms) task 0552 id 0069 message ba73 0001 93b6 0fa0
+22:19:37.394 Free
+22:19:37.394 Deliver (due -215ms) task 06bd id 47b3
+22:19:37.394 Send (due 30000ms) task 06bd id 47b3
+22:19:37.396 Free
+22:19:37.397 Deliver (due -216ms) task 0552 id 8004 message 0016 0010 0000 a1a4 005b 0002 0fa0 0004
+22:19:37.397 Send (due -1ms) task 06bd id 5003 message 0000 a1a4 005b 0002 0fa0 0000
+22:19:37.402 Free
+22:19:37.402 Deliver (due -146ms) task 1f00 id 0004
+22:19:37.402 Send (due 1000ms) task 1f00 id 0004
+22:19:37.402 Free
+22:19:37.403 Deliver (due -17ms) task 0552 id 0068 message ba73 0fa0
+22:19:37.403 Send (due -1ms) task 0552 id 8004 message 0c37 0010 000c 0000 a1a4 005b 0002 0fa0
+22:19:37.409 Free
+22:19:37.409 Deliver (due -16ms) task 0552 id 0069 message ba73 0001 93b6 0fa0
+22:19:37.417 Free
+22:19:37.417 Deliver (due -21ms) task 06bd id 5003 message 0000 a1a4 005b 0002 0fa0 0000
+22:19:37.417 Free
+22:19:37.418 Deliver (due -16ms) task 0552 id 8004 message 0c37 0010 000c 0000 a1a4 005b 0002 0fa0
+22:19:37.418 Send (due -1ms) task 0552 id 8004 message 0345 0010 0000 0000 a1a4 005b 0002 b06c
+22:19:37.424 Free
+22:19:37.424 Deliver (due -12ms) task 06bd id 47f7 message 0001 0180
+22:19:37.434 Free
+22:19:37.434 Deliver (due -17ms) task 0552 id 8004 message 0345 0010 0000 0000 a1a4 005b 0002 b06c
+22:19:37.434 Free
+22:19:37.703 Send (due -1ms) task 0500 id 8021 message 2e8c 0130
+22:19:37.703 Deliver (due -1ms) task 0500 id 8021 message 2e8c 0130
+22:19:37.704 Free
+22:19:37.704 Send (due -1ms) task 0500 id 8022 message ba73 0000
+22:19:37.704 Deliver (due -1ms) task 0500 id 8022 message ba73 0000
+22:19:37.705 Free
+22:19:37.806 Send (due -1ms) task 0552 id 8004 message 02c3 0010 1201 0000 a1a4 005b 0002 0002 0024 0418
+22:19:37.806 Deliver (due -1ms) task 0552 id 8004 message 02c3 0010 1201 0000 a1a4 005b 0002 0002 0024 0418
+22:19:37.806 Send (due -1ms) task 1201 id 500e message 0000 a1a4 005b 0002
+22:19:37.895 Free
+22:19:37.895 Deliver (due -90ms) task 1201 id 500e message 0000 a1a4 005b 0002
+22:19:37.896 Send (due -1ms) task 0552 id 0061 message 1201 0000 a1a4 005b 0002 0001 0000 1f40 0000 1f40 0010 0000 0000 0007 0000 0000
+22:19:37.896 Send (due -1ms) task 0552 id 0061 message 1201 0000 a1a4 005b 0002 0000 0000 1f40 0000 1f40 0010 0000 0000 0007 0000 0000
+22:19:37.903 Free
+22:19:37.903 Deliver (due -8ms) task 0552 id 0061 message 1201 0000 a1a4 005b 0002 0001 0000 1f40 0000 1f40 0010 0000 0000 0007 0000 0000
+22:19:37.911 Free
+22:19:37.911 Deliver (due -16ms) task 0552 id 0061 message 1201 0000 a1a4 005b 0002 0000 0000 1f40 0000 1f40 0010 0000 0000 0007 0000 0000
+22:19:37.918 Free
+22:19:37.920 Deliver (due 0ms) task 06bd id 473f
+22:19:37.925 Send (due -2ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0418
+22:19:37.927 Free
+22:19:37.927 Deliver (due -4ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0418
+22:19:37.929 Send (due -1ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0000
+22:19:37.929 Free
+22:19:37.947 Send (due -1ms) task 0552 id 8004 message 02c6 0010 1201 0057 0000 0000 a1a4 005b 0002 0002 0012 0000 005a 005a 0002 0000
+22:19:37.947 Deliver (due -1ms) task 0552 id 8004 message 02c6 0010 1201 0057 0000 0000 a1a4 005b 0002 0002 0012 0000 005a 005a 0002 0000
+22:19:37.947 Send (due -1ms) task 1201 id 500d message 0000 0002 0000 a1a4 005b 0002 ba70 0000 1f40 0000 1f40 0057 0000 0002 0000 0000
+22:19:37.948 Free
+22:19:37.948 Deliver (due -2ms) task 1201 id 500d message 0000 0002 0000 a1a4 005b 0002 ba70 0000 1f40 0000 1f40 0057 0000 0002 0000 0000
+22:19:37.960 Send (due -1ms) task 82ac id 7000 message ba70 0002 0000 0000 1f40 4002 0004 0000 0005 1211 06bd 0000 0060 000f 0000 0000
+22:19:37.964 Send (due -1ms) task 0500 id 8021 message 2e8c 0160
+22:19:37.967 Send (due -1ms) task 82ac id 7004 message 0000 000a
+22:19:37.973 Send (due -1ms) task 82ac id 7012 message 000c 0280
+22:19:37.973 Send (due -1ms) task 06bd id 4786
+22:19:37.973 Cancel (due 1926ms) task 06bd id 473d
+22:19:37.975 Free
+22:19:37.975 Deliver (due -16ms) task 82ac id 7000 message ba70 0002 0000 0000 1f40 4002 0004 0000 0005 1211 06bd 0000 0060 000f 0000 0000
+22:19:38.411 Send (due -1ms) task 82ac id 8024 message 1000 091f 0000 0000 0000 0000
+22:19:39.314 Free
+22:19:39.314 Deliver (due -1351ms) task 0500 id 8021 message 2e8c 0160
+22:19:39.315 Send (due -1ms) task 06bd id 47f9
+22:19:39.316 Free
+22:19:39.316 Deliver (due -1350ms) task 82ac id 7004 message 0000 000a
+22:19:39.316 Free
+22:19:39.317 Deliver (due -1345ms) task 82ac id 7012 message 000c 0280
+22:19:39.317 Free
+22:19:39.317 Deliver (due -1345ms) task 06bd id 4786
+22:19:39.319 Free
+22:19:39.320 Deliver (due -918ms) task 1f00 id 0004
+22:19:39.320 Send (due 1000ms) task 1f00 id 0004
+22:19:39.320 Free
+22:19:39.320 Deliver (due -910ms) task 82ac id 8024 message 1000 091f 0000 0000 0000 0000
+22:19:39.323 Send (due -1ms) task 0504 id 8022 message ba5d 0280
+22:19:39.339 Send (due 1000ms) task 82ac id 7004 message 0000 0000
+22:19:39.340 Free
+22:19:39.340 Deliver (due -26ms) task 06bd id 47f9
+22:19:39.349 Send (due -1ms) task a438 id 7009 message 0057 0028 0001 06bd fc7c 4002
+22:19:39.350 Send (due -1ms) task 06bd id 4757
+22:19:39.350 Send (due -1ms) task 06bd id 47b2
+22:19:39.350 Free
+22:19:39.350 Deliver (due -28ms) task 0504 id 8022 message ba5d 0280
+22:19:39.350 Free
+22:19:39.350 Deliver (due -2ms) task a438 id 7009 message 0057 0028 0001 06bd fc7c 4002
+22:19:39.350 Send (due -1ms) task 0504 id 8022 message ba5d 0280
+22:19:39.358 Free
+22:19:39.358 Deliver (due -9ms) task 0504 id 8022 message ba5d 0280
+22:19:39.358 Free
+22:19:39.360 Send (due -1ms) task 82ac id 8024 message 1006 000b ffff ff66 6011 0008
+22:19:39.365 Deliver (due -6ms) task 82ac id 8024 message 1006 000b ffff ff66 6011 0008
+22:19:39.365 Free
+22:19:39.393 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd3 c532 c4f2 0000 0000 0000 0000 0000 0000 0000 0000 0000 3b92 14df 0000 0000
+22:19:39.394 Deliver (due -2ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffd3 c532 c4f2 0000 0000 0000 0000 0000 0000 0000 0000 0000 3b92 14df 0000 0000
+22:19:39.401 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd3 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:39.415 Free
+22:19:39.416 Deliver (due -16ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffd3 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:39.428 Send (due 1000ms) task 06bd id 47f7 message 0001 0370
+22:19:39.431 Free
+22:19:40.320 Deliver (due 0ms) task 1f00 id 0004
+22:19:40.321 Send (due 1000ms) task 1f00 id 0004
+22:19:40.321 Free
+22:19:40.340 Deliver (due -1ms) task 82ac id 7004 message 0000 0000
+22:19:40.340 Send (due -1ms) task 82ac id 7004 message 0000 0298
+22:19:40.340 Free
+22:19:40.428 Deliver (due 0ms) task 06bd id 47f7 message 0001 0370
+22:19:40.430 Free
+22:19:41.129 Send (due -1ms) task a438 id 8026 message 2e9a ba62
+22:19:41.129 Deliver (due -1ms) task a438 id 8026 message 2e9a ba62
+22:19:41.130 Free
+22:19:41.130 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:41.130 Deliver (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:41.130 Free
+22:19:41.131 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:41.131 Deliver (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:41.131 Free
+22:19:41.132 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:41.132 Deliver (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:41.132 Free
+22:19:41.133 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:41.144 Send (due -1ms) task 82ac id 8024 message 1006 000b ffff ff66 6011 0000
+22:19:41.154 Send (due -1ms) task 82ac id 8024 message 1080 0000 0000 0000 0000 0000
+22:19:41.173 Deliver (due -41ms) task a438 id 8022 message ba62 ba62
+22:19:41.173 Free
+22:19:41.173 Deliver (due -30ms) task 82ac id 8024 message 1006 000b ffff ff66 6011 0000
+22:19:41.181 Free
+22:19:41.181 Deliver (due -28ms) task 82ac id 8024 message 1080 0000 0000 0000 0000 0000
+22:19:41.181 Send (due -1ms) task 06bd id 7307
+22:19:41.181 Free
+22:19:41.181 Deliver (due -1832ms) task 06bd id 4757
+22:19:41.182 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:41.188 Free
+22:19:41.189 Deliver (due -1840ms) task 06bd id 47b2
+22:19:41.190 Free
+22:19:41.191 Deliver (due -852ms) task 82ac id 7004 message 0000 0298
+22:19:41.191 Free
+22:19:41.191 Deliver (due -11ms) task 06bd id 7307
+22:19:41.191 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:41.197 Free
+22:19:41.197 Deliver (due -16ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:41.197 Free
+22:19:41.198 Deliver (due -8ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:41.205 Free
+22:19:41.239 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:41.239 Deliver (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:41.239 Free
+22:19:41.239 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:41.240 Deliver (due -2ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:41.240 Free
+22:19:41.321 Deliver (due 0ms) task 1f00 id 0004
+22:19:41.321 Send (due 1000ms) task 1f00 id 0004
+22:19:41.322 Free
+22:19:42.321 Deliver (due 0ms) task 1f00 id 0004
+22:19:42.321 Send (due 1000ms) task 1f00 id 0004
+22:19:42.321 Free
+22:19:43.321 Deliver (due 0ms) task 1f00 id 0004
+22:19:43.321 Send (due 1000ms) task 1f00 id 0004
+22:19:43.321 Free
+22:19:43.345 Send (due -1ms) task 1a00 id 8023 message 0004 0000 cc9d 0000
+22:19:43.345 Send (due -1ms) task 1a00 id 802d message 0001 0001
+22:19:43.345 Deliver (due -1ms) task 1a00 id 8023 message 0004 0000 cc9d 0000
+22:19:43.347 Send (due -1ms) task 0552 id 002c message 0800 0012
+22:19:43.347 Send (due -1ms) task 0552 id 0030 message 0003 0000
+22:19:43.347 Cancel (due 35692ms) task 06bd id 472f
+22:19:43.348 Send (due 60000ms) task 06bd id 472f
+22:19:43.348 Send (due 1000ms) task 1a00 id 0002
+22:19:43.348 Send (due 800ms) task 1a00 id 0003
+22:19:43.348 Free
+22:19:43.399 Deliver (due -55ms) task 1a00 id 802d message 0001 0001
+22:19:43.400 Free
+22:19:43.400 Deliver (due -54ms) task 0552 id 002c message 0800 0012
+22:19:43.400 Free
+22:19:43.400 Deliver (due -54ms) task 0552 id 0030 message 0003 0000
+22:19:43.401 Send (due -1ms) task 0552 id 8004 message 0e1c 0010 0000 a1a4
+22:19:43.401 Send (due -1ms) task 0552 id 8004 message 0e1a 0010 0000 0012
+22:19:43.407 Free
+22:19:43.407 Deliver (due -7ms) task 0552 id 8004 message 0e1c 0010 0000 a1a4
+22:19:43.414 Free
+22:19:43.414 Deliver (due -14ms) task 0552 id 8004 message 0e1a 0010 0000 0012
+22:19:43.414 Free
+22:19:44.148 Deliver (due 0ms) task 1a00 id 0003
+22:19:44.148 Send (due 800ms) task 1a00 id 0003
+22:19:44.149 Free
+22:19:44.321 Deliver (due 0ms) task 1f00 id 0004
+22:19:44.321 Send (due 1000ms) task 1f00 id 0004
+22:19:44.321 Free
+22:19:44.349 Deliver (due -1ms) task 1a00 id 0002
+22:19:44.349 Send (due 1500ms) task 1a00 id 0002
+22:19:44.349 Send (due -1ms) task 06bd id 471e
+22:19:44.350 Free
+22:19:44.350 Deliver (due -2ms) task 06bd id 471e
+22:19:44.352 Free
+22:19:44.367 Send (due -1ms) task 0504 id 8021 message 2ea2 006b
+22:19:44.367 Deliver (due -1ms) task 0504 id 8021 message 2ea2 006b
+22:19:44.367 Free
+22:19:44.377 Send (due -1ms) task 0504 id 8021 message 2ea2 006b
+22:19:44.377 Deliver (due -1ms) task 0504 id 8021 message 2ea2 006b
+22:19:44.378 Send (due -1ms) task 06bd id 400c
+22:19:44.531 Free
+22:19:44.531 Deliver (due -154ms) task 06bd id 400c
+22:19:44.531 Send (due -1ms) task 06bd id 4019
+22:19:44.532 Free
+22:19:44.533 Deliver (due -3ms) task 06bd id 4019
+22:19:44.533 Send (due -1ms) task 82ac id 7012 message 8697 006b
+22:19:44.540 Send (due -1ms) task 0504 id 8022 message ba5d adaa
+22:19:44.541 Send (due -1ms) task a438 id 7009 message 0043 0014 0001 06bd fc7c 4002
+22:19:44.541 Send (due -1ms) task 06bd id 4757
+22:19:44.541 Send (due -1ms) task 06bd id 47b2
+22:19:44.541 Free
+22:19:44.541 Deliver (due -9ms) task 82ac id 7012 message 8697 006b
+22:19:44.548 Free
+22:19:44.548 Deliver (due -9ms) task 0504 id 8022 message ba5d adaa
+22:19:44.548 Free
+22:19:44.548 Deliver (due -8ms) task a438 id 7009 message 0043 0014 0001 06bd fc7c 4002
+22:19:44.549 Free
+22:19:44.552 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:44.557 Deliver (due -6ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:44.558 Free
+22:19:44.949 Deliver (due -1ms) task 1a00 id 0003
+22:19:44.949 Send (due 800ms) task 1a00 id 0003
+22:19:44.950 Free
+22:19:45.056 Send (due -1ms) task 1a00 id 8023 message 0000 0000 d34c 0000
+22:19:45.057 Send (due -1ms) task 1a00 id 802d message 0001 0000
+22:19:45.057 Deliver (due -2ms) task 1a00 id 8023 message 0000 0000 d34c 0000
+22:19:45.059 Cancel (due 790ms) task 1a00 id 0002
+22:19:45.059 Cancel (due 690ms) task 1a00 id 0003
+22:19:45.060 Free
+22:19:45.060 Deliver (due -4ms) task 1a00 id 802d message 0001 0000
+22:19:45.061 Free
+22:19:45.321 Deliver (due 0ms) task 1f00 id 0004
+22:19:45.322 Send (due 1000ms) task 1f00 id 0004
+22:19:45.322 Free
+22:19:46.029 Send (due -1ms) task 1a00 id 8023 message 0004 0000 d719 0000
+22:19:46.029 Send (due -1ms) task 1a00 id 802d message 0001 0001
+22:19:46.029 Deliver (due -1ms) task 1a00 id 8023 message 0004 0000 d719 0000
+22:19:46.031 Send (due -1ms) task 0552 id 002c message 0800 0012
+22:19:46.031 Send (due -1ms) task 0552 id 0030 message 0003 adaa
+22:19:46.031 Cancel (due 57317ms) task 06bd id 472f
+22:19:46.033 Send (due 59999ms) task 06bd id 472f
+22:19:46.033 Send (due 1000ms) task 1a00 id 0002
+22:19:46.033 Send (due 800ms) task 1a00 id 0003
+22:19:46.033 Free
+22:19:46.033 Deliver (due -5ms) task 1a00 id 802d message 0001 0001
+22:19:46.034 Free
+22:19:46.034 Deliver (due -4ms) task 0552 id 002c message 0800 0012
+22:19:46.118 Free
+22:19:46.118 Deliver (due -88ms) task 0552 id 0030 message 0003 adaa
+22:19:46.119 Free
+22:19:46.120 Send (due -2ms) task 0552 id 8004 message 0e1c 0010 0000 a1a4
+22:19:46.120 Send (due -1ms) task 0552 id 8004 message 0e1a 0010 0000 0012
+22:19:46.125 Deliver (due -7ms) task 0552 id 8004 message 0e1c 0010 0000 a1a4
+22:19:46.126 Free
+22:19:46.126 Deliver (due -7ms) task 0552 id 8004 message 0e1a 0010 0000 0012
+22:19:46.133 Free
+22:19:46.322 Deliver (due 0ms) task 1f00 id 0004
+22:19:46.322 Send (due 1000ms) task 1f00 id 0004
+22:19:46.322 Free
+22:19:46.358 Send (due -1ms) task a438 id 8026 message 2ee1 ba62
+22:19:46.358 Deliver (due -1ms) task a438 id 8026 message 2ee1 ba62
+22:19:46.358 Free
+22:19:46.358 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:46.359 Deliver (due -2ms) task a438 id 8022 message ba62 ba62
+22:19:46.359 Free
+22:19:46.360 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:46.360 Deliver (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:46.360 Free
+22:19:46.360 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:46.368 Deliver (due -9ms) task a438 id 8022 message ba62 ba62
+22:19:46.368 Free
+22:19:46.373 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:46.373 Deliver (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:46.374 Free
+22:19:46.382 Send (due -1ms) task 82ac id 8024 message 1080 0000 0000 0000 0000 0000
+22:19:46.383 Deliver (due -2ms) task 82ac id 8024 message 1080 0000 0000 0000 0000 0000
+22:19:46.383 Send (due -1ms) task 06bd id 7307
+22:19:46.383 Free
+22:19:46.383 Deliver (due -1843ms) task 06bd id 4757
+22:19:46.384 Free
+22:19:46.384 Deliver (due -1844ms) task 06bd id 47b2
+22:19:46.386 Free
+22:19:46.386 Deliver (due -4ms) task 06bd id 7307
+22:19:46.386 Free
+22:19:46.386 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:46.387 Deliver (due -2ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:46.387 Free
+22:19:46.833 Deliver (due 0ms) task 1a00 id 0003
+22:19:46.833 Send (due 800ms) task 1a00 id 0003
+22:19:46.834 Free
+22:19:47.033 Deliver (due 0ms) task 1a00 id 0002
+22:19:47.033 Send (due 1500ms) task 1a00 id 0002
+22:19:47.033 Send (due -1ms) task 06bd id 471e
+22:19:47.034 Free
+22:19:47.034 Deliver (due -2ms) task 06bd id 471e
+22:19:47.036 Free
+22:19:47.051 Send (due -1ms) task 0504 id 8021 message 2ea2 ba62
+22:19:47.051 Deliver (due -1ms) task 0504 id 8021 message 2ea2 ba62
+22:19:47.052 Free
+22:19:47.061 Send (due -1ms) task 0504 id 8021 message 2ea2 ba62
+22:19:47.062 Deliver (due -2ms) task 0504 id 8021 message 2ea2 ba62
+22:19:47.062 Send (due -1ms) task 06bd id 400c
+22:19:47.062 Free
+22:19:47.062 Deliver (due -1ms) task 06bd id 400c
+22:19:47.063 Send (due -1ms) task 06bd id 401a
+22:19:47.092 Free
+22:19:47.092 Deliver (due -30ms) task 06bd id 401a
+22:19:47.093 Send (due -1ms) task 82ac id 7012 message 0697 ba62
+22:19:47.097 Send (due -1ms) task a438 id 7009 message 0066 003f 0001 06bd fc7c 4002
+22:19:47.099 Send (due -1ms) task 0504 id 8022 message ba5d 006b
+22:19:47.099 Send (due -1ms) task 06bd id 4757
+22:19:47.099 Send (due -1ms) task 06bd id 47b2
+22:19:47.100 Free
+22:19:47.100 Deliver (due -8ms) task 82ac id 7012 message 0697 ba62
+22:19:47.101 Free
+22:19:47.101 Deliver (due -5ms) task a438 id 7009 message 0066 003f 0001 06bd fc7c 4002
+22:19:47.127 Free
+22:19:47.127 Deliver (due -29ms) task 0504 id 8022 message ba5d 006b
+22:19:47.127 Free
+22:19:47.130 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:47.130 Deliver (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:47.130 Free
+22:19:47.322 Deliver (due 0ms) task 1f00 id 0004
+22:19:47.322 Send (due 1000ms) task 1f00 id 0004
+22:19:47.323 Free
+22:19:47.633 Deliver (due 0ms) task 1a00 id 0003
+22:19:47.633 Send (due 800ms) task 1a00 id 0003
+22:19:47.634 Free
+22:19:47.671 Send (due -1ms) task 1a00 id 8023 message 0000 0000 dd83 0000
+22:19:47.671 Send (due -1ms) task 1a00 id 802d message 0001 0000
+22:19:47.671 Deliver (due -1ms) task 1a00 id 8023 message 0000 0000 dd83 0000
+22:19:47.673 Cancel (due 860ms) task 1a00 id 0002
+22:19:47.673 Cancel (due 760ms) task 1a00 id 0003
+22:19:47.674 Free
+22:19:47.674 Deliver (due -4ms) task 1a00 id 802d message 0001 0000
+22:19:47.675 Free
+22:19:48.267 Deliver (due 0ms) task 1f00 id 0000
+22:19:48.267 Send (due 20000ms) task 1f00 id 0000
+22:19:48.268 Free
+22:19:48.270 Send (due -1ms) task 1f00 id 8025 message 0004 020b
+22:19:48.270 Deliver (due -1ms) task 1f00 id 8025 message 0004 020b
+22:19:48.270 Free
+22:19:48.282 Deliver (due 0ms) task 1f00 id 0002
+22:19:48.283 Send (due -2ms) task 1f00 id 8025 message 0006 0f00
+22:19:48.283 Send (due 20000ms) task 1f00 id 0002
+22:19:48.283 Free
+22:19:48.283 Deliver (due -2ms) task 1f00 id 8025 message 0006 0f00
+22:19:48.283 Free
+22:19:48.314 Deliver (due 0ms) task 1f00 id 0001
+22:19:48.314 Send (due -1ms) task 1f00 id 8025 message 0005 09f4
+22:19:48.475 Send (due 20000ms) task 1f00 id 0001
+22:19:48.475 Free
+22:19:48.475 Deliver (due -162ms) task 1f00 id 8025 message 0005 09f4
+22:19:48.476 Free
+22:19:48.476 Deliver (due -154ms) task 1f00 id 0004
+22:19:48.476 Send (due 1000ms) task 1f00 id 0004
+22:19:48.476 Free
+22:19:48.476 Deliver (due -144ms) task 1f00 id 0006
+22:19:48.483 Send (due 0ms) task 1f00 id 0003
+22:19:48.483 Free
+22:19:48.483 Deliver (due 0ms) task 1f00 id 0003
+22:19:48.483 Send (due 20000ms) task 1f00 id 0006
+22:19:48.483 Free
+22:19:48.485 Send (due -1ms) task 1f00 id 8025 message 0001 0062
+22:19:48.485 Deliver (due -1ms) task 1f00 id 8025 message 0001 0062
+22:19:48.485 Free
+22:19:48.691 Send (due -1ms) task 0552 id 8004 message 0601 0010 0000 0000 0000 0000 0000 0000
+22:19:48.691 Deliver (due -1ms) task 0552 id 8004 message 0601 0010 0000 0000 0000 0000 0000 0000
+22:19:48.691 Send (due -1ms) task 06bd id 5005 message 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 7fff 0000 0000 0000 0000 0000
+22:19:48.692 Free
+22:19:48.692 Deliver (due -10764ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 0000
+22:19:48.693 Send (due -1ms) task 0552 id 8004 message 0e05 0010 0000 a1a4
+22:19:48.694 Send (due -1ms) task 0552 id 8004 message 0e05 0010 0000 a1a4
+22:19:48.701 Send (due -1ms) task 1a00 id 8023 message 0004 0000 e189 0000
+22:19:48.701 Send (due -1ms) task 1a00 id 802d message 0001 0001
+22:19:48.752 Free
+22:19:48.752 Deliver (due -62ms) task 06bd id 5005 message 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 7fff 0000 0000 0000 0000 0000
+22:19:48.762 Send (due 2000ms) task 06bd id 473f
+22:19:48.762 Free
+22:19:48.762 Deliver (due -70ms) task 0552 id 8004 message 0e05 0010 0000 a1a4
+22:19:48.763 Free
+22:19:48.763 Deliver (due -70ms) task 0552 id 8004 message 0e05 0010 0000 a1a4
+22:19:48.763 Free
+22:19:48.767 Deliver (due -67ms) task 1a00 id 8023 message 0004 0000 e189 0000
+22:19:48.769 Send (due -1ms) task 0552 id 002c message 0800 0012
+22:19:48.769 Send (due -1ms) task 0552 id 0030 message 0003 b05a
+22:19:48.769 Cancel (due 57263ms) task 06bd id 472f
+22:19:48.770 Send (due 60000ms) task 06bd id 472f
+22:19:48.770 Send (due 1000ms) task 1a00 id 0002
+22:19:48.776 Send (due 800ms) task 1a00 id 0003
+22:19:48.776 Free
+22:19:48.776 Deliver (due -76ms) task 1a00 id 802d message 0001 0001
+22:19:48.777 Free
+22:19:48.777 Deliver (due -9ms) task 0552 id 002c message 0800 0012
+22:19:48.778 Free
+22:19:48.779 Send (due -1ms) task 0552 id 8004 message 0e1c 0010 0000 0012
+22:19:48.785 Deliver (due -17ms) task 0552 id 0030 message 0003 b05a
+22:19:48.785 Free
+22:19:48.785 Deliver (due -7ms) task 0552 id 8004 message 0e1c 0010 0000 0012
+22:19:48.786 Send (due -1ms) task 0552 id 8004 message 0e1a 0010 0000 a1a4
+22:19:48.793 Free
+22:19:48.793 Deliver (due -8ms) task 0552 id 8004 message 0e1a 0010 0000 a1a4
+22:19:48.793 Free
+22:19:48.974 Send (due -1ms) task a438 id 8026 message 2ee4 ba62
+22:19:48.975 Deliver (due -2ms) task a438 id 8026 message 2ee4 ba62
+22:19:48.975 Free
+22:19:48.975 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:48.975 Deliver (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:48.975 Free
+22:19:48.976 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:48.976 Deliver (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:48.976 Free
+22:19:48.976 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:48.977 Deliver (due -2ms) task a438 id 8022 message ba62 ba62
+22:19:48.977 Free
+22:19:48.977 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:48.996 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:48.999 Send (due -1ms) task 82ac id 8024 message 1080 0000 0000 0000 0000 0000
+22:19:49.053 Deliver (due -77ms) task a438 id 8022 message ba62 ba62
+22:19:49.053 Free
+22:19:49.053 Deliver (due -58ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:49.060 Free
+22:19:49.060 Deliver (due -62ms) task 82ac id 8024 message 1080 0000 0000 0000 0000 0000
+22:19:49.060 Send (due -1ms) task 06bd id 7307
+22:19:49.060 Free
+22:19:49.061 Deliver (due -1963ms) task 06bd id 4757
+22:19:49.061 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:49.067 Free
+22:19:49.067 Deliver (due -1969ms) task 06bd id 47b2
+22:19:49.069 Free
+22:19:49.069 Deliver (due -10ms) task 06bd id 7307
+22:19:49.069 Free
+22:19:49.069 Deliver (due -9ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:49.075 Free
+22:19:49.477 Deliver (due -1ms) task 1f00 id 0004
+22:19:49.477 Send (due 1000ms) task 1f00 id 0004
+22:19:49.477 Free
+22:19:49.576 Deliver (due 0ms) task 1a00 id 0003
+22:19:49.576 Send (due 800ms) task 1a00 id 0003
+22:19:49.577 Free
+22:19:49.723 Send (due -1ms) task 0504 id 8021 message 2ea2 0148
+22:19:49.723 Deliver (due -1ms) task 0504 id 8021 message 2ea2 0148
+22:19:49.723 Free
+22:19:49.733 Send (due -1ms) task 0504 id 8021 message 2ea2 0148
+22:19:49.733 Deliver (due -1ms) task 0504 id 8021 message 2ea2 0148
+22:19:49.733 Send (due -1ms) task 06bd id 400c
+22:19:49.734 Free
+22:19:49.734 Deliver (due -2ms) task 06bd id 400c
+22:19:49.734 Send (due -1ms) task 06bd id 4019
+22:19:49.735 Free
+22:19:49.735 Deliver (due -2ms) task 06bd id 4019
+22:19:49.755 Send (due -1ms) task 82ac id 7012 message 8697 0148
+22:19:49.760 Send (due -1ms) task a438 id 7009 message 0043 0014 0001 06bd fc7c 4002
+22:19:49.760 Send (due -1ms) task 06bd id 4757
+22:19:49.760 Send (due -1ms) task 06bd id 47b2
+22:19:49.760 Free
+22:19:49.762 Send (due -1ms) task 0504 id 8022 message ba5d ada2
+22:19:49.764 Deliver (due -10ms) task 82ac id 7012 message 8697 0148
+22:19:49.765 Free
+22:19:49.765 Deliver (due -6ms) task a438 id 7009 message 0043 0014 0001 06bd fc7c 4002
+22:19:49.766 Free
+22:19:49.766 Deliver (due -5ms) task 0504 id 8022 message ba5d ada2
+22:19:49.768 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:49.773 Free
+22:19:49.773 Deliver (due -6ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:49.774 Free
+22:19:49.774 Deliver (due -4ms) task 1a00 id 0002
+22:19:49.782 Send (due 1500ms) task 1a00 id 0002
+22:19:49.782 Send (due -1ms) task 06bd id 471e
+22:19:49.784 Free
+22:19:49.785 Deliver (due -4ms) task 06bd id 471e
+22:19:49.788 Free
+22:19:50.376 Deliver (due 0ms) task 1a00 id 0003
+22:19:50.377 Send (due 800ms) task 1a00 id 0003
+22:19:50.378 Free
+22:19:50.413 Send (due -1ms) task 1a00 id 802d message 0001 0000
+22:19:50.414 Deliver (due -2ms) task 1a00 id 802d message 0001 0000
+22:19:50.416 Cancel (due 866ms) task 1a00 id 0002
+22:19:50.416 Cancel (due 761ms) task 1a00 id 0003
+22:19:50.416 Send (due -1ms) task 1a00 id 8023 message 0000 0000 e83c 0000
+22:19:50.417 Free
+22:19:50.417 Deliver (due -2ms) task 1a00 id 8023 message 0000 0000 e83c 0000
+22:19:50.418 Free
+22:19:50.477 Deliver (due 0ms) task 1f00 id 0004
+22:19:50.477 Send (due 1000ms) task 1f00 id 0004
+22:19:50.477 Free
+22:19:50.762 Deliver (due 0ms) task 06bd id 473f
+22:19:50.770 Send (due -1ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 ea1b
+22:19:50.773 Free
+22:19:50.773 Deliver (due -4ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 ea1b
+22:19:50.773 Send (due -1ms) task 0552 id 0003 message 06bd 009e 8b01 0008 000a 0020 0400 0000 0000 5205
+22:19:50.774 Free
+22:19:51.322 Send (due -1ms) task 1a00 id 8023 message 0004 0000 ebc6 0000
+22:19:51.322 Send (due -1ms) task 1a00 id 802d message 0001 0001
+22:19:51.323 Deliver (due -2ms) task 1a00 id 8023 message 0004 0000 ebc6 0000
+22:19:51.324 Send (due -1ms) task 0552 id 002c message 0800 0012
+22:19:51.324 Send (due -1ms) task 0552 id 0030 message 0003 adc6
+22:19:51.324 Cancel (due 57446ms) task 06bd id 472f
+22:19:51.325 Send (due 60000ms) task 06bd id 472f
+22:19:51.325 Send (due 1000ms) task 1a00 id 0002
+22:19:51.326 Send (due 800ms) task 1a00 id 0003
+22:19:51.326 Free
+22:19:51.326 Deliver (due -5ms) task 1a00 id 802d message 0001 0001
+22:19:51.327 Free
+22:19:51.327 Deliver (due -4ms) task 0552 id 002c message 0800 0012
+22:19:51.366 Free
+22:19:51.367 Deliver (due -44ms) task 0552 id 0030 message 0003 adc6
+22:19:51.367 Free
+22:19:51.368 Send (due -1ms) task 0552 id 8004 message 0e1c 0010 0000 a1a4
+22:19:51.369 Send (due -1ms) task 0552 id 8004 message 0e1a 0010 0000 0012
+22:19:51.374 Deliver (due -7ms) task 0552 id 8004 message 0e1c 0010 0000 a1a4
+22:19:51.374 Free
+22:19:51.375 Deliver (due -7ms) task 0552 id 8004 message 0e1a 0010 0000 0012
+22:19:51.382 Free
+22:19:51.477 Deliver (due 0ms) task 1f00 id 0004
+22:19:51.477 Send (due 1000ms) task 1f00 id 0004
+22:19:51.477 Free
+22:19:51.574 Send (due -1ms) task a438 id 8026 message 2ee8 ba62
+22:19:51.574 Deliver (due -1ms) task a438 id 8026 message 2ee8 ba62
+22:19:51.574 Free
+22:19:51.575 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:51.575 Deliver (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:51.575 Free
+22:19:51.576 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:51.576 Deliver (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:51.576 Free
+22:19:51.577 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:51.594 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:51.599 Send (due -1ms) task 82ac id 8024 message 1080 0000 0000 0000 0000 0000
+22:19:51.631 Deliver (due -55ms) task a438 id 8022 message ba62 ba62
+22:19:51.631 Free
+22:19:51.631 Deliver (due -38ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:51.638 Free
+22:19:51.638 Deliver (due -40ms) task 82ac id 8024 message 1080 0000 0000 0000 0000 0000
+22:19:51.639 Send (due -1ms) task 06bd id 7307
+22:19:51.639 Free
+22:19:51.639 Deliver (due -1880ms) task 06bd id 4757
+22:19:51.639 Free
+22:19:51.640 Send (due -2ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:51.646 Deliver (due -1887ms) task 06bd id 47b2
+22:19:51.648 Free
+22:19:51.648 Deliver (due -10ms) task 06bd id 7307
+22:19:51.648 Free
+22:19:51.648 Deliver (due -10ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:51.648 Free
+22:19:52.126 Deliver (due 0ms) task 1a00 id 0003
+22:19:52.126 Send (due 800ms) task 1a00 id 0003
+22:19:52.127 Free
+22:19:52.325 Deliver (due 0ms) task 1a00 id 0002
+22:19:52.325 Send (due 1500ms) task 1a00 id 0002
+22:19:52.325 Send (due -1ms) task 06bd id 471e
+22:19:52.326 Free
+22:19:52.326 Deliver (due -2ms) task 06bd id 471e
+22:19:52.329 Free
+22:19:52.344 Send (due -1ms) task 0504 id 8021 message 2ea2 01c8
+22:19:52.344 Deliver (due -1ms) task 0504 id 8021 message 2ea2 01c8
+22:19:52.344 Free
+22:19:52.354 Send (due -1ms) task 0504 id 8021 message 2ea2 01c8
+22:19:52.354 Deliver (due -1ms) task 0504 id 8021 message 2ea2 01c8
+22:19:52.355 Send (due -1ms) task 06bd id 400c
+22:19:52.355 Free
+22:19:52.355 Deliver (due -1ms) task 06bd id 400c
+22:19:52.355 Send (due -1ms) task 06bd id 401a
+22:19:52.356 Free
+22:19:52.356 Deliver (due -2ms) task 06bd id 401a
+22:19:52.357 Send (due -1ms) task 82ac id 7012 message 0697 01c8
+22:19:52.364 Send (due -1ms) task a438 id 7009 message 0066 003f 0001 06bd fc7c 4002
+22:19:52.364 Send (due -1ms) task 0504 id 8022 message ba5d adaa
+22:19:52.558 Send (due -1ms) task 06bd id 4757
+22:19:52.558 Send (due -1ms) task 06bd id 47b2
+22:19:52.558 Free
+22:19:52.558 Deliver (due -202ms) task 82ac id 7012 message 0697 01c8
+22:19:52.567 Free
+22:19:52.567 Deliver (due -204ms) task a438 id 7009 message 0066 003f 0001 06bd fc7c 4002
+22:19:52.568 Free
+22:19:52.568 Deliver (due -205ms) task 0504 id 8022 message ba5d adaa
+22:19:52.568 Free
+22:19:52.568 Deliver (due -91ms) task 1f00 id 0004
+22:19:52.570 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:52.575 Send (due 1000ms) task 1f00 id 0004
+22:19:52.575 Free
+22:19:52.576 Deliver (due -7ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:52.576 Free
+22:19:52.581 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffc7 c4f2 c572 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:52.591 Deliver (due -11ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffc7 c4f2 c572 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:52.601 Send (due -2ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffc7 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:52.617 Free
+22:19:52.617 Deliver (due -18ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffc7 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:52.639 Send (due 1000ms) task 06bd id 47f7 message 0001 0560
+22:19:52.639 Free
+22:19:52.882 Send (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffbe c572 c532 0000 0000 0000 0000 0000 0000 0000 0000 0000 3b92 14df 0000 0000
+22:19:52.882 Deliver (due -1ms) task 0552 id 8004 message 0015 0010 0001 0000 a1a4 005b 0002 0001 0002 0024 0418 006f ffbe c572 c532 0000 0000 0000 0000 0000 0000 0000 0000 0000 3b92 14df 0000 0000
+22:19:53.097 Send (due -1ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffbe 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 1100 2e00 1100 1e00 1100 0800 1100 3100 1100 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:53.113 Free
+22:19:53.113 Deliver (due -187ms) task 1a00 id 0003
+22:19:53.113 Send (due 800ms) task 1a00 id 0003
+22:19:53.115 Free
+22:19:53.115 Deliver (due -19ms) task 06bd id 5005 message 0001 0000 a1a4 005b 0002 0024 0418 006f 0001 0000 ffbe 0022 0009 0010 0001 0000 0088 0077 0014 0004 0014 0004 0002 000a 0004 0013 0002 000d 0011 000b 0011 000e 0011 000f 0011 0030 0011 002e 0011 001e 0011 0008 0011 0031 0011 0000 1100 2e00 1100 1e00 1100 0800 1100 3100 1100 0000 0000 0000 0000 0000 0000 0000 0000 0000
+22:19:53.133 Cancel (due 506ms) task 06bd id 47f7 message 0001 0560
+22:19:53.133 Send (due 1000ms) task 06bd id 47f7 message 0001 0000
+22:19:53.133 Free
+22:19:53.575 Deliver (due 0ms) task 1f00 id 0004
+22:19:53.575 Send (due 1000ms) task 1f00 id 0004
+22:19:53.575 Free
+22:19:53.628 Send (due -1ms) task 1a00 id 8023 message 0000 0000 f4c8 0000
+22:19:53.629 Send (due -1ms) task 1a00 id 802d message 0001 0000
+22:19:53.629 Deliver (due -2ms) task 1a00 id 8023 message 0000 0000 f4c8 0000
+22:19:53.631 Cancel (due 194ms) task 1a00 id 0002
+22:19:53.631 Cancel (due 282ms) task 1a00 id 0003
+22:19:53.632 Free
+22:19:53.632 Deliver (due -4ms) task 1a00 id 802d message 0001 0000
+22:19:53.633 Free
+22:19:54.134 Deliver (due -1ms) task 06bd id 47f7 message 0001 0000
+22:19:54.136 Free
+22:19:54.415 Send (due -1ms) task a438 id 8026 message 2eef ba62
+22:19:54.415 Deliver (due -1ms) task a438 id 8026 message 2eef ba62
+22:19:54.416 Free
+22:19:54.416 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:54.416 Deliver (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:54.416 Free
+22:19:54.417 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:54.417 Deliver (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:54.417 Free
+22:19:54.418 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:54.418 Deliver (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:54.418 Free
+22:19:54.419 Send (due -1ms) task a438 id 8022 message ba62 ba62
+22:19:54.432 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:54.440 Send (due -1ms) task 82ac id 8024 message 1080 0000 0000 0000 0000 0000
+22:19:54.500 Deliver (due -82ms) task a438 id 8022 message ba62 ba62
+22:19:54.500 Free
+22:19:54.500 Deliver (due -69ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:54.508 Free
+22:19:54.508 Deliver (due -69ms) task 82ac id 8024 message 1080 0000 0000 0000 0000 0000
+22:19:54.509 Send (due -1ms) task 06bd id 7307
+22:19:54.509 Free
+22:19:54.509 Deliver (due -1952ms) task 06bd id 4757
+22:19:54.509 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:54.516 Free
+22:19:54.516 Deliver (due -1959ms) task 06bd id 47b2
+22:19:54.518 Free
+22:19:54.518 Deliver (due -10ms) task 06bd id 7307
+22:19:54.519 Free
+22:19:54.519 Deliver (due -11ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000
+22:19:54.525 Free
+22:19:54.575 Deliver (due 0ms) task 1f00 id 0004
+22:19:54.575 Send (due 1000ms) task 1f00 id 0004
+22:19:54.575 Free
+22:19:55.575 Deliver (due 0ms) task 1f00 id 0004
+22:19:55.575 Send (due 1000ms) task 1f00 id 0004
+22:19:55.575 Free
+22:19:56.575 Deliver (due 0ms) task 1f00 id 0004
+22:19:56.575 Send (due 1000ms) task 1f00 id 0004
+22:19:56.575 Free
+22:19:57.575 Deliver (due 0ms) task 1f00 id 0004
+22:19:57.575 Send (due 1000ms) task 1f00 id 0004
+22:19:57.576 Free
+22:19:54.509 Send (due -1ms) task 82ac id 8024 message 1006 000f b845 fffe 0000 0000

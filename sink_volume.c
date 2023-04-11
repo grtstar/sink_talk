@@ -42,6 +42,8 @@ Copyright (c) 2004 - 2017 Qualcomm Technologies International, Ltd.
 
 #include "sink_accessory.h"
 
+#include "headset_multi_talk.h"
+
 #include <audio.h>
 #include <sink.h>
 #include <stddef.h>
@@ -514,7 +516,7 @@ RETURNS
     void
 
 */
-static void volumeSetMuteState(AUDIO_MUTE_GROUP_T mute_group, AUDIO_MUTE_STATE_T state)
+void volumeSetMuteState(AUDIO_MUTE_GROUP_T mute_group, AUDIO_MUTE_STATE_T state)
 {
     /* First un-set the bit corresponding to mute_group in the mute_states bit-field) */
     GSINK_VOLUME_DATA.mute_states &= ~AUDIO_MUTE_MASK(mute_group);
@@ -786,6 +788,10 @@ void VolumeSetMicrophoneMute(AUDIO_MUTE_STATE_T state)
         VolumeSetA2dpMicrophoneGain(state);
     }
 #endif /* defined(APTX_LL_BACK_CHANNEL) || defined(INCLUDE_FASTSTREAM)*/
+    else if(mtGetConnectDevices() > 0)
+    {
+        mtMicMute(state);
+    }
 }
 
 
@@ -1392,10 +1398,15 @@ void VolumeSetHeadsetVolume( uint16 pNewVolume , bool pPlayTone, hfp_link_priori
         
         /* set new volume */
         sinkHfpdataSetAudioSMVolumeLevel(pNewVolume,PROFILE_INDEX(priority));
+
+        if(mtGetConnectDevices)
+        {
+            sinkHfpDataSetDefaultVolume(pNewVolume);
+        }
         
         if(sinkAudioIsVoiceRouted())
         {
-            DEBUG(("DISP: VolumeSetHeadsetVolume\n"));
+            DEBUG(("DISP: VolumeSetHeadsetVolume %d - %d\n", pNewVolume, sinkVolumeGetVolumeMappingforCVC(pNewVolume)));
             /* update the display */
             displayUpdateVolume((VOLUME_NUM_VOICE_STEPS * pNewVolume)/sinkVolumeGetNumberOfVolumeSteps(audio_output_group_main));
 
@@ -1404,6 +1415,10 @@ void VolumeSetHeadsetVolume( uint16 pNewVolume , bool pPlayTone, hfp_link_priori
             if(set_gain)
             {
                 AudioSetVolume ( (int16)sinkVolumeGetVolumeMappingforCVC(pNewVolume) , (int16)TonesGetToneVolume()) ;
+            }
+            if(mtGetConnectDevices())
+            {
+                AudioSetVolume ( (int16)pNewVolume , (int16)TonesGetToneVolume()) ;
             }
         }
     }
@@ -1509,7 +1524,7 @@ void VolumeSendAndSetHeadsetVolume( uint16 pNewVolume , bool pPlayTone, hfp_link
 static bool ifHfpConnectedModifyAndUpdateVolume(const volume_direction direction, const audio_output_group_t group)
 {
 
-    if(deviceManagerNumConnectedDevs())
+    if(deviceManagerNumConnectedDevs() || mtGetConnectDevices())
     {
         if(group == audio_output_group_main)
         {
@@ -1519,7 +1534,10 @@ static bool ifHfpConnectedModifyAndUpdateVolume(const volume_direction direction
             /* Get current volume for this profile */
             uint16 volume = sinkHfpDataGetAudioSMVolumeLevel(PROFILE_INDEX(priority));
 
-            
+            if(mtGetConnectDevices())
+            {
+                volume = sinkHfpDataGetDefaultVolume();
+            }
             if(direction == increase_volume)
             {
                 VOL_DEBUG(("VOL: VolUp[%d][%d] to AG%d\n",volume, 
@@ -1729,6 +1747,22 @@ static bool ifUsbSinkExistsModifyAndUpdateVolume(const volume_direction directio
     return FALSE;
 }
 
+static bool ifMtTalkExistsModifyAndUpdateVolume(const volume_direction direction, const audio_output_group_t group, const bool unmuteOnChange)
+{
+    if(mtGetConnectDevices() > 0)
+    {
+        volume_info fm_volume_info = {0};
+
+        sinkGetMTVolume(&fm_volume_info);
+        modifyAndUpdateVolume(direction, group, &fm_volume_info, unmuteOnChange);
+        DEBUG(("VOL: vol = %d\n", fm_volume_info.main_volume));
+        AudioSetVolume(fm_volume_info.main_volume, TonesGetToneVolume());
+        sinkSetMTVolume(&fm_volume_info);
+        return TRUE;
+    }
+    return FALSE;
+}
+
 void modifyAndUpdateRoutedAudioVolume(volume_direction direction, audio_output_group_t group, const bool unmuteOnChange)
 {
     /* Try A2DP first */
@@ -1754,7 +1788,9 @@ void modifyAndUpdateRoutedAudioVolume(volume_direction direction, audio_output_g
     /* Try USB */
     if(ifUsbSinkExistsModifyAndUpdateVolume(direction, group, unmuteOnChange))
         return;
-
+    /* Try MultiTalk */
+    if (ifMtTalkExistsModifyAndUpdateVolume(direction, group, unmuteOnChange))
+        return;
     /* Try HFP without any audio connections */
     ifHfpConnectedModifyAndUpdateVolume(direction, group);
 }

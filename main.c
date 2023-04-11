@@ -1197,6 +1197,30 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
             MAIN_DEBUG(("Sys/Usr Volume Event\n"));
             id = sinkVolumeModifyEventAccordingToVolumeOrientation(id);
             lIndicateEvent = sinkVolumeProcessEventVolume(id);
+
+            if(id == EventUsrMicrophoneMuteToggle)
+            {
+                if(mtGetConnectDevices() == 0)
+                {
+                    return;
+                }
+            }
+            if(id == EventUsrMicrophoneMuteOn)
+            {
+                if(mtGetConnectDevices())
+                {
+                    AudioPlay(AP_MIC_OFF, TRUE);
+                    lIndicateEvent = FALSE;
+                }
+            }
+            if(id == EventUsrMicrophoneMuteOff)
+            {
+                if(mtGetConnectDevices())
+                {
+                    AudioPlay(AP_MIC_ON, TRUE);
+                    lIndicateEvent = FALSE;
+                }
+            }
             break;
 
         /*case (EventSysEnterPairingEmptyPDL):*/
@@ -1250,10 +1274,13 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
 
         case EventUsrCancelPairing:
             MAIN_DEBUG(("HS: Cancel Pairing\n")) ;
+             #ifdef     ENABLE_MULTI_TALK
+            #else
             MessageCancelAll(&theSink.task, EventSysPairingFail);
             MessageSend(&theSink.task, EventSysPairingFail, 0);
 
             sinkSportHealthSMDeviceStateCheck(EventUsrCancelPairing);
+            #endif
             break;
 
         case (EventSysPairingFail):
@@ -1635,7 +1662,9 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
                    /*disconnect any connected A2DP/AVRCP profiles*/
                    disconnectAllA2dpAvrcp(TRUE);
                 }
-
+#ifdef ENABLE_MULTI_TALK
+                MTResetDeviceList();
+#endif
                 deviceManagerRemoveAllDevices();
 
 #ifdef ENABLE_PEER
@@ -1645,6 +1674,9 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
 
                 if(INQUIRY_ON_PDL_RESET)
                     MessageSend(&theSink.task, EventUsrRssiPair, 0);
+                AudioPlay(AP_RESET_PAIR_LIST, TRUE);
+
+                MessageSendLater(&theSink.task, EventUsrPowerOff, NULL, 500);
             }
         break ;
         case ( EventSysLimboTimeout ):
@@ -1759,11 +1791,9 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
         break;
 
         case EventSysGasGauge0 :
-            AudioPlay(AP_BATTERY_LOW, TRUE);
         break;
         case EventSysGasGauge1 :
         case EventSysGasGauge2 :
-            AudioPlay(AP_BATTERY_MID, TRUE);
         break;
         case EventSysGasGauge3 :
             MAIN_DEBUG(("HS: EventSysGasGauge%d\n", id - EventSysGasGauge0)) ;
@@ -1771,18 +1801,14 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
             {
                 lIndicateEvent = FALSE;
             }
-            AudioPlay(AP_BATTERY_HIGH, TRUE);
         break ;
 
         case EventSysChargerGasGauge0 :
-             AudioPlay(AP_BATTERY_LOW, TRUE);
         break;
         case EventSysChargerGasGauge1 :
         case EventSysChargerGasGauge2 :
-            AudioPlay(AP_BATTERY_MID, TRUE);
         break;
         case EventSysChargerGasGauge3 :
-            AudioPlay(AP_BATTERY_HIGH, TRUE);
         break;
 
         case EventSysBatteryOk:
@@ -1894,8 +1920,13 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
         case EventSysPrimaryDeviceConnected:
         case EventSysSecondaryDeviceConnected:
             MAIN_DEBUG(("HS:Device Connected [%c]\n " , (id - EventSysPrimaryDeviceConnected)? 'S' : 'P'  )); 
+ #ifdef     ENABLE_MULTI_TALK
+            break;
+ #else
             sinkNfcBTDeviceConnectedInd(task);
             MessageSend(&theSink.task, EventSysUpdateDevicesConnectedStatus, NULL);
+ #endif
+
             break;
         case EventSysPrimaryDeviceDisconnected:
         case EventSysSecondaryDeviceDisconnected:
@@ -3207,6 +3238,7 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
             {
                /* use LEDS to indicate current state which is retrieved inside the function and set beforehand */
                LedManagerIndicateExtendedState() ;
+               UartSendState(stateManagerGetExtendedState());
             }
             break;
 
@@ -3660,10 +3692,10 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
 #endif
 
 #ifdef ENABLE_MULTI_TALK
-    if(processEventMultiTalk(task, id, message))
-    {
-
-    }
+    processEventMultiTalk(task, id, message);
+    processEventMultiTalkFriendMode(task, id, message);
+    processEventMultiTalkNearbyMode(task, id, message);
+    processEventMultiTalkCoupleMode(task, id, message);
 #endif
 }
 
@@ -4316,6 +4348,8 @@ void app_handler(Task task, MessageId id, Message message)
         LOG_ERROR(("Config Error, code=%u\n", err));
     }
 
+    UartSendEvent(id);
+
     /* determine the message type based on base and offset */
     if ( ( id >= EVENTS_MESSAGE_BASE ) && ( id < EVENTS_LAST_EVENT ) )
     {
@@ -4596,6 +4630,9 @@ int main(void)
             }
             
             UartInit(&theSink.task);
+            MessageSendLater(&theSink.task, EventMultiTalkUser1, NULL,D_SEC(100));
+            LedManagerForceDisable(TRUE);
+
         }
         break;
     }
@@ -4664,9 +4701,7 @@ static void IndicateEvent(MessageId id)
     {
         LedManagerIndicateEvent(id);
     }
-#ifndef PROMPT_REMOTE
     sinkAudioIndicationPlayEvent(id);
-#endif
     ATCommandPlayEvent(id);
 }
 /**  \} */ /* End sink_app group */

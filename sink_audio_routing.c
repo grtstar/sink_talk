@@ -2320,7 +2320,7 @@ static bool connectVoiceSink(Sink sink)
     if(populateVoiceConnectParameters(sink,connect_parameters))
     {
         connected_instance = ConnectWithParameters(connect_parameters);
-        DEBUG(("AUD: connected_instance = %x\n", (uint16)connected_instance));
+        AUD_DEBUG(("AUD: connected_instance = %x\n", (uint16)connected_instance));
         if(connected_instance)
         {
             sinkAudioSetRoutedVoiceInstance(connected_instance);
@@ -2381,7 +2381,7 @@ static void updateVolumeBasedOnRoutedSources(void)
 
 static void routeVoiceSink(Sink voice_sink)
 {
-    DEBUG(("voice_sink = %x, sinkAudioGetRoutedVoiceSink = %x\n", (uint16)voice_sink, (uint16)sinkAudioGetRoutedVoiceSink()));
+    AUD_DEBUG(("voice_sink = %x, sinkAudioGetRoutedVoiceSink = %x\n", (uint16)voice_sink, (uint16)sinkAudioGetRoutedVoiceSink()));
     if(sinkAudioGetRoutedVoiceSink() != voice_sink)
     {
         audioDisconnectRoutedVoice();
@@ -2900,7 +2900,7 @@ static void audioDisconnectInstance(audio_instance_t instance_to_disconnect)
 {
     if(instance_to_disconnect)
     {
-        DEBUG(("audioDisconnectInstance: 0x%x\n",(uint16)instance_to_disconnect));
+        AUD_DEBUG(("audioDisconnectInstance: 0x%x\n",(uint16)instance_to_disconnect));
         AudioDisconnectInstance(instance_to_disconnect);
     }
 }
@@ -2913,7 +2913,7 @@ void audioDisconnectRoutedAudio(void)
 
 void audioDisconnectRoutedVoice(void)
 {
-    DEBUG(("AUD:audioDisconnectRoutedVoice\n"));
+    AUD_DEBUG(("AUD:audioDisconnectRoutedVoice\n"));
     audioDisconnectInstance(sinkAudioGetRoutedVoiceInstance());
     sinkAudioSetRoutedVoiceInstance(NULL);
     updateControlPlugin();

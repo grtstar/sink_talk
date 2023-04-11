@@ -31,7 +31,7 @@ typedef struct {
     unsigned padding:14;
 } sink_charge_current_t;
 
-#define SINK_USB_POWER_READONLY_CONFIG_BLK_ID 1000
+#define SINK_USB_POWER_READONLY_CONFIG_BLK_ID 973
 
 typedef struct {
     sink_charge_current_t charge[11];

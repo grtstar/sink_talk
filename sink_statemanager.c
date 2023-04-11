@@ -306,13 +306,13 @@ static sink_extended_state_t getConnDiscovExtendedStates(void)
     }
     else if (sinkInquiryIsInqSessionMuliTalk())
     {
-        conndisc_ext_state = sink_ext_state_mtPairing;
+        conndisc_ext_state = sink_ext_state_multiTalkFast;
     }
     else if (sinkInquiryIsInqSessionNearbyTalk() || sinkInquiryIsInqSessionFriend())
     {
         if(mtGetConnectDevices() == 1)
         {
-            conndisc_ext_state = sink_ext_state_mtHeadConnected;
+            conndisc_ext_state = sink_ext_state_multiTalkSlow2;
         }
         else
         {
@@ -342,11 +342,11 @@ static sink_extended_state_t getConnectedExtendedStates(void)
 #ifdef ENABLE_MULTI_TALK
     if(mtHeadConnected())
     {
-        return sink_ext_state_mtHeadConnected;
+        return sink_ext_state_multiTalkSlow2;
     }
     if(mtNodeConnected())
     {
-        return sink_ext_state_mtNodeConnected;
+        return sink_ext_state_multiTalkSlow3;
     }
 #endif
     if (deviceManagerIsBothAgSourceAndPeerConnected())
@@ -387,22 +387,6 @@ static sink_extended_state_t stateManagerFindExtendedStateFromState( sinkState p
 
     SM_DEBUG(("SM: Getting extended state from state %s IS[%d]\n",debug_state,pState));
 
-    switch(UartGetState())
-    {
-        case(deviceConnectable):
-        break;
-        case(deviceConnDiscoverable):
-        if(gTheSinkState != deviceConnDiscoverable)
-            return sink_ext_state_connDiscoverableToSource;
-        break;
-        case (deviceConnected):
-        if(gTheSinkState != deviceConnected)
-            return sink_ext_state_connectedToAG;
-        break;
-        default:
-        break;
-    }
-
     switch(pState)
     {
         case(deviceLimbo):
@@ -411,7 +395,7 @@ static sink_extended_state_t stateManagerFindExtendedStateFromState( sinkState p
     #ifdef ENABLE_MULTI_TALK
             if(mtHeadConnected())
             {
-                return sink_ext_state_mtHeadConnected;
+                return sink_ext_state_multiTalkSlow2;
             }
     #endif
             return sink_ext_state_connectable;

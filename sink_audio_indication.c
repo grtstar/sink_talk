@@ -16,6 +16,7 @@ DESCRIPTION
 #include "sink_statemanager.h"
 #include "sink_anc.h"
 #include "sink_volume.h"
+#include "audio_prompt.h"
 
 #include <audio.h>
 
@@ -218,7 +219,9 @@ void sinkAudioIndicationPlayEvent(sinkEvents_t sink_event)
             /*Play audio prompt or tone*/
             if(event_has_prompt)
             {
+                #ifndef PROMPT_REMOTE
                 AudioPromptPlayEvent(sink_event, event_can_be_queued);
+                #endif
             }
             else if(event_has_tone)
             {

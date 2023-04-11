@@ -9661,7 +9661,7 @@
                         DefaultValue="MultiTalk Key Press" />
                     <PatternArrayConfigItem 
                         ShortId="type" 
-                        DefaultValue="LONG" />
+                        DefaultValue="VLONG" />
                 </PatternArrayRow>
                 <PatternArrayRow 
                     Node="Basic" 
@@ -9738,7 +9738,7 @@
                     Id="Pattern Row" >
                     <PatternArrayConfigItem 
                         ShortId="pio_mask" 
-                        DefaultValue="2." />
+                        DefaultValue="" />
                     <PatternArrayConfigItem 
                         ShortId="vreg_enabled" 
                         DefaultValue="False" />
@@ -9761,7 +9761,7 @@
                     Id="Pattern Row" >
                     <PatternArrayConfigItem 
                         ShortId="pio_mask" 
-                        DefaultValue="2." />
+                        DefaultValue="" />
                     <PatternArrayConfigItem 
                         ShortId="vreg_enabled" 
                         DefaultValue="False" />
@@ -9784,7 +9784,7 @@
                     Id="Pattern Row" >
                     <PatternArrayConfigItem 
                         ShortId="pio_mask" 
-                        DefaultValue="1." />
+                        DefaultValue="" />
                     <PatternArrayConfigItem 
                         ShortId="vreg_enabled" 
                         DefaultValue="False" />
@@ -9807,7 +9807,7 @@
                     Id="Pattern Row" >
                     <PatternArrayConfigItem 
                         ShortId="pio_mask" 
-                        DefaultValue="1." />
+                        DefaultValue="" />
                     <PatternArrayConfigItem 
                         ShortId="vreg_enabled" 
                         DefaultValue="False" />
@@ -9830,16 +9830,16 @@
                     Id="Pattern Row" >
                     <PatternArrayConfigItem 
                         ShortId="pio_mask" 
-                        DefaultValue="1. | 2." />
+                        DefaultValue="" />
                     <PatternArrayConfigItem 
                         ShortId="vreg_enabled" 
-                        DefaultValue="False" />
+                        DefaultValue="True" />
                     <PatternArrayConfigItem 
                         ShortId="chg_enabled" 
                         DefaultValue="False" />
                     <PatternArrayConfigItem 
                         ShortId="state_mask" 
-                        DefaultValue="Outgoing Call | Ongoing Call with SCO | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO" />
+                        DefaultValue="Connectable | Connectable/Discoverable | Connected" />
                     <PatternArrayConfigItem 
                         ShortId="user_event" 
                         DefaultValue="Microphone Mute Toggle" />
@@ -9868,7 +9868,7 @@
                         DefaultValue="Reset Paired Device List" />
                     <PatternArrayConfigItem 
                         ShortId="type" 
-                        DefaultValue="VVLONG" />
+                        DefaultValue="LONG" />
                 </PatternArrayRow>
                 <PatternArrayRow 
                     Node="Basic" 

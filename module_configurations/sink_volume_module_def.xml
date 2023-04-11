@@ -339,257 +339,19 @@
                         DefaultValue="-45 dB" />
                 </PatternArrayRow>
 
-                <PatternArrayRow Id="Row2" ShortId="vol_mapping_r2" Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="A2dpGain"
-                        DefaultValue="Volume Profile 1" />
-                    <PatternArrayConfigItem
-                        ShortId="IncVol"
-                        DefaultValue="Vol 2" />
-                    <PatternArrayConfigItem
-                        ShortId="DecVol"
-                        DefaultValue="Vol 0" />
-                    <PatternArrayConfigItem
-                        ShortId="Tone"
-                        DefaultValue="Short 3" />
-                    <PatternArrayConfigItem
-                        ShortId="VolGain"
-                        DefaultValue="-41.5 dB" />
-                </PatternArrayRow>
 
-                <PatternArrayRow Id="Row3" ShortId="vol_mapping_r3" Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="A2dpGain"
-                        DefaultValue="Volume Profile 2" />
-                     <PatternArrayConfigItem
-                        ShortId="IncVol"
-                        DefaultValue="Vol 3" />
-                    <PatternArrayConfigItem
-                        ShortId="DecVol"
-                        DefaultValue="Vol 1" />
-                    <PatternArrayConfigItem
-                        ShortId="Tone"
-                        DefaultValue="Short 3" />
-                    <PatternArrayConfigItem
-                        ShortId="VolGain"
-                        DefaultValue="-39 dB" />
-                </PatternArrayRow>
 
-              <PatternArrayRow Id="Row4" ShortId="vol_mapping_r4" Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="A2dpGain"
-                        DefaultValue="Volume Profile 3" />
-                     <PatternArrayConfigItem
-                        ShortId="IncVol"
-                        DefaultValue="Vol 4" />
-                    <PatternArrayConfigItem
-                        ShortId="DecVol"
-                        DefaultValue="Vol 2" />
-                    <PatternArrayConfigItem
-                        ShortId="Tone"
-                        DefaultValue="Short 3" />
-                    <PatternArrayConfigItem
-                        ShortId="VolGain"
-                        DefaultValue="-35.5 dB" />
-                </PatternArrayRow>
 
-                <PatternArrayRow Id="Row5" ShortId="vol_mapping_r5" Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="A2dpGain"
-                        DefaultValue="Volume Profile 4" />
-                    <PatternArrayConfigItem
-                        ShortId="IncVol"
-                        DefaultValue="Vol 5" />
-                    <PatternArrayConfigItem
-                        ShortId="DecVol"
-                        DefaultValue="Vol 3" />
-                    <PatternArrayConfigItem
-                        ShortId="Tone"
-                        DefaultValue="Short 3" />
-                    <PatternArrayConfigItem
-                        ShortId="VolGain"
-                        DefaultValue="-33 dB" />
-                </PatternArrayRow>
 
-                <PatternArrayRow Id="Row6" ShortId="vol_mapping_r6" Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="A2dpGain"
-                        DefaultValue="Volume Profile 5" />
-                    <PatternArrayConfigItem
-                        ShortId="IncVol"
-                        DefaultValue="Vol 6" />
-                    <PatternArrayConfigItem
-                        ShortId="DecVol"
-                        DefaultValue="Vol 4" />
-                    <PatternArrayConfigItem
-                        ShortId="Tone"
-                        DefaultValue="Short 3" />
-                    <PatternArrayConfigItem
-                        ShortId="VolGain"
-                        DefaultValue="-29.5 dB" />
-                </PatternArrayRow>
 
-                <PatternArrayRow Id="Row7" ShortId="vol_mapping_r7" Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="A2dpGain"
-                        DefaultValue="Volume Profile 6" />
-                    <PatternArrayConfigItem
-                        ShortId="IncVol"
-                        DefaultValue="Vol 7" />
-                    <PatternArrayConfigItem
-                        ShortId="DecVol"
-                        DefaultValue="Vol 5" />
-                    <PatternArrayConfigItem
-                        ShortId="Tone"
-                        DefaultValue="Short 3" />
-                    <PatternArrayConfigItem
-                        ShortId="VolGain"
-                        DefaultValue="-27 dB" />
-                </PatternArrayRow>
 
-                <PatternArrayRow Id="Row8" ShortId="vol_mapping_r8" Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="A2dpGain"
-                        DefaultValue="Volume Profile 7" />
-                    <PatternArrayConfigItem
-                        ShortId="IncVol"
-                        DefaultValue="Vol 8" />
-                    <PatternArrayConfigItem
-                        ShortId="DecVol"
-                        DefaultValue="Vol 6" />
-                    <PatternArrayConfigItem
-                        ShortId="Tone"
-                        DefaultValue="Short 3" />
-                    <PatternArrayConfigItem
-                        ShortId="VolGain"
-                        DefaultValue="-23.5 dB" />
-                </PatternArrayRow>
 
-                <PatternArrayRow Id="Row9" ShortId="vol_mapping_r9" Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="A2dpGain"
-                        DefaultValue="Volume Profile 8" />
-                    <PatternArrayConfigItem
-                        ShortId="IncVol"
-                        DefaultValue="Vol 9" />
-                    <PatternArrayConfigItem
-                        ShortId="DecVol"
-                        DefaultValue="Vol 7" />
-                    <PatternArrayConfigItem
-                        ShortId="Tone"
-                        DefaultValue="Short 3" />
-                    <PatternArrayConfigItem
-                        ShortId="VolGain"
-                        DefaultValue="-21 dB" />
-                </PatternArrayRow>
 
-                <PatternArrayRow Id="Row10" ShortId="vol_mapping_r10" Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="A2dpGain"
-                        DefaultValue="Volume Profile 9" />
-                    <PatternArrayConfigItem
-                        ShortId="IncVol"
-                        DefaultValue="Vol 10" />
-                    <PatternArrayConfigItem
-                        ShortId="DecVol"
-                        DefaultValue="Vol 8" />
-                    <PatternArrayConfigItem
-                        ShortId="Tone"
-                        DefaultValue="Short 3" />
-                    <PatternArrayConfigItem
-                        ShortId="VolGain"
-                        DefaultValue="-18 dB" />
-                </PatternArrayRow>
 
-                <PatternArrayRow Id="Row11" ShortId="vol_mapping_r11" Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="A2dpGain"
-                        DefaultValue="Volume Profile 10" />
-                    <PatternArrayConfigItem
-                        ShortId="IncVol"
-                        DefaultValue="Vol 11" />
-                    <PatternArrayConfigItem
-                        ShortId="DecVol"
-                        DefaultValue="Vol 9" />
-                    <PatternArrayConfigItem
-                        ShortId="Tone"
-                        DefaultValue="Short 3" />
-                    <PatternArrayConfigItem
-                        ShortId="VolGain"
-                        DefaultValue="-15 dB" />
-                </PatternArrayRow>
 
-                <PatternArrayRow Id="Row12" ShortId="vol_mapping_r12" Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="A2dpGain"
-                        DefaultValue="Volume Profile 11" />
-                    <PatternArrayConfigItem
-                        ShortId="IncVol"
-                        DefaultValue="Vol 12" />
-                    <PatternArrayConfigItem
-                        ShortId="DecVol"
-                        DefaultValue="Vol 10" />
-                    <PatternArrayConfigItem
-                        ShortId="Tone"
-                        DefaultValue="Short 3" />
-                    <PatternArrayConfigItem
-                        ShortId="VolGain"
-                        DefaultValue="-12 dB" />
-                </PatternArrayRow>
 
-               <PatternArrayRow Id="Row13" ShortId="vol_mapping_r13" Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="A2dpGain"
-                        DefaultValue="Volume Profile 12" />
-                    <PatternArrayConfigItem
-                        ShortId="IncVol"
-                        DefaultValue="Vol 13" />
-                    <PatternArrayConfigItem
-                        ShortId="DecVol"
-                        DefaultValue="Vol 11" />
-                    <PatternArrayConfigItem
-                        ShortId="Tone"
-                        DefaultValue="Short 3" />
-                    <PatternArrayConfigItem
-                        ShortId="VolGain"
-                        DefaultValue="-9 dB" />
-                </PatternArrayRow>
 
-                <PatternArrayRow Id="Row14" ShortId="vol_mapping_r14" Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="A2dpGain"
-                        DefaultValue="Volume Profile 13" />
-                    <PatternArrayConfigItem
-                        ShortId="IncVol"
-                        DefaultValue="Vol 14" />
-                    <PatternArrayConfigItem
-                        ShortId="DecVol"
-                        DefaultValue="Vol 12" />
-                    <PatternArrayConfigItem
-                        ShortId="Tone"
-                        DefaultValue="Short 3" />
-                    <PatternArrayConfigItem
-                        ShortId="VolGain"
-                        DefaultValue="-6 dB" />
-                </PatternArrayRow>
 
-                <PatternArrayRow Id="Row15" ShortId="vol_mapping_r15" Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="A2dpGain"
-                        DefaultValue="Volume Profile 14" />
-                    <PatternArrayConfigItem
-                        ShortId="IncVol"
-                        DefaultValue="Vol 15" />
-                    <PatternArrayConfigItem
-                        ShortId="DecVol"
-                        DefaultValue="Vol 13" />
-                    <PatternArrayConfigItem
-                        ShortId="Tone"
-                        DefaultValue="Short 3" />
-                    <PatternArrayConfigItem
-                        ShortId="VolGain"
-                        DefaultValue="-3 dB" />
-                </PatternArrayRow>
 
                <PatternArrayRow Id="Row16" ShortId="vol_mapping_r16" Node="Basic">
                     <PatternArrayConfigItem
@@ -608,6 +370,532 @@
                         ShortId="VolGain"
                         DefaultValue="0 dB" />
                 </PatternArrayRow>
+                <BuildVariant
+                    HwVariant="CNS10001v4"
+                    SwVariant="Headset-Gaming" >
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="A2dpGain" 
+                            DefaultValue="Volume Profile 1" />
+                        <PatternArrayConfigItem 
+                            ShortId="IncVol" 
+                            DefaultValue="Vol 2" />
+                        <PatternArrayConfigItem 
+                            ShortId="DecVol" 
+                            DefaultValue="Vol 0" />
+                        <PatternArrayConfigItem 
+                            ShortId="Tone" 
+                            DefaultValue="No Tone" />
+                        <PatternArrayConfigItem 
+                            ShortId="VolGain" 
+                            DefaultValue="-41.5 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="A2dpGain" 
+                            DefaultValue="Volume Profile 2" />
+                        <PatternArrayConfigItem 
+                            ShortId="IncVol" 
+                            DefaultValue="Vol 3" />
+                        <PatternArrayConfigItem 
+                            ShortId="DecVol" 
+                            DefaultValue="Vol 1" />
+                        <PatternArrayConfigItem 
+                            ShortId="Tone" 
+                            DefaultValue="No Tone" />
+                        <PatternArrayConfigItem 
+                            ShortId="VolGain" 
+                            DefaultValue="-39 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="A2dpGain" 
+                            DefaultValue="Volume Profile 3" />
+                        <PatternArrayConfigItem 
+                            ShortId="IncVol" 
+                            DefaultValue="Vol 4" />
+                        <PatternArrayConfigItem 
+                            ShortId="DecVol" 
+                            DefaultValue="Vol 2" />
+                        <PatternArrayConfigItem 
+                            ShortId="Tone" 
+                            DefaultValue="No Tone" />
+                        <PatternArrayConfigItem 
+                            ShortId="VolGain" 
+                            DefaultValue="-35.5 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="A2dpGain" 
+                            DefaultValue="Volume Profile 4" />
+                        <PatternArrayConfigItem 
+                            ShortId="IncVol" 
+                            DefaultValue="Vol 5" />
+                        <PatternArrayConfigItem 
+                            ShortId="DecVol" 
+                            DefaultValue="Vol 3" />
+                        <PatternArrayConfigItem 
+                            ShortId="Tone" 
+                            DefaultValue="No Tone" />
+                        <PatternArrayConfigItem 
+                            ShortId="VolGain" 
+                            DefaultValue="-33 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="A2dpGain" 
+                            DefaultValue="Volume Profile 5" />
+                        <PatternArrayConfigItem 
+                            ShortId="IncVol" 
+                            DefaultValue="Vol 6" />
+                        <PatternArrayConfigItem 
+                            ShortId="DecVol" 
+                            DefaultValue="Vol 4" />
+                        <PatternArrayConfigItem 
+                            ShortId="Tone" 
+                            DefaultValue="No Tone" />
+                        <PatternArrayConfigItem 
+                            ShortId="VolGain" 
+                            DefaultValue="-29.5 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="A2dpGain" 
+                            DefaultValue="Volume Profile 6" />
+                        <PatternArrayConfigItem 
+                            ShortId="IncVol" 
+                            DefaultValue="Vol 7" />
+                        <PatternArrayConfigItem 
+                            ShortId="DecVol" 
+                            DefaultValue="Vol 5" />
+                        <PatternArrayConfigItem 
+                            ShortId="Tone" 
+                            DefaultValue="No Tone" />
+                        <PatternArrayConfigItem 
+                            ShortId="VolGain" 
+                            DefaultValue="-27 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="A2dpGain" 
+                            DefaultValue="Volume Profile 7" />
+                        <PatternArrayConfigItem 
+                            ShortId="IncVol" 
+                            DefaultValue="Vol 8" />
+                        <PatternArrayConfigItem 
+                            ShortId="DecVol" 
+                            DefaultValue="Vol 6" />
+                        <PatternArrayConfigItem 
+                            ShortId="Tone" 
+                            DefaultValue="No Tone" />
+                        <PatternArrayConfigItem 
+                            ShortId="VolGain" 
+                            DefaultValue="-23.5 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="A2dpGain" 
+                            DefaultValue="Volume Profile 8" />
+                        <PatternArrayConfigItem 
+                            ShortId="IncVol" 
+                            DefaultValue="Vol 9" />
+                        <PatternArrayConfigItem 
+                            ShortId="DecVol" 
+                            DefaultValue="Vol 7" />
+                        <PatternArrayConfigItem 
+                            ShortId="Tone" 
+                            DefaultValue="No Tone" />
+                        <PatternArrayConfigItem 
+                            ShortId="VolGain" 
+                            DefaultValue="-21 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="A2dpGain" 
+                            DefaultValue="Volume Profile 9" />
+                        <PatternArrayConfigItem 
+                            ShortId="IncVol" 
+                            DefaultValue="Vol 10" />
+                        <PatternArrayConfigItem 
+                            ShortId="DecVol" 
+                            DefaultValue="Vol 8" />
+                        <PatternArrayConfigItem 
+                            ShortId="Tone" 
+                            DefaultValue="No Tone" />
+                        <PatternArrayConfigItem 
+                            ShortId="VolGain" 
+                            DefaultValue="-18 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="A2dpGain" 
+                            DefaultValue="Volume Profile 10" />
+                        <PatternArrayConfigItem 
+                            ShortId="IncVol" 
+                            DefaultValue="Vol 11" />
+                        <PatternArrayConfigItem 
+                            ShortId="DecVol" 
+                            DefaultValue="Vol 9" />
+                        <PatternArrayConfigItem 
+                            ShortId="Tone" 
+                            DefaultValue="No Tone" />
+                        <PatternArrayConfigItem 
+                            ShortId="VolGain" 
+                            DefaultValue="-15 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="A2dpGain" 
+                            DefaultValue="Volume Profile 11" />
+                        <PatternArrayConfigItem 
+                            ShortId="IncVol" 
+                            DefaultValue="Vol 12" />
+                        <PatternArrayConfigItem 
+                            ShortId="DecVol" 
+                            DefaultValue="Vol 10" />
+                        <PatternArrayConfigItem 
+                            ShortId="Tone" 
+                            DefaultValue="No Tone" />
+                        <PatternArrayConfigItem 
+                            ShortId="VolGain" 
+                            DefaultValue="-12 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="A2dpGain" 
+                            DefaultValue="Volume Profile 12" />
+                        <PatternArrayConfigItem 
+                            ShortId="IncVol" 
+                            DefaultValue="Vol 13" />
+                        <PatternArrayConfigItem 
+                            ShortId="DecVol" 
+                            DefaultValue="Vol 11" />
+                        <PatternArrayConfigItem 
+                            ShortId="Tone" 
+                            DefaultValue="No Tone" />
+                        <PatternArrayConfigItem 
+                            ShortId="VolGain" 
+                            DefaultValue="-9 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="A2dpGain" 
+                            DefaultValue="Volume Profile 13" />
+                        <PatternArrayConfigItem 
+                            ShortId="IncVol" 
+                            DefaultValue="Vol 14" />
+                        <PatternArrayConfigItem 
+                            ShortId="DecVol" 
+                            DefaultValue="Vol 12" />
+                        <PatternArrayConfigItem 
+                            ShortId="Tone" 
+                            DefaultValue="No Tone" />
+                        <PatternArrayConfigItem 
+                            ShortId="VolGain" 
+                            DefaultValue="-6 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="A2dpGain" 
+                            DefaultValue="Volume Profile 14" />
+                        <PatternArrayConfigItem 
+                            ShortId="IncVol" 
+                            DefaultValue="Vol 15" />
+                        <PatternArrayConfigItem 
+                            ShortId="DecVol" 
+                            DefaultValue="Vol 13" />
+                        <PatternArrayConfigItem 
+                            ShortId="Tone" 
+                            DefaultValue="No Tone" />
+                        <PatternArrayConfigItem 
+                            ShortId="VolGain" 
+                            DefaultValue="-3 dB" />
+                    </PatternArrayRow>
+                </BuildVariant>
+                <BuildVariant
+                    HwVariant="All"
+                    SwVariant="All" >
+                    <PatternArrayRow Id="Row2" ShortId="vol_mapping_r2" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="A2dpGain"
+                            DefaultValue="Volume Profile 1" />
+                        <PatternArrayConfigItem
+                            ShortId="IncVol"
+                            DefaultValue="Vol 2" />
+                        <PatternArrayConfigItem
+                            ShortId="DecVol"
+                            DefaultValue="Vol 0" />
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Short 3" />
+                        <PatternArrayConfigItem
+                            ShortId="VolGain"
+                            DefaultValue="-41.5 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow Id="Row3" ShortId="vol_mapping_r3" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="A2dpGain"
+                            DefaultValue="Volume Profile 2" />
+                         <PatternArrayConfigItem
+                            ShortId="IncVol"
+                            DefaultValue="Vol 3" />
+                        <PatternArrayConfigItem
+                            ShortId="DecVol"
+                            DefaultValue="Vol 1" />
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Short 3" />
+                        <PatternArrayConfigItem
+                            ShortId="VolGain"
+                            DefaultValue="-39 dB" />
+                    </PatternArrayRow>
+                  <PatternArrayRow Id="Row4" ShortId="vol_mapping_r4" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="A2dpGain"
+                            DefaultValue="Volume Profile 3" />
+                         <PatternArrayConfigItem
+                            ShortId="IncVol"
+                            DefaultValue="Vol 4" />
+                        <PatternArrayConfigItem
+                            ShortId="DecVol"
+                            DefaultValue="Vol 2" />
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Short 3" />
+                        <PatternArrayConfigItem
+                            ShortId="VolGain"
+                            DefaultValue="-35.5 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow Id="Row5" ShortId="vol_mapping_r5" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="A2dpGain"
+                            DefaultValue="Volume Profile 4" />
+                        <PatternArrayConfigItem
+                            ShortId="IncVol"
+                            DefaultValue="Vol 5" />
+                        <PatternArrayConfigItem
+                            ShortId="DecVol"
+                            DefaultValue="Vol 3" />
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Short 3" />
+                        <PatternArrayConfigItem
+                            ShortId="VolGain"
+                            DefaultValue="-33 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow Id="Row6" ShortId="vol_mapping_r6" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="A2dpGain"
+                            DefaultValue="Volume Profile 5" />
+                        <PatternArrayConfigItem
+                            ShortId="IncVol"
+                            DefaultValue="Vol 6" />
+                        <PatternArrayConfigItem
+                            ShortId="DecVol"
+                            DefaultValue="Vol 4" />
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Short 3" />
+                        <PatternArrayConfigItem
+                            ShortId="VolGain"
+                            DefaultValue="-29.5 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow Id="Row7" ShortId="vol_mapping_r7" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="A2dpGain"
+                            DefaultValue="Volume Profile 6" />
+                        <PatternArrayConfigItem
+                            ShortId="IncVol"
+                            DefaultValue="Vol 7" />
+                        <PatternArrayConfigItem
+                            ShortId="DecVol"
+                            DefaultValue="Vol 5" />
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Short 3" />
+                        <PatternArrayConfigItem
+                            ShortId="VolGain"
+                            DefaultValue="-27 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow Id="Row8" ShortId="vol_mapping_r8" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="A2dpGain"
+                            DefaultValue="Volume Profile 7" />
+                        <PatternArrayConfigItem
+                            ShortId="IncVol"
+                            DefaultValue="Vol 8" />
+                        <PatternArrayConfigItem
+                            ShortId="DecVol"
+                            DefaultValue="Vol 6" />
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Short 3" />
+                        <PatternArrayConfigItem
+                            ShortId="VolGain"
+                            DefaultValue="-23.5 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow Id="Row9" ShortId="vol_mapping_r9" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="A2dpGain"
+                            DefaultValue="Volume Profile 8" />
+                        <PatternArrayConfigItem
+                            ShortId="IncVol"
+                            DefaultValue="Vol 9" />
+                        <PatternArrayConfigItem
+                            ShortId="DecVol"
+                            DefaultValue="Vol 7" />
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Short 3" />
+                        <PatternArrayConfigItem
+                            ShortId="VolGain"
+                            DefaultValue="-21 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow Id="Row10" ShortId="vol_mapping_r10" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="A2dpGain"
+                            DefaultValue="Volume Profile 9" />
+                        <PatternArrayConfigItem
+                            ShortId="IncVol"
+                            DefaultValue="Vol 10" />
+                        <PatternArrayConfigItem
+                            ShortId="DecVol"
+                            DefaultValue="Vol 8" />
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Short 3" />
+                        <PatternArrayConfigItem
+                            ShortId="VolGain"
+                            DefaultValue="-18 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow Id="Row11" ShortId="vol_mapping_r11" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="A2dpGain"
+                            DefaultValue="Volume Profile 10" />
+                        <PatternArrayConfigItem
+                            ShortId="IncVol"
+                            DefaultValue="Vol 11" />
+                        <PatternArrayConfigItem
+                            ShortId="DecVol"
+                            DefaultValue="Vol 9" />
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Short 3" />
+                        <PatternArrayConfigItem
+                            ShortId="VolGain"
+                            DefaultValue="-15 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow Id="Row12" ShortId="vol_mapping_r12" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="A2dpGain"
+                            DefaultValue="Volume Profile 11" />
+                        <PatternArrayConfigItem
+                            ShortId="IncVol"
+                            DefaultValue="Vol 12" />
+                        <PatternArrayConfigItem
+                            ShortId="DecVol"
+                            DefaultValue="Vol 10" />
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Short 3" />
+                        <PatternArrayConfigItem
+                            ShortId="VolGain"
+                            DefaultValue="-12 dB" />
+                    </PatternArrayRow>
+                   <PatternArrayRow Id="Row13" ShortId="vol_mapping_r13" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="A2dpGain"
+                            DefaultValue="Volume Profile 12" />
+                        <PatternArrayConfigItem
+                            ShortId="IncVol"
+                            DefaultValue="Vol 13" />
+                        <PatternArrayConfigItem
+                            ShortId="DecVol"
+                            DefaultValue="Vol 11" />
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Short 3" />
+                        <PatternArrayConfigItem
+                            ShortId="VolGain"
+                            DefaultValue="-9 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow Id="Row14" ShortId="vol_mapping_r14" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="A2dpGain"
+                            DefaultValue="Volume Profile 13" />
+                        <PatternArrayConfigItem
+                            ShortId="IncVol"
+                            DefaultValue="Vol 14" />
+                        <PatternArrayConfigItem
+                            ShortId="DecVol"
+                            DefaultValue="Vol 12" />
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Short 3" />
+                        <PatternArrayConfigItem
+                            ShortId="VolGain"
+                            DefaultValue="-6 dB" />
+                    </PatternArrayRow>
+                    <PatternArrayRow Id="Row15" ShortId="vol_mapping_r15" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="A2dpGain"
+                            DefaultValue="Volume Profile 14" />
+                        <PatternArrayConfigItem
+                            ShortId="IncVol"
+                            DefaultValue="Vol 15" />
+                        <PatternArrayConfigItem
+                            ShortId="DecVol"
+                            DefaultValue="Vol 13" />
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Short 3" />
+                        <PatternArrayConfigItem
+                            ShortId="VolGain"
+                            DefaultValue="-3 dB" />
+                    </PatternArrayRow>
+                </BuildVariant>
             </ConfigPatternArray>
        </ConfigGroup>
 

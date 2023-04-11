@@ -312,29 +312,23 @@ uint16 WriteDeviceIdEirData( uint8 *p )
 }
 
 #ifdef ENABLE_MULTI_TALK
-
-bool mtCheckPeerDevice(uint16 size_eir_data, const uint8 *eir_data)
+#if 0
+bool mtCheckPeerDeviceIdData(uint16 size_eir_data, const uint8 *eir_data)
 {
     while (size_eir_data >= EIR_FULL_SIZE_DEVICE_ID)
     {
         uint16 eir_record_size = eir_data[0] + 1; /* Record size in eir_data[0] does not include length byte, just tag and data size */
-
         if (eir_data[1] == EIR_TAG_DEVICE_ID)
         {
             uint16 vendorIdSource = (eir_data[3] << 8) + eir_data[2];
             uint16 vendorId = (eir_data[5] << 8) + eir_data[4];
             uint16 productId = (eir_data[7] << 8) + eir_data[6];
-
-            DEBUG(("Peer Device Id data = vid_src(%x), vid(%x), pid(%x)\n", vendorIdSource, vendorId, productId));
-
+            if ((vendorIdSource == DEVICE_ID_VENDOR_ID_SOURCE) && (vendorId == DEVICE_ID_VENDOR_ID) && (productId == DEVICE_ID_PRODUCT_ID))
             {
-                if ((vendorIdSource != 0) && (vendorId == 0xA5) && (productId == 0xAA55))
-                {
-                    return TRUE;
-                }
+                return TRUE;
             }
         }
-
+        
         if (size_eir_data > eir_record_size)
         {
             size_eir_data -= eir_record_size;
@@ -345,10 +339,9 @@ bool mtCheckPeerDevice(uint16 size_eir_data, const uint8 *eir_data)
             size_eir_data = 0;
         }
     }
-    /* Device Id data not present or did not match expected values */
     return FALSE;
 }
-
+#endif
 bool mtCheckEirDeviceIdData(uint16 size_eir_data, const uint8 *eir_data)
 {
 #if defined DEVICE_ID_PSKEY || defined DEVICE_ID_CONST

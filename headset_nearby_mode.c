@@ -50,7 +50,6 @@
 #include "csr_common_example_plugin.h"
 
 extern MTData *mt;
-extern const uint16 syn_conftab[];
 extern TaskData acl_parent_task;
 extern TaskData acl_child_task;
 
@@ -194,7 +193,6 @@ bool handleMTL2capConnectIndNearbyMode(CL_L2CAP_CONNECT_IND_T *msg)
 
         if (mt->mt_mode == CLOSE_MODE)
         {
-            DEBUG(("MT: handleMTL2capConnectIndNearbyMode cannot allow connected in close mode \n"));
             return FALSE;
         }
         else
@@ -339,7 +337,7 @@ void handleMTL2capConnectCfmNearbyMode(CL_L2CAP_CONNECT_CFM_T *msg)
                 mt->status = MT_ST_SEARCHING;
             }
 
-            if (msg->status == l2cap_connect_error) /* 137 */
+            if (msg->status == l2cap_connect_error || msg->status == l2cap_connect_failed_security) /* 137 */
             {
                 deviceManagerRemoveDevice(&msg->addr);
             }
@@ -608,6 +606,10 @@ void handleMTSynDisconIndNearbyMode(CL_DM_SYNC_DISCONNECT_IND_T *msg)
 
 bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
 {
+    if(mt->mt_mode != NEARBY_MODE)
+    {
+        return FALSE;
+    }
     switch (id)
     {
     case EventSysMultiTalkEnterNearbyMode:
@@ -659,7 +661,7 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
                 if (mt->status == MT_ST_PARING || mt->status == MT_ST_SEARCHING)
                 {
                     inquiry_result_t *result = sinkinquiryGetInquiryResults();
-                    if (result)
+                    if (result && sinkInquiryIsInqSessionNearbyTalk())
                     {
                         /* 连接比自己头地址更大的设  */
                         if (BdaddrCompare(&mt->addr, &result[0].bd_addr) == -1 &&

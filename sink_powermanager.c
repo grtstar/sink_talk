@@ -1629,9 +1629,10 @@ bool powerManagerChargerSetup(voltage_reading* vthm)
             break;
         }
 
-        /* Disable LEDs if required */
+        /* Disable LEDs if required 
         LedManagerForceDisable(setting.current.disable_leds);
-
+        */
+        
         if(GPOWER.current_external_devices < setting.current.current)
         {
             setting.current.current -= GPOWER.current_external_devices;

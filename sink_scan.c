@@ -367,8 +367,8 @@ void sinkEnableDiscoverable( void )
     }
     
     /* Set the inquiry scan params */
+    DEBUG(("Discoverable scan %d, %d\n", radioConfig.inquiry_scan_interval, radioConfig.inquiry_scan_window));
     ConnectionWriteInquiryscanActivity(radioConfig.inquiry_scan_interval,radioConfig.inquiry_scan_window);
-
     enableScanMode(hci_scan_enable_inq);
 }
 

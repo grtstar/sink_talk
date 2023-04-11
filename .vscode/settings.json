@@ -33,6 +33,7 @@
         "audio_prompt.h": "c",
         "connection_private.h": "c",
         "l2cap_prim.h": "c",
-        "headset_uart.h": "c"
+        "headset_uart.h": "c",
+        "initializer_list": "c"
     }
 }

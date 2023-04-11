@@ -146,7 +146,7 @@ static void handleAudioMessage ( Task task , MessageId id, Message message )
             }
             else
             {
-                CsrExamplePluginSetSoftMute(mute_message);
+                CsrExamplePluginSetSoftMute((ExamplePluginTaskdata*)task, mute_message);
             }
         }
         break;

@@ -706,6 +706,7 @@ typedef enum sinkEventsTag
               EventSysMultiTalkLeaveFriendMode,
               EventSysMultiTalkLeaveFriendModeDelay,
               EventSysMultiTalkFriendModeLeaved,
+              EventSysMultiTalkFriendSaveListDelay,
 
               EventSysMultiTalkEnterNearbyMode,
               EventSysMultiTalkLeaveNearbyMode,
@@ -715,6 +716,8 @@ typedef enum sinkEventsTag
               EventSysMultiTalkEnterCoupleMode,
               EventSysMultiTalkLeaveCoupleMode,
               EventSysMultiTalkPairingCoupleMode,
+              EventSysMultiTalkQuitPairingCoupleMode,
+              EventSysMultiTalkPairingTimeoutCoupleMode,
               EventSysMultiTalkLeaveCoupleModeDelay,
               EventSysMultiTalkCoupleModeLeaved,
               EventSysMultiTalkCoupleModeReconnect,
@@ -726,7 +729,6 @@ typedef enum sinkEventsTag
               EventSysAGSlcConnectCfm,
               EventSysAGSlcDisconnectInd,
               EventSysAGAudioConnectCfm,
-
 
               EventSysLast
 

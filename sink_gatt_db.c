@@ -28,52 +28,6 @@ const uint16 gattDatabase[] = {
     0x3005, 0x0209, 0x0001, 0x2a00,
     /* 0009:  */
     0xd400,
-    /* 000a: Primary Service 1804 */
-    0x0002, 0x0418,
-    /* 000b: Characteristic Declaration 2a07 */
-    0x3045, 0x020c, 0x0007, 0x2a00,
-    /* 000c: . */
-    0xd401, 0x0000,
-    /* 000d: Primary Service 1802 */
-    0x0002, 0x0218,
-    /* 000e: Characteristic Declaration 2a06 */
-    0x3005, 0x040f, 0x0006, 0x2a00,
-    /* 000f: . */
-    0xd501, 0x0000,
-    /* 0010: Primary Service 1803 */
-    0x0002, 0x0318,
-    /* 0011: Characteristic Declaration 2a06 */
-    0x3045, 0x0a12, 0x0006, 0x2a00,
-    /* 0012: . */
-    0xd501, 0x0000,
-    /* 0013: Primary Service 00001100-d102-11e1-9b23-00025b00a5a5 */
-    0x0010, 0xa5a5, 0x005b, 0x0200, 0x239b, 0xe111, 0x02d1, 0x0011, 0x0000,
-    /* 0014: Characteristic Declaration 00001101-d102-11e1-9b23-00025b00a5a5 */
-    0x3013, 0x0815, 0x00a5, 0xa500, 0x5b02, 0x0023, 0x9be1, 0x1102, 0xd101, 0x1100, 0x0000,
-    /* 0015: . */
-    0xcd01, 0x0000,
-    /* 0016: Characteristic Declaration 00001102-d102-11e1-9b23-00025b00a5a5 */
-    0x3013, 0x1217, 0x00a5, 0xa500, 0x5b02, 0x0023, 0x9be1, 0x1102, 0xd102, 0x1100, 0x0000,
-    /* 0017: . */
-    0xcc01, 0x0000,
-    /* 0018: Client Characteristic Configuration */
-    0x6c00,
-    /* 0019: Characteristic Declaration 00001103-d102-11e1-9b23-00025b00a5a5 */
-    0x3053, 0x161a, 0x00a5, 0xa500, 0x5b02, 0x0023, 0x9be1, 0x1102, 0xd103, 0x1100, 0x0000,
-    /* 001a: . */
-    0xcd01, 0x0000,
-    /* 001b: Client Characteristic Configuration */
-    0x6c00,
-    /* 001c: Primary Service 180f */
-    0x0002, 0x0f18,
-    /* 001d: Characteristic Declaration 2a19 */
-    0x3005, 0x121e, 0x0019, 0x2a00,
-    /* 001e: . */
-    0xd401, 0x0000,
-    /* 001f: Characteristic Presentation Format, rfu, 0 */
-    0x8c07, 0x0000, 0x0000, 0x0000, 0x0000,
-    /* 0020: Client Characteristic Configuration */
-    0x6c00,
 };
 
 /* SDP service snippets */
@@ -133,8 +87,7 @@ const struct
     uint16      start;
     uint16      end;
 } sdp_data[] = {
-    { UUID_IS_16  | 0x000a, 0x0005, 0x0009 },     /* GAP_SERVICE */
-    { UUID_IS_16  | 0x0060, 0x001c, 0xffff },     /* BATTERY_SERVICE1 */
+    { UUID_IS_16  | 0x000a, 0x0005, 0xffff },     /* GAP_SERVICE */
 };
 
 uint8 *GattGetServiceRecord(gatt_sdp service, uint16 *len)

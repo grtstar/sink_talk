@@ -1,7 +1,7 @@
 compression=pcm,rate=8000,channels=mono,file=欢迎使用蓝牙对讲系统.wav
 compression=pcm,rate=8000,channels=mono,file=关机.wav
-compression=pcm,rate=8000,channels=mono,file=电池电量高.wav
-compression=pcm,rate=8000,channels=mono,file=电池电量中等.wav
+compression=pcm,rate=8000,channels=mono,file=电量充足.wav
+compression=pcm,rate=8000,channels=mono,file=电量中等.wav
 compression=pcm,rate=8000,channels=mono,file=电池电量低.wav
 compression=pcm,rate=8000,channels=mono,file=配对状态.wav
 compression=pcm,rate=8000,channels=mono,file=手机1已连接.wav
@@ -11,14 +11,6 @@ compression=pcm,rate=8000,channels=mono,file=麦克风已打开.wav
 compression=pcm,rate=8000,channels=mono,file=麦克风已关闭.wav
 compression=pcm,rate=8000,channels=mono,file=多人对讲好友模式.wav
 compression=pcm,rate=8000,channels=mono,file=多人对讲好友模式组网.wav
-compression=pcm,rate=8000,channels=mono,file=组网人数1人.wav
-compression=pcm,rate=8000,channels=mono,file=组网人数2人.wav
-compression=pcm,rate=8000,channels=mono,file=组网人数3人.wav
-compression=pcm,rate=8000,channels=mono,file=组网人数4人.wav
-compression=pcm,rate=8000,channels=mono,file=组网人数5人.wav
-compression=pcm,rate=8000,channels=mono,file=组网人数6人.wav
-compression=pcm,rate=8000,channels=mono,file=组网人数7人.wav
-compression=pcm,rate=8000,channels=mono,file=组网人数8人.wav
 compression=pcm,rate=8000,channels=mono,file=2人组网完成.wav
 compression=pcm,rate=8000,channels=mono,file=3人组网完成.wav
 compression=pcm,rate=8000,channels=mono,file=4人组网完成.wav
@@ -45,3 +37,12 @@ compression=pcm,rate=8000,channels=mono,file=当前人数8人.wav
 compression=pcm,rate=8000,channels=mono,file=取消组网.wav
 compression=pcm,rate=8000,channels=mono,file=音乐分享开启.wav
 compression=pcm,rate=8000,channels=mono,file=音乐分享关闭.wav
+compression=pcm,rate=8000,channels=mono,file=保存组网失败.wav
+compression=pcm,rate=8000,channels=mono,file=自动接听已打开.wav
+compression=pcm,rate=8000,channels=mono,file=自动接听已关闭.wav
+compression=pcm,rate=8000,channels=mono,file=对讲已连接.wav
+compression=pcm,rate=8000,channels=mono,file=配对失败退出双人对讲配对.wav
+compression=pcm,rate=8000,channels=mono,file=对讲记录已清除.wav
+compression=pcm,rate=8000,channels=mono,file=退出配对.wav
+compression=pcm,rate=8000,channels=mono,file=手机1已断开.wav
+compression=pcm,rate=8000,channels=mono,file=手机2已断开.wav

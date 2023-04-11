@@ -187,27 +187,27 @@
         Id="AVRCP Enable and Audio Switching Mask Bitfields" />
 
     <ConfigGroup 
-        Active="True" 
+        Active="False" 
         PsKeyNumber="44" 
         Id="BLE" />
 
     <ConfigGroup 
-        Active="True" 
+        Active="False" 
         PsKeyNumber="45" 
         Id="ANCS_readonly" />
 
     <ConfigGroup 
-        Active="True" 
+        Active="False" 
         PsKeyNumber="46" 
         Id="Find Me Server" />
 
     <ConfigGroup 
-        Active="True" 
+        Active="False" 
         PsKeyNumber="47" 
         Id="Find Me Common" />
 
     <ConfigGroup 
-        Active="True" 
+        Active="False" 
         PsKeyNumber="48" 
         Id="Proximity_readonly" />
 

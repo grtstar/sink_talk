@@ -25,7 +25,7 @@ typedef struct {
     unsigned padding:8;
 } gaia_pio_pattern_t;
 
-#define GAIA_READ_ONLY_CONFIG_BLK_ID 975
+#define GAIA_READ_ONLY_CONFIG_BLK_ID 948
 
 typedef struct {
     unsigned StoreCurrentPEQSettingsTimeout_s;
@@ -35,7 +35,7 @@ typedef struct {
     unsigned padding:10;
 } gaia_read_only_config_def_t;
 
-#define GAIA_PIO_TRANSLATION_CONFIG_BLK_ID 981
+#define GAIA_PIO_TRANSLATION_CONFIG_BLK_ID 954
 
 typedef struct {
     gaia_pio_pattern_t gaia_pio_array[1];

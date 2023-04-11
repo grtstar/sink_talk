@@ -109,10 +109,14 @@ static const lp_power_table lp_powertable_subwoofer[2] =
 #endif
 
 #ifdef ENABLE_MULTI_TALK
-static const lp_power_table mt_powertable[]=
-{
-    /* mode,        min_interval, max_interval, attempt, timeout, duration */
-    {lp_active, 0,            0,            0,       0,     0}      /* Go into active mode and stay there */
+static const lp_power_table mt_powertable[] =
+    {
+        /* mode,        min_interval,   max_interval,   attempt,    timeout,    duration */
+        {lp_active, 0, 0, 0, 0, 0} /* Go into active mode and stay there */
+#if 0
+        {lp_passive, 0, 0, 0, 0, 30}, /*Passive mode 30 seconds */
+        {lp_sniff, 160, 160, 2, 1, 0} /* Enter sniff mode (100mS)*/
+#endif
 };
 #endif
 

@@ -32,10 +32,11 @@ void AudioPlay(int event, bool queue)
         DEBUG(("AUP: error %d\n", event));
         return;
     }
-#ifdef PROMPT_REMOTE
+#ifdef PROMPT_REMOTEx
     DEBUG(("AUP: Send %d\n", event));
     UartSendPrompt(event, queue);
 #else
+    UartSendPrompt(event, 2);
     if(!stateManagerIsReadyForAudio())
     {
         return;

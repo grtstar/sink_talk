@@ -174,6 +174,7 @@ static void populatePluginFromAudioConnectData(const AUDIO_PLUGIN_CONNECT_MSG_T 
     CSR_COMMON_EXAMPLE->mic_gain_right  = MIC_DEFAULT_GAIN;
     CSR_COMMON_EXAMPLE->voice_mic_params = (params ? params->voice_mic_params : NULL);
     CSR_COMMON_EXAMPLE->audio_sink_parent = (params ? params->usb_params.usb_sink : NULL);
+    CSR_COMMON_EXAMPLE->mic_muted       = FALSE;
 
     PRINT(("CSR_COMMON_EXAMPLE: connect [%x] [%x]\n", CSR_COMMON_EXAMPLE->running , (int)CSR_COMMON_EXAMPLE->audio_sink)); 
 }
@@ -554,7 +555,7 @@ void CsrExamplePluginSetMode(const AUDIO_MODE_T mode)
 }
 
 
-void CsrExamplePluginSetSoftMute(const AUDIO_PLUGIN_SET_SOFT_MUTE_MSG_T * const message)
+void CsrExamplePluginSetSoftMute(const ExamplePluginTaskdata * const task, const AUDIO_PLUGIN_SET_SOFT_MUTE_MSG_T * const message)
 {
     bool mute_mic = FALSE;
     bool mute_speaker = FALSE;
@@ -578,6 +579,21 @@ void CsrExamplePluginSetSoftMute(const AUDIO_PLUGIN_SET_SOFT_MUTE_MSG_T * const 
     {
         /* mute/unmute mic here */
         CSR_COMMON_EXAMPLE->mic_muted = mute_mic;
+        if(mute_mic)
+        {
+            disconnectMicrophones(task);
+        }
+        else
+        {
+            uint16 adc_rate;
+            audio_output_params_t params;
+            memset(&params, 0, sizeof(audio_output_params_t));
+            params.disable_resample = FALSE;
+            params.sample_rate = CSR_COMMON_EXAMPLE->dac_rate;
+            adc_rate = AudioOutputGetSampleRate(&params, 0);
+
+            connectMicrophones(task, adc_rate);
+        }
     }
 
     if(CSR_COMMON_EXAMPLE->speaker_muted != mute_speaker)
