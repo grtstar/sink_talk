@@ -730,7 +730,7 @@ static bool sinkPowerProcessEventPower(const MessageId EventPower)
                 MessageSend(&theSink.task, EventSysUpdateDevicesConnectedStatus, NULL);
             
                  /* Power on BLE */
-                 sinkBlePowerOnEvent();
+                 /* sinkBlePowerOnEvent();*/
 
                 sinkBroadcastAudioHandleUserPowerOn();
                 
@@ -1197,6 +1197,16 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
             MAIN_DEBUG(("Sys/Usr Volume Event\n"));
             id = sinkVolumeModifyEventAccordingToVolumeOrientation(id);
             lIndicateEvent = sinkVolumeProcessEventVolume(id);
+
+            if(id == EventUsrMainOutVolumeDown || id == EventUsrMainOutVolumeUp || id == EventSysVolumeMax || id == EventSysVolumeMin)
+            {
+                if(mtGetConnectDevices() == 0)
+                {
+                    return;
+                }
+                UartSendTone(id);
+                return;
+            }
 
             if(id == EventUsrMicrophoneMuteToggle)
             {

@@ -10,7 +10,7 @@ compression=adpcm,rate=8000,channels=mono,file=语音呼叫.wav
 compression=adpcm,rate=8000,channels=mono,file=麦克风已打开.wav
 compression=adpcm,rate=8000,channels=mono,file=麦克风已关闭.wav
 compression=adpcm,rate=8000,channels=mono,file=多人对讲好友模式.wav
-compression=adpcm,rate=8000,channels=mono,file=多人对讲好友模式组网.wav
+compression=adpcm,rate=8000,channels=mono,file=好友模式组网.wav
 compression=adpcm,rate=8000,channels=mono,file=2人组网完成.wav
 compression=adpcm,rate=8000,channels=mono,file=3人组网完成.wav
 compression=adpcm,rate=8000,channels=mono,file=4人组网完成.wav
@@ -44,3 +44,11 @@ compression=adpcm,rate=8000,channels=mono,file=对讲已连接.wav
 compression=adpcm,rate=8000,channels=mono,file=配对失败退出双人对讲配对.wav
 compression=adpcm,rate=8000,channels=mono,file=恢复出厂设置.wav
 compression=adpcm,rate=8000,channels=mono,file=退出配对.wav
+compression=adpcm,rate=8000,channels=mono,file=组网人数1人.wav
+compression=adpcm,rate=8000,channels=mono,file=组网人数2人.wav
+compression=adpcm,rate=8000,channels=mono,file=组网人数3人.wav
+compression=adpcm,rate=8000,channels=mono,file=组网人数4人.wav
+compression=adpcm,rate=8000,channels=mono,file=组网人数5人.wav
+compression=adpcm,rate=8000,channels=mono,file=组网人数6人.wav
+compression=adpcm,rate=8000,channels=mono,file=组网人数7人.wav
+compression=adpcm,rate=8000,channels=mono,file=组网人数8人.wav

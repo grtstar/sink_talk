@@ -44,7 +44,7 @@ bool isMTVoiceSink(Sink sink);
 
 bool mtRssiConnect(void);
 
-bool mtCanPair(void);
+bool mtCanPair(bdaddr *addr);
 bool mtIsOnlyChildConnect(void);
 bool mtIsOnlyParentConnect(void);
 int mtGetConnectDevices(void);

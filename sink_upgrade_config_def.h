@@ -33,7 +33,7 @@ typedef struct {
     unsigned padding:14;
 } upgrade_config_t;
 
-#define SINK_UPGRADE_READONLY_CONFIG_BLK_ID 1107
+#define SINK_UPGRADE_READONLY_CONFIG_BLK_ID 1113
 
 typedef struct {
     upgrade_config_t upgrade_config;

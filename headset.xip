@@ -344,6 +344,8 @@
   <file path="headset_nearby_mode.c" />
   <file path="headset_couple_mode.c" />
   <file path="headset_multi_comm.c" />
+  <file path="headset_multi_pair.c" />
+  <file path="headset_multi_pair.h" />
  </folder>
  <folder name="Header Files" >
   <extension name="h" />
@@ -504,7 +506,7 @@
    <property key="enable_fm" >0</property>
    <property key="enable_fm_rds" >0</property>
    <property key="enable_gaia" >1</property>
-   <property key="enable_gatt" >0</property>
+   <property key="enable_gatt" >1</property>
    <property key="enable_gatt_battery_server" >0</property>
    <property key="enable_gatt_findme_server" >0</property>
    <property key="enable_gatt_gaia_server" >0</property>

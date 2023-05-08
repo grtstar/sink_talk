@@ -31,6 +31,8 @@ DESCRIPTION
 #include "sink_ba.h"
 #include "sink_ba_ble_gap.h"
 
+#include "headset_multi_pair.h"
+
 #include <connection.h>
 #include <gatt.h>
 #include <local_device.h>
@@ -178,6 +180,12 @@ static uint8* updateServicesAdData(uint8* ad_data, uint8* space)
         BLE_AD_INFO(("DIS "));
         ad_data = bleAddServiceUuidToAdData(ad_data, space, GATT_SERVICE_UUID_DEVICE_INFORMATION);
     }
+
+    if (sinkMultiTalkPairServiceEnabled() && (*space))
+    {
+        BLE_AD_INFO(("MTP "));
+        ad_data = bleAddServiceUuidToAdData(ad_data, space, mtGetPairServiceUuid());
+    }
     
     return ad_data;
 }
@@ -211,6 +219,8 @@ static uint16 getNumberOfServersEnabled(void)
 #endif
 
     if (sinkGattDeviceInfoServiceEnabled())
+        num_services++;
+    if (sinkMultiTalkPairServiceEnabled())
         num_services++;
 
     return num_services;

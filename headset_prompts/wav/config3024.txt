@@ -46,3 +46,11 @@ compression=pcm,rate=8000,channels=mono,file=对讲记录已清除.wav
 compression=pcm,rate=8000,channels=mono,file=退出配对.wav
 compression=pcm,rate=8000,channels=mono,file=手机1已断开.wav
 compression=pcm,rate=8000,channels=mono,file=手机2已断开.wav
+compression=pcm,rate=8000,channels=mono,file=组网人数1人.wav
+compression=pcm,rate=8000,channels=mono,file=组网人数2人.wav
+compression=pcm,rate=8000,channels=mono,file=组网人数3人.wav
+compression=pcm,rate=8000,channels=mono,file=组网人数4人.wav
+compression=pcm,rate=8000,channels=mono,file=组网人数5人.wav
+compression=pcm,rate=8000,channels=mono,file=组网人数6人.wav
+compression=pcm,rate=8000,channels=mono,file=组网人数7人.wav
+compression=pcm,rate=8000,channels=mono,file=组网人数8人.wav

@@ -28,7 +28,7 @@ DESCRIPTION
  /*end of DO_NOT_DOCUMENT*/
 
     /*The global debug enable*/ 
-    #define DEBUG_PRINT_ENABLEDx
+    #define DEBUG_PRINT_ENABLED
 
 #define DEBUG_VM_HATSx
 
@@ -79,10 +79,10 @@ void printVmLogsInTestSystem (const char *format, ...);
         #define DEBUG_BAT_REPx
         /* Broadcast Audio Debug */
         #define DEBUG_BA_COMMONx
-        #define DEBUG_BLE_GAPx
+        #define DEBUG_BLE_GAP
         #define DEBUG_BLE_SCx
         /* BLE transport / messages Debug */
-        #define DEBUG_BLEx
+        #define DEBUG_BLE
         /* Button Manager debug */
         #define DEBUG_BUT_MANx
         /* Low Level Button Parsing Debug */
@@ -123,7 +123,7 @@ void printVmLogsInTestSystem (const char *format, ...);
         #define DEBUG_GATT_MANAGERx
         #define DEBUG_GATT_SERVICE_CLIENTx
         #define DEBUG_GATT_SPC_CLIENTx
-        #define DEBUG_GATTx
+        #define DEBUG_GATT
         #define DEBUG_HIDx
         #define DEBUG_INITx
         #define DEBUG_INPUT_MANAGERx
@@ -173,7 +173,7 @@ void printVmLogsInTestSystem (const char *format, ...);
         #define DEBUG_AOVx
         #define DEBUG_AUDIO_CLOCKx
 
-        #define ENABLE_MT_DEBUG
+        #define ENABLE_MT_DEBUGx
 
     #else
         #ifndef DEBUG_VM_HATS

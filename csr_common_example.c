@@ -236,8 +236,14 @@ static void sendVolumeMessage(const uint16 volume)
 
         digital_dsp = DSP_DIG_VOL_FLAG | (gain.common.system & 0xF);
     }
-
-    KALIMBA_SEND_MESSAGE(MESSAGE_EXAMPLE_PLUGIN_VOLUME, 0, digital_dsp, volume, CSR_COMMON_EXAMPLE->tone_volume);
+    if(CSR_COMMON_EXAMPLE->kap_type == 2)
+    {
+        setHardwareGain(volume);
+    }
+    else
+    {
+        KALIMBA_SEND_MESSAGE(MESSAGE_EXAMPLE_PLUGIN_VOLUME, 0, digital_dsp, volume, CSR_COMMON_EXAMPLE->tone_volume);
+    }
 }
 
 static void sendDelayedVolumeMessage(const ExamplePluginTaskdata * const task, const uint16 volume)
@@ -612,8 +618,8 @@ void CsrExamplePluginPlayTone(const ExamplePluginTaskdata * const task,
     Sink lSink;
     Source lSource = StreamRingtoneSource(tone_message->tone);
 
-    uint16 volume = ((tone_message->tone_volume > VOLUME_0DB) ?
-                                                VOLUME_0DB : tone_message->tone_volume);
+    uint16 volume = (((tone_message->tone_volume) > VOLUME_0DB) ?
+                                                VOLUME_0DB : (tone_message->tone_volume));
         
     if(isPluginRunning() == FALSE)
     {
@@ -622,14 +628,16 @@ void CsrExamplePluginPlayTone(const ExamplePluginTaskdata * const task,
         return;
     }
 
+    
     if(CSR_COMMON_EXAMPLE->kap_type == 2)
     {
         PRINT(("CSR_COMMON_EXAMPLE: Tone Cannot Start\n"));
         SetAudioBusy(NULL);
         return;
     }
+    
 
-    PRINT(("CSR_COMMON_EXAMPLE: Tone Start\n"));
+    PRINT(("CSR_COMMON_EXAMPLE: Tone Start v = %d\n", volume));
    
     AudioSetAudioPromptPlayingTask((Task)task);
 

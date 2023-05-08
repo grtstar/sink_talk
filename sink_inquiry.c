@@ -1631,7 +1631,7 @@ void inquiryHandleTalkResult(CL_DM_INQUIRE_RESULT_T *result)
                     {
                         
                         INQ_DEBUG(("INQ: inquiry devices %d\n", count));
-                        if(count >= GINQDATA.inquiry.result_count)
+                        /* if(count >= GINQDATA.inquiry.result_count)*/
                         {
                             uint8 *c = PanicUnlessMalloc(sizeof(uint8));
                             *c = count;
@@ -1665,7 +1665,7 @@ void inquiryHandleTalkResult(CL_DM_INQUIRE_RESULT_T *result)
             /* if(count < NUM_INQ_DEVS) forever inquiry*/
             {
                 /* 
-                    未搜索到足够多设备，继续�
+                    未搜索到足够多设备，继续�
                 */
 
                 if(count != GINQDATA.inquiry.result_count)

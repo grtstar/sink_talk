@@ -12,7 +12,7 @@
 
 #ifdef ENABLE_AG
 
-#define AG_DEBUG(x)
+#define AG_DEBUG(x) DEBUG(x)
 
 extern CvcPluginTaskdata csr_cvsd_no_dsp_plugin;
 extern CvcPluginTaskdata csr_wbs_cvc_1mic_headset_plugin;
@@ -759,7 +759,7 @@ int AgInit(Task task)
 
 	read_config();
 
-	AghfpInit(&SIMPLE->task, aghfp_handsfree_15_profile, aghfp_incoming_call_reject | aghfp_inband_ring);
+	AghfpInit(&SIMPLE->task, aghfp_handsfree_16_profile, aghfp_incoming_call_reject | aghfp_inband_ring);
 	return 0; 
 }
 

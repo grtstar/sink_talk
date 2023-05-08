@@ -32,7 +32,7 @@ void AudioPlay(int event, bool queue)
         DEBUG(("AUP: error %d\n", event));
         return;
     }
-#ifdef PROMPT_REMOTEx
+#ifdef PROMPT_REMOTE
     DEBUG(("AUP: Send %d\n", event));
     UartSendPrompt(event, queue);
 #else

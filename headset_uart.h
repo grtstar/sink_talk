@@ -9,4 +9,5 @@ uint8 UartGetState(void);
 void UartSendState(int state);
 void UartSendPrompt(int prompt, uint8 queue);
 void UartGetHeadsetAddr(void);
+void UartSendTone(uint16 event);
 #endif

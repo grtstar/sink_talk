@@ -46,6 +46,7 @@
 
 #include "headset_multi_talk.h"
 #include "headset_multi_comm.h"
+#include "headset_multi_pair.h"
 #include "audio_prompt.h"
 #include "csr_common_example_plugin.h"
 
@@ -288,7 +289,7 @@ void handleMTL2capConnectCfmNearbyMode(CL_L2CAP_CONNECT_CFM_T *msg)
                 {
                     mt->mt_type = MT_NODE;
                     mt->status = MT_ST_CONNECTED;
-                    inquiryStop();
+                    mtInquiryStop();
                     stateManagerEnterConnectedState();
                 }
                 else
@@ -363,10 +364,10 @@ void handleMTL2capDisconIndNearbyMode(CL_L2CAP_DISCONNECT_IND_T *msg)
             ConnectionL2capDisconnectResponse(msg->identifier, msg->sink);
         }
 
-        inquiryStop();
+        mtInquiryStop();
         if (mt->status != MT_ST_NOCONNECT)
         {
-            inquiryPair(inquiry_session_nearby, mtGetConnectDevices() == 0);
+            mtInquiryPair(inquiry_session_nearby, mtGetConnectDevices() == 0);
 
             mt->status = MT_ST_SEARCHING;
         }
@@ -392,10 +393,10 @@ void handleMTL2capDisconIndNearbyMode(CL_L2CAP_DISCONNECT_IND_T *msg)
             ConnectionL2capDisconnectResponse(msg->identifier, msg->sink);
         }
 
-        inquiryStop();
+        mtInquiryStop();
         if (mt->status != MT_ST_NOCONNECT)
         {
-            inquiryPair(inquiry_session_nearby, mtGetConnectDevices() == 0);
+            mtInquiryPair(inquiry_session_nearby, mtGetConnectDevices() == 0);
 
             mt->status = MT_ST_SEARCHING;
         }
@@ -475,7 +476,7 @@ void handleMTSynConnCfmNearbyMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
             {
                 mt->mt_type = MT_NODE;
                 mt->status = MT_ST_CONNECTED;
-                inquiryStop();
+                mtInquiryStop();
                 stateManagerEnterConnectedState();
             }
             else
@@ -525,7 +526,7 @@ void handleMTSynConnCfmNearbyMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
             {
                 mt->mt_type = MT_NODE;
                 mt->status = MT_ST_CONNECTED;
-                inquiryStop();
+                mtInquiryStop();
                 stateManagerEnterConnectedState();
             }
             else
@@ -613,14 +614,14 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
     switch (id)
     {
     case EventSysMultiTalkEnterNearbyMode:
-        inquiryPair(inquiry_session_nearby, TRUE);
+        mtInquiryPair(inquiry_session_nearby, TRUE);
         mt->status = MT_ST_PARING;
         mt->header_addr[0] = mt->addr;
         BdaddrSetZero(&mt->header_addr[1]);
         PowerAmpOn();
         break;
     case EventSysMultiTalkLeaveNearbyMode:
-        inquiryStop();
+        mtInquiryStop();
         stateManagerEnterConnectableState(FALSE);
         if (mtGetConnectDevices() == 0)
         {
@@ -647,13 +648,74 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
         mt->nearby_connected = 0;
         MessageSend(mt->app_task, EventSysMultiTalkNeabyModeLeaved, NULL);
         break;
+    case EventSysMultiTalkBleInquiryDevices:
+    {
+        if (mt->mt_mode == NEARBY_MODE)
+        {
+            if (mt->nearby_connected == 8)
+            {
+                mtInquiryStop();
+                break;
+            }
+            if (mt->connect_token == TOKEN_IDLE)
+            {
+                if (mt->status == MT_ST_PARING || mt->status == MT_ST_SEARCHING)
+                {
+                    CL_DM_BLE_ADVERTISING_REPORT_IND_T *ind = (CL_DM_BLE_ADVERTISING_REPORT_IND_T *)message;
+                    if (ind)
+                    {
+                        /* 连接比自己头地址更大的设  */
+                        if (BdaddrCompare(&mt->addr, &ind->current_taddr.addr) == -1 &&
+                            !BdaddrIsSame(&mt->header_addr[0], &ind->current_taddr.addr) &&
+                            !BdaddrIsSame(&mt->header_addr[1], &ind->current_taddr.addr) &&
+                            !BdaddrIsSame(&mt->mt_device[MT_LEFT].bt_addr, &ind->current_taddr.addr) &&
+                            !BdaddrIsSame(&mt->mt_device[MT_RIGHT].bt_addr, &ind->current_taddr.addr))
+                        {
+                            if (mt->mt_device[0].state >= MT_L2CAP_Connected)
+                            {
+                                mtSendConnectToken(0, TOKEN_HELD);
+                            }
+                            else if (mt->mt_device[1].state >= MT_L2CAP_Connected)
+                            {
+                                mtSendConnectToken(1, TOKEN_HELD);
+                            }
+                            mtConnectNearby(&ind->current_taddr.addr);
+                            mt->status = MT_ST_CONNECTING;
+                            break;
+                        }
+                        else
+                        {
+                            MT_DEBUG(("MT: search %x:%x:%lx, but header is [%x:%x:%lx] [%x:%x:%lx]\n",
+                                      ind->current_taddr.addr.bd_addr.nap,
+                                      ind->current_taddr.addr.bd_addr.uap,
+                                      ind->current_taddr.addr.bd_addr.lap,
+                                      mt->header_addr[0].nap,
+                                      mt->header_addr[0].uap,
+                                      mt->header_addr[0].lap,
+                                      mt->header_addr[1].nap,
+                                      mt->header_addr[1].uap,
+                                      mt->header_addr[1].lap));
+                        }
+                    }
+                }
+                else
+                {
+                    MT_DEBUG(("MT: search device, but status is %d\n", mt->status));
+                }
+            }
+            else
+            {
+                MT_DEBUG(("MT: search device, but no token\n"));
+            }
+        }
+    }
     case EventSysMultiTalkInquiryDevices:
     {
         if (mt->mt_mode == NEARBY_MODE)
         {
             if (mt->nearby_connected == 8)
             {
-                inquiryStop();
+                mtInquiryStop();
                 break;
             }
             if (mt->connect_token == TOKEN_IDLE)

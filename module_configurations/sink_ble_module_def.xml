@@ -47,6 +47,10 @@
             ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='ble_profiles']">
             <BuildVariant HwVariant="All" SwVariant="Speaker_with_TWS Speaker_with_BA" Value="1"/>
             <BuildVariant HwVariant="All" SwVariant="Soundbar-Subwoofer" Value="1"/>
+            <BuildVariant
+                HwVariant="CNS10001v4"
+                SwVariant="Headset-Gaming"
+                Value="1" />
         </ConfigItem>
         <ConfigItem
             Id="LE Authenticated Payload Timeout"

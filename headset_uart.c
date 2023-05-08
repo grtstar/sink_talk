@@ -32,7 +32,8 @@ enum
     UTYPE_PEER_ADDR,
     UTYPE_HEADSET_ADDR,
     UTYPE_PEER_STATE,
-    UTYPE_GET_HEADSET_ADDR
+    UTYPE_GET_HEADSET_ADDR,
+    UTYPE_TONE
 };
 
 enum
@@ -285,6 +286,25 @@ void UartSendEvent(uint16 event)
     }
 }
 
+void UartSendTone(uint16 event)
+{
+    switch (event)
+    {
+    case EventUsrMainOutVolumeDown:
+    case EventUsrMainOutVolumeUp:
+    {
+        uint8 d[7] = {0xAA, 0x55, 3, UTYPE_TONE};
+        d[4] = event >> 8;
+        d[5] = event;
+        d[6] = UartCalcCRC(d, 6);
+        UartTxData(d, 7);
+    }
+    break;
+    default:
+        break;
+    }
+}
+
 void UartGetHeadsetAddr(void)
 {
     uint8 d[3 + 2] = {0xAA, 0x55, 1, UTYPE_GET_HEADSET_ADDR};
@@ -325,6 +345,7 @@ void UartSendState(int state)
         uint8 d[6] = {0xAA, 0x55, 2, UTYPE_STATE};
         d[4] = state;
         d[5] = UartCalcCRC(d, 5);
+        UartTxData(d, 6);
         UartTxData(d, 6);
     }
     break;

@@ -316,7 +316,7 @@ void handleAddAuthDeviceCfm (const CL_SM_ADD_AUTH_DEVICE_CFM_T *cfm)
 static bool AuthCanSinkConnect ( const bdaddr * bd_addr );
 
 /****************************************************************************/
-static bool AuthCanSinkPair(TRANSPORT_T transport, bool sm_over_bredr) ;
+static bool AuthCanSinkPair(TRANSPORT_T transport, bool sm_over_bredr, bdaddr *addr) ;
 
 /****************************************************************************/
 void sinkHandlePinCodeInd(const CL_SM_PIN_CODE_IND_T* ind)
@@ -325,7 +325,7 @@ void sinkHandlePinCodeInd(const CL_SM_PIN_CODE_IND_T* ind)
     uint16  pin[16];
     void   *pin_to_play = pin;
 
-    if ( AuthCanSinkPair(TRANSPORT_BREDR_ACL, FALSE) )
+    if ( AuthCanSinkPair(TRANSPORT_BREDR_ACL, FALSE, (bdaddr*)&ind->taddr.addr) )
     {
 
         AUTH_DEBUG(("auth: Can Pin\n")) ;
@@ -363,7 +363,7 @@ void sinkHandleUserConfirmationInd(const CL_SM_USER_CONFIRMATION_REQ_IND_T* ind)
 {
     tp_bdaddr  *confirmation_addr;
 
-    bool can_pair = AuthCanSinkPair(ind->tpaddr.transport, FALSE);
+    bool can_pair = AuthCanSinkPair(ind->tpaddr.transport, FALSE, (bdaddr*)&ind->tpaddr.taddr.addr);
 
     /* Can we pair? */
     if ( can_pair && sinkDataIsMITMRequired())
@@ -432,7 +432,7 @@ static uint16 sinkAuthGetKeyDistribution(const CL_SM_IO_CAPABILITY_REQ_IND_T* in
 /****************************************************************************/
 void sinkHandleIoCapabilityInd(const CL_SM_IO_CAPABILITY_REQ_IND_T* ind)
 {
-    bool can_pair = AuthCanSinkPair(ind->tpaddr.transport, ind->sm_over_bredr);
+    bool can_pair = AuthCanSinkPair(ind->tpaddr.transport, ind->sm_over_bredr, (bdaddr*)&(ind->tpaddr.taddr.addr));
     bool bonding = TRUE; /* By default we want to bond */
     /* If not pairable should reject */
     if(can_pair)
@@ -559,10 +559,16 @@ void sinkHandleAuthenticateCfm(const CL_SM_AUTHENTICATE_CFM_T *cfm)
 }
 
 /****************************************************************************/
-static bool AuthCanSinkPair(TRANSPORT_T transport, bool sm_over_bredr)
+static bool AuthCanSinkPair(TRANSPORT_T transport, bool sm_over_bredr, bdaddr *addr)
 {
     if(transport == TRANSPORT_BREDR_ACL)
     {
+#ifdef ENABLE_MULTI_TALK
+        if(mtCanPair(addr))
+        {
+            return TRUE;
+        }
+#endif
         if(!sinkDataIsSecureParingEnabled())
             return TRUE;
         
@@ -577,12 +583,6 @@ static bool AuthCanSinkPair(TRANSPORT_T transport, bool sm_over_bredr)
         
         if(sinkBleGapIsBondable())
             return TRUE;
-#ifdef ENABLE_MULTI_TALK
-        if(mtCanPair())
-        {
-            return TRUE;
-        }
-#endif
 #ifdef ENABLE_PARTYMODE
         if(sinkPartymodeIsEnabled())
             return TRUE;
@@ -650,7 +650,7 @@ void sinkPairingAcceptRes( void )
 {
     tp_bdaddr* tpaddr = sinkDataGetSMConfirmationAddress();
     
-    if(AuthCanSinkPair(tpaddr->transport, FALSE) && sinkDataGetAuthConfirmationFlag())
+    if(AuthCanSinkPair(tpaddr->transport, FALSE, &tpaddr->taddr.addr) && sinkDataGetAuthConfirmationFlag())
     {
         AUTH_DEBUG(("auth: Accepted Confirmation Req\n")) ;
         ConnectionSmUserConfirmationResponse(tpaddr, TRUE);
@@ -666,7 +666,7 @@ void sinkPairingRejectRes( void )
 {
     tp_bdaddr* tpaddr = sinkDataGetSMConfirmationAddress();
     
-    if(AuthCanSinkPair(tpaddr->transport, FALSE) && sinkDataGetAuthConfirmationFlag())
+    if(AuthCanSinkPair(tpaddr->transport, FALSE, &tpaddr->taddr.addr) && sinkDataGetAuthConfirmationFlag())
     {    
         AUTH_DEBUG(("auth: Rejected Confirmation Req\n")) ;
         ConnectionSmUserConfirmationResponse(tpaddr, FALSE);

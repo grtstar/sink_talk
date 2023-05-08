@@ -698,7 +698,9 @@ typedef enum sinkEventsTag
 
               EventSysMultiTalkReconnect,
               EventSysMultiTalkCheckLoop,
+              EventSysMultiTalkCheckLoopTimeout,
               EventSysMultiTalkInquiryDevices,
+              EventSysMultiTalkBleInquiryDevices,
               EventSysMultiTalkDeviceConnected,
               EventSysMultiTalkCurrentDevices,
               EventSysMultiTalkSendRouteTable,

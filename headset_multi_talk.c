@@ -1207,7 +1207,7 @@ bool mtVoicePopulateConnectParameters(audio_connect_parameters *connect_paramete
         connect_parameters->sink_type = AUDIO_SINK_ESCO;
         if(mt->mt_mode == FREIEND_MODE_PAIRING)
         {
-            connect_parameters->volume = 1;
+            connect_parameters->volume = 0;
         }
         else
         {
@@ -1245,9 +1245,15 @@ int mtGetConnectDevices(void)
     return count;
 }
 
-bool mtCanPair(void)
+bool mtCanPair(bdaddr *addr)
 {
-    if (mt->status == MT_ST_RECONNECTING || mt->status == MT_ST_LINKLOSS || mt->status == MT_ST_CONNECTING || mt->status == MT_ST_WAITING_CONNECT)
+    if (addr->nap != mt->addr.nap || addr->uap != mt->addr.uap)
+    {
+        return FALSE;
+    }
+    if (mt->status == MT_ST_RECONNECTING || mt->status == MT_ST_LINKLOSS || 
+        mt->status == MT_ST_CONNECTING || mt->status == MT_ST_WAITING_CONNECT ||
+        mt->status == MT_ST_PARING || mt->status == MT_ST_SEARCHING)
     {
         return TRUE;
     }

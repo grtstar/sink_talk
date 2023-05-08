@@ -225,6 +225,7 @@ void ProcessData(int ch, const uint8 *data, int size)
                 mt->header_addr[0] = mt->addr;
                 mt->header_addr[1] = temp;
             }
+            MT_DEBUG(("MT: no loop\n"));
             mtBroadcastHeaderAddr1(ch, 1, &mt->addr);
         }
         break;

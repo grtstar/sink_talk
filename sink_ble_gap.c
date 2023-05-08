@@ -7,7 +7,7 @@ FILE NAME
 DESCRIPTION
     BLE GAP functionality
 */
-
+#include "headset_multi_pair.h"
 #include "sink_ble_gap.h"
 #include "sink_ba_ble_gap.h"
 #include "sink_ble.h"
@@ -36,6 +36,9 @@ DESCRIPTION
 #include "config_definition.h"
 #include "sink_ble_config_def.h"
 #include <config_store.h>
+
+
+
 
 #ifdef DEBUG_BLE_GAP
 #define BLE_GAP_INFO(x) DEBUG(x)
@@ -1704,6 +1707,13 @@ static bool gapStateIdleHandleEvent(ble_gap_event_t event)
                 /* This will trigger scanning and advertising */
                 sinkBleCheckNoConnectionsEvent();
             }
+            else
+            {
+                 /* Move to scanning and advertising state */
+                sinkBleSetGapState(ble_gap_state_scanning_advertising);
+                /* This will trigger scanning and advertising */
+                sinkBleCheckNoConnectionsEvent();
+            }
             
         }
         break;
@@ -2815,7 +2825,7 @@ void sinkBleGapInitialise(void)
     gapBaSetBroadcastToScan(FALSE);
     
     /* Set initial advertising speed */
-    gapSetAdvSpeed(ble_gap_adv_speed_fast);
+    gapSetAdvSpeed(ble_gap_adv_speed_slow);
 
 }
 
@@ -2932,10 +2942,20 @@ void sinkBleGapReadLocalNameComplete(CL_DM_LOCAL_NAME_COMPLETE_T * cfm)
     {
         /* Use local name to setup advertising data */
         BLE_GAP_INFO(("    Set advertising data bondable=[%u]\n", sinkBleGetGapState() == ble_gap_state_bondable_associating_scanning_advertising ? TRUE : FALSE));
-        bleSetupAdvertisingData(cfm->size_local_name, 
+        if(0)
+        {
+            bleSetupAdvertisingData(cfm->size_local_name, 
                                 cfm->local_name, 
                                 sinkBleGetGapState() == ble_gap_state_bondable_associating_scanning_advertising ? adv_discoverable_mode_limited : adv_non_discoverable_mode,
                                 ble_gap_read_name_advertising);
+        }
+        else
+        {
+            bleSetupAdvertisingData(mtGetAdvDataLen(), 
+                                mtGetAdvData(), 
+                                sinkBleGetGapState() == ble_gap_state_bondable_associating_scanning_advertising ? adv_discoverable_mode_limited : adv_non_discoverable_mode,
+                                ble_gap_read_name_advertising);
+        }
     }
     else if(GAP.name_read & ble_gap_read_name_associating)
     {

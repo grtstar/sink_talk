@@ -504,7 +504,7 @@ void AudioPromptPlay(Task plugin, uint16 id, bool can_queue, bool override)
         prompt_header_index = VoicePromptsHeaderGetFileIndex(voice_prompts_index);
         prompt_index = VoicePromptsGetFileIndex(voice_prompts_index);
 
-        PROMPTS_DEBUG(("AudioPromptPlay %d  [lang:%u][q:%u][o.r.:%u]\n", id, GAUDIOPROMPTS.audio_prompt_language,can_queue,override));
+        PROMPTS_DEBUG(("AudioPromptPlay %d  [lang:%u][q:%u][o.r.:%u][v:%d]\n", id, GAUDIOPROMPTS.audio_prompt_language,can_queue,override, ap_volume));
         AudioPlayAudioPrompt(plugin, prompt_index, prompt_header_index, can_queue,
                                ap_volume,  sinkAudioGetPluginFeatures(), override, &theSink.task);
         /* turn amp off if audio is inactive */

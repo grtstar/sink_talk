@@ -866,7 +866,7 @@ $main:
    call $frame_sync.sco_initialize;
 
    r7 = &$sco2_data.object;
-   call $frame_sync.sco2_initialize;
+   call $frame_sync.sco_initialize;
 #endif
 
    // send message saying we're up and running!
@@ -925,7 +925,7 @@ $main_receive:
     call $frame_sync.sco_decode;
 
     r7 = &$sco2_data.object;
-    call $frame_sync.sco2_decode;
+    call $frame_sync.sco_decode;
 
     // Get Current System Mode
     r0 = M[$one_mic_example.sys_mode];
@@ -963,7 +963,7 @@ $main_send:
 
     call $frame_sync.sco_encode;
 
-      r7 = &$sco_data2.object;
+    r7 = &$sco_data2.object;
     r0 = M[r7 + $sco_pkt_handler.DECODER_PTR];
     r9 = M[r0 + $sco_decoder.DATA_PTR];
 
