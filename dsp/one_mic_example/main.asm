@@ -119,7 +119,7 @@
    .CONST  $SCO_OUT_PORT         ($cbuffer.WRITE_PORT_MASK + $CODEC_ESCO_OUT_PORT_NUMBER);      // 0
 
    .CONST  $SCO_IN_PORT2          ($cbuffer.READ_PORT_MASK  + 2);
-   .CONST  $SCO_OUT_PORT2         ($cbuffer.WRITE_PORT_MASK + $RELAY_L2CAP_OUT_PORT_NUMBER);    // 2
+   .CONST  $SCO_OUT_PORT2         ($cbuffer.WRITE_PORT_MASK + 3);    // 3
 
 #ifdef USB_DONGLE
    .CONST  $USB_IN_PORT          ($cbuffer.READ_PORT_MASK + 0);
@@ -144,6 +144,199 @@
 .ENDMODULE;
 
 #if defined(USB_DONGLE)
+
+.MODULE $usb_in;
+   .DATASEGMENT DM;
+   DeclareCBuffer (cbuffer_struc,mem, (2* $SAMPLE_RATE / 1000));
+
+#ifdef STEREO_USB_INPUT
+   DeclareCBuffer(right.cbuffer_struc,right.mem,(2* $SAMPLE_RATE / 1000));
+   .VAR/DM1 copy_struc[$frame_sync.USB_IN_STEREO_COPY_STRUC_SIZE] =
+      $USB_IN_PORT,                 /* $USB_IN.STEREO_COPY_SOURCE_FIELD */
+      &cbuffer_struc,       /* $USB_IN.STEREO_COPY_LEFT_SINK_FIELD */
+      &right.cbuffer_struc, /* $USB_IN.STEREO_COPY_RIGHT_SINK_FIELD */
+      $USB_PACKET_LEN,             /* $USB_IN.STEREO_COPY_PACKET_LENGTH_FIELD */
+      8,                   /* $USB_IN.STEREO_COPY_SHIFT_AMOUNT_FIELD */
+      0 ...;
+#else
+   // ** allocate memory for USB input (non-cbops) copy routine **
+   .VAR/DM copy_struc[$frame_sync.USB_IN_MONO_COPY_STRUC_SIZE] =
+      $USB_IN_PORT,                             // USB source port
+      &cbuffer_struc,                           // Sink buffer
+      $USB_PACKET_LEN,                          // Packet length (Number of audio data bytes in a USB packet for all channels)
+      8,                                        // Shift amount
+      0 ...;
+#endif
+
+.ENDMODULE;
+
+#define USBIN_INPUT_INDEX       0
+#define USBIN_OUTPUT_INDEX      1
+#define USBIN_INTERNAL_INDEX    2
+
+.MODULE $usb_in_rm;
+   .DATASEGMENT DM;
+
+//          usbin       internal         usbin_rm
+//    cBuffer --> RESAMPLE -+-> RATE_MATCH --> cBuffer
+//                          |
+//                      RATE_MONITOR
+
+   DeclareCBuffer (cbuffer_struc,mem,$BLOCK_SIZE * $BUFFER_SCALING);
+
+  .VAR/DM1CIRC sr_hist_left[$cbops.rate_adjustment_and_shift.SRA_COEFFS_SIZE];
+
+   .VAR copy_struc[] =
+        $cbops.scratch.BufferTable,     // BUFFER_TABLE_FIELD
+        &copy_op,                       // MAIN_FIRST_OPERATOR_FIELD
+        &sw_copy_op,                    // MTU_FIRST_OPERATOR_FIELD
+        1,                              // NUM_INPUTS_FIELD
+        &$usb_in.cbuffer_struc,
+        1,                              // NUM_OUTPUTS_FIELD
+        &cbuffer_struc,
+        1,                              // NUM_INTERNAL_FIELD
+        &$cbops.scratch.cbuffer_struc2;
+
+     //  Copy/Resampler Operator
+    .BLOCK copy_op;
+        .VAR copy_op.mtu_next  = $cbops.NO_MORE_OPERATORS;
+        .VAR copy_op.main_next = &sw_rate_op;
+        .VAR copy_op.func = $cbops_iir_resamplev2;
+        .VAR copy_op.param[$iir_resamplev2.OBJECT_SIZE] =
+            USBIN_INPUT_INDEX,               // Input index
+            USBIN_INTERNAL_INDEX,            // Output index
+#if uses_48_to_16kHz
+            &$M.iir_resamplev2.Up_1_Down_3.filter,// FILTER_DEFINITION_PTR_FIELD
+#elif uses_48_to_8kHz
+            &$M.iir_resamplev2.Up_1_Down_6.filter,// FILTER_DEFINITION_PTR_FIELD
+#else
+            0,                               // Pass-Through (Copy)
+#endif
+            -8,                              // INPUT_SCALE_FIELD   (input Q15)
+            8,                               // OUTPUT_SCALE_FIELD  (output Q23)
+            &$cbops.scratch.mem1,            // INTERMEDIATE_CBUF_PTR_FIELD
+            LENGTH($cbops.scratch.mem1),     // INTERMEDIATE_CBUF_LEN_FIELD
+            0 ...;
+    .ENDBLOCK;
+
+    .BLOCK sw_rate_op;
+        .VAR sw_rate_op.mtu_next  = &copy_op;
+        .VAR sw_rate_op.main_next = &sw_copy_op;
+        .VAR sw_rate_op.func = &$cbops.rate_monitor_op;
+        .VAR sw_rate_op.param[$cbops.rate_monitor_op.STRUC_SIZE] =
+            USBIN_INTERNAL_INDEX,         // MONITOR_INDEX_FIELD
+            1600,                       // PERIODS_PER_SECOND_FEILD
+            10,                         // SECONDS_TRACKED_FIELD
+#if uses_16kHz
+            16000,                      // TARGET_RATE_FIELD
+#else
+            8000,
+#endif
+            10,                         // ALPHA_LIMIT_FIELD (controls the size of the averaging window)
+            0.5,                        // AVERAGE_IO_RATIO_FIELD - initialize to 1.0 in q.22
+            11,                         // WARP_MSG_LIMIT_FIELD
+            0 ...;
+    .ENDBLOCK;
+
+    .BLOCK sw_copy_op;
+        .VAR sw_copy_op.mtu_next  = &sw_rate_op;
+        .VAR sw_copy_op.main_next = $cbops.NO_MORE_OPERATORS;
+        .VAR sw_copy_op.func = &$cbops.rate_adjustment_and_shift;
+        .VAR sw_copy_op.param[$cbops.rate_adjustment_and_shift.STRUC_SIZE] =
+            USBIN_INTERNAL_INDEX,       // INPUT1_START_INDEX_FIELD
+            USBIN_OUTPUT_INDEX,         // OUTPUT1_START_INDEX_FIELD
+            0,                          // SHIFT_AMOUNT_FIELD
+            0,                          // MASTER_OP_FIELD
+            &$sra_coeffs,               // FILTER_COEFFS_FIELD
+            &sr_hist_left,              // HIST1_BUF_FIELD
+            &sr_hist_left,              // HIST1_BUF_START_FIELD
+            &sw_rate_op.param + $cbops.rate_monitor_op.WARP_VALUE_FIELD, // SRA_TARGET_RATE_ADDR_FIELD
+            0,                          // ENABLE_COMPRESSOR_FIELD
+            0 ...;
+    .ENDBLOCK;
+
+.ENDMODULE;
+
+.MODULE $usb_out;
+   .DATASEGMENT DM;
+
+  // Only allow this buffer to be two USB packets so frame_sync can drop/add samples
+   DeclareCBuffer (cbuffer_struc,mem, (2* $SAMPLE_RATE / 1000));
+
+   // ** allocate memory for USB input (non-cbops) copy routine **
+   .VAR/DM copy_struc[$frame_sync.USB_OUT_MONO_STRUC_SIZE] =
+      &cbuffer_struc,                           // Source buffer
+      $USB_OUT_PORT,                            // USB sink port
+      -8,                                       // Shift amount
+      ($SAMPLE_RATE / 1000),                    // Transfer per period (number of samples transferred on each timer interrupt)
+      0;                                        // Stall counter
+.ENDMODULE;
+
+#define USBOUT_INPUT_INDEX       0
+#define USBOUT_OUTPUT_INDEX      1
+#define USBOUT_INTERNAL_INDEX    2
+
+.MODULE $usb_out_rm;
+   .DATASEGMENT DM;
+
+//          usbout_rm     internal       usbout
+//    cBuffer --> RATE_MATCH ---> RESAMPLE --> cBuffer
+
+    DeclareCBuffer (cbuffer_struc,mem,$BLOCK_SIZE * $BUFFER_SCALING);
+
+    .VAR/DM1CIRC sr_hist_left[$cbops.rate_adjustment_and_shift.SRA_COEFFS_SIZE];
+
+    .VAR copy_struc[] =
+        $cbops.scratch.BufferTable,     // BUFFER_TABLE_FIELD
+        &sw_copy_op,                    // MAIN_FIRST_OPERATOR_FIELD
+        &copy_op,                       // MTU_FIRST_OPERATOR_FIELD
+        1,                              // NUM_INPUTS_FIELD
+        &cbuffer_struc,
+        1,                              // NUM_OUTPUTS_FIELD
+        &$usb_out.cbuffer_struc,
+        1,                              // NUM_INTERNAL_FIELD
+        &$cbops.scratch.cbuffer_struc2;
+
+    .BLOCK sw_copy_op;
+        .VAR sw_copy_op.mtu_next  = $cbops.NO_MORE_OPERATORS;
+        .VAR sw_copy_op.main_next = &copy_op;
+        .VAR sw_copy_op.func = &$cbops.rate_adjustment_and_shift;
+        .VAR sw_copy_op.param[$cbops.rate_adjustment_and_shift.STRUC_SIZE] =
+            USBOUT_INPUT_INDEX,         // INPUT1_START_INDEX_FIELD
+            USBOUT_INTERNAL_INDEX,      // OUTPUT1_START_INDEX_FIELD
+            0,                          // SHIFT_AMOUNT_FIELD
+            0,                          // MASTER_OP_FIELD
+            &$sra_coeffs,               // FILTER_COEFFS_FIELD
+            &sr_hist_left,              // HIST1_BUF_FIELD
+            &sr_hist_left,              // HIST1_BUF_START_FIELD
+            &$usb_in_rm.sw_rate_op.param + $cbops.rate_monitor_op.INVERSE_WARP_VALUE_FIELD, // SRA_TARGET_RATE_ADDR_FIELD
+            0,                          // ENABLE_COMPRESSOR_FIELD
+            0 ...;
+    .ENDBLOCK;
+
+    // Copy/Resampler Operator
+    .BLOCK copy_op;
+        .VAR copy_op.mtu_next  = &sw_copy_op;
+        .VAR copy_op.main_next = $cbops.NO_MORE_OPERATORS;
+        .VAR copy_op.func = $cbops_iir_resamplev2;
+        .VAR copy_op.param[$iir_resamplev2.OBJECT_SIZE] =
+            USBOUT_INTERNAL_INDEX,              // Input index
+            USBOUT_OUTPUT_INDEX,                // Output index
+#if uses_48_to_16kHz
+            $M.iir_resamplev2.Up_3_Down_1.filter,// FILTER_DEFINITION_PTR_FIELD
+#elif uses_48_to_8kHz
+            $M.iir_resamplev2.Up_6_Down_1.filter,// FILTER_DEFINITION_PTR_FIELD
+#else
+            0,                                  // Pass-Through (Copy)
+#endif
+            -8,                          // INPUT_SCALE_FIELD   (input Q15)
+            8,                                  // OUTPUT_SCALE_FIELD  (output Q23)
+            &$cbops.scratch.mem1,               // INTERMEDIATE_CBUF_PTR_FIELD
+            LENGTH($cbops.scratch.mem1),        // INTERMEDIATE_CBUF_LEN_FIELD
+            0 ...;
+    .ENDBLOCK;
+
+.ENDMODULE;
 
 #else
 // INPUT/OUTPUT streams
@@ -626,9 +819,9 @@
     // declare all plc memory for testing plc module
 #if !uses_16kHz
     .VAR/DM sco_decoder[$sco_decoder.STRUC_SIZE] =
-            $frame_sync.sco2_decoder.pcm.validate,        // VALIDATE_FUNC
-            $frame_sync.sco2_decoder.pcm.process,         // DECODE_FUNC
-            $frame_sync.sco2_decoder.pcm.initialize,      // RESET_FUNC
+            $frame_sync.sco_decoder.pcm.validate,        // VALIDATE_FUNC
+            $frame_sync.sco_decoder.pcm.process,         // DECODE_FUNC
+            $frame_sync.sco_decoder.pcm.initialize,      // RESET_FUNC
             0,                                // DATA_PTR
             0.3;                              // THRESHOLD (between 0 and 1) //wmsn: this field is for PLC only
 
@@ -829,11 +1022,10 @@ $main:
 
    // Initialize Synchronized Timing for SCO   (Requires wall clock)
    call $wall_clock.initialise;
-   r8 = $sco_data.object;
-   call $sco_timing.initialize;
-
+   r7 = $sco_data.object;
    r8 = $sco2_data.object;
    call $sco2_timing.initialize;
+
 
 #ifdef USB_DONGLE
 #else
@@ -863,10 +1055,10 @@ $main:
    // used framework.
 
    r7 = &$sco_data.object;
-   call $frame_sync.sco_initialize;
+   call $frame_sync.sco2_initialize;
 
    r7 = &$sco2_data.object;
-   call $frame_sync.sco_initialize;
+   call $frame_sync.sco2_initialize;
 #endif
 
    // send message saying we're up and running!
@@ -922,11 +1114,11 @@ $main_receive:
 
     // Run PLC and Decoder
     r7 = &$sco_data.object;
-    call $frame_sync.sco_decode;
-
+    call $frame_sync.sco2_decode;
+    
     r7 = &$sco2_data.object;
-    call $frame_sync.sco_decode;
-
+    call $frame_sync.sco2_decode;
+    
     // Get Current System Mode
     r0 = M[$one_mic_example.sys_mode];
     // Call processing table that corresponds to the current mode
@@ -962,12 +1154,6 @@ $main_send:
     r9 = M[r0 + $sco_decoder.DATA_PTR];
 
     call $frame_sync.sco_encode;
-
-    r7 = &$sco_data2.object;
-    r0 = M[r7 + $sco_pkt_handler.DECODER_PTR];
-    r9 = M[r0 + $sco_decoder.DATA_PTR];
-
-    call $frame_sync.sco2_encode;
 
 #endif
 
@@ -1056,11 +1242,6 @@ $audio_copy_handler:
 irq_sco:
 
    // SP - SCO synchronization may reset frame counter
-   r7 = &$M.App.scheduler.tasks + $FRM_SCHEDULER.COUNT_FIELD;
-   r1 = &$audio_copy_timer_struc;
-   r3 = &$audio_copy_handler;
-   call $sco_timing.SyncClock;
-
    r7 = &$M.App.scheduler.tasks + $FRM_SCHEDULER.COUNT_FIELD;
    r1 = &$audio_copy_timer_struc;
    r3 = &$audio_copy_handler;

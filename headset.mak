@@ -65,9 +65,9 @@ endif
 #Check if example plugins are to be included
 ifneq (, $(findstring -DINCLUDE_DSP_EXAMPLES,$(DEFS)))
 
-image/one_mic_example_cvsd/one_mic_example_cvsd.kap :
+image/one_mic_example_cvsd/one_mic_multitalk_cvsd.kap :
 	$(mkdir) image/one_mic_example_cvsd
-	$(copyfile) ../../kalimba/apps/one_mic_example/image/one_mic_example_cvsd/one_mic_example_cvsd.kap $@
+	$(copyfile) dsp/one_mic_example/image/one_mic_multitalk_cvsd/one_mic_multitalk_cvsd.kap $@
     
 image.fs : image/one_mic_example_cvsd/one_mic_example_cvsd.kap
 
@@ -92,17 +92,16 @@ image.fs : image/two_mic_example_16k/two_mic_example_16k.kap
 endif
 
 ifneq (, $(findstring -DENABLE_MULTI_TALK,$(DEFS)))
+#image/one_mic_example_cvsd/one_mic_example_cvsd.kap :
+#	$(mkdir) image/one_mic_example_cvsd
+#	$(copyfile) ../../kalimba/apps/one_mic_example/image/one_mic_example_cvsd/one_mic_example_cvsd.kap $@
+
 image/one_mic_example_cvsd/one_mic_example_cvsd.kap :
 	$(mkdir) image/one_mic_example_cvsd
-	$(copyfile) ../../kalimba/apps/one_mic_example/image/one_mic_example_cvsd/one_mic_example_cvsd.kap $@
-
-image/one_mic_multitalk_cvsd/one_mic_multitalk_cvsd.kap :
-	$(mkdir) image/one_mic_multitalk_cvsd
 	$(copyfile) ./dsp/one_mic_example/image/one_mic_multitalk_cvsd/one_mic_multitalk_cvsd.kap $@
 
 image.fs : image/one_mic_example_cvsd/one_mic_example_cvsd.kap
 #image.fs : image/one_mic_multitalk_cvsd/one_mic_multitalk_cvsd.kap
-image.fs : image/one_mic_example_2sco/one_mic_example_2sco.kap
 endif
 
 ######################################################################################################

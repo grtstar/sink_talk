@@ -85,10 +85,10 @@ static FILE_INDEX selectKapFile(const EXAMPLE_PLUGIN_TYPE_T example_plugin_varia
         case CVSD_8K_1_MIC:
             if(CSR_COMMON_EXAMPLE->audio_sink_parent != NULL)
             {
-                kap_file = "one_mic_multitalk_cvsd/one_mic_multitalk_cvsd.kap";
+                kap_file = "one_mic_example_cvsd/one_mic_example_cvsd.kap";
                 CSR_COMMON_EXAMPLE->kap_type = 1;
-                kap_file = "one_mic_example_2sco/one_mic_example_2sco.kap";
-                CSR_COMMON_EXAMPLE->kap_type = 2;
+/*                 kap_file = "one_mic_example_2sco/one_mic_example_2sco.kap";
+                CSR_COMMON_EXAMPLE->kap_type = 2; */
                 PRINT(("CSR_COMMON_EXAMPLE: one_mic_example_2sco\n"));
             }
             else
@@ -157,6 +157,8 @@ static uint32 calculateDacRate (const ExamplePluginTaskdata * const task, const 
     return rate;
 }
 
+const T_mic_gain MIC_GAIN = {1,0,0x1,0x5}; /* +3db for digital and analog, preamp=in */
+
 static void populatePluginFromAudioConnectData(const AUDIO_PLUGIN_CONNECT_MSG_T * const connect_message)
 {
     hfp_common_plugin_params_t *params = (hfp_common_plugin_params_t*)connect_message->params;
@@ -170,8 +172,8 @@ static void populatePluginFromAudioConnectData(const AUDIO_PLUGIN_CONNECT_MSG_T 
     CSR_COMMON_EXAMPLE->mode            = connect_message->mode;
     CSR_COMMON_EXAMPLE->stereo          = connect_message->features.stereo;
     CSR_COMMON_EXAMPLE->tone_volume     = connect_message->volume;
-    CSR_COMMON_EXAMPLE->mic_gain_left   = MIC_DEFAULT_GAIN;
-    CSR_COMMON_EXAMPLE->mic_gain_right  = MIC_DEFAULT_GAIN;
+    CSR_COMMON_EXAMPLE->mic_gain_left   = MIC_GAIN;
+    CSR_COMMON_EXAMPLE->mic_gain_right  = MIC_GAIN;
     CSR_COMMON_EXAMPLE->voice_mic_params = (params ? params->voice_mic_params : NULL);
     CSR_COMMON_EXAMPLE->audio_sink_parent = (params ? params->usb_params.usb_sink : NULL);
     CSR_COMMON_EXAMPLE->mic_muted       = FALSE;
@@ -216,11 +218,11 @@ static void sendBluetoothAddressMessage(void)
     SinkGetBdAddr(CSR_COMMON_EXAMPLE->audio_sink, &rem_addr);
     KALIMBA_SEND_MESSAGE(MESSAGE_REM_BT_ADDRESS, rem_addr.taddr.addr.nap, (rem_addr.taddr.addr.lap >> 16) | (((unsigned int)rem_addr.taddr.addr.uap) << 8), rem_addr.taddr.addr.lap & 0xffff, 0 );
 
-    if(CSR_COMMON_EXAMPLE->audio_sink_parent)
+    /* if(CSR_COMMON_EXAMPLE->audio_sink_parent)
     {
         SinkGetBdAddr(CSR_COMMON_EXAMPLE->audio_sink_parent, &rem_addr);
-        KALIMBA_SEND_MESSAGE(MESSAGE_REM_BT_ADDRESS, rem_addr.taddr.addr.nap, (rem_addr.taddr.addr.lap >> 16) | (((unsigned int)rem_addr.taddr.addr.uap) << 8), rem_addr.taddr.addr.lap & 0xffff, 0 );
-    }
+        KALIMBA_SEND_MESSAGE(MESSAGE_REM_BT_ADDRESS, rem_addr.taddr.addr.nap, (rem_addr.taddr.addr.lap >> 16) | (((unsigned int)rem_addr.taddr.addr.uap) << 8), rem_addr.taddr.addr.lap & 0xffff, 1 );
+    } */
 }
 
 static void sendVolumeMessage(const uint16 volume)
@@ -374,7 +376,7 @@ static void connectAudio(const ExamplePluginTaskdata * const task)
         if(CSR_COMMON_EXAMPLE->kap_type == 1)
         {
             r1 = (bool) StreamConnect(StreamSourceFromSink( CSR_COMMON_EXAMPLE->audio_sink_parent ),StreamKalimbaSink(DSP_INPUT_PORT_FOR_AG2)); /* SCO->DSP */
-            r2 = (bool) StreamConnect( StreamKalimbaSource(DSP_OUTPUT_PORT_FOR_AG2), CSR_COMMON_EXAMPLE->audio_sink_parent ); /* DSP->SCO */
+            r2 = (bool) StreamConnect( StreamKalimbaSource(3), CSR_COMMON_EXAMPLE->audio_sink_parent ); /* DSP->SCO */
             PRINT(("Connect sco1 [%x] [%x]\n", r1, r2));
         }
         else if(CSR_COMMON_EXAMPLE->kap_type == 2)

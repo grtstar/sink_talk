@@ -118,14 +118,14 @@ $frame_sync.sco2_initialize:
 //      [sync word        ]   (0x5C5C)
 //      [header size      ]   (size in words, 16-bit)
 //      [payload size     ]   (size in bytes, 8-bit)
-//      [0x00  � status   ]
+//      [0x00  �status   ]
 //      [ (extra header)  ]   (not used)
 //      -------------------
 //      [  (payload)      ]
 //
 //   DSP buffers are 24-bits wide.  The packet format in the buffer is:
-//      [ 0x00 � payload size   ]   (size in bytes, 8-bit)
-//      [ 0x00 � 0x00  � status ]
+//      [ 0x00 �payload size   ]   (size in bytes, 8-bit)
+//      [ 0x00 �x00  �status ]
 //      ------------------------
 //      [       (payload)       ]
 //
@@ -148,7 +148,153 @@ $frame_sync.sco2_initialize:
 //        4) Amount of Data in port is >= header plus payload size provided in header
 //
 // *****************************************************************************
-.MODULE $M.frame_sync.sco2_port_handler;
+.MODULE $M.frame_sync.sco2_port_handler1;
+   .CODESEGMENT FRAME_SYNC_SCO_PORT_HANDLER_PM;
+   .DATASEGMENT DM;
+
+   // Size of last packet written to CBuffer
+   .VAR $sco1_last_packet_size=0;
+   // Amount of data in Port
+   .VAR $sco1_port_data=0;
+
+   // The amount of metadata that we read from the header
+   .CONST METADATA_TO_READ    5;
+   // The amount of metadata we write into the buffer 
+   // for sco_decode to read
+   .CONST METADATA_TO_WRITE   3;
+
+$frame_sync.sco2_port_handler1:
+
+   $push_rLink_macro;
+jp_do_again:
+   // Check SCO Port for Data
+   r0 = M[r8 + $sco_pkt_handler.SCO_PORT_FIELD];
+   call $cbuffer.calc_amount_data;
+   M[$sco1_port_data]=r0;
+   if Z jump $pop_rLink_and_rts;
+   // Check CBuffer for space
+   r0 = M[r8 + $sco_pkt_handler.INPUT_PTR_FIELD];
+   call $cbuffer.calc_amount_space;
+   Null = r0 - M[$sco1_last_packet_size];
+   if NEG jump $pop_rLink_and_rts;
+   // Get Port
+   r0 = M[r8 + $sco_pkt_handler.SCO_PORT_FIELD];
+   call $cbuffer.get_read_address_and_size.its_a_port;
+   r6 = r0;
+   // Get CBuffer
+   r0 = M[r8 + $sco_pkt_handler.INPUT_PTR_FIELD];
+#ifdef BASE_REGISTER_MODE
+    call $cbuffer.get_write_address_and_size_and_start_address;
+    push r2;
+    pop  B4;
+#else
+   call $cbuffer.get_write_address_and_size;
+#endif
+   I4 = r0;
+   L4 = r1;
+   // Check Header
+   r5 = M[$sco1_port_data];
+   Null = r5 - METADATA_TO_READ;
+   if NEG jump jp_purge;
+   r0 = M[r6];           // Sync
+   r3 = M[r6];           // Header size
+   r5 = r5 - METADATA_TO_READ;
+   // Payload size (bytes)
+   r1 = M[r6];
+   M[I4,1]=r1;
+   r9 = r1 + 1;
+   // Status
+   r4 = M[r6];
+   M[I4,1]=r4;
+   // Timestamp
+   r1 = M[r6];
+   M[I4,1]=r1;
+
+#ifdef DEBUG_ON // Debug
+   M[$plc_status2]=r4;
+   r4 = r4 LSHIFT -8;
+   r4 = r4 AND 0xFF;
+   M[$plc_fsco2] = r4;
+#endif
+
+   // Check Sync word
+   Null = r0 - 0x5c5c;
+   if NZ jump jp_purge;
+   // Dump remainder of header
+   r10 = r3 - METADATA_TO_READ;        // Remainder of header in words
+   Null = r5 - r10;
+   if NEG jump jp_purge;
+   r5 = r5 - r10;
+   // Get Port
+   do lp_skip_hdr;
+       r0 = M[r6];
+       nop;
+   lp_skip_hdr:
+   // Payload in words
+   r10 = r9 ASHIFT -1;
+   Null  = r5 - r10;
+   if NEG jump jp_purge;
+   r5  = r5 - r10;
+   // Set Payload Configuration Payload
+   r0 = M[r8 + $sco_pkt_handler.SCO_PAYLOAD_FIELD];
+   call $cbuffer.get_read_address_and_size.its_a_port;
+   // Set Packet size
+   r0 = r10 + METADATA_TO_WRITE;
+   M[$sco1_last_packet_size]=r0;
+   // Copy Port to Buffer
+   do lp_copy;
+      r1 = M[r6];
+      M[I4,1] = r1;
+lp_copy:
+   // Update CBuffer
+   L4 = Null;
+   r0 = M[r8 + $sco_pkt_handler.INPUT_PTR_FIELD];
+   r1 = I4;
+   call $cbuffer.set_write_address;
+
+#ifdef BASE_REGISTER_MODE
+   push Null;
+   pop  B4;
+#endif
+
+   // Update Port
+   // force an MMU buffer set
+   Null = M[$PORT_BUFFER_SET];
+
+#ifdef USES_RCV_TIMING
+   jump jp_do_again;
+#else
+   jump $pop_rLink_and_rts;
+#endif
+
+jp_purge:
+  // Payload minus amount read
+  r2 = M[$sco1_port_data];
+  r10 = r5;
+  // Update Purge Count
+#ifdef DEBUG_ON
+   r0 = M[$sco_purge2];
+   r0 = r0 + r2;
+   M[$sco_purge2]=r0;
+#endif
+
+   // Purge port
+   do lp_purge;
+      r1 = M[r6];
+      nop;
+lp_purge:
+   L4 = Null;
+#ifdef BASE_REGISTER_MODE
+   push Null;
+   pop  B4;
+#endif
+   // force an MMU buffer set
+   Null = M[$PORT_BUFFER_SET];
+   jump $pop_rLink_and_rts;
+
+.ENDMODULE;
+
+.MODULE $M.frame_sync.sco2_port_handler2;
    .CODESEGMENT FRAME_SYNC_SCO_PORT_HANDLER_PM;
    .DATASEGMENT DM;
 
@@ -163,7 +309,7 @@ $frame_sync.sco2_initialize:
    // for sco_decode to read
    .CONST METADATA_TO_WRITE   3;
 
-$frame_sync.sco2_port_handler:
+$frame_sync.sco2_port_handler2:
 
    $push_rLink_macro;
 jp_do_again:
@@ -303,8 +449,8 @@ lp_purge:
 //    operates on the buffer written to by $frame_sync.sco_port_handler.
 //
 //   DSP buffers are 24-bits wide.  The packet format in the buffer is:
-//      [ 0x00 � payload size   ]   (size in bytes, 8-bit)
-//      [ 0x00 � 0x00  � status ]
+//      [ 0x00 �payload size   ]   (size in bytes, 8-bit)
+//      [ 0x00 �x00  �status ]
 //      ------------------------
 //      [       (payload)       ]
 //
@@ -855,22 +1001,27 @@ jump jp_repeat;
 //  .VAR rcv_deadline;        // (Not-Used) fsco * MICROSECONDS_PER_SLOT + psk [1]
 //.ENDBLOCK;
 
+.VAR    sco_data_ptr1=0;
 .VAR    sco_data_ptr2=0;
 .VAR    bt_addr.message_struc[$message.STRUC_SIZE];
 .VAR    sco_param.message_struc[$message.STRUC_SIZE];
 .VAR    sco_param_failed.message_struc[$message.STRUC_SIZE];
+.VAR    wallclock_obj1[$wall_clock.STRUC_SIZE] = 0 ...;
 .VAR    wallclock_obj2[$wall_clock.STRUC_SIZE] = 0 ...;
 #ifdef USES_RCV_TIMING
 .VAR sco_rcv_trigger2;
 .VAR    rcv_proc_trigger2;
 #endif
-   // r8 = sco object
+   // r7 = sco1_object
+   // r8 = sco2 object
 $sco2_timing.initialize:
    $push_rLink_macro;
 
    // Save SCO Data Object
+   M[sco_data_ptr1]   = r7;
    M[sco_data_ptr2]   = r8;
    // Clear Tsco until SCO connection
+   M[r7+$sco_pkt_handler.SCO_PARAM_TESCO_FIELD]=NULL;
    M[r8+$sco_pkt_handler.SCO_PARAM_TESCO_FIELD]=NULL;
 
    // set up message handler for bluetooth address
@@ -931,8 +1082,16 @@ $sco2_timing.PortConnected:
    r0 = M[r8 + $sco_pkt_handler.SCO_OUT_PORT_FIELD];
    r0 = r0 AND $cbuffer.TOTAL_PORT_NUMBER_MASK;
    NULL = r1 - r0;
+   if Z jump port1_connected;
+
+   r8 = M[$M.sco2_timing.sco_data_ptr1];
+   if Z rts;
+   r0 = M[r8 + $sco_pkt_handler.SCO_OUT_PORT_FIELD];
+   r0 = r0 AND $cbuffer.TOTAL_PORT_NUMBER_MASK;
+   NULL = r1 - r0;
    if NZ rts;
 
+port1_connected:
    $push_rLink_macro;
 
    // Clear Tsco to indicate new connection
@@ -958,9 +1117,31 @@ $sco2_timing.PortDisConnected:
    r0 = M[r8 + $sco_pkt_handler.SCO_OUT_PORT_FIELD];
    r0 = r0 AND $cbuffer.TOTAL_PORT_NUMBER_MASK;
    NULL = r1 - r0;
+   if Z jump $sco2_timing.ScoDisconnect2;
+
+   r8 = M[$M.sco2_timing.sco_data_ptr1];
+   if Z rts;
+   r0 = M[r8 + $sco_pkt_handler.SCO_OUT_PORT_FIELD];
+   r0 = r0 AND $cbuffer.TOTAL_PORT_NUMBER_MASK;
+   NULL = r1 - r0;
    if NZ rts;
 
-$sco2_timing.ScoDisconnect:
+$sco2_timing.ScoDisconnect1:
+   $push_rLink_macro;
+   //SP.  Only disconnect once
+   r1 = &$M.sco2_timing.wallclock_obj1;
+   NULL = M[r1 + $wall_clock.NEXT_ADDR_FIELD];
+   if NZ call $wall_clock.disable;
+   // Clear wall clock parameters
+   r1 = &$M.sco2_timing.wallclock_obj1;
+   M[r1 + $wall_clock.NEXT_ADDR_FIELD]=NULL;
+   M[r1 + $wall_clock.ADJUSTMENT_VALUE_FIELD]=NULL;
+   // Clear TSco to indicate no SCO
+   r8 = M[$M.sco2_timing.sco_data_ptr1];
+   M[r8+$sco_pkt_handler.SCO_PARAM_TESCO_FIELD]=NULL;
+   jump $pop_rLink_and_rts;
+
+$sco2_timing.ScoDisconnect2:
    $push_rLink_macro;
    //SP.  Only disconnect once
    r1 = &$M.sco2_timing.wallclock_obj2;
@@ -1001,6 +1182,7 @@ $sco2_timing.ScoDisconnect:
 // NOTES:
 //
 // *****************************************************************************
+
 .MODULE $M.sco2_timing.rm_bluetooth_address_handler2;
    .CODESEGMENT SCO_TIMING_RCV_BT_ADDRESS_PM;
 $rm_bluetooth_address_handler2:
@@ -1008,6 +1190,24 @@ $rm_bluetooth_address_handler2:
 
    // Save encoding mode and other parameters
    // note these can end up getting sign-extended... is this OK?
+   r5 = r1 AND 0xF;
+   r8 = M[$M.sco2_timing.sco_data_ptr1];
+   r0 = M[r8 + $sco_pkt_handler.SCO_OUT_PORT_FIELD];
+   r0 = r0 AND $cbuffer.TOTAL_PORT_NUMBER_MASK;
+   NULL = r5 - r0;
+   if NZ jump port2_bt_address;
+   r1 = r1 LSHIFT -8;
+   M[$M.sco2_timing.wallclock_obj1 + $wall_clock.BT_ADDR_TYPE_FIELD]  = r1;
+   M[$M.sco2_timing.wallclock_obj1 + $wall_clock.BT_ADDR_WORD0_FIELD] = r2;
+   M[$M.sco2_timing.wallclock_obj1 + $wall_clock.BT_ADDR_WORD1_FIELD] = r3;
+   M[$M.sco2_timing.wallclock_obj1 + $wall_clock.BT_ADDR_WORD2_FIELD] = r4;
+
+   // start wallclock.  SP.  only start it once
+   r1 = &$M.sco2_timing.wallclock_obj1;
+   NULL = M[r1 + $wall_clock.NEXT_ADDR_FIELD];
+   if Z call $wall_clock.enable;
+   jump $pop_rLink_and_rts;
+port2_bt_address:
    r1 = r1 LSHIFT -8;
    M[$M.sco2_timing.wallclock_obj2 + $wall_clock.BT_ADDR_TYPE_FIELD]  = r1;
    M[$M.sco2_timing.wallclock_obj2 + $wall_clock.BT_ADDR_WORD0_FIELD] = r2;
@@ -1050,7 +1250,7 @@ $sco2_params_failed_handler:
    .DATASEGMENT DM;
 
 $sco2_params_handler:
-//#define DEBUG_SCO_PARMS
+#define DEBUG_SCO_PARMS
 #ifdef DEBUG_SCO_PARMS
    .VAR $sco2_params[9];
    
@@ -1064,8 +1264,16 @@ $sco2_params_handler:
 #endif
 
    M1 = 1; 
+   r0 =  M[r3 + 0];
+   r8 = M[$M.sco2_timing.sco_data_ptr1];
+   r1 = M[r8 + $sco_pkt_handler.SCO_OUT_PORT_FIELD];
+   r1 = r1 AND 0xF;
+   NULL = r0 - r1;
+   if NZ jump port2_params;   
+   jump params_handler;
+port2_params:
    r8 = M[$M.sco2_timing.sco_data_ptr2];
-
+params_handler:
    // Update Next Xmit Time in BT clks (24-bit)
    r1 = M[r3 + 5]; // msw
    r2 = M[r3 + 6]; // lsw
@@ -1173,8 +1381,161 @@ jp_force_reset:
 .MODULE $M.sco2_timing.SyncClock;
    .CODESEGMENT SCO_TIMING_SYNC_PM;
    .DATASEGMENT DM;
-
 $sco2_timing.SyncClock:
+   $push_rLink_macro;
+   push r7;
+   push r1;
+   push r3;
+   call $sco2_timing.SyncClock1;
+   pop r7;
+   pop r1;
+   pop r3;
+   call $sco2_timing.SyncClock2;
+   jump $pop_rLink_and_rts;
+.ENDMODULE;
+
+.MODULE $M.sco2_timing.SyncClock1;
+   .CODESEGMENT SCO_TIMING_SYNC_PM;
+   .DATASEGMENT DM;
+
+$sco2_timing.SyncClock1:
+   $push_rLink_macro;
+
+
+   r8 = M[$M.sco2_timing.sco_data_ptr1];
+
+   // Set Timer Task to Middle of next BT slot
+
+#if 1
+   r5 = M[r1 + $timer.TIME_FIELD];
+#else
+   r5 = M[$TIMER_TIME];
+#endif
+   // BT clk in usec
+   r0 = M[&$M.sco2_timing.wallclock_obj1 + $wall_clock.ADJUSTMENT_VALUE_FIELD];
+   r6 = r0 + r5;
+
+   // BT Clks till SCO Xmit slot (negative if already passed)
+   r0 = M[r8+$sco_pkt_handler.SCO_PARAM_SLOT_LS_FIELD];
+   r0 = r0 - r6;
+
+   // Calculate offset between BT clock and SCO Xmit
+   r4 = 625;
+   rMAC = r0 * 0.0016;
+   r2   = rMAC1;
+   r2   = r2 * r4    (int);
+   r2   = r0 - r2;
+
+   // Modulous clks by Tesco in usec
+   rMAC = r0 ASHIFT 0 (LO);    // LS word of rMAC now equals r0, with
+                                // sign extension in higher bits;
+   r0 = M[r8+$sco_pkt_handler.SCO_PARAM_TESCO_FIELD];
+   if Z r2 = NULL;
+   Div = rMAC/r0;
+
+   // Advance Timer
+   NULL = r2 - 312;
+   if GT r2 = r2 - r4;
+   r2 = r2 + r4;
+   r2 = r2 + r5;
+
+   // r1 and r3 set in function call
+   call $timer.schedule_event_at;   //SP.  r6-r9 & Div not used in call
+
+   // Wait for Valid SCO parameters and BT clock sync
+   r0 = M[r8+$sco_pkt_handler.SCO_PARAM_TESCO_FIELD];
+   if Z jump $pop_rLink_and_rts;
+   NULL = M[&$M.sco2_timing.wallclock_obj1 + $wall_clock.ADJUSTMENT_VALUE_FIELD];
+   if Z jump $pop_rLink_and_rts;
+
+   // Advance sco next_xmit_clks.
+   // r6 - BT clks in usec
+   // DivRemainder - modulous of sco xmit
+   r4 = DivRemainder;
+   NULL = r4 + NULL;
+   if LE r4 = r4 + r0; // SP.  If neg then time was passed.  If zero then advance by tsco
+   // r4 is clks till next SCO xmit.  Update SCO xmit time (current clk + remainder)
+   r1 = r6 + r4;
+   M[r8+$sco_pkt_handler.SCO_PARAM_SLOT_LS_FIELD] = r1;
+
+   // Check for SCO XMIT (tsco - remainder)
+   r4 = r4 + 312;
+   rMAC = r4 * 0.0016;               // 1/625 usec
+   r2  = rMAC1;                     // BT clk we are currently in
+
+#ifdef USES_RCV_TIMING
+   // Perform re-trans safe SCO read
+   push r2;
+NULL = r2 - M[$M.sco2_timing.sco_rcv_trigger2];
+   if Z call $frame_sync.sco2_port_handler1;
+   pop r2;
+#endif
+   NULL = r2 - 1;
+   if NZ jump $pop_rLink_and_rts;
+
+   // Get Buffer and Port
+   r0 = M[r8 + $sco_pkt_handler.SCO_OUT_PORT_FIELD];
+   call $cbuffer.get_write_address_and_size.its_a_port;
+   I4 = r0;
+   L4 = r1;
+   r0 = M[r8 + $sco_pkt_handler.SCO_OUT_BUFFER_FIELD];
+
+#ifdef BASE_REGISTER_MODE
+   call $cbuffer.get_read_address_and_size_and_start_address;
+   push r2;
+   pop  B0;
+#else
+   call $cbuffer.get_read_address_and_size;
+#endif
+   I0 = r0;
+   L0 = r1;
+   // Transfer SCO Packet
+   r0 = M[r8 + $sco_pkt_handler.SCO_OUT_BUFFER_FIELD];
+   call $cbuffer.calc_amount_data;
+   r10 = M[r8 + $sco_pkt_handler.SCO_OUT_PKTSIZE_FIELD];
+
+   // If not CVSD then bytes/2
+   r2 = r10 LSHIFT -1;
+   r1 = M[r8 + $sco_pkt_handler.SCO_OUT_PORT_FIELD];
+   r1 = r1 AND $cbuffer.FORCE_16BIT_DATA_STREAM;
+   NULL = r1 - $cbuffer.FORCE_16BIT_DATA_STREAM;
+   if Z r10 = r2;
+
+   NULL = r0 - r10;
+   if NEG r10 = r0;
+   r1 = M[r8 + $sco_pkt_handler.SCO_OUT_SHIFT_FIELD];
+   do lp_sco_xmit;
+      r0 = M[I0,1];
+      r0 = r0 ASHIFT r1;
+      M[I4,1]=r0;
+lp_sco_xmit:
+   // Update Buffer and Port
+   r0 = M[r8 + $sco_pkt_handler.SCO_OUT_BUFFER_FIELD];
+   r1 = I0;
+   call $cbuffer.set_read_address;
+   r0 = M[r8 + $sco_pkt_handler.SCO_OUT_PORT_FIELD];
+   r1 = I4;
+   call $cbuffer.set_write_address;
+   L0 = NULL;
+   L4 = NULL;
+#ifdef BASE_REGISTER_MODE
+   push Null;
+   pop  B0;
+#endif
+   // Check for sync with first SCO xmit
+   NULL = M[r8 + $sco_pkt_handler.SCO_NEW_PARAMS_FLAG];
+   if NZ M[r7]=NULL;
+   M[r8 + $sco_pkt_handler.SCO_NEW_PARAMS_FLAG]=NULL;
+
+   jump $pop_rLink_and_rts;
+
+.ENDMODULE;
+
+.MODULE $M.sco2_timing.SyncClock2;
+   .CODESEGMENT SCO_TIMING_SYNC_PM;
+   .DATASEGMENT DM;
+
+$sco2_timing.SyncClock2:
    $push_rLink_macro;
 
 
@@ -1216,7 +1577,7 @@ $sco2_timing.SyncClock:
    r2 = r2 + r5;
 
    // r1 and r3 set in function call
-   call $timer.schedule_event_at;   //SP.  r6-r9 & Div not used in call
+   // call $timer.schedule_event_at;   //SP.  r6-r9 & Div not used in call
 
    // Wait for Valid SCO parameters and BT clock sync
    r0 = M[r8+$sco_pkt_handler.SCO_PARAM_TESCO_FIELD];
@@ -1243,7 +1604,7 @@ $sco2_timing.SyncClock:
    // Perform re-trans safe SCO read
    push r2;
 NULL = r2 - M[$M.sco2_timing.sco_rcv_trigger2];
-   if Z call $frame_sync.sco2_port_handler;
+   if Z call $frame_sync.sco2_port_handler2;
    pop r2;
 #endif
    NULL = r2 - 1;

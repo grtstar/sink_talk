@@ -12,9 +12,8 @@
 .CONST $stream_copy.OUTPUT_PTR_BUFFER_FIELD            1;
 .CONST $stream_copy.STRUC_SIZE                         2;
 
-.CONST $stream_mix_copy.INPUT_PTR_BUFFER_FIELD             0;
-.CONST $stream_mix_copy.INPUT_PTR_BUFFER_FIELD2            1;
-.CONST $stream_mix_copy.OUTPUT_PTR_BUFFER_FIELD            2;
-.CONST $stream_mix_copy.STRUC_SIZE                         3;
-
+.CONST $stream_dual_copy.INPUT_PTR_BUFFER_FIELD              0;
+.CONST $stream_dual_copy.OUTPUT_PTR_BUFFER_FIELD             1;
+.CONST $stream_dual_copy.OUTPUT_PTR_BUFFER_FIELD2            2;
+.CONST $stream_dual_copy.STRUC_SIZE                          3;
 #endif

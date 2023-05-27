@@ -200,7 +200,7 @@ static void handleInitComplete(void)
     if ((!sinkBroadcastAudioIsActive() && sinkBleIsActiveOnPowerOff()) || DEVICE_IS_ON)
     {
         /* Power on BLE */
-        sinkBlePowerOnEvent();     
+        /* sinkBlePowerOnEvent(); */    
     }
 }
 

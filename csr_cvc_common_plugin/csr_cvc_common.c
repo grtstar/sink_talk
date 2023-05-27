@@ -77,7 +77,7 @@ static void pluginConnectForProductionTest(CvcPluginTaskdata * task)
         SourceConfigure(CVC->audio_source,VM_SOURCE_SCO_METADATA_ENABLE,0);
 
         csrCvcCommonConnectAudio(task) ;
-        SetCurrentDspStatus(DSP_LOADED_IDLE);
+
         SetAudioBusy( NULL );
         csrCvcCommonStateMachineHandleEvent(cvc_event_no_dsp_setup, NULL);
         return;
@@ -195,7 +195,6 @@ void CsrCvcPluginConnect( CvcPluginTaskdata *task,
     {
         if(csrCvcCommonDspSupportsNoDspMode(task))
             CVC->no_dsp = TRUE;
-        CVC->no_dsp = TRUE;
         pluginConnectForProductionTest(task);
         return;
     }
@@ -271,8 +270,6 @@ void CsrCvcPluginDisconnect( CvcPluginTaskdata *task )
         CsrCvcIoDisconnectOutputNoCvc();
         /* disconnect the microphones */
         CsrCvcIoDisconnectMicNoCvc();
-        
-        SetCurrentDspStatus(DSP_NOT_LOADED);
     }
     else
     {

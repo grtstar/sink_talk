@@ -12,6 +12,7 @@
  <file path="main.asm" />
  <file path="one_mic_example_system.asm" />
  <file path="sco_decode2.asm" />
+ <file path="stream_mix.asm" />
  <properties currentconfiguration="Release" >
   <configuration name="Release" >
    <property key="BUILDENV" >0</property>

@@ -15,6 +15,7 @@
 #define AG_DEBUG(x) DEBUG(x)
 
 extern CvcPluginTaskdata csr_cvsd_no_dsp_plugin;
+extern CvcPluginTaskdata csr_cvsd_cvc_1mic_headset_plugin;
 extern CvcPluginTaskdata csr_wbs_cvc_1mic_headset_plugin;
 
 extern MTData *mt;
@@ -410,17 +411,19 @@ static void profile_handler(Task task, MessageId id, Message message)
 			case (audio_codec_cvsd):
 				/* Not implemented yet. Revert to CVSD with no DSP */
 				lPlugin = (TaskData *)&csr_cvsd_no_dsp_plugin;
+				AG_DEBUG(("CVSD\n"));
 				break;
 			case (audio_codec_auristream_2_bit_8k):
 			case (audio_codec_auristream_2_bit_16k):
-				AG_DEBUG(("\auristream_2_bit not yet implemented.\n"));
+				AG_DEBUG(("\tauristream_2_bit not yet implemented.\n"));
 				break;
 			case (audio_codec_auristream_4_bit_8k):
 			case (audio_codec_auristream_4_bit_16k):
-				AG_DEBUG(("\auristream_4_bit_ not yet implemented.\n"));
+				AG_DEBUG(("\tauristream_4_bit_ not yet implemented.\n"));
 				break;
 			case (audio_codec_wbs_sbc):
 				lPlugin = (TaskData *)&csr_wbs_cvc_1mic_headset_plugin;
+				AG_DEBUG(("WBS SBC\n"));
 				break;
 			case (audio_codec_wbs_amr):
 				/* Not implemented yet. */
@@ -527,12 +530,12 @@ static void profile_handler(Task task, MessageId id, Message message)
 		if (SIMPLE->audio_codec == audio_codec_cvsd)
 		{
 			AG_DEBUG(("AUDIOPARAMS >ESCO: [%x] [%x]\n", SIMPLE->audio_cvsd_params.syncPktTypes, SIMPLE->audio_cvsd_params.hfpAudioParams.max_latency));
-			AghfpAudioConnectResponse(msg->aghfp, TRUE, SIMPLE->audio_cvsd_params.syncPktTypes, &SIMPLE->audio_cvsd_params.hfpAudioParams);
+			AghfpAudioConnectResponse(msg->aghfp, TRUE, SIMPLE->audio_cvsd_params.syncPktTypes, NULL);
 		}
 		else
 		{
 			AG_DEBUG(("AUDIOPARAMS >ESCO: [%x] [%x]\n", SIMPLE->audio_auristream_params.syncPktTypes, SIMPLE->audio_auristream_params.hfpAudioParams.max_latency));
-			AghfpAudioConnectResponse(msg->aghfp, TRUE, SIMPLE->audio_auristream_params.syncPktTypes, &SIMPLE->audio_auristream_params.hfpAudioParams);
+			AghfpAudioConnectResponse(msg->aghfp, TRUE, SIMPLE->audio_auristream_params.syncPktTypes, NULL);
 		}
 	}
 	break;
@@ -706,12 +709,12 @@ static void profile_handler(Task task, MessageId id, Message message)
 			if (SIMPLE->audio_codec == audio_codec_cvsd)
 			{
 				AG_DEBUG(("AUDIOPARAMS CVSD >SCO: [%x] [%x]\n", SIMPLE->audio_cvsd_params.syncPktTypes, SIMPLE->audio_cvsd_params.hfpAudioParams.max_latency));
-				AghfpAudioConnect(SIMPLE->aghfp, SIMPLE->audio_cvsd_params.syncPktTypes, &SIMPLE->audio_cvsd_params.hfpAudioParams);
+				AghfpAudioConnect(SIMPLE->aghfp, SIMPLE->audio_cvsd_params.syncPktTypes, NULL);
 			}
 			else
 			{
 				AG_DEBUG(("AUDIOPARAMS AURISTREAM >ESCO: [%x] [%x]\n", SIMPLE->audio_auristream_params.syncPktTypes, SIMPLE->audio_auristream_params.hfpAudioParams.max_latency));
-				AghfpAudioConnect(SIMPLE->aghfp, SIMPLE->audio_auristream_params.syncPktTypes, &SIMPLE->audio_auristream_params.hfpAudioParams);
+				AghfpAudioConnect(SIMPLE->aghfp, SIMPLE->audio_auristream_params.syncPktTypes, NULL);
 			}
 		}
 	}
@@ -759,7 +762,7 @@ int AgInit(Task task)
 
 	read_config();
 
-	AghfpInit(&SIMPLE->task, aghfp_handsfree_16_profile, aghfp_incoming_call_reject | aghfp_inband_ring);
+	AghfpInit(&SIMPLE->task, aghfp_handsfree_16_profile, 0);
 	return 0; 
 }
 

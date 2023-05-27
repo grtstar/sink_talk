@@ -61,7 +61,7 @@ bool mtConnect(bdaddr *bd_addr)
     MT_DEBUG_ADDR((*bd_addr));
     if (RouteTableIsNotSaved(&mt->route_table) || RouteTableIsContain(&mt->route_table, bd_addr))
     {
-        if (mt->mt_device[MT_RIGHT].state <= MT_L2CAP_Connected)
+        if (mt->mt_device[MT_RIGHT].state < MT_L2CAP_WaitConnect)
         {
             mt->mt_device[MT_RIGHT].state = MT_L2CAP_Disconnected;
             BdaddrSetZero(&mt->mt_device[MT_RIGHT].bt_addr);
@@ -69,7 +69,7 @@ bool mtConnect(bdaddr *bd_addr)
             mt->mt_device[MT_RIGHT].bt_addr = *bd_addr;
             mt->mt_device[MT_RIGHT].state = MT_L2CAP_Connecting;
         }
-        else if (mt->mt_device[MT_LEFT].state <= MT_L2CAP_Connected)
+        else if (mt->mt_device[MT_LEFT].state < MT_L2CAP_WaitConnect)
         {
             mt->mt_device[MT_LEFT].state = MT_L2CAP_Disconnected;
             BdaddrSetZero(&mt->mt_device[MT_LEFT].bt_addr);
@@ -101,7 +101,7 @@ bool handleMTL2capConnectIndFriendMode(CL_L2CAP_CONNECT_IND_T *msg)
 
     if (mt->mt_mode == FREIEND_MODE)
     {
-        if(!RouteTableIsContain(&mt->route_table, &msg->bd_addr))
+        if (!RouteTableIsContain(&mt->route_table, &msg->bd_addr))
         {
             MT_DEBUG(("MT: not in table\n"));
             return FALSE;
@@ -118,8 +118,8 @@ bool handleMTL2capConnectIndFriendMode(CL_L2CAP_CONNECT_IND_T *msg)
             return FALSE;
         }
     }
-
-    if (mt->mt_device[MT_LEFT].state == MT_ST_WAITING_CONNECT && BdaddrIsSame(&msg->bd_addr, &mt->mt_device[MT_LEFT].bt_addr))
+#if 0
+    if (mt->mt_device[MT_LEFT].state == MT_L2CAP_WaitConnect && BdaddrIsSame(&msg->bd_addr, &mt->mt_device[MT_LEFT].bt_addr))
     {
         MT_DEBUG(("MT: handleMTL2capConnectIndFriendMode peer is in waiting\n"));
         mt->mt_device[MT_LEFT].state = MT_L2CAP_WaitConnect;
@@ -128,7 +128,7 @@ bool handleMTL2capConnectIndFriendMode(CL_L2CAP_CONNECT_IND_T *msg)
         return TRUE;
     }
 
-    if (mt->mt_device[MT_RIGHT].state == MT_ST_WAITING_CONNECT && BdaddrIsSame(&msg->bd_addr, &mt->mt_device[MT_RIGHT].bt_addr))
+    if (mt->mt_device[MT_RIGHT].state == MT_L2CAP_WaitConnect && BdaddrIsSame(&msg->bd_addr, &mt->mt_device[MT_RIGHT].bt_addr))
     {
         MT_DEBUG(("MT: handleMTL2capConnectIndFriendMode peer is in waiting\n"));
         mt->mt_device[MT_RIGHT].state = MT_L2CAP_WaitConnect;
@@ -136,7 +136,7 @@ bool handleMTL2capConnectIndFriendMode(CL_L2CAP_CONNECT_IND_T *msg)
         mt->mt_type = MT_NODE;
         return TRUE;
     }
-
+#endif
     if (mt->mt_device[MT_LEFT].state == MT_L2CAP_Disconnected || mt->mt_device[MT_LEFT].state >= MT_L2CAP_Disconnecting)
     {
         /* ?????????????? */
@@ -190,6 +190,11 @@ bool handleMTL2capConnectIndFriendMode(CL_L2CAP_CONNECT_IND_T *msg)
                 }
             }
         }
+
+        if(mt->status == MT_ST_CONNECTING)
+        {
+            mt->last_connect_time = VmGetClock();
+        }
     }
     else
     {
@@ -217,24 +222,26 @@ void handleMTL2capConnectCfmFriendMode(CL_L2CAP_CONNECT_CFM_T *msg)
         ConnectionSetLinkSupervisionTimeout(msg->sink, 4000);
         linkPolicyUseMultiTalkSettings(msg->sink);
 
-        MessageSinkTask(msg->sink, &acl_parent_task);
-
         if (msg->status == l2cap_connect_success)
         {
+            BdaddrSetZero(&mt->last_connect_addr);
+
             if (mt->mt_device[MT_LEFT].state == MT_L2CAP_Connecting)
             {
                 mt->mt_device[MT_LEFT].state = MT_L2CAP_Connected;
                 mt->mt_device[MT_LEFT].acl_sink = msg->sink;
+                MessageSinkTask(msg->sink, &acl_parent_task);
 
                 /* 连上后需要检测是否成�如果成环则断开 */
                 mt->status = MT_ST_CHECKLOOP;
                 mt->sco_expend_dev = MT_LEFT;
                 MessageSendLater(mt->app_task, EventSysMultiTalkCheckLoop, NULL, D_SEC(0.5));
             }
-            else
+            else if (mt->mt_device[MT_LEFT].state == MT_L2CAP_WaitConnect)
             {
                 mt->mt_device[MT_LEFT].state = MT_L2CAP_Connected;
                 mt->mt_device[MT_LEFT].acl_sink = msg->sink;
+                MessageSinkTask(msg->sink, &acl_parent_task);
             }
 
             linkPolicyCheckRoles();
@@ -268,24 +275,26 @@ void handleMTL2capConnectCfmFriendMode(CL_L2CAP_CONNECT_CFM_T *msg)
             ConnectionSetLinkSupervisionTimeout(msg->sink, 4000);
             linkPolicyUseMultiTalkSettings(msg->sink);
 
-            MessageSinkTask(msg->sink, &acl_child_task);
+            BdaddrSetZero(&mt->last_connect_addr);
 
             if (mt->mt_device[MT_RIGHT].state == MT_L2CAP_Connecting)
             {
                 mt->mt_device[MT_RIGHT].state = MT_L2CAP_Connected;
                 mt->mt_device[MT_RIGHT].acl_sink = msg->sink;
                 mt->mt_type = MT_NODE;
+                MessageSinkTask(msg->sink, &acl_child_task);
 
                 /* 连上后需要检测是否成�如果成环则断开 */
                 mt->status = MT_ST_CHECKLOOP;
                 mt->sco_expend_dev = MT_RIGHT;
                 MessageSendLater(mt->app_task, EventSysMultiTalkCheckLoop, NULL, D_SEC(0.5));
             }
-            else
+            else if (mt->mt_device[MT_RIGHT].state == MT_L2CAP_WaitConnect)
             {
                 mt->mt_device[MT_RIGHT].state = MT_L2CAP_Connected;
                 mt->mt_device[MT_RIGHT].acl_sink = msg->sink;
                 mt->mt_type = MT_NODE;
+                MessageSinkTask(msg->sink, &acl_child_task);
             }
 
             linkPolicyCheckRoles();
@@ -299,7 +308,12 @@ void handleMTL2capConnectCfmFriendMode(CL_L2CAP_CONNECT_CFM_T *msg)
                 mt->status = MT_ST_SEARCHING;
             }
 
-            if (msg->status == l2cap_connect_error || msg->status ==  l2cap_connect_failed_security) /* 137 */
+            if(msg->status == l2cap_connect_failed_remote_reject)
+            {
+                 mt->last_connect_time = VmGetClock();
+            }
+
+            if (msg->status == l2cap_connect_error || msg->status == l2cap_connect_failed_security) /* 137 */
             {
                 deviceManagerRemoveDevice(&msg->addr);
             }
@@ -604,7 +618,7 @@ void handleMTSynDisconIndFriendMode(CL_DM_SYNC_DISCONNECT_IND_T *msg)
 
 bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
 {
-    if(mt->mt_mode != FREIEND_MODE && mt->mt_mode != FREIEND_MODE_PAIRING)
+    if (mt->mt_mode != FREIEND_MODE && mt->mt_mode != FREIEND_MODE_PAIRING)
     {
         return FALSE;
     }
@@ -718,6 +732,17 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
                     {
                         if (RouteTableIsContain(&mt->route_table, &ind->current_taddr.addr))
                         {
+                           /*  if (BdaddrIsSame(&ind->current_taddr.addr, &mt->last_connect_addr)) */
+                            {
+                                if (VmGetClock() - mt->last_connect_time < D_SEC(5))
+                                {   
+                                     MT_DEBUG(("MT: search %x:%x:%lx, but same as last, delay 5s\n",
+                                              ind->current_taddr.addr.nap,
+                                              ind->current_taddr.addr.uap,
+                                              ind->current_taddr.addr.lap));
+                                    break;
+                                }
+                            }
                             /* 连接比自己地址更大的设  */
                             if (BdaddrCompare(&mt->addr, &ind->current_taddr.addr) == -1 &&
                                 !BdaddrIsSame(&mt->header_addr[0], &ind->current_taddr.addr) &&
@@ -734,29 +759,30 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
                                     mtSendConnectToken(1, TOKEN_HELD);
                                 }
                                 mtConnect(&ind->current_taddr.addr);
+                                mt->last_connect_addr = ind->current_taddr.addr;
                                 mt->status = MT_ST_CONNECTING;
                                 break;
                             }
                             else
                             {
-                                MT_DEBUG(("MT: search %x:%x:%lx", ind->current_taddr.addr.bd_addr.nap,
-                                          ind->current_taddr.addr.bd_addr.uap,
-                                          ind->current_taddr.addr.bd_addr.lap));
+                                MT_DEBUG(("MT: search %x:%x:%lx", ind->current_taddr.addr.nap,
+                                          ind->current_taddr.addr.uap,
+                                          ind->current_taddr.addr.lap));
                                 MT_DEBUG(("but header is [%x:%x:%lx] [%x:%x:%lx]\n",
-                                      mt->header_addr[0].nap,
-                                      mt->header_addr[0].uap,
-                                      mt->header_addr[0].lap,
-                                      mt->header_addr[1].nap,
-                                      mt->header_addr[1].uap,
-                                      mt->header_addr[1].lap));
+                                          mt->header_addr[0].nap,
+                                          mt->header_addr[0].uap,
+                                          mt->header_addr[0].lap,
+                                          mt->header_addr[1].nap,
+                                          mt->header_addr[1].uap,
+                                          mt->header_addr[1].lap));
                             }
                         }
                         else
                         {
                             MT_DEBUG(("MT: search %x:%x:%lx, but not in route table\n",
-                                      ind->current_taddr.addr.bd_addr.nap,
-                                      ind->current_taddr.addr.bd_addr.uap,
-                                      ind->current_taddr.addr.bd_addr.lap));
+                                      ind->current_taddr.addr.nap,
+                                      ind->current_taddr.addr.uap,
+                                      ind->current_taddr.addr.lap));
                         }
                     }
                 }
@@ -781,6 +807,17 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
                     {
                         MT_DEBUG(("MT: right is connected, dont pair\n"));
                         break;
+                    }
+                    if (BdaddrIsSame(&ind->current_taddr.addr, &mt->last_connect_addr))
+                    {
+                        if (VmGetClock() - mt->last_connect_time < D_SEC(5))
+                        {
+                            /* MT_DEBUG(("MT: search %x:%x:%lx, but same as last, delay 5s\n",
+                                      ind->current_taddr.addr.nap,
+                                      ind->current_taddr.addr.uap,
+                                      ind->current_taddr.addr.lap)); */
+                            break;
+                        }
                     }
                     {
                         /* 连接比自己地址更大的设  */
@@ -808,14 +845,16 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
                                 mtSendConnectToken(1, TOKEN_HELD);
                             }
                             mtConnect(&ind->current_taddr.addr);
+                            mt->last_connect_time = VmGetClock();
+                            mt->last_connect_addr = ind->current_taddr.addr;
                             mt->status = MT_ST_CONNECTING;
                             break;
                         }
                         else
                         {
                             MT_DEBUG(("MT: search %x:%x:%lx", ind->current_taddr.addr.nap,
-                                          ind->current_taddr.addr.uap,
-                                          ind->current_taddr.addr.lap));
+                                      ind->current_taddr.addr.uap,
+                                      ind->current_taddr.addr.lap));
                             MT_DEBUG(("but header is [%x:%x:%lx] [%x:%x:%lx]\n",
                                       mt->header_addr[0].nap,
                                       mt->header_addr[0].uap,
@@ -981,11 +1020,11 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
         {
             mt->total_connected = 1;
         }
-        if(mt->mt_mode == FREIEND_MODE)
+        if (mt->mt_mode == FREIEND_MODE)
         {
             AudioPlay(AP_MULTI_TALK_1_PERSON + mt->total_connected - 1, TRUE);
         }
-        if(mt->mt_mode == FREIEND_MODE_PAIRING)
+        if (mt->mt_mode == FREIEND_MODE_PAIRING)
         {
             AudioPlay(AP_MULTI_TALK_1_PAIRED + mt->total_connected - 1, TRUE);
         }

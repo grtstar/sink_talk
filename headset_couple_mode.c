@@ -629,6 +629,10 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
                 MessageSendLater(mt->app_task, EventSysMultiTalkCoupleModeReconnect, NULL, D_SEC(5));
             }
         }
+        else
+        {
+            MessageCancelAll(task, EventSysMultiTalkCoupleModeReconnect);
+        }
     }
 
     break;

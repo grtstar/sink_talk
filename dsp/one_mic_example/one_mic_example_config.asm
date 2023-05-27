@@ -73,6 +73,7 @@
 // *****************************************************************************
 #include "one_mic_example.h"
 #include "stream_copy.h"
+#include "stream_mix.h"
 
 #include "frame_sync_buffer.h"
 #include "cbuffer.h"
@@ -81,6 +82,10 @@
 .MODULE $M.system_config.data;
    .DATASEGMENT DM;
 
+   .VAR left_mantissa = 0.5;
+   .VAR right_mantissa = 0.5;
+   .VAR exponent = 1;
+   
 // -----------------------------------------------------------------------------
 // DATA OBJECTS USED WITH PROCESSING MODULES
 //
@@ -88,20 +93,29 @@
 // were to be added to the system.
 
 // Data object used with $stream_copy.pass_thru function
-   .VAR snd_pass_thru_obj[$stream_mix_copy.STRUC_SIZE] =
+   .VAR snd_pass_thru_obj[$stream_mix.STRUC_SIZE] =
     &snd_stream_map_adc,
     &rcv_stream_map_sco2_in,
-    &snd_stream_map_sco_out;
+    &snd_stream_map_sco_out,
+    &left_mantissa,
+    &right_mantissa,
+    &exponent;
 
-   .VAR snd_pass_thru_obj2[$stream_mix_copy.STRUC_SIZE] =
+   .VAR snd_pass_thru_obj2[$stream_mix.STRUC_SIZE] =
     &snd_stream_map_adc,
     &rcv_stream_map_sco_in,
-    &snd_stream_map_sco2_out;
+    &snd_stream_map_sco2_out,
+    &left_mantissa,
+    &right_mantissa,
+    &exponent;
 
-   .VAR rcv_pass_thru_obj[$stream_mix_copy.STRUC_SIZE] =
+   .VAR rcv_pass_thru_obj[$stream_mix.STRUC_SIZE] =
     &rcv_stream_map_sco_in,
     &rcv_stream_map_sco2_in,
-    &rcv_stream_map_dac;
+    &rcv_stream_map_dac,
+    &left_mantissa,
+    &right_mantissa,
+    &exponent;
 
 // -----------------------------------------------------------------------------
 
@@ -169,6 +183,7 @@
       $frame_sync.update_output_streams_ind,    // Update Function
       0 ...;
 
+
 // sco_in stream map (incoming Bluetooth signal):
 // The pass_thru_obj uses the sco_in stream to populate its SCO_IN input fields.
 // The aux_mix_dm1 uses the sco_in stream to populate its input and output
@@ -183,6 +198,7 @@
       $frame_sync.update_input_streams_ind,     // Update Function
       0 ...;
 
+// sco2_in stream map (incoming Bluetooth signal):
    .VAR rcv_stream_map_sco2_in[$framesync_ind.ENTRY_SIZE_FIELD] =
       &$sco2_data.sco_in.cbuffer_struc,          // $framesync_ind.CBUFFER_PTR_FIELD
       0,                                        // $framesync_ind.FRAME_PTR_FIELD
@@ -229,8 +245,6 @@
 // Stream List for Send Processing
 .VAR    snd_process_streams[] =
    &snd_stream_map_adc,
-   &rcv_stream_map_sco_in,
-   &rcv_stream_map_sco2_in,
    &snd_stream_map_sco_out,
    &snd_stream_map_sco2_out,
    0;
@@ -293,15 +307,15 @@
    .VAR snd_funcs[] =
     // Function                        r7                     r8
        $frame_sync.distribute_streams_ind,   &snd_process_streams,      0,
-       $stream_mix_copy,                     &snd_pass_thru_obj,        0,
-       $stream_mix_copy,                     &snd_pass_thru_obj2,       0,
+       $stream_mix,                         &snd_pass_thru_obj,        0,
+       $stream_mix,                         &snd_pass_thru_obj2,        0,
        $frame_sync.update_streams_ind,       &snd_process_streams,      0,
        0;
 
    .VAR rcv_funcs[] =
     // Function                        r7                    r8
        $frame_sync.distribute_streams_ind,   &rcv_process_streams,     0,
-       $stream_mix_copy,                     &rcv_pass_thru_obj,       0,
+       $stream_mix,                          &rcv_pass_thru_obj,       0,
        $frame_sync.update_streams_ind,       &rcv_process_streams,     0,
        0;
 .ENDMODULE;

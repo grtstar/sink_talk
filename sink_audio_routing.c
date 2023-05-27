@@ -1639,7 +1639,7 @@ void audioUpdateAudioActivePio(void)
 }
     else if (!IsAudioBusy())
     { 
-        PioDrivePio(PIO_AUDIO_ACTIVE, FALSE);
+        /* PioDrivePio(PIO_AUDIO_ACTIVE, FALSE); */
     }
 }
 

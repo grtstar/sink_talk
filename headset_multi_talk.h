@@ -173,6 +173,9 @@ typedef struct MTData
     uint8 sco_expend_dev;
     uint8 connect_token;
     uint8 prepare_paring;
+
+    bdaddr last_connect_addr;
+    uint32 last_connect_time;
 } MTData;
 
 #define MULTITALK_FRIEND_PSM 0x0055

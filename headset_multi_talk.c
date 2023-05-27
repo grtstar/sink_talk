@@ -44,6 +44,7 @@
 #include <broadcast_context.h>
 #include <audio_plugin_voice_prompts_variants.h>
 #include <ps.h>
+#include <audio_plugin_voice_variants.h>
 
 #include "headset_multi_talk.h"
 #include "audio_prompt.h"
@@ -614,6 +615,7 @@ void handleMTSynConnCfm(CL_DM_SYNC_CONNECT_CFM_T *msg)
     {
         handleMTSynConnCfmCoupleMode(msg);
     }
+    enableAudioActivePio();
 }
 
 void handleMTSynDisconInd(CL_DM_SYNC_DISCONNECT_IND_T *msg)
@@ -629,6 +631,10 @@ void handleMTSynDisconInd(CL_DM_SYNC_DISCONNECT_IND_T *msg)
     if (mt->mt_mode == COUPLE_MODE || mt->mt_mode == COUPLE_MODE_PAIRING)
     {
         handleMTSynDisconIndCoupleMode(msg);
+    }
+    if(mtGetConnectDevices() == 0)
+    {
+        disableAudioActivePio();
     }
 }
 
@@ -1172,6 +1178,7 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
 bool mtVoicePopulateConnectParameters(audio_connect_parameters *connect_parameters)
 {
     Sink audio_sink = NULL;
+    bool two_sco = FALSE;
     if (mt->mt_device[MT_LEFT].audio_sink != NULL)
     {
         audio_sink = mt->mt_device[MT_LEFT].audio_sink;
@@ -1187,6 +1194,7 @@ bool mtVoicePopulateConnectParameters(audio_connect_parameters *connect_paramete
     {
         mt->plugin_params.usb_params.usb_sink = mt->mt_device[MT_LEFT].audio_sink;
         audio_sink = mt->mt_device[MT_RIGHT].audio_sink;
+        two_sco = TRUE;
         MT_DEBUG(("MT: PopulateConnectParameters Tow Sink\n"));
     }
     else
@@ -1194,9 +1202,10 @@ bool mtVoicePopulateConnectParameters(audio_connect_parameters *connect_paramete
         mt->plugin_params.usb_params.usb_sink = NULL;
     }
     if (audio_sink != NULL)
-    {
+    { 
         connect_parameters->app_task = mt->app_task;
-        connect_parameters->audio_plugin = CVSD1MIC_EXAMPLE;
+        
+        connect_parameters->audio_plugin = two_sco? CVSD1MIC_EXAMPLE : AudioPluginVoiceVariantsGetHfpPlugin(hfp_wbs_codec_mask_cvsd, sinkHfpDataGetAudioPlugin()); 
         connect_parameters->audio_sink = audio_sink;
         connect_parameters->features = sinkAudioGetPluginFeatures();
         connect_parameters->mode = AUDIO_MODE_CONNECTED;
@@ -1212,7 +1221,7 @@ bool mtVoicePopulateConnectParameters(audio_connect_parameters *connect_paramete
         else
         {
             connect_parameters->volume = sinkHfpDataGetDefaultVolume();
-        }
+        } 
         return TRUE;
     }
     return FALSE;

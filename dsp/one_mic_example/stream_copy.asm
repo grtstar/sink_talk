@@ -79,14 +79,12 @@ $stream_copy:
    rts;
 .ENDMODULE;
 
-
-.MODULE $M.stream_mix_copy;
+.MODULE $M.stream_dual_copy;
  .codesegment PM;
-$stream_mix_copy:
-
+$stream_dual_copy:
    push rLink;  
    // Get Input Buffer
-   r0  = M[r7 + $stream_mix_copy.INPUT_PTR_BUFFER_FIELD];
+   r0  = M[r7 + $stream_dual_copy.INPUT_PTR_BUFFER_FIELD];
 #ifdef BASE_REGISTER_MODE  
    call $frmbuffer.get_buffer_with_start_address;
    push r2;
@@ -100,29 +98,14 @@ $stream_mix_copy:
    // r3 = frame size
    I0  = r0;
    L0  = r1;
-         
-   // Get Input Buffer2
-   r0  = M[r7 + $stream_mix_copy.INPUT_PTR_BUFFER_FIELD2];
-#ifdef BASE_REGISTER_MODE  
-   call $frmbuffer.get_buffer_with_start_address;
-   push r2;
-   pop  B0;
-#else
-   call $frmbuffer.get_buffer;
-#endif
-   // r0 = buf ptr
-   // r1 = circ buf length
-   // r2 = buffer base address <base variant only>
-   // r3 = frame size
-   I1  = r0;
-   L1  = r1;
-      
+   
    // Use input frame size
-   r10 = r3;   // loop count
-   // Update output frame size from input
-   r0 = M[r7 + $stream_mix_copy.OUTPUT_PTR_BUFFER_FIELD];
-   call $frmbuffer.set_frame_size;
+   r10 = r3;
 
+   // Update output frame size from input
+   r0 = M[r7 + $stream_dual_copy.OUTPUT_PTR_BUFFER_FIELD];
+   call $frmbuffer.set_frame_size;
+   
    // Get output buffer
 #ifdef BASE_REGISTER_MODE  
    call $frmbuffer.get_buffer_with_start_address;
@@ -133,22 +116,35 @@ $stream_mix_copy:
 #endif
    I4 = r0;
    L4 = r1;
+
+   r0  = M[r7 + $stream_dual_copy.OUTPUT_PTR_BUFFER_FIELD2];
+   call $frmbuffer.set_frame_size;
+   // Get output buffer
+#ifdef BASE_REGISTER_MODE  
+   call $frmbuffer.get_buffer_with_start_address;
+   push r2;
+   pop  B4;
+#else
+   call $frmbuffer.get_buffer;
+#endif
+   I5 = r0;
+   L5 = r1;
+
    pop rLink;
    
 
 // INPUT->OUTPUT
-   do loop_passthru2;
-      r1=M[I0,1]; // first input
-      r2=M[I1,1];
-      r0 = r1 + r2;
-      r0 = r0 * 0.5;
+   r0=M[I0,1]; // first input
+   do loop_passthru;
+      M[I5,1] = r0;
       M[I4,1] = r0;
-   loop_passthru2:
+      r0=M[I0,1]; // first input
+   loop_passthru:
 
 // Clear L registers
    L0 = 0;
-   L1 = 0;
    L4 = 0;
+   L5 = 0;
 #ifdef BASE_REGISTER_MODE  
    push Null;
    B4 = M[SP-1];

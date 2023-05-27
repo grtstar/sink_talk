@@ -35,6 +35,8 @@
         "l2cap_prim.h": "c",
         "headset_uart.h": "c",
         "initializer_list": "c",
-        "headset_multi_pair.h": "c"
+        "headset_multi_pair.h": "c",
+        "csr_cvc_common.h": "c",
+        "csr_cvc_common_plugin.h": "c"
     }
 }
