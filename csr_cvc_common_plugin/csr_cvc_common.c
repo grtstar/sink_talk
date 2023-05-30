@@ -91,7 +91,6 @@ static void pluginConnectForProductionTest(CvcPluginTaskdata * task)
         SourceConfigure(CVC->audio_source,VM_SOURCE_SCO_METADATA_ENABLE,1);
     }
 
-    PRINT(("CVC: csrCvcCommonDspLoadDsp 1\n"));
     csrCvcCommonDspLoadDsp(task);
     sendDspLoadedCvcCommonStateMachineEvent(task);
 }
@@ -253,7 +252,6 @@ void CsrCvcPluginConnect( CvcPluginTaskdata *task,
         SourceConfigure(CVC->audio_source,VM_SOURCE_SCO_METADATA_ENABLE,1);
     }
 
-    PRINT(("CVC: csrCvcCommonDspLoadDsp 2\n"));
     csrCvcCommonDspLoadDsp(task);
     sendDspLoadedCvcCommonStateMachineEvent(task);
 }

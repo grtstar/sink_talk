@@ -359,13 +359,15 @@ static void profile_handler(Task task, MessageId id, Message message)
 	{
 		AGHFP_SLC_CONNECT_CFM_T *msg = (AGHFP_SLC_CONNECT_CFM_T *)message;
 		AG_DEBUG(("AGHFP_SLC_CONNECT_CFM status = %d\n", msg->status));
-		if (msg->status == aghfp_success)
+		if (msg->status == aghfp_connect_success)
 		{
 			SIMPLE->connected = TRUE;
 
 			SIMPLE->rfcomm_sink = msg->rfcomm_sink;
 
 			MessageSend(task, EventSysAGAudioConnect, NULL);
+
+			enableAudioActivePio();
 		}
 		{
 			uint8 *state = (uint8*)malloc(1);
@@ -410,7 +412,7 @@ static void profile_handler(Task task, MessageId id, Message message)
 			{
 			case (audio_codec_cvsd):
 				/* Not implemented yet. Revert to CVSD with no DSP */
-				lPlugin = (TaskData *)&csr_cvsd_no_dsp_plugin;
+				lPlugin = (TaskData *)&csr_cvsd_cvc_1mic_headset_plugin;
 				AG_DEBUG(("CVSD\n"));
 				break;
 			case (audio_codec_auristream_2_bit_8k):
@@ -480,6 +482,8 @@ static void profile_handler(Task task, MessageId id, Message message)
 			uint8 *state = (uint8*)malloc(1);
 			*state = msg->status;
 			MessageSend(SIMPLE->app_task, EventSysAGSlcDisconnectInd, (void*)state);
+
+			disableAudioActivePio();
 		}
 	}
 	break;
@@ -510,13 +514,17 @@ static void profile_handler(Task task, MessageId id, Message message)
 	{
 		AGHFP_SLC_CONNECT_IND_T *msg = (AGHFP_SLC_CONNECT_IND_T *)message;
 		AG_DEBUG(("AGHFP_SLC_CONNECT_IND\n"));
-		if(mt != NULL && (mt->mt_mode == COUPLE_MODE || mt->mt_mode == COUPLE_MODE_PAIRING))
+		if(mt != NULL && (mt->mt_mode == COUPLE_MODE || mt->mt_mode == COUPLE_MODE_PAIRING || mt->mt_mode == CLOSE_MODE))
 		{
 			AghfpSlcConnectResponse(SIMPLE->aghfp, TRUE);
+			if(mt->mt_mode == CLOSE_MODE)
+			{
+				mt->mt_mode = COUPLE_MODE;
+			}
 		}
 		else
 		{
-			AG_DEBUG(("AG: not in couple mode, reject %x:%x:%lx\n", msg->bd_addr.nap, msg->bd_addr.uap, msg->bd_addr.lap));
+			AG_DEBUG(("AG: not in couple or close mode, reject %x:%x:%lx\n", msg->bd_addr.nap, msg->bd_addr.uap, msg->bd_addr.lap));
 			if(msg->aghfp == SIMPLE->aghfp){}
 			AghfpSlcConnectResponse(SIMPLE->aghfp, FALSE);
 		}
@@ -530,12 +538,12 @@ static void profile_handler(Task task, MessageId id, Message message)
 		if (SIMPLE->audio_codec == audio_codec_cvsd)
 		{
 			AG_DEBUG(("AUDIOPARAMS >ESCO: [%x] [%x]\n", SIMPLE->audio_cvsd_params.syncPktTypes, SIMPLE->audio_cvsd_params.hfpAudioParams.max_latency));
-			AghfpAudioConnectResponse(msg->aghfp, TRUE, SIMPLE->audio_cvsd_params.syncPktTypes, NULL);
+			AghfpAudioConnectResponse(msg->aghfp, TRUE, SIMPLE->audio_cvsd_params.syncPktTypes, &SIMPLE->audio_cvsd_params.hfpAudioParams);
 		}
 		else
 		{
 			AG_DEBUG(("AUDIOPARAMS >ESCO: [%x] [%x]\n", SIMPLE->audio_auristream_params.syncPktTypes, SIMPLE->audio_auristream_params.hfpAudioParams.max_latency));
-			AghfpAudioConnectResponse(msg->aghfp, TRUE, SIMPLE->audio_auristream_params.syncPktTypes, NULL);
+			AghfpAudioConnectResponse(msg->aghfp, TRUE, SIMPLE->audio_auristream_params.syncPktTypes, &SIMPLE->audio_auristream_params.hfpAudioParams);
 		}
 	}
 	break;
@@ -662,6 +670,11 @@ static void profile_handler(Task task, MessageId id, Message message)
 		}
 	}
 	break;
+	case AGHFP_CALL_WAITING_SETUP_IND:
+	{
+		AG_DEBUG(("AGHFP_CALL_WAITING_SETUP_IND:\n"));
+	}
+	break;
 	case AGHFP_INDICATOR_EVENTS_REPORTING_IND:
 		AG_DEBUG(("AGHFP_INDICATOR_EVENTS_REPORTING_IND: mode[%d] ind[%d]\n",
 			   ((AGHFP_INDICATOR_EVENTS_REPORTING_IND_T *)message)->mode,
@@ -709,12 +722,12 @@ static void profile_handler(Task task, MessageId id, Message message)
 			if (SIMPLE->audio_codec == audio_codec_cvsd)
 			{
 				AG_DEBUG(("AUDIOPARAMS CVSD >SCO: [%x] [%x]\n", SIMPLE->audio_cvsd_params.syncPktTypes, SIMPLE->audio_cvsd_params.hfpAudioParams.max_latency));
-				AghfpAudioConnect(SIMPLE->aghfp, SIMPLE->audio_cvsd_params.syncPktTypes, NULL);
+				AghfpAudioConnect(SIMPLE->aghfp, SIMPLE->audio_cvsd_params.syncPktTypes, &SIMPLE->audio_cvsd_params.hfpAudioParams);
 			}
 			else
 			{
 				AG_DEBUG(("AUDIOPARAMS AURISTREAM >ESCO: [%x] [%x]\n", SIMPLE->audio_auristream_params.syncPktTypes, SIMPLE->audio_auristream_params.hfpAudioParams.max_latency));
-				AghfpAudioConnect(SIMPLE->aghfp, SIMPLE->audio_auristream_params.syncPktTypes, NULL);
+				AghfpAudioConnect(SIMPLE->aghfp, SIMPLE->audio_auristream_params.syncPktTypes, &SIMPLE->audio_auristream_params.hfpAudioParams);
 			}
 		}
 	}
@@ -796,7 +809,6 @@ bool agVoicePopulateConnectParameters(audio_connect_parameters *connect_paramete
 	connect_parameters->route = AUDIO_ROUTE_INTERNAL;
 	connect_parameters->sink_type = SIMPLE->link_type;
 	connect_parameters->volume = sinkHfpDataGetDefaultVolume();
-
 	return TRUE;
 }
 

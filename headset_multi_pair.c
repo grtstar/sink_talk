@@ -10,7 +10,7 @@ inquiry_session inqSesson = inquiry_session_normal;
 
 bool mtIsInquirySession(void)
 {
-    return inqSesson != inquiry_session_normal;
+    return inqSesson == inquiry_session_multi_talk;
 }
 
 bool mtInquiryPair(inquiry_session session, bool remind)
