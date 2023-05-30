@@ -1204,7 +1204,10 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
                 {
                     return;
                 }
-                UartSendTone(id);
+                if(lIndicateEvent)
+                {
+                    UartSendTone(id);
+                }                
                 return;
             }
 

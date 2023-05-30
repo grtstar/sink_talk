@@ -28,7 +28,7 @@ DESCRIPTION
  /*end of DO_NOT_DOCUMENT*/
 
     /*The global debug enable*/ 
-    #define DEBUG_PRINT_ENABLED
+    #define DEBUG_PRINT_ENABLEDx
 
 #define DEBUG_VM_HATSx
 

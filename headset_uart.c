@@ -292,6 +292,8 @@ void UartSendTone(uint16 event)
     {
     case EventUsrMainOutVolumeDown:
     case EventUsrMainOutVolumeUp:
+    case EventSysVolumeMax:
+    case EventSysVolumeMin:
     {
         uint8 d[7] = {0xAA, 0x55, 3, UTYPE_TONE};
         d[4] = event >> 8;
