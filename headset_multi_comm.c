@@ -23,6 +23,7 @@
 #include "sink_devicemanager.h"
 #include "sink_device_id.h"
 #include "sink_events.h"
+#define ENABLE_MT_DEBUG
 #include "sink_debug.h"
 #include "sink_audio_prompts.h"
 #include "sink_statemanager.h"
@@ -57,7 +58,7 @@ bool mtSend(int ch, uint8 *data, int len)
 bool mtBroadcastHeaderAddr1(int ch, uint8 count, bdaddr *addr)
 {
     uint8 d[9] = {COMM_HEADER_ADDR1};
-    MT_DEBUG(("MT: mtBroadcastHeaderAddr1 to %d\n", ch));
+    MT_DEBUG(("MT: mtBroadcastHeaderAddr1 [%x:%x:%lx] to %d\n", addr->nap, addr->uap, addr->lap, ch));
     d[1] = count;
     BdaddrToArray(addr, &d[2]);
     return mtSend(ch, d, sizeof(d));
@@ -66,7 +67,7 @@ bool mtBroadcastHeaderAddr1(int ch, uint8 count, bdaddr *addr)
 bool mtBroadcastHeaderAddr2(int ch, uint8 count, bdaddr *addr)
 {
     uint8 d[9] = {COMM_HEADER_ADDR2};
-    MT_DEBUG(("MT: mtBroadcastHeaderAddr2 to %d\n", ch));
+    MT_DEBUG(("MT: mtBroadcastHeaderAddr2 [%x:%x:%lx] to %d\n", addr->nap, addr->uap, addr->lap, ch));
     d[1] = count;
     BdaddrToArray(addr, &d[2]);
     return mtSend(ch, d, sizeof(d));
@@ -75,7 +76,7 @@ bool mtBroadcastHeaderAddr2(int ch, uint8 count, bdaddr *addr)
 bool mtSendConnectToken(int ch, int token_action)
 {
     uint8 d[2] = {COMM_CONNECT_TOKEN};
-    MT_DEBUG(("MT: SendConnectToken to %d\n", ch));
+    MT_DEBUG(("MT: SendConnectToken to %d %d\n", ch, token_action));
     d[1] = token_action;
     return mtSend(ch, d, sizeof(d));
 }
@@ -143,11 +144,16 @@ void ProcessData(int ch, const uint8 *data, int size)
     }
     break;
     case COMM_HEADER_ADDR1:
-        mt->header_addr[0] = ArrayToBdaddr(&data[2]);
-        if (!mtBroadcastHeaderAddr1(!ch, data[1] + 1, &mt->header_addr[0]))
+        
+        if(mt->status == MT_ST_NOLOOP)
         {
-            mt->header_addr[1] = mt->addr;
-            mtBroadcastHeaderAddr2(ch, data[1] + 1, &mt->header_addr[1]);
+            mt->header_addr[1] = ArrayToBdaddr(&data[2]);
+            MT_DEBUG(("HEADER1 total:%d\n", data[1] + 1));
+            mt->connect_token = TOKEN_IDLE;
+            mt->status = MT_ST_CONNECTING;
+            mt->mt_device[mt->sco_expend_dev].state = MT_SYN_Connecting;
+            mtScoConnect(mt->mt_device[mt->sco_expend_dev].acl_sink);
+            MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoopTimeout);
             if (mt->mt_mode == NEARBY_MODE)
             {
                 mt->nearby_connected = data[1] + 1;
@@ -156,16 +162,30 @@ void ProcessData(int ch, const uint8 *data, int size)
             {
                 mt->total_connected = data[1] + 1;
             }
-            MT_DEBUG(("HEADER1 total:%d\n", data[1] + 1));
-            mt->connect_token = TOKEN_IDLE;
-            if (mt->status == MT_ST_CHECKLOOP)
+            if(BdaddrCompare(&mt->addr, &mt->header_addr[1]) == 1)
             {
-                mt->status = MT_ST_CONNECTING;
-                mtScoConnect(mt->mt_device[mt->sco_expend_dev].acl_sink);
-            }
-            else
-            {
+                mtBroadcastHeaderAddr2(ch, data[1] + 1, &mt->header_addr[1]);
                 MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
+            }
+        }
+        else
+        {
+            mt->header_addr[0] = ArrayToBdaddr(&data[2]);
+            if (!mtBroadcastHeaderAddr1(!ch, data[1] + 1, &mt->header_addr[0]))
+            {
+                mt->header_addr[1] = mt->addr;
+                mtBroadcastHeaderAddr2(ch, data[1] + 1, &mt->header_addr[1]);
+                MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
+                if (mt->mt_mode == NEARBY_MODE)
+                {
+                    mt->nearby_connected = data[1] + 1;
+                }
+                else
+                {
+                    mt->total_connected = data[1] + 1;
+                }
+                mt->connect_token = TOKEN_IDLE;
+                MT_DEBUG(("HEADER1 total:%d\n", data[1] + 1));
             }
         }
         break;
@@ -173,7 +193,6 @@ void ProcessData(int ch, const uint8 *data, int size)
     {
         mt->header_addr[1] = ArrayToBdaddr(&data[2]);
         mtBroadcastHeaderAddr2(!ch, data[1], &mt->header_addr[1]);
-        mt->connect_token = TOKEN_IDLE;
         if (mt->mt_mode == NEARBY_MODE)
         {
             mt->nearby_connected = data[1];
@@ -183,37 +202,39 @@ void ProcessData(int ch, const uint8 *data, int size)
             mt->total_connected = data[1];
         }
         MT_DEBUG(("HEADER2 total:%d\n", data[1]));
-        if (mt->status == MT_ST_CHECKLOOP)
+        mt->connect_token = TOKEN_IDLE;
+        if (mt->status == MT_ST_NOLOOP || mt->status == MT_ST_CHECKLOOP)
         {
             mt->status = MT_ST_CONNECTING;
+            mt->mt_device[mt->sco_expend_dev].state = MT_SYN_Connecting;
             mtScoConnect(mt->mt_device[mt->sco_expend_dev].acl_sink);
-        }
-        else
-        {
-            MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
-        }
+            MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoopTimeout);
+        }        
+        MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
     }
     break;
     case COMM_CONNECT_TOKEN:
         if (!mtSendConnectToken(!ch, data[1]))
         {
-            if (data[1] == TOKEN_HELD)
+            if(mt->status != MT_ST_CONNECTING || (mt->status == MT_ST_CONNECTING && BdaddrCompare(&mt->addr, &mt->mt_device[ch].bt_addr) == -1))
             {
-                mt->connect_token = TOKEN_WAITTING;
+                if (data[1] == TOKEN_HELD)
+                {
+                    mt->connect_token = TOKEN_WAITTING;
+                }
             }
             if (data[1] == TOKEN_RELEASE)
             {
                 mt->connect_token = TOKEN_IDLE;
             }
         }
-
         break;
     case COMM_CHECK_LOOP:
-        if (mt->status == MT_ST_CHECKLOOP)
+        if (mt->status == MT_ST_CHECKLOOP && ch == !mt->sco_expend_dev)
         {
             MT_DEBUG(("MT: loop disconnect\n"));
             mtACLDisconnect(!ch);
-            mt->status = MT_ST_SEARCHING;
+            MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoopTimeout);
             break;
         }
         mtSendAck(ch, COMM_CHECK_LOOP);

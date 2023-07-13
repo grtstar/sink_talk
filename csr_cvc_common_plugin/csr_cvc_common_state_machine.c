@@ -121,6 +121,7 @@ static void handleEventDspReadyForConfiguration(cvc_event_t* event)
 {
     Task cvc_task = event->ready_for_configuration.task;
     csrCvcCommonConnectAudio((CvcPluginTaskdata*)cvc_task);
+    
     SetCurrentDspStatus(DSP_LOADED_IDLE);
     cvcSetState(cvc_state_loaded_idle);
 }

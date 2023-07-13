@@ -63,6 +63,7 @@ ahi_application_mode_t currentAppMode;
 void sinkAhiEarlyInit(void)
 {
     currentAppMode = getAppModeFromPsKey();
+    /*currentAppMode = ahi_app_mode_configuration;*/
 }
 
 

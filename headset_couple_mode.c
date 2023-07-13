@@ -23,6 +23,7 @@
 #include "sink_devicemanager.h"
 #include "sink_device_id.h"
 #include "sink_events.h"
+#define ENABLE_MT_DEBUG
 #include "sink_debug.h"
 #include "sink_audio_prompts.h"
 #include "sink_statemanager.h"
@@ -45,6 +46,7 @@
 #include <ps.h>
 
 #include "headset_multi_talk.h"
+#include "headset_multi_pair.h"
 #include "audio_prompt.h"
 #include "csr_common_example_plugin.h"
 #include "headset_ag.h"
@@ -137,7 +139,7 @@ bool handleMTL2capConnectIndCoupleMode(CL_L2CAP_CONNECT_IND_T *msg)
                     mt->mt_type = MT_NODE;
                     return TRUE;
                 }
-                else if(mt->mt_mode == COUPLE_MODE)
+                else if(mt->mt_mode == COUPLE_MODE || mt->mt_mode == CLOSE_MODE)
                 {
                     if(BdaddrIsSame(&msg->bd_addr, &mt->couple_addr))
                     {
@@ -145,6 +147,7 @@ bool handleMTL2capConnectIndCoupleMode(CL_L2CAP_CONNECT_IND_T *msg)
                         mt->mt_device[MT_LEFT].state = MT_L2CAP_Connecting;
                         mt->mt_device[MT_LEFT].bt_addr = msg->bd_addr;
                         mt->mt_type = MT_NODE;
+                        mt->mt_mode = COUPLE_MODE;
                         return TRUE;
                     }
                     else
@@ -163,7 +166,54 @@ void handleMTL2capConnectCfmCoupleMode(CL_L2CAP_CONNECT_CFM_T *msg)
 {
     MT_DEBUG(("MT: handleMTL2capConnectCfmCoupleMode: addr=%x:%x:%lx, status=%d\n",
               msg->addr.nap, msg->addr.uap, msg->addr.lap, msg->status));
-    if (BdaddrIsSame(&msg->addr, &mt->mt_device[MT_LEFT].bt_addr))
+    
+    if (BdaddrIsSame(&msg->addr, &mt->mt_device[MT_RIGHT].bt_addr))
+    {
+        MT_DEBUG(("MT: Child\n"));
+        if (msg->status == l2cap_connect_success)
+        {
+            mt->mt_device[MT_RIGHT].state = MT_L2CAP_Connected;
+            mt->mt_device[MT_RIGHT].acl_sink = msg->sink;
+            mt->mt_type = MT_NODE;
+
+            ConnectionSetLinkSupervisionTimeout(msg->sink, 4000);
+            linkPolicyUseMultiTalkSettings(msg->sink);
+
+            MessageSinkTask(msg->sink, &acl_child_task);
+
+            linkPolicyCheckRoles();
+            mt->mt_device[MT_RIGHT].state = MT_SYN_Connecting;
+            mtScoConnect(msg->sink);
+        }
+        else if (msg->status >= l2cap_connect_failed)
+        {
+            BdaddrSetZero(&mt->mt_device[MT_RIGHT].bt_addr);
+
+            if (msg->status == l2cap_connect_error || msg->status == l2cap_connect_failed_security) /* 137 */
+            {
+                if(mt->mt_mode == COUPLE_MODE_PAIRING)
+                {
+                    deviceManagerRemoveDevice(&msg->addr);
+                }
+            }
+            if(mt->mt_mode == COUPLE_MODE_PAIRING)
+            {
+                mt->status = MT_ST_PARING;
+            }
+            else 
+            {
+                if (mt->status == MT_ST_CONNECTED  || mt->status == MT_ST_CONNECTING)
+                {
+                    mt->status = MT_ST_SEARCHING;
+                    if(mt->couple_reconnect_retry-- > 0)
+                    {
+                        MessageSendLater(mt->app_task, EventSysMultiTalkCoupleModeReconnect, NULL, 500);
+                    }
+                }
+            }
+        }
+    }
+    else if (BdaddrIsSame(&msg->addr, &mt->mt_device[MT_LEFT].bt_addr))
     {
         MT_DEBUG(("MT: Parent\n"));
         if (msg->status == l2cap_connect_success)
@@ -179,49 +229,7 @@ void handleMTL2capConnectCfmCoupleMode(CL_L2CAP_CONNECT_CFM_T *msg)
             linkPolicyCheckRoles();
         }
     }
-    else if (BdaddrIsSame(&msg->addr, &mt->mt_device[MT_RIGHT].bt_addr))
-    {
-        MT_DEBUG(("MT: Child\n"));
-        if (msg->status == l2cap_connect_success)
-        {
-            mt->mt_device[MT_RIGHT].state = MT_L2CAP_Connected;
-            mt->mt_device[MT_RIGHT].acl_sink = msg->sink;
-            mt->mt_type = MT_NODE;
 
-            ConnectionSetLinkSupervisionTimeout(msg->sink, 4000);
-            linkPolicyUseMultiTalkSettings(msg->sink);
-
-            MessageSinkTask(msg->sink, &acl_child_task);
-
-            linkPolicyCheckRoles();
-
-            mtScoConnect(msg->sink);
-        }
-        else if (msg->status >= l2cap_connect_failed)
-        {
-            BdaddrSetZero(&mt->mt_device[MT_RIGHT].bt_addr);
-
-            if (msg->status == l2cap_connect_error || msg->status == l2cap_connect_failed_security) /* 137 */
-            {
-                deviceManagerRemoveDevice(&msg->addr);
-            }
-            if (mt->status == MT_ST_CONNECTED || mt->status == MT_ST_RECONNECTING)
-            {
-                MessageSendLater(mt->app_task, EventSysMultiTalkCoupleModeReconnect, NULL, D_SEC(3));
-            }
-            if(mt->mt_mode == COUPLE_MODE_PAIRING)
-            {
-                if (mt->status == MT_ST_CONNECTING)
-                {
-                    mt->status = MT_ST_PARING;
-                }
-                else
-                {
-                    MessageSendLater(mt->app_task, EventSysMultiTalkCoupleModeReconnect, NULL, D_SEC(3));
-                }
-            }
-        }
-    }
 }
 
 void handleMTL2capDisconIndCoupleMode(CL_L2CAP_DISCONNECT_IND_T *msg)
@@ -234,12 +242,12 @@ void handleMTL2capDisconIndCoupleMode(CL_L2CAP_DISCONNECT_IND_T *msg)
         mt->mt_device[MT_LEFT].state = MT_L2CAP_Disconnected;
         mt->mt_device[MT_LEFT].acl_sink = NULL;
         stateManagerEnterConnectableState(FALSE);
-        stateManagerUpdateState();
 
         if (msg->status == l2cap_disconnect_successful)
         {
             ConnectionL2capDisconnectResponse(msg->identifier, msg->sink);
         }
+        mt->status = MT_ST_LINKLOSS;
         MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
     }
     if (msg->sink == mt->mt_device[MT_RIGHT].acl_sink)
@@ -247,12 +255,12 @@ void handleMTL2capDisconIndCoupleMode(CL_L2CAP_DISCONNECT_IND_T *msg)
         MT_DEBUG(("MT: handleMTL2capDisconIndCoupleMode: child\n"));
         mt->mt_device[MT_RIGHT].state = MT_L2CAP_Disconnected;
         mt->mt_device[MT_RIGHT].acl_sink = NULL;
-        stateManagerUpdateState();
 
         if (msg->status == l2cap_disconnect_successful)
         {
             ConnectionL2capDisconnectResponse(msg->identifier, msg->sink);
         }
+        mt->status = MT_ST_LINKLOSS;
         MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
     }
 }
@@ -313,6 +321,7 @@ void handleMTSynConnCfmCoupleMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
 
             sinkInquirySetInquiryState(inquiry_complete);
             inquiryStop();
+            mtInquiryStop();
 
             mt->status = MT_ST_CONNECTED;
             stateManagerEnterConnectedState();
@@ -356,7 +365,9 @@ void handleMTSynConnCfmCoupleMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
 
             sinkInquirySetInquiryState(inquiry_complete);
             inquiryStop();
+            mtInquiryStop();
 
+            mt->status = MT_ST_CONNECTED;
             stateManagerEnterConnectedState();
             stateManagerUpdateState();
             MessageCancelAll(mt->app_task, EventSysRssiPairReminder);
@@ -381,7 +392,7 @@ void handleMTSynConnCfmCoupleMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
             break;
         case hci_error_rej_by_remote_no_res:
             /* todo : delay to connect */
-            mtScoConnect(mt->mt_device[MT_RIGHT].acl_sink);
+            MT_DEBUG(("MT: sync error\n"));
             break;
         default:
             break;
@@ -450,6 +461,8 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
         stateManagerEnterConnectableState(FALSE);
         if (!BdaddrIsZero(&mt->couple_addr))
         {
+            mt->status = MT_ST_CONNECTING;
+            mt->couple_reconnect_retry = 3;
             MessageSendLater(task, EventSysRssiPairReminder, NULL, D_SEC(5));
             MessageSend(task, EventSysMultiTalkCoupleModeReconnect, NULL);
         }
@@ -457,6 +470,7 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
     case EventSysMultiTalkLeaveCoupleMode:
         MessageCancelAll(task, EventSysRssiPairReminder);
         stateManagerEnterConnectableState(FALSE);
+        mtInquiryStop();
         MessageCancelAll(task, EventSysMultiTalkCoupleModeReconnect);
         if (mt->couple_type == COUPLE_MT_WITH_PEER || mt->couple_type == COUPLE_MT_NO_PEER)
         {
@@ -466,9 +480,10 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
             }
             else
             {
-                mtDisconnect();
                 MessageSendLater(task, EventSysMultiTalkLeaveCoupleModeDelay, NULL, D_SEC(1));
             }
+            mtDisconnect();
+
         }
         else
         {
@@ -490,25 +505,26 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
             {
                 MessageSend(task, EventSysMultiTalkCoupleModeLeaved, NULL);
             }
+            mtInquiryStop();
             MessageCancelAll(task, EventSysMultiTalkCoupleModeReconnect);
         }
         break;
     case EventSysMultiTalkCoupleModeReconnect:
         if (mt->couple_type == COUPLE_MT_WITH_PEER || mt->couple_type == COUPLE_MT_NO_PEER)
         {
-            if (BdaddrCompare(&mt->head_addr, &mt->couple_addr) == -1)
+            /* attemp to reconnect close mode peer */
+            if (mt->couple_reconnect_retry > 0)
             {
                 mtConnectCouple(&mt->couple_addr);
-                mt->status = MT_ST_RECONNECTING;
             }
             else
             {
-                mt->status = MT_ST_RECONNECTING;
+                mtInquiryPair(inquiry_session_2talk, FALSE);
+                mt->status = MT_ST_SEARCHING;
             }
         }
         else /* ag */
         {
-            /* deviceManagerRemoveDevice(&mt->couple_addr); */
             AgConnect(&mt->couple_addr);
             mt->status = MT_ST_RECONNECTING;
             mt->couple_type = COUPLE_AG;
@@ -521,13 +537,13 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
         {
             AgDisconnect();
         }
-        if (mtGetConnectDevices() > 0)
-        {
-            mtDisconnect();
-        }
+        mtDisconnect();
+        mtInquiryStop();
         inquiryStop();
-        inquiryPair(inquiry_session_ag, TRUE);
         PowerAmpOn();
+        mtInquiryPair(inquiry_session_2talk_pairing, FALSE);
+        inquiryPair(inquiry_session_ag, TRUE);
+        stateManagerUpdateState();
         MessageCancelAll(task, EventSysMultiTalkPairingTimeoutCoupleMode);
         MessageSendLater(task, EventSysMultiTalkPairingTimeoutCoupleMode, NULL, D_SEC(120));
         break;
@@ -567,8 +583,7 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
             inquiry_result_t *result = sinkinquiryGetInquiryResults();
             if (result && sinkInquiryIsInqSession2Talk())
             {
-                uint8 *c = (uint8 *)message;
-                if (*c > 0)
+                if (result[0].peer_device == remote_device_peer)
                 {
                     /* 连接比自己头地址更大的设  */
                     if (BdaddrCompare(&mt->head_addr, &result[0].bd_addr) == -1)
@@ -581,18 +596,44 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
                 }
                 else /* ag */
                 {
-                    deviceManagerRemoveDevice(&result[0].bd_addr);
-                    AgConnect(&result[0].bd_addr);
-                    mt->status = MT_ST_CONNECTING;
-                    mt->couple_type = COUPLE_AG;
-                    mt->couple_addr = result[0].bd_addr;
-                    
+                    if(!BdaddrIsZero(&result[0].bd_addr))
+                    {
+                        deviceManagerRemoveDevice(&result[0].bd_addr);
+                        AgConnect(&result[0].bd_addr);
+                        mt->status = MT_ST_CONNECTING;
+                        mt->couple_type = COUPLE_AG;
+                        mt->couple_addr = result[0].bd_addr;
+                    }
                 }
             }
         }
 
         break;
     }
+    case EventSysMultiTalkBleInquiryDevices:
+    {
+        if (mt->mt_mode == COUPLE_MODE_PAIRING && mt->status == MT_ST_PARING)
+        {
+            CL_DM_BLE_ADVERTISING_REPORT_IND_T *ind = (CL_DM_BLE_ADVERTISING_REPORT_IND_T *)message;
+            if (BdaddrCompare(&mt->head_addr, &ind->current_taddr.addr) == -1)
+            {
+                mtConnectCouple(&ind->current_taddr.addr);
+                mt->status = MT_ST_CONNECTING;
+                mt->couple_type = COUPLE_MT_WITH_PEER;
+            }
+        }
+        if(mt->mt_mode == COUPLE_MODE && mt->status == MT_ST_SEARCHING)
+        {
+            CL_DM_BLE_ADVERTISING_REPORT_IND_T *ind = (CL_DM_BLE_ADVERTISING_REPORT_IND_T *)message;
+            if (ind && BdaddrIsSame(&ind->current_taddr.addr, &mt->couple_addr) 
+                    && BdaddrCompare(&mt->head_addr, &mt->couple_addr) == -1)
+            {
+                mt->status = MT_ST_CONNECTING;
+                mtConnectCouple(&mt->couple_addr);
+            }
+        }
+    }
+    break;
     case EventSysMultiTalkDeviceConnected:
         if (mt->mt_mode == COUPLE_MODE_PAIRING)
         {
@@ -606,10 +647,12 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
         MessageCancelAll(task, EventSysRssiPairReminder);
         mt->mt_mode = COUPLE_MODE;
         mt->prepare_paring = 0;
+        mt->couple_reconnect_retry = 0;
         break;
     case EventSysMultiTalkCurrentDevices:
     {
         AudioPlay(AP_TALK_DISCONNECTED, TRUE);
+        stateManagerUpdateState();
         MessageSendLater(task, EventSysRssiPairReminder, NULL, D_SEC(5));
         MessageSendLater(task, EventSysMultiTalkCoupleModeReconnect, NULL, D_SEC(1));
     }
@@ -622,6 +665,10 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
             if (mt->mt_mode == COUPLE_MODE_PAIRING)
             {
                 mt->status = MT_ST_PARING;
+                if(*status == aghfp_connect_failed)
+                {
+                    deviceManagerRemoveDevice(&mt->couple_addr);
+                }
             }
             else
             {
@@ -631,6 +678,7 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
         }
         else
         {
+            mtInquiryStop();
             MessageCancelAll(task, EventSysMultiTalkCoupleModeReconnect);
         }
     }
@@ -669,15 +717,21 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
             }
             else
             {
-                mt->status = MT_ST_LINKLOSS;
-                MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
+                if(mt->status != MT_ST_PARING)
+                {
+                    mt->status = MT_ST_LINKLOSS;
+                    MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
+                }
             }
         }
         else
         {
             DEBUG(("CP:linkloss\n"));
-            mt->status = MT_ST_LINKLOSS;
-            MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
+            if(mt->status != MT_ST_PARING)
+            {
+                mt->status = MT_ST_LINKLOSS;
+                MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
+            }
         }
     }
     break;

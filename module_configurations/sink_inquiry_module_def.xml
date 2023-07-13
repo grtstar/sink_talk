@@ -133,7 +133,12 @@
                 Id="RSSI Threshold"
                 ShortId="threshold" 
                 Desc="The peak RSSI value that any discovered devices RSSI value must exceed to be considered a suitable in-range device."
-                DefaultValue="-35"  />
+                DefaultValue="-35"   >
+                <BuildVariant
+                    HwVariant="CNS10001v4"
+                    SwVariant="Headset-Gaming"
+                    Value="-55" />
+            </StructElementConfigItem>
             <StructElementConfigItem
                 Id="RSSI Difference Threshold"
                 ShortId="diff_threshold" 

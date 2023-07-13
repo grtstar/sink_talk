@@ -23,6 +23,7 @@
 #include "sink_devicemanager.h"
 #include "sink_device_id.h"
 #include "sink_events.h"
+#define ENABLE_MT_DEBUG
 #include "sink_debug.h"
 #include "sink_audio_prompts.h"
 #include "sink_statemanager.h"
@@ -49,9 +50,6 @@
 #include "headset_multi_pair.h"
 #include "audio_prompt.h"
 #include "csr_common_example_plugin.h"
-
-#undef MT_DEBUG
-#define MT_DEBUG(x) DEBUG(x)
 
 extern MTData *mt;
 extern TaskData acl_parent_task;
@@ -161,9 +159,15 @@ bool handleMTL2capConnectIndNearbyMode(CL_L2CAP_CONNECT_IND_T *msg)
         MT_DEBUG(("MT: connected device is 8\n"));
         return FALSE;
     }
+
+    if(mt->status == MT_ST_CONNECTING)
+    {
+        mt->last_connect_time = VmGetClock();
+        MT_DEBUG(("MT: connecting, will delay 5s\n"));
+    }
     if (mt->connect_token != TOKEN_IDLE)
     {
-        if (BdaddrCompare(&mt->header_addr[0], &msg->bd_addr) == 1 || BdaddrCompare(&mt->header_addr[1], &msg->bd_addr) == 1)
+        if (BdaddrCompare(&mt->header_addr[0], &msg->bd_addr) == -1 || BdaddrCompare(&mt->header_addr[1], &msg->bd_addr) == -1)
         {
             MT_DEBUG(("MT: token held, cannot allow larger [%x:%x:%lx] than header [%x:%x:%lx] [%x:%x:%lx]\n", msg->bd_addr.nap, msg->bd_addr.uap, msg->bd_addr.lap,
                       mt->header_addr[0].nap, mt->header_addr[0].uap, mt->header_addr[0].lap,
@@ -171,32 +175,19 @@ bool handleMTL2capConnectIndNearbyMode(CL_L2CAP_CONNECT_IND_T *msg)
             return FALSE;
         }
     }
-#if 0
-    if (mt->mt_device[MT_LEFT].state == MT_L2CAP_WaitConnect && BdaddrIsSame(&msg->bd_addr, &mt->mt_device[MT_LEFT].bt_addr))
+    if(BdaddrIsSame(&msg->bd_addr, &mt->header_addr[0]) || BdaddrIsSame(&msg->bd_addr, &mt->header_addr[1]))
     {
-        MT_DEBUG(("MT: handleMTL2capConnectIndNearbyMode peer is in waiting\n"));
-        mt->mt_device[MT_LEFT].state = MT_L2CAP_WaitConnect;
-        mt->mt_device[MT_LEFT].bt_addr = msg->bd_addr;
-        mt->mt_type = MT_NODE;
-        return TRUE;
+        MT_DEBUG(("MT: cannot allow header connect me\n"));
+        return FALSE;
     }
-
-    if (mt->mt_device[MT_RIGHT].state == MT_L2CAP_WaitConnect && BdaddrIsSame(&msg->bd_addr, &mt->mt_device[MT_RIGHT].bt_addr))
-    {
-        MT_DEBUG(("MT: handleMTL2capConnectIndNearbyMode peer is in waiting\n"));
-        mt->mt_device[MT_RIGHT].state = MT_L2CAP_WaitConnect;
-        mt->mt_device[MT_RIGHT].bt_addr = msg->bd_addr;
-        mt->mt_type = MT_NODE;
-        return TRUE;
-    }
-#endif
     if (mt->mt_device[MT_LEFT].state == MT_L2CAP_Disconnected || mt->mt_device[MT_LEFT].state >= MT_L2CAP_Disconnecting)
     {
         /* ?????????????? */
         MT_DEBUG(("MT: handleMTL2capConnectIndNearbyMode parant is disconnect\n"));
 
-        if (mt->mt_mode == CLOSE_MODE)
+        if (mt->status != MT_ST_SEARCHING && mt->status != MT_ST_PARING)
         {
+            DEBUG(("MT: handleMTL2capConnectIndNearbyMode cannot allow connected in nonsearching\n"));
             return FALSE;
         }
         else
@@ -221,9 +212,9 @@ bool handleMTL2capConnectIndNearbyMode(CL_L2CAP_CONNECT_IND_T *msg)
     {
         MT_DEBUG(("MT: handleMTL2capConnectIndNearbyMode child is disconnect\n"));
 
-        if (mt->mt_mode == CLOSE_MODE)
+        if (mt->status != MT_ST_SEARCHING && mt->status != MT_ST_PARING)
         {
-            DEBUG(("MT: handleMTL2capConnectIndNearbyMode cannot allow connected in close mode \n"));
+            DEBUG(("MT: handleMTL2capConnectIndNearbyMode cannot allow connected in nonsearching\n"));
             return FALSE;
         }
         else
@@ -237,10 +228,7 @@ bool handleMTL2capConnectIndNearbyMode(CL_L2CAP_CONNECT_IND_T *msg)
             }
         }
     }
-    if(mt->status == MT_ST_CONNECTING)
-    {
-        mt->last_connect_time = VmGetClock();
-    }
+    
     return FALSE;
 }
 
@@ -275,9 +263,21 @@ void handleMTL2capConnectCfmNearbyMode(CL_L2CAP_CONNECT_CFM_T *msg)
                 MessageSinkTask(msg->sink, &acl_parent_task);
 
                 /* 连上后需要检测是否成�如果成环则断开 */
-                mt->status = MT_ST_CHECKLOOP;
-                mt->sco_expend_dev = MT_LEFT;
-                MessageSendLater(mt->app_task, EventSysMultiTalkCheckLoop, NULL, D_SEC(0.5));
+                if(mt->mt_device[MT_RIGHT].state >= MT_L2CAP_Connected)
+                {
+                    mt->status = MT_ST_CHECKLOOP;
+                    mt->sco_expend_dev = MT_LEFT;
+                    MessageSendLater(mt->app_task, EventSysMultiTalkCheckLoop, NULL, D_SEC(0.5));
+                    MT_DEBUG(("MT: Check loop\n"));
+                }
+                else
+                {
+                    MT_DEBUG(("MT: maybe no loop\n"));
+                    mt->status = MT_ST_NOLOOP;
+                    mt->sco_expend_dev = MT_LEFT;
+                    /* wait a moment to send, make sure acl is connected */
+                    MessageSendLater(mt->app_task, EventSysMultiTalkCheckLoop, NULL, D_SEC(0.5));
+                }
             }
             else if (mt->mt_device[MT_LEFT].state == MT_L2CAP_WaitConnect)
             {
@@ -288,25 +288,19 @@ void handleMTL2capConnectCfmNearbyMode(CL_L2CAP_CONNECT_CFM_T *msg)
 
             linkPolicyCheckRoles();
         }
-        else if (msg->status >= l2cap_connect_failed)
+        else if (msg->status > l2cap_connect_failed || (msg->status == l2cap_connect_failed && mt->status == MT_ST_CONNECTING))
         {
             BdaddrSetZero(&mt->mt_device[MT_LEFT].bt_addr);
             mt->mt_device[MT_LEFT].state = MT_L2CAP_Disconnected;
-            mtSendConnectToken(MT_RIGHT, TOKEN_RELEASE);
             if (mt->status == MT_ST_CONNECTING)
             {
-                if (mtGetConnectDevices() == 2)
-                {
-                    mt->mt_type = MT_NODE;
-                    mt->status = MT_ST_CONNECTED;
-                    mtInquiryStop();
-                    stateManagerEnterConnectedState();
-                }
-                else
-                {
-                    mt->status = MT_ST_SEARCHING;
-                }
+                mt->status = MT_ST_SEARCHING;
             }
+            if (msg->status == l2cap_connect_error || msg->status == l2cap_connect_failed_security) /* 137 */
+            {
+                deviceManagerRemoveDevice(&msg->addr);
+            }
+            mtSendConnectToken(MT_RIGHT, TOKEN_RELEASE);
         }
     }
     else if (BdaddrIsSame(&msg->addr, &mt->mt_device[MT_RIGHT].bt_addr))
@@ -326,11 +320,21 @@ void handleMTL2capConnectCfmNearbyMode(CL_L2CAP_CONNECT_CFM_T *msg)
                 mt->mt_type = MT_NODE;
                 MessageSinkTask(msg->sink, &acl_child_task);
 
-
                 /* 连上后需要检测是否成�如果成环则断开 */
-                mt->status = MT_ST_CHECKLOOP;
-                mt->sco_expend_dev = MT_RIGHT;
-                MessageSendLater(mt->app_task, EventSysMultiTalkCheckLoop, NULL, D_SEC(0.5));
+                if(mt->mt_device[MT_LEFT].state >= MT_L2CAP_Connected)
+                {
+                    mt->status = MT_ST_CHECKLOOP;
+                    mt->sco_expend_dev = MT_RIGHT;
+                    MessageSendLater(mt->app_task, EventSysMultiTalkCheckLoop, NULL, D_SEC(0.5));
+                    MT_DEBUG(("MT: Check loop\n"));
+                }
+                else
+                {
+                    MT_DEBUG(("MT: maybe no loop\n"));
+                    mt->status = MT_ST_NOLOOP;
+                    mt->sco_expend_dev = MT_RIGHT;
+                    MessageSendLater(mt->app_task, EventSysMultiTalkCheckLoop, NULL, D_SEC(0.5));
+                }
             }
             else if (mt->mt_device[MT_RIGHT].state == MT_L2CAP_WaitConnect)
             {
@@ -342,18 +346,13 @@ void handleMTL2capConnectCfmNearbyMode(CL_L2CAP_CONNECT_CFM_T *msg)
 
             linkPolicyCheckRoles();
         }
-        else if (msg->status >= l2cap_connect_failed)
+        else if (msg->status > l2cap_connect_failed || (msg->status == l2cap_connect_failed && mt->status == MT_ST_CONNECTING))
         {
             BdaddrSetZero(&mt->mt_device[MT_RIGHT].bt_addr);
             mt->mt_device[MT_RIGHT].state = MT_L2CAP_Disconnected;
             if (mt->status == MT_ST_CONNECTING)
             {
                 mt->status = MT_ST_SEARCHING;
-            }
-
-            if(msg->status == l2cap_connect_failed_remote_reject)
-            {
-                 mt->last_connect_time = VmGetClock();
             }
 
             if (msg->status == l2cap_connect_error || msg->status == l2cap_connect_failed_security) /* 137 */
@@ -411,14 +410,6 @@ void handleMTL2capDisconIndNearbyMode(CL_L2CAP_DISCONNECT_IND_T *msg)
             ConnectionL2capDisconnectResponse(msg->identifier, msg->sink);
         }
 
-        mtInquiryStop();
-        if (mt->status != MT_ST_NOCONNECT)
-        {
-            mtInquiryPair(inquiry_session_nearby, mtGetConnectDevices() == 0);
-
-            mt->status = MT_ST_SEARCHING;
-        }
-
         mt->header_addr[0] = mt->addr;
         BdaddrSetZero(&mt->header_addr[1]);
         if (!mtBroadcastHeaderAddr1(MT_LEFT, 1, &mt->addr))
@@ -427,6 +418,7 @@ void handleMTL2capDisconIndNearbyMode(CL_L2CAP_DISCONNECT_IND_T *msg)
             MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
         }
     }
+    mt->connect_token = TOKEN_IDLE;
 }
 
 void handleMTL2capDisconCfmNearbyMode(CL_L2CAP_DISCONNECT_CFM_T *msg)
@@ -439,6 +431,14 @@ void handleMTL2capDisconCfmNearbyMode(CL_L2CAP_DISCONNECT_CFM_T *msg)
         BdaddrSetZero(&mt->mt_device[MT_LEFT].bt_addr);
         mt->mt_device[MT_LEFT].acl_sink = NULL;
         mt->head_addr = mt->addr;
+        MT_DEBUG(("MT: handleMTL2capDisconCfm parent\n"));
+        if(mt->status == MT_ST_CHECKLOOP || mt->status == MT_ST_NOLOOP)
+        {
+            if(mt->sco_expend_dev == MT_LEFT)
+            {
+                mt->status = MT_ST_SEARCHING;
+            }
+        }
         stateManagerUpdateState();
     }
     else if (msg->sink == mt->mt_device[MT_RIGHT].acl_sink)
@@ -446,11 +446,20 @@ void handleMTL2capDisconCfmNearbyMode(CL_L2CAP_DISCONNECT_CFM_T *msg)
         mt->mt_device[MT_RIGHT].state = MT_L2CAP_Disconnected;
         BdaddrSetZero(&mt->mt_device[MT_RIGHT].bt_addr);
         mt->mt_device[MT_RIGHT].acl_sink = NULL;
+        MT_DEBUG(("MT: handleMTL2capDisconCfm child\n"));
+        if(mt->status == MT_ST_CHECKLOOP || mt->status == MT_ST_NOLOOP)
+        {
+            if(mt->sco_expend_dev == MT_RIGHT)
+            {
+                mt->status = MT_ST_SEARCHING;
+            }
+        }
         stateManagerUpdateState();
     }
     else
     {
         MT_DEBUG(("MT: not Now link\n"));
+        return;
     }
     if (mtGetConnectDevices() == 0)
     {
@@ -488,11 +497,6 @@ void handleMTSynConnCfmNearbyMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
             MT_DEBUG(("MT: left sync connected\n"));
             audioUpdateAudioRouting();
 
-            if (mt->status == MT_ST_CONNECTING)
-            {
-                MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
-            }
-
             if (mtGetConnectDevices() == 2)
             {
                 mt->mt_type = MT_NODE;
@@ -509,20 +513,14 @@ void handleMTSynConnCfmNearbyMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
 
             break;
         case hci_error_page_timeout:
-            break;
         case hci_error_auth_fail:
-            break;
         case hci_error_key_missing:
-            break;
         case hci_error_conn_timeout:
-            break;
         case hci_error_max_nr_of_conns:
-            break;
         case hci_error_max_nr_of_sco:
-            break;
         case hci_error_rej_by_remote_no_res:
-            break;
         default:
+            mtACLDisconnect(MT_LEFT);
             break;
         }
     }
@@ -538,11 +536,6 @@ void handleMTSynConnCfmNearbyMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
 
             audioUpdateAudioRouting();
 
-            if (mt->status == MT_ST_CONNECTING)
-            {
-                MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
-            }
-
             if (mtGetConnectDevices() == 2)
             {
                 mt->mt_type = MT_NODE;
@@ -558,27 +551,24 @@ void handleMTSynConnCfmNearbyMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
             MessageCancelAll(mt->app_task, EventSysRssiPairReminder);
             break;
         case hci_error_page_timeout:
-            break;
         case hci_error_auth_fail:
-            break;
         case hci_error_key_missing:
-            break;
         case hci_error_conn_timeout:
-            break;
         case hci_error_max_nr_of_conns:
-            break;
         case hci_error_max_nr_of_sco:
-            break;
         case hci_error_rej_by_remote_no_res:
-            /* todo : delay to connect */
-            break;
         default:
+            mtACLDisconnect(MT_RIGHT);
             break;
         }
     }
     else
     {
-        MT_DEBUG(("MT: A loss conection, disconnect it?\n"));
+        MT_DEBUG(("MT: A loss conection, disconnect sync?\n"));
+        if(msg->status == hci_success)
+        {
+            ConnectionSyncDisconnect(msg->audio_sink, hci_error_oetc_user);
+        }
     }
 }
 
@@ -597,11 +587,6 @@ void handleMTSynDisconIndNearbyMode(CL_DM_SYNC_DISCONNECT_IND_T *msg)
 
         mt->mt_device[MT_LEFT].state = MT_SYN_Disconnected;
         mt->mt_device[MT_LEFT].audio_sink = NULL;
-
-        if (msg->reason == 0)
-        {
-            BdaddrSetZero(&mt->mt_device[MT_LEFT].bt_addr);
-        }
     }
     else if (msg->audio_sink == mt->mt_device[MT_RIGHT].audio_sink)
     {
@@ -613,11 +598,6 @@ void handleMTSynDisconIndNearbyMode(CL_DM_SYNC_DISCONNECT_IND_T *msg)
 
         mt->mt_device[MT_RIGHT].state = MT_SYN_Disconnected;
         mt->mt_device[MT_RIGHT].audio_sink = NULL;
-
-        if (msg->reason == 0)
-        {
-            BdaddrSetZero(&mt->mt_device[MT_RIGHT].bt_addr);
-        }
     }
     else
     {
@@ -651,9 +631,9 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
         }
         else
         {
-            mtDisconnect();
-            MessageSendLater(task, EventSysMultiTalkLeaveNearbyModeDelay, NULL, D_SEC(1));
+            MessageSendLater(task, EventSysMultiTalkLeaveNearbyModeDelay, NULL, D_SEC(2));
         }
+        mtDisconnect();
         mt->connect_token = TOKEN_IDLE;
         break;
     case EventSysMultiTalkLeaveNearbyModeDelay:
@@ -673,26 +653,34 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
     {
         if (mt->mt_mode == NEARBY_MODE)
         {
+            CL_DM_BLE_ADVERTISING_REPORT_IND_T *ind = (CL_DM_BLE_ADVERTISING_REPORT_IND_T *)message;
             if (mt->nearby_connected == 8)
             {
                 mtInquiryStop();
                 break;
             }
+            if (ind)
+            {
+                /* MT_DEBUG(("MT: search %x:%x:%lx\n", 
+                                    ind->current_taddr.addr.nap,
+                                      ind->current_taddr.addr.uap,
+                                      ind->current_taddr.addr.lap)); */
+            }
+            if(BdaddrCompare(&mt->addr, &ind->current_taddr.addr) == 1 && !BdaddrIsSame(&mt->header_addr[0], &ind->current_taddr.addr) && !BdaddrIsSame(&mt->header_addr[1], &ind->current_taddr.addr))
+            {
+                mt->last_connect_time = VmGetClock();
+            }
             if (mt->connect_token == TOKEN_IDLE)
             {
                 if (mt->status == MT_ST_PARING || mt->status == MT_ST_SEARCHING)
                 {
-                    CL_DM_BLE_ADVERTISING_REPORT_IND_T *ind = (CL_DM_BLE_ADVERTISING_REPORT_IND_T *)message;
                     if (ind)
                     {
 /*                       if(BdaddrIsSame(&ind->current_taddr.addr, &mt->last_connect_addr)) */
                         {
                             if(VmGetClock() - mt->last_connect_time < D_SEC(5))
                             {
-                                MT_DEBUG(("MT: search %x:%x:%lx, but same as last, delay 5s\n", 
-                                    ind->current_taddr.addr.nap,
-                                      ind->current_taddr.addr.uap,
-                                      ind->current_taddr.addr.lap));
+                                /* MT_DEBUG(("MT: but same as last, delay 5s\n")); */
                                 break;
                             }
                         }
@@ -711,9 +699,9 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
                             {
                                 mtSendConnectToken(1, TOKEN_HELD);
                             }
-                            mtConnectNearby(&ind->current_taddr.addr);  
                             mt->last_connect_addr = ind->current_taddr.addr;
                             mt->status = MT_ST_CONNECTING;
+                            MessageSendLater(task, EventSysMultiTalkConnect, NULL, D_SEC(1));
                             break;
                         }
                         else
@@ -733,12 +721,12 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
                 }
                 else
                 {
-                    MT_DEBUG(("MT: search device, but status is %d\n", mt->status));
+                    MT_DEBUG(("MT: but status is %d\n", mt->status));
                 }
             }
             else
             {
-                MT_DEBUG(("MT: search device, but no token\n"));
+                MT_DEBUG(("MT: but no token\n"));
             }
         }
         break;
@@ -807,32 +795,86 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
         break;
     }
     #endif
+    case EventSysMultiTalkConnect:
+        if(mt->status == MT_ST_CONNECTING)
+        {
+            if(!mtConnectNearby(&mt->last_connect_addr))
+            {
+                mt->status = MT_ST_SEARCHING;
+            }
+        }
+        else
+        {
+            MT_DEBUG(("no connect, status = %d\n", mt->status));
+        }
+        break;
     case EventSysMultiTalkDeviceConnected:
         if (mt->nearby_connected >= 2)
         {
             AudioPlay(AP_MULTI_TALK_2_CONNECTED + mt->nearby_connected - 2, TRUE);
         }
+        MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoop);
+        MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoopTimeout);
         break;
     case EventSysMultiTalkCurrentDevices:
     {
+        int nearby_connected = mt->nearby_connected;
         if (mt->nearby_connected < 1)
         {
             mt->nearby_connected = 1;
         }
+        if(nearby_connected > 9)
+        {
+            nearby_connected = 9;
+        }
+        MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoop);
+        MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoopTimeout);
         MT_DEBUG(("Play nearby connected:%d\n", mt->nearby_connected));
-        AudioPlay(AP_MULTI_TALK_1_PERSON + mt->nearby_connected - 1, TRUE);
+        AudioPlay(AP_MULTI_TALK_1_PERSON + nearby_connected - 1, TRUE);
+        if(mtGetConnectDevices() < 2)
+        {
+            mtInquiryStop();
+            if (mt->status != MT_ST_NOCONNECT)
+            {
+                if(mtGetConnectDevices() == 0)
+                {
+                    mtInquiryPair(inquiry_session_nearby, TRUE); 
+                }
+                else
+                {
+                    mtInquiryPair(inquiry_session_nearby, FALSE); 
+                }
+            }
+        } 
     }
     break;
     case EventSysMultiTalkCheckLoop:
     {
-        if (!mtSendCheckLoop(mt->sco_expend_dev, 0))
+        if(mt->status == MT_ST_NOLOOP)
         {
-            mtBroadcastHeaderAddr1(!mt->sco_expend_dev, 1, &mt->addr);
+            mtBroadcastHeaderAddr1(mt->sco_expend_dev, 1, &mt->addr);
+            MessageSendLater(mt->app_task, EventSysMultiTalkCheckLoop, NULL, D_SEC(5));
+            MessageSendLater(mt->app_task, EventSysMultiTalkCheckLoopTimeout, NULL, D_SEC(15));
         }
         else
         {
-            MessageSendLater(mt->app_task, EventSysMultiTalkCheckLoop, NULL, D_SEC(5));
+             if (!mtSendCheckLoop(mt->sco_expend_dev, 0))
+            {
+                mtBroadcastHeaderAddr1(!mt->sco_expend_dev, 1, &mt->addr);
+            }
+            else
+            {
+                MessageSendLater(mt->app_task, EventSysMultiTalkCheckLoop, NULL, D_SEC(5));
+                MessageSendLater(mt->app_task, EventSysMultiTalkCheckLoopTimeout, NULL, D_SEC(15));
+            }
         }
+    }
+    break;
+    case EventSysMultiTalkCheckLoopTimeout:
+    {
+        MT_DEBUG(("MT: check loop timeout, disconnect\n"));
+        MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoopTimeout);
+        mtACLDisconnect(mt->sco_expend_dev);
     }
     break;
     default:

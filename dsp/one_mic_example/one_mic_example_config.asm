@@ -81,10 +81,10 @@
 
 .MODULE $M.system_config.data;
    .DATASEGMENT DM;
-
+   .VAR adc_mantissa = 0.5;
    .VAR left_mantissa = 0.5;
    .VAR right_mantissa = 0.5;
-   .VAR exponent = 1;
+   .VAR exponent = 0;
    
 // -----------------------------------------------------------------------------
 // DATA OBJECTS USED WITH PROCESSING MODULES
@@ -97,7 +97,7 @@
     &snd_stream_map_adc,
     &rcv_stream_map_sco2_in,
     &snd_stream_map_sco_out,
-    &left_mantissa,
+    &adc_mantissa,
     &right_mantissa,
     &exponent;
 
@@ -105,7 +105,7 @@
     &snd_stream_map_adc,
     &rcv_stream_map_sco_in,
     &snd_stream_map_sco2_out,
-    &left_mantissa,
+    &adc_mantissa,
     &right_mantissa,
     &exponent;
 

@@ -1129,6 +1129,242 @@
                             DefaultValue="4.25V" />
                     </PatternArrayRow>
                 </BuildVariant>
+                <BuildVariant
+                    HwVariant="QCC3024-AA_DEV-BRD-R2-AA"
+                    SwVariant="Headset-Gaming" >
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="charger_vthm_region" 
+                            DefaultValue="Hottest region - Vthm up to Limit Threshold 1" />
+                        <PatternArrayConfigItem 
+                            ShortId="charge" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="vsel" 
+                            DefaultValue="CHG" />
+                        <PatternArrayConfigItem 
+                            ShortId="power_off" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="disable_leds" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="current" 
+                            DefaultValue="0" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_type" 
+                            DefaultValue="N/a" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_voltage" 
+                            DefaultValue="N/a" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="charger_vthm_region" 
+                            DefaultValue="Limit Threshold 1 to 2" />
+                        <PatternArrayConfigItem 
+                            ShortId="charge" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="vsel" 
+                            DefaultValue="CHG" />
+                        <PatternArrayConfigItem 
+                            ShortId="power_off" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="disable_leds" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="current" 
+                            DefaultValue="0" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_type" 
+                            DefaultValue="N/a" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_voltage" 
+                            DefaultValue="N/a" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="charger_vthm_region" 
+                            DefaultValue="Limit Threshold 2 to 3" />
+                        <PatternArrayConfigItem 
+                            ShortId="charge" 
+                            DefaultValue="True" />
+                        <PatternArrayConfigItem 
+                            ShortId="vsel" 
+                            DefaultValue="CHG" />
+                        <PatternArrayConfigItem 
+                            ShortId="power_off" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="disable_leds" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="current" 
+                            DefaultValue="1420" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_type" 
+                            DefaultValue="Voltage" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_voltage" 
+                            DefaultValue="4.10V" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="charger_vthm_region" 
+                            DefaultValue="Limit Threshold 3 to 4" />
+                        <PatternArrayConfigItem 
+                            ShortId="charge" 
+                            DefaultValue="True" />
+                        <PatternArrayConfigItem 
+                            ShortId="vsel" 
+                            DefaultValue="CHG" />
+                        <PatternArrayConfigItem 
+                            ShortId="power_off" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="disable_leds" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="current" 
+                            DefaultValue="1470" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_type" 
+                            DefaultValue="Vfloat" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_voltage" 
+                            DefaultValue="N/a" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="charger_vthm_region" 
+                            DefaultValue="Limit Threshold 4 to 5" />
+                        <PatternArrayConfigItem 
+                            ShortId="charge" 
+                            DefaultValue="True" />
+                        <PatternArrayConfigItem 
+                            ShortId="vsel" 
+                            DefaultValue="CHG" />
+                        <PatternArrayConfigItem 
+                            ShortId="power_off" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="disable_leds" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="current" 
+                            DefaultValue="1420" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_type" 
+                            DefaultValue="Voltage" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_voltage" 
+                            DefaultValue="4.10V" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="charger_vthm_region" 
+                            DefaultValue="Limit Threshold 5 to 6" />
+                        <PatternArrayConfigItem 
+                            ShortId="charge" 
+                            DefaultValue="True" />
+                        <PatternArrayConfigItem 
+                            ShortId="vsel" 
+                            DefaultValue="CHG" />
+                        <PatternArrayConfigItem 
+                            ShortId="power_off" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="disable_leds" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="current" 
+                            DefaultValue="1250" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_type" 
+                            DefaultValue="Voltage" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_voltage" 
+                            DefaultValue="3.90V" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="charger_vthm_region" 
+                            DefaultValue="Limit Threshold 6 to 7" />
+                        <PatternArrayConfigItem 
+                            ShortId="charge" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="vsel" 
+                            DefaultValue="CHG" />
+                        <PatternArrayConfigItem 
+                            ShortId="power_off" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="disable_leds" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="current" 
+                            DefaultValue="0" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_type" 
+                            DefaultValue="N/a" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_voltage" 
+                            DefaultValue="N/a" />
+                    </PatternArrayRow>
+                    <PatternArrayRow 
+                        Node="Basic" 
+                        ShortId="pattern_row" 
+                        Id="Pattern Row" >
+                        <PatternArrayConfigItem 
+                            ShortId="charger_vthm_region" 
+                            DefaultValue="Coldest region - Vthm over Limit Threshold 7" />
+                        <PatternArrayConfigItem 
+                            ShortId="charge" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="vsel" 
+                            DefaultValue="CHG" />
+                        <PatternArrayConfigItem 
+                            ShortId="power_off" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="disable_leds" 
+                            DefaultValue="False" />
+                        <PatternArrayConfigItem 
+                            ShortId="current" 
+                            DefaultValue="0" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_type" 
+                            DefaultValue="N/a" />
+                        <PatternArrayConfigItem 
+                            ShortId="termination_voltage" 
+                            DefaultValue="N/a" />
+                    </PatternArrayRow>
+                </BuildVariant>
             </ConfigPatternArray>
         </ConfigGroup>
     </ConfigGroup>

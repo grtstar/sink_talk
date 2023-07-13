@@ -28,7 +28,7 @@ DESCRIPTION
  /*end of DO_NOT_DOCUMENT*/
 
     /*The global debug enable*/ 
-    #define DEBUG_PRINT_ENABLEDx
+    #define DEBUG_PRINT_ENABLED
 
 #define DEBUG_VM_HATSx
 
@@ -62,7 +62,7 @@ void printVmLogsInTestSystem (const char *format, ...);
 
         #define DEBUG_A2DPx
         #define DEBUG_ACCESSORYx
-        #define DEBUG_AHIx
+        #define DEBUG_AHI
         /* Debug Always-on-Voice (AoV) module */
         #define DEBUG_AOVx
         #define DEBUG_AT_COMMANDSx

@@ -341,6 +341,10 @@ static sink_extended_state_t getConnectedExtendedStates(void)
 
     sink_extended_state_t connected_ext_state = sink_ext_state_Default;
 #ifdef ENABLE_MULTI_TALK
+    if(mtIsFriendPairing())
+    {
+        return sink_ext_state_multiTalkFast;
+    }
     if(mtHeadConnected())
     {
         return sink_ext_state_multiTalkSlow2;
@@ -394,6 +398,10 @@ static sink_extended_state_t stateManagerFindExtendedStateFromState( sinkState p
             return sink_ext_state_limbo;
         case(deviceConnectable):
     #ifdef ENABLE_MULTI_TALK
+            if(mtIsFriendPairing())
+            {
+                return sink_ext_state_multiTalkFast;
+            }
             if(mtHeadConnected())
             {
                 return sink_ext_state_multiTalkSlow2;
@@ -616,8 +624,10 @@ void stateManagerEnterConnDiscoverableState ( bool req_disc )
         sinkEnableConnectable();
 
         /* Make the device discoverable */
-        sinkEnableDiscoverable();
-
+        if(req_disc)
+        {
+            sinkEnableDiscoverable();
+        }
         
         /* If there is a timeout - send a user message*/
         MessageCancelAll(&theSink.task, EventSysPairingFail);

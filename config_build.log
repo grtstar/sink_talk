@@ -40,7 +40,6 @@ INFO :     ./module_configurations/sink_powermanager_onchip_vbat_v1_def.xml
 INFO :     ./module_configurations/sink_powermanager_onchip_vthm_v1_def.xml
 INFO :     ./module_configurations/sink_powermanager_onchip_vchg_v1_def.xml
 INFO :     ./module_configurations/sink_powermanager_onchip_charger_configuration_v1_def.xml
-INFO :     ./module_configurations/sink_upgrade_module_def.xml
 INFO : Reading from: ./global_config.xml
 INFO : 
 ...... Reading from: ./module_configurations/sink_a2dp_module_def.xml
@@ -98,8 +97,6 @@ INFO :
 ...... Reading from: ./module_configurations/sink_powermanager_onchip_vchg_v1_def.xml
 INFO : 
 ...... Reading from: ./module_configurations/sink_powermanager_onchip_charger_configuration_v1_def.xml
-INFO : 
-...... Reading from: ./module_configurations/sink_upgrade_module_def.xml
 INFO : Processing module sink_a2dp...
 INFO : Processing module Sink_hfp_data...
 INFO : Packed event Id="At Cmd Event" - Type:enum into BlockId:Relative Word:1 BitOffset:0 ItemSize:16
@@ -219,10 +216,6 @@ INFO : Packed termination_type Id="Termination Type" - Type:enum into BlockId:Re
 INFO : Packed charger_vthm_region Id="Charger Vthm Region" - Type:enum into BlockId:Relative Word:2 BitOffset:12 ItemSize:4
 INFO : Processing module sink_powermanager_onchip_vchg_v1...
 INFO : Processing module sink_powermanager_onchip_charger_configuration_v1...
-INFO : Processing module sink_upgrade...
-INFO : Packed physical_partition_2 Id="Partition #2" - Type:uint into BlockId:Relative Word:1 BitOffset:0 ItemSize:8
-INFO : Packed physical_partition_1 Id="Partition #1" - Type:uint into BlockId:Relative Word:1 BitOffset:8 ItemSize:8
-INFO : Packed logical_type Id="Logical Type" - Type:enum_disabler into BlockId:Relative Word:2 BitOffset:12 ItemSize:4
 INFO : Mapping PS key:7
 INFO : Packed A2dpConnectionUpdateDelay_ms Id="A2DP Delay Connection Updates [ms]" - Type:uint into BlockId:33 Word:1 BitOffset:0 ItemSize:16
 INFO : Packed A2dpLinkLossReconnectionTime_s Id="A2DP Link Loss Reconnection Period [s]" - Type:uint into BlockId:33 Word:2 BitOffset:0 ItemSize:16
@@ -620,16 +613,16 @@ INFO : Packed event Id="Event" - Type:enum into BlockId:Relative Word:0 BitOffse
 INFO : Packed tone Id="Tones" - Type:enum into BlockId:Relative Word:1 BitOffset:8 ItemSize:8
 INFO : PS key:35 maps BlockId:621 'Event Tones'
 INFO : Mapping PS key:36
-INFO : Packed gVariableTone Id="Configtone value" - Type:uint into BlockId:715 Word:1 BitOffset:0 ItemSize:16
-INFO : PS key:36 maps BlockId:715 'ConfigToneData'
+INFO : Packed gVariableTone Id="Configtone value" - Type:uint into BlockId:713 Word:1 BitOffset:0 ItemSize:16
+INFO : PS key:36 maps BlockId:713 'ConfigToneData'
 INFO : Mapping PS key:37
-INFO : Packed MuteToneFixedVolume Id="MuteToneFixedVolume" - Type:bool into BlockId:720 Word:1 BitOffset:6 ItemSize:1
-INFO : Packed QueueEventTones Id="QueueEventTones" - Type:bool into BlockId:720 Word:1 BitOffset:7 ItemSize:1
-INFO : Packed QueueVolumeTones Id="QueueVolumeTones" - Type:bool into BlockId:720 Word:1 BitOffset:8 ItemSize:1
-INFO : Packed PlayLocalVolumeTone Id="PlayLocalVolumeTone" - Type:bool into BlockId:720 Word:1 BitOffset:9 ItemSize:1
-INFO : Packed PlayTonesAtFixedVolume Id="PlayTonesAtFixedVolume" - Type:bool into BlockId:720 Word:1 BitOffset:10 ItemSize:1
-INFO : Packed FixedToneVolumeLevel Id="FixedToneVolumeLevel" - Type:uint into BlockId:720 Word:1 BitOffset:11 ItemSize:5
-INFO : PS key:37 maps BlockId:720 'Sink Tones Readonly'
+INFO : Packed MuteToneFixedVolume Id="MuteToneFixedVolume" - Type:bool into BlockId:718 Word:1 BitOffset:6 ItemSize:1
+INFO : Packed QueueEventTones Id="QueueEventTones" - Type:bool into BlockId:718 Word:1 BitOffset:7 ItemSize:1
+INFO : Packed QueueVolumeTones Id="QueueVolumeTones" - Type:bool into BlockId:718 Word:1 BitOffset:8 ItemSize:1
+INFO : Packed PlayLocalVolumeTone Id="PlayLocalVolumeTone" - Type:bool into BlockId:718 Word:1 BitOffset:9 ItemSize:1
+INFO : Packed PlayTonesAtFixedVolume Id="PlayTonesAtFixedVolume" - Type:bool into BlockId:718 Word:1 BitOffset:10 ItemSize:1
+INFO : Packed FixedToneVolumeLevel Id="FixedToneVolumeLevel" - Type:uint into BlockId:718 Word:1 BitOffset:11 ItemSize:5
+INFO : PS key:37 maps BlockId:718 'Sink Tones Readonly'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_tones_config_def.h
 INFO : Mapping PS key:38
 INFO : Packed state Id="Extended State" - Type:enum into BlockId:Relative Word:0 BitOffset:0 ItemSize:16
@@ -643,7 +636,7 @@ INFO : Packed OverideDisable Id="LED Override Disable" - Type:bool into BlockId:
 INFO : Packed Colour Id="Colour" - Type:enum into BlockId:Relative Word:4 BitOffset:1 ItemSize:3
 INFO : Packed NumFlashes Id="Number of Flashes" - Type:uint into BlockId:Relative Word:4 BitOffset:4 ItemSize:4
 INFO : Packed LED_B Id="LED B Mapping" - Type:enum into BlockId:Relative Word:4 BitOffset:8 ItemSize:8
-INFO : PS key:38 maps BlockId:725 'States'
+INFO : PS key:38 maps BlockId:723 'States'
 INFO : Mapping PS key:39
 INFO : Packed event Id="Event" - Type:enum into BlockId:Relative Word:0 BitOffset:0 ItemSize:16
 INFO : Packed OffTime Id="Off Time [ms]" - Type:uint into BlockId:Relative Word:1 BitOffset:0 ItemSize:8
@@ -656,7 +649,7 @@ INFO : Packed OverideDisable Id="LED Override Disable" - Type:bool into BlockId:
 INFO : Packed Colour Id="Colour" - Type:enum into BlockId:Relative Word:4 BitOffset:1 ItemSize:3
 INFO : Packed NumFlashes Id="Number of Flashes" - Type:uint into BlockId:Relative Word:4 BitOffset:4 ItemSize:4
 INFO : Packed LED_B Id="LED B Mapping" - Type:enum into BlockId:Relative Word:4 BitOffset:8 ItemSize:8
-INFO : PS key:39 maps BlockId:829 'Events'
+INFO : PS key:39 maps BlockId:827 'Events'
 INFO : Mapping PS key:40
 INFO : Packed Event Id="Event" - Type:enum into BlockId:Relative Word:0 BitOffset:0 ItemSize:16
 INFO : Packed Speed Id="Speed Factor" - Type:uint into BlockId:Relative Word:1 BitOffset:0 ItemSize:8
@@ -667,61 +660,61 @@ INFO : Packed FilterType Id="Filter Type" - Type:enum_disabler into BlockId:Rela
 INFO : Packed FollowerLEDDelay Id="Follow LED Delay [ms]" - Type:uint into BlockId:Relative Word:2 BitOffset:7 ItemSize:4
 INFO : Packed FilterToCancel Id="Filter to Cancel" - Type:enum into BlockId:Relative Word:2 BitOffset:11 ItemSize:5
 INFO : Packed OverideDisable Id="Override LED Disable" - Type:bool into BlockId:Relative Word:3 BitOffset:15 ItemSize:1
-INFO : PS key:40 maps BlockId:858 'Filters'
+INFO : PS key:40 maps BlockId:856 'Filters'
 INFO : Mapping PS key:41
-INFO : Packed TriCol_b Id="Tri Colour Led B" - Type:enum into BlockId:926 Word:1 BitOffset:0 ItemSize:8
-INFO : Packed TriCol_a Id="Tri Colour Led A" - Type:enum into BlockId:926 Word:1 BitOffset:8 ItemSize:8
-INFO : Packed TriCol_c Id="Tri Colour Led C" - Type:enum into BlockId:926 Word:2 BitOffset:8 ItemSize:8
-INFO : Packed ChargerTerminationLEDOveride Id="Charging Complete Override LED Enable" - Type:bool into BlockId:926 Word:3 BitOffset:2 ItemSize:1
-INFO : Packed ResetLEDEnableStateAfterReset Id="LED Disable State Reset after Boot" - Type:bool into BlockId:926 Word:3 BitOffset:3 ItemSize:1
-INFO : Packed QueueLEDEvents Id="Queue LED Event Indications" - Type:bool into BlockId:926 Word:3 BitOffset:4 ItemSize:1
-INFO : Packed OverideFilterPermanentlyOn Id="Override Filter LED is Permanently On" - Type:bool into BlockId:926 Word:3 BitOffset:5 ItemSize:1
-INFO : Packed LedTimeMultiplier Id="LED Duty Cycle Time Multiplier" - Type:enum into BlockId:926 Word:3 BitOffset:6 ItemSize:2
-INFO : Packed LedEnablePIO Id="LED Enable PIO" - Type:enum into BlockId:926 Word:3 BitOffset:8 ItemSize:8
-INFO : PS key:41 maps BlockId:926 'LED Config Readable Block'
+INFO : Packed TriCol_b Id="Tri Colour Led B" - Type:enum into BlockId:924 Word:1 BitOffset:0 ItemSize:8
+INFO : Packed TriCol_a Id="Tri Colour Led A" - Type:enum into BlockId:924 Word:1 BitOffset:8 ItemSize:8
+INFO : Packed TriCol_c Id="Tri Colour Led C" - Type:enum into BlockId:924 Word:2 BitOffset:8 ItemSize:8
+INFO : Packed ChargerTerminationLEDOveride Id="Charging Complete Override LED Enable" - Type:bool into BlockId:924 Word:3 BitOffset:2 ItemSize:1
+INFO : Packed ResetLEDEnableStateAfterReset Id="LED Disable State Reset after Boot" - Type:bool into BlockId:924 Word:3 BitOffset:3 ItemSize:1
+INFO : Packed QueueLEDEvents Id="Queue LED Event Indications" - Type:bool into BlockId:924 Word:3 BitOffset:4 ItemSize:1
+INFO : Packed OverideFilterPermanentlyOn Id="Override Filter LED is Permanently On" - Type:bool into BlockId:924 Word:3 BitOffset:5 ItemSize:1
+INFO : Packed LedTimeMultiplier Id="LED Duty Cycle Time Multiplier" - Type:enum into BlockId:924 Word:3 BitOffset:6 ItemSize:2
+INFO : Packed LedEnablePIO Id="LED Enable PIO" - Type:enum into BlockId:924 Word:3 BitOffset:8 ItemSize:8
+INFO : PS key:41 maps BlockId:924 'LED Config Readable Block'
 INFO : Mapping PS key:42
-INFO : Packed gLEDSEnabled Id="LED Enabled" - Type:bool into BlockId:933 Word:1 BitOffset:15 ItemSize:1
-INFO : PS key:42 maps BlockId:933 'LED Session Config Block'
+INFO : Packed gLEDSEnabled Id="LED Enabled" - Type:bool into BlockId:931 Word:1 BitOffset:15 ItemSize:1
+INFO : PS key:42 maps BlockId:931 'LED Session Config Block'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_led_config_def.h
 INFO : Mapping PS key:43
-INFO : Packed EnableAvrcpAudioSwitching Id="AVRCP Audio Switching" - Type:bool into BlockId:938 Word:1 BitOffset:14 ItemSize:1
-INFO : Packed avrcp_enabled Id="AVRCP Enabled" - Type:bool into BlockId:938 Word:1 BitOffset:15 ItemSize:1
-INFO : PS key:43 maps BlockId:938 'AVRCP Enable and Audio Switching Mask Bitfields'
+INFO : Packed EnableAvrcpAudioSwitching Id="AVRCP Audio Switching" - Type:bool into BlockId:936 Word:1 BitOffset:14 ItemSize:1
+INFO : Packed avrcp_enabled Id="AVRCP Enabled" - Type:bool into BlockId:936 Word:1 BitOffset:15 ItemSize:1
+INFO : PS key:43 maps BlockId:936 'AVRCP Enable and Audio Switching Mask Bitfields'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_avrcp_config_def.h
 INFO : Mapping PS key:44
-INFO : Packed LeAuthenticatedPayloadTO_s Id="LE Authenticated Payload Timeout" - Type:uint into BlockId:943 Word:1 BitOffset:0 ItemSize:16
-INFO : Packed BleMaxCentralConn Id="BLE Max Central Connection" - Type:uint into BlockId:943 Word:2 BitOffset:5 ItemSize:2
-INFO : Packed BleMaxPeripheralConn Id="BLE Max Peripheral Connection" - Type:uint into BlockId:943 Word:2 BitOffset:7 ItemSize:2
-INFO : Packed BleAdvertisingFilters Id="BLE Advertising Filters" - Type:bitfield into BlockId:943 Word:2 BitOffset:9 ItemSize:7
-INFO : PS key:44 maps BlockId:943 'BLE'
+INFO : Packed LeAuthenticatedPayloadTO_s Id="LE Authenticated Payload Timeout" - Type:uint into BlockId:941 Word:1 BitOffset:0 ItemSize:16
+INFO : Packed BleMaxCentralConn Id="BLE Max Central Connection" - Type:uint into BlockId:941 Word:2 BitOffset:5 ItemSize:2
+INFO : Packed BleMaxPeripheralConn Id="BLE Max Peripheral Connection" - Type:uint into BlockId:941 Word:2 BitOffset:7 ItemSize:2
+INFO : Packed BleAdvertisingFilters Id="BLE Advertising Filters" - Type:bitfield into BlockId:941 Word:2 BitOffset:9 ItemSize:7
+INFO : PS key:44 maps BlockId:941 'BLE'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_ble_config_def.h
 INFO : Mapping PS key:49
-INFO : Packed pbap_enabled Id="Enable PBAP" - Type:bool into BlockId:949 Word:1 BitOffset:15 ItemSize:1
-INFO : PS key:49 maps BlockId:949 'PBAP_readonly'
+INFO : Packed pbap_enabled Id="Enable PBAP" - Type:bool into BlockId:947 Word:1 BitOffset:15 ItemSize:1
+INFO : PS key:49 maps BlockId:947 'PBAP_readonly'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_pbap_config_def.h
 INFO : Mapping PS key:150
-INFO : Packed StoreCurrentPEQSettingsTimeout_s Id="GAIA User Defined EQ Settings Persistent Store Timeout [s]" - Type:uint into BlockId:954 Word:1 BitOffset:0 ItemSize:16
-INFO : Packed GaiaRemainConnected Id="Maintain Connection After Power Off" - Type:bool into BlockId:954 Word:2 BitOffset:10 ItemSize:1
-INFO : Packed GaiaEnableSession Id="Enable GAIA Session" - Type:bool into BlockId:954 Word:2 BitOffset:11 ItemSize:1
-INFO : Packed dfu_partition Id="GAIA DFU Partition" - Type:uint into BlockId:954 Word:2 BitOffset:12 ItemSize:4
-INFO : PS key:150 maps BlockId:954 'GAIA_readonly'
+INFO : Packed StoreCurrentPEQSettingsTimeout_s Id="GAIA User Defined EQ Settings Persistent Store Timeout [s]" - Type:uint into BlockId:952 Word:1 BitOffset:0 ItemSize:16
+INFO : Packed GaiaRemainConnected Id="Maintain Connection After Power Off" - Type:bool into BlockId:952 Word:2 BitOffset:10 ItemSize:1
+INFO : Packed GaiaEnableSession Id="Enable GAIA Session" - Type:bool into BlockId:952 Word:2 BitOffset:11 ItemSize:1
+INFO : Packed dfu_partition Id="GAIA DFU Partition" - Type:uint into BlockId:952 Word:2 BitOffset:12 ItemSize:4
+INFO : PS key:150 maps BlockId:952 'GAIA_readonly'
 INFO : Mapping PS key:151
 INFO : Packed pio Id="Physical PIO" - Type:enum into BlockId:Relative Word:0 BitOffset:8 ItemSize:8
-INFO : PS key:151 maps BlockId:960 'GAIA_pio_translation'
+INFO : PS key:151 maps BlockId:958 'GAIA_pio_translation'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_gaia_config_def.h
 INFO : Mapping PS key:152
-INFO : Packed device_class Id="Class" - Type:bitfield into BlockId:967 Word:1 BitOffset:0 ItemSize:16
-INFO : Packed pause_when_switching_source Id="USB Audio Paused When Source Switched" - Type:bool into BlockId:967 Word:2 BitOffset:0 ItemSize:1
-INFO : Packed audio_always_on Id="USB Audio Always Routed" - Type:bool into BlockId:967 Word:2 BitOffset:1 ItemSize:1
-INFO : Packed plugin_type Id="USB Plug-in Type" - Type:enum into BlockId:967 Word:2 BitOffset:2 ItemSize:2
-INFO : Packed deconfigured_timeout Id="Deconfigure Timeout [s]" - Type:uint into BlockId:967 Word:2 BitOffset:4 ItemSize:4
-INFO : Packed attach_timeout Id="Attach Timeout [s]" - Type:uint into BlockId:967 Word:2 BitOffset:8 ItemSize:4
-INFO : Packed plugin_index Id="USB Voice Plug-in Index" - Type:enum into BlockId:967 Word:2 BitOffset:12 ItemSize:4
-INFO : PS key:152 maps BlockId:967 'USB RO'
+INFO : Packed device_class Id="Class" - Type:bitfield into BlockId:965 Word:1 BitOffset:0 ItemSize:16
+INFO : Packed pause_when_switching_source Id="USB Audio Paused When Source Switched" - Type:bool into BlockId:965 Word:2 BitOffset:0 ItemSize:1
+INFO : Packed audio_always_on Id="USB Audio Always Routed" - Type:bool into BlockId:965 Word:2 BitOffset:1 ItemSize:1
+INFO : Packed plugin_type Id="USB Plug-in Type" - Type:enum into BlockId:965 Word:2 BitOffset:2 ItemSize:2
+INFO : Packed deconfigured_timeout Id="Deconfigure Timeout [s]" - Type:uint into BlockId:965 Word:2 BitOffset:4 ItemSize:4
+INFO : Packed attach_timeout Id="Attach Timeout [s]" - Type:uint into BlockId:965 Word:2 BitOffset:8 ItemSize:4
+INFO : Packed plugin_index Id="USB Voice Plug-in Index" - Type:enum into BlockId:965 Word:2 BitOffset:12 ItemSize:4
+INFO : PS key:152 maps BlockId:965 'USB RO'
 INFO : Mapping PS key:153
-INFO : Packed usb_main_volume Id="USB Volume (Main)" - Type:uint into BlockId:973 Word:1 BitOffset:0 ItemSize:16
-INFO : Packed usb_aux_volume Id="USB Volume (Aux)" - Type:uint into BlockId:973 Word:2 BitOffset:0 ItemSize:16
-INFO : PS key:153 maps BlockId:973 'USB RW'
+INFO : Packed usb_main_volume Id="USB Volume (Main)" - Type:uint into BlockId:971 Word:1 BitOffset:0 ItemSize:16
+INFO : Packed usb_aux_volume Id="USB Volume (Aux)" - Type:uint into BlockId:971 Word:2 BitOffset:0 ItemSize:16
+INFO : PS key:153 maps BlockId:971 'USB RW'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_usb_config_def.h
 INFO : Mapping PS key:154
 INFO : Packed vsel Id="Voltage Select" - Type:enum into BlockId:Relative Word:0 BitOffset:0 ItemSize:1
@@ -731,68 +724,68 @@ INFO : Packed charger_config Id="USB Charger Configuration" - Type:enum into Blo
 INFO : Packed current Id="Current [mA]" - Type:uint into BlockId:Relative Word:0 BitOffset:8 ItemSize:8
 INFO : Packed disable_leds Id="Disable LEDs" - Type:bool into BlockId:Relative Word:1 BitOffset:14 ItemSize:1
 INFO : Packed power_off Id="Power Off" - Type:bool into BlockId:Relative Word:1 BitOffset:15 ItemSize:1
-INFO : PS key:154 maps BlockId:979 'USB Power RO'
+INFO : PS key:154 maps BlockId:977 'USB Power RO'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_usb_charger_config_def.h
 INFO : Mapping PS key:155
-INFO : Packed lbipmenable Id="LBIMP Enable" - Type:bool into BlockId:1005 Word:1 BitOffset:15 ItemSize:1
-INFO : PS key:155 maps BlockId:1005 'Sink Power Manager'
+INFO : Packed lbipmenable Id="LBIMP Enable" - Type:bool into BlockId:1003 Word:1 BitOffset:15 ItemSize:1
+INFO : PS key:155 maps BlockId:1003 'Sink Power Manager'
 INFO : Mapping PS key:156
-INFO : Packed max_volume_limit Id="Maximum volume level limit whilst charging when the battery is getting low [%]" - Type:uint into BlockId:1010 Word:1 BitOffset:0 ItemSize:16
-INFO : Packed action_when_battery_less_than_gas_gauge0 Id="Action to perform when streaming music and the battery level is getting low whilst charging" - Type:enum into BlockId:1010 Word:2 BitOffset:13 ItemSize:3
-INFO : PS key:156 maps BlockId:1010 'Sink Gas Gauge Actions'
+INFO : Packed max_volume_limit Id="Maximum volume level limit whilst charging when the battery is getting low [%]" - Type:uint into BlockId:1008 Word:1 BitOffset:0 ItemSize:16
+INFO : Packed action_when_battery_less_than_gas_gauge0 Id="Action to perform when streaming music and the battery level is getting low whilst charging" - Type:enum into BlockId:1008 Word:2 BitOffset:13 ItemSize:3
+INFO : PS key:156 maps BlockId:1008 'Sink Gas Gauge Actions'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_power_manager_config_def.h
 INFO : Mapping PS key:157
-INFO : Packed min_charge_i Id="Minimum charge current [mA]" - Type:uint into BlockId:1016 Word:1 BitOffset:0 ItemSize:16
-INFO : Packed max_charge_i Id="Maximum charge current [mA]" - Type:uint into BlockId:1016 Word:2 BitOffset:0 ItemSize:16
-INFO : Packed monitor_period_active Id="Temp monitor period if charger active [ms]" - Type:uint into BlockId:1016 Word:3 BitOffset:0 ItemSize:16
-INFO : Packed monitor_period_idle Id="Temp monitor period if charger idle [ms]" - Type:uint into BlockId:1016 Word:4 BitOffset:0 ItemSize:16
-INFO : Packed monitor_period_nopwr Id="Temp monitor period if charger has no power [ms]" - Type:uint into BlockId:1016 Word:5 BitOffset:0 ItemSize:16
-INFO : Packed no_incr_i_temp Id="Temp Lower Bound [degC]" - Type:uint into BlockId:1016 Word:6 BitOffset:0 ItemSize:8
-INFO : Packed charger_i_step Id="Charger current step size [mA]" - Type:uint into BlockId:1016 Word:6 BitOffset:8 ItemSize:8
-INFO : Packed decr_i_temp Id="Temp Upper Bound [degC]" - Type:uint into BlockId:1016 Word:7 BitOffset:8 ItemSize:8
-INFO : PS key:157 maps BlockId:1016 'PMU Charger Monitor'
+INFO : Packed min_charge_i Id="Minimum charge current [mA]" - Type:uint into BlockId:1014 Word:1 BitOffset:0 ItemSize:16
+INFO : Packed max_charge_i Id="Maximum charge current [mA]" - Type:uint into BlockId:1014 Word:2 BitOffset:0 ItemSize:16
+INFO : Packed monitor_period_active Id="Temp monitor period if charger active [ms]" - Type:uint into BlockId:1014 Word:3 BitOffset:0 ItemSize:16
+INFO : Packed monitor_period_idle Id="Temp monitor period if charger idle [ms]" - Type:uint into BlockId:1014 Word:4 BitOffset:0 ItemSize:16
+INFO : Packed monitor_period_nopwr Id="Temp monitor period if charger has no power [ms]" - Type:uint into BlockId:1014 Word:5 BitOffset:0 ItemSize:16
+INFO : Packed no_incr_i_temp Id="Temp Lower Bound [degC]" - Type:uint into BlockId:1014 Word:6 BitOffset:0 ItemSize:8
+INFO : Packed charger_i_step Id="Charger current step size [mA]" - Type:uint into BlockId:1014 Word:6 BitOffset:8 ItemSize:8
+INFO : Packed decr_i_temp Id="Temp Upper Bound [degC]" - Type:uint into BlockId:1014 Word:7 BitOffset:8 ItemSize:8
+INFO : PS key:157 maps BlockId:1014 'PMU Charger Monitor'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_power_manager_pmu_monitor_config_def.h
 INFO : Mapping PS key:158
-INFO : Packed current_limit_threshold Id="Vchg Current Limit Threshold [V]" - Type:enum into BlockId:1027 Word:1 BitOffset:0 ItemSize:16
-INFO : Packed current_recovery_threshold Id="Vchg Current Recovery Threshold [V]" - Type:enum into BlockId:1027 Word:2 BitOffset:0 ItemSize:16
-INFO : Packed current_limit_read_period Id="Vchg Current Limit Read Period [ms]" - Type:uint into BlockId:1027 Word:3 BitOffset:0 ItemSize:16
-INFO : Packed negative_current_step Id="Negative current step [mA]" - Type:uint into BlockId:1027 Word:4 BitOffset:0 ItemSize:8
-INFO : Packed positive_current_step Id="Positive current step [mA]" - Type:uint into BlockId:1027 Word:4 BitOffset:8 ItemSize:8
-INFO : PS key:158 maps BlockId:1027 'BC 1.2'
+INFO : Packed current_limit_threshold Id="Vchg Current Limit Threshold [V]" - Type:enum into BlockId:1025 Word:1 BitOffset:0 ItemSize:16
+INFO : Packed current_recovery_threshold Id="Vchg Current Recovery Threshold [V]" - Type:enum into BlockId:1025 Word:2 BitOffset:0 ItemSize:16
+INFO : Packed current_limit_read_period Id="Vchg Current Limit Read Period [ms]" - Type:uint into BlockId:1025 Word:3 BitOffset:0 ItemSize:16
+INFO : Packed negative_current_step Id="Negative current step [mA]" - Type:uint into BlockId:1025 Word:4 BitOffset:0 ItemSize:8
+INFO : Packed positive_current_step Id="Positive current step [mA]" - Type:uint into BlockId:1025 Word:4 BitOffset:8 ItemSize:8
+INFO : PS key:158 maps BlockId:1025 'BC 1.2'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_power_manager_charger_bc12_config_def.h
 INFO : Mapping PS key:159
-INFO : Packed Vref_Read_Period_Not_Charging Id="Vref Read Period When Not Charging [s]" - Type:uint into BlockId:1035 Word:1 BitOffset:0 ItemSize:16
-INFO : Packed Vref_Read_Period_Charging Id="Vref Read Period When Charging [s]" - Type:uint into BlockId:1035 Word:2 BitOffset:0 ItemSize:8
-INFO : Packed Vref_ADC_Source Id="Vref ADC Source" - Type:enum into BlockId:1035 Word:2 BitOffset:8 ItemSize:8
-INFO : PS key:159 maps BlockId:1035 'Sink Power Readonly Vref'
+INFO : Packed Vref_Read_Period_Not_Charging Id="Vref Read Period When Not Charging [s]" - Type:uint into BlockId:1033 Word:1 BitOffset:0 ItemSize:16
+INFO : Packed Vref_Read_Period_Charging Id="Vref Read Period When Charging [s]" - Type:uint into BlockId:1033 Word:2 BitOffset:0 ItemSize:8
+INFO : Packed Vref_ADC_Source Id="Vref ADC Source" - Type:enum into BlockId:1033 Word:2 BitOffset:8 ItemSize:8
+INFO : PS key:159 maps BlockId:1033 'Sink Power Readonly Vref'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_power_manager_vref_config_def.h
 INFO : Mapping PS key:160
-INFO : Packed Vbat_Read_Period_Not_Charging Id="Vbat Read Period When Not Charging [s]" - Type:uint into BlockId:1041 Word:1 BitOffset:0 ItemSize:16
-INFO : Packed Vbat_Read_Period_Charging Id="Vbat Read Period When Charging [s]" - Type:uint into BlockId:1041 Word:2 BitOffset:0 ItemSize:8
-INFO : Packed Vbat_ADC_Source Id="Vbat ADC Source" - Type:enum into BlockId:1041 Word:2 BitOffset:8 ItemSize:8
-INFO : Packed ignore_increase_no_chg Id="Ignore Increasing Vbat Readings When Not Charging" - Type:bool into BlockId:1041 Word:3 BitOffset:15 ItemSize:1
+INFO : Packed Vbat_Read_Period_Not_Charging Id="Vbat Read Period When Not Charging [s]" - Type:uint into BlockId:1039 Word:1 BitOffset:0 ItemSize:16
+INFO : Packed Vbat_Read_Period_Charging Id="Vbat Read Period When Charging [s]" - Type:uint into BlockId:1039 Word:2 BitOffset:0 ItemSize:8
+INFO : Packed Vbat_ADC_Source Id="Vbat ADC Source" - Type:enum into BlockId:1039 Word:2 BitOffset:8 ItemSize:8
+INFO : Packed ignore_increase_no_chg Id="Ignore Increasing Vbat Readings When Not Charging" - Type:bool into BlockId:1039 Word:3 BitOffset:15 ItemSize:1
 INFO : Packed event Id="Vbat User Event" - Type:enum into BlockId:Relative Word:0 BitOffset:0 ItemSize:16
 INFO : Packed notify_period Id="Vbat Notify Interval [s]" - Type:uint into BlockId:Relative Word:1 BitOffset:0 ItemSize:8
 INFO : Packed limit Id="Vbat Battery Threshold Voltage [mV]" - Type:uint into BlockId:Relative Word:1 BitOffset:8 ItemSize:8
 INFO : Packed sources Id="Vbat Trigger Source" - Type:bitfield into BlockId:Relative Word:2 BitOffset:13 ItemSize:3
-INFO : PS key:160 maps BlockId:1041 'Sink Power Readonly Vbat'
+INFO : PS key:160 maps BlockId:1039 'Sink Power Readonly Vbat'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_power_manager_vbat_config_def.h
 INFO : Mapping PS key:161
-INFO : Packed Vthm_Read_Period_Not_Charging Id="Vthm Read Period When Not Charging [s]" - Type:uint into BlockId:1066 Word:1 BitOffset:0 ItemSize:16
-INFO : Packed Vthm_Read_Period_Charging Id="Vthm Read Period When Charging [s]" - Type:uint into BlockId:1066 Word:2 BitOffset:0 ItemSize:8
-INFO : Packed Vthm_ADC_Source Id="Vthm ADC Source" - Type:enum into BlockId:1066 Word:2 BitOffset:8 ItemSize:8
-INFO : Packed lim1 Id="Limit Threshold 1" - Type:uint into BlockId:1066 Word:3 BitOffset:0 ItemSize:16
-INFO : Packed lim2 Id="Limit Threshold 2" - Type:uint into BlockId:1066 Word:4 BitOffset:0 ItemSize:16
-INFO : Packed lim3 Id="Limit Threshold 3" - Type:uint into BlockId:1066 Word:5 BitOffset:0 ItemSize:16
-INFO : Packed lim4 Id="Limit Threshold 4" - Type:uint into BlockId:1066 Word:6 BitOffset:0 ItemSize:16
-INFO : Packed lim5 Id="Limit Threshold 5" - Type:uint into BlockId:1066 Word:7 BitOffset:0 ItemSize:16
-INFO : Packed lim6 Id="Limit Threshold 6" - Type:uint into BlockId:1066 Word:8 BitOffset:0 ItemSize:16
-INFO : Packed lim7 Id="Limit Threshold 7" - Type:uint into BlockId:1066 Word:9 BitOffset:0 ItemSize:16
-INFO : Packed Drive_Thermistor_ICS Id="Drive Thermistor Output ICS" - Type:enum into BlockId:1066 Word:10 BitOffset:0 ItemSize:8
-INFO : Packed Drive_Thermistor_PIO Id="Drive Thermistor Output PIO" - Type:enum into BlockId:1066 Word:10 BitOffset:8 ItemSize:8
-INFO : Packed Use_Raw_Limits Id="Use Raw Limits" - Type:bool into BlockId:1066 Word:11 BitOffset:11 ItemSize:1
-INFO : Packed Thermistor_Drive_Delay Id="Thermistor Drive Delay [ms]" - Type:uint into BlockId:1066 Word:11 BitOffset:12 ItemSize:4
-INFO : PS key:161 maps BlockId:1066 'Sink Power Readonly Vthm'
+INFO : Packed Vthm_Read_Period_Not_Charging Id="Vthm Read Period When Not Charging [s]" - Type:uint into BlockId:1064 Word:1 BitOffset:0 ItemSize:16
+INFO : Packed Vthm_Read_Period_Charging Id="Vthm Read Period When Charging [s]" - Type:uint into BlockId:1064 Word:2 BitOffset:0 ItemSize:8
+INFO : Packed Vthm_ADC_Source Id="Vthm ADC Source" - Type:enum into BlockId:1064 Word:2 BitOffset:8 ItemSize:8
+INFO : Packed lim1 Id="Limit Threshold 1" - Type:uint into BlockId:1064 Word:3 BitOffset:0 ItemSize:16
+INFO : Packed lim2 Id="Limit Threshold 2" - Type:uint into BlockId:1064 Word:4 BitOffset:0 ItemSize:16
+INFO : Packed lim3 Id="Limit Threshold 3" - Type:uint into BlockId:1064 Word:5 BitOffset:0 ItemSize:16
+INFO : Packed lim4 Id="Limit Threshold 4" - Type:uint into BlockId:1064 Word:6 BitOffset:0 ItemSize:16
+INFO : Packed lim5 Id="Limit Threshold 5" - Type:uint into BlockId:1064 Word:7 BitOffset:0 ItemSize:16
+INFO : Packed lim6 Id="Limit Threshold 6" - Type:uint into BlockId:1064 Word:8 BitOffset:0 ItemSize:16
+INFO : Packed lim7 Id="Limit Threshold 7" - Type:uint into BlockId:1064 Word:9 BitOffset:0 ItemSize:16
+INFO : Packed Drive_Thermistor_ICS Id="Drive Thermistor Output ICS" - Type:enum into BlockId:1064 Word:10 BitOffset:0 ItemSize:8
+INFO : Packed Drive_Thermistor_PIO Id="Drive Thermistor Output PIO" - Type:enum into BlockId:1064 Word:10 BitOffset:8 ItemSize:8
+INFO : Packed Use_Raw_Limits Id="Use Raw Limits" - Type:bool into BlockId:1064 Word:11 BitOffset:11 ItemSize:1
+INFO : Packed Thermistor_Drive_Delay Id="Thermistor Drive Delay [ms]" - Type:uint into BlockId:1064 Word:11 BitOffset:12 ItemSize:4
+INFO : PS key:161 maps BlockId:1064 'Sink Power Readonly Vthm'
 INFO : Mapping PS key:162
 INFO : Packed termination_voltage Id="Termination Voltage [mV]" - Type:uint into BlockId:Relative Word:0 BitOffset:0 ItemSize:8
 INFO : Packed current Id="Max Current [mA]" - Type:uint into BlockId:Relative Word:0 BitOffset:8 ItemSize:8
@@ -803,33 +796,25 @@ INFO : Packed charge Id="Charge" - Type:bool into BlockId:Relative Word:1 BitOff
 INFO : Packed boost Id="Boost" - Type:enum into BlockId:Relative Word:1 BitOffset:6 ItemSize:2
 INFO : Packed termination_type Id="Termination Type" - Type:enum into BlockId:Relative Word:1 BitOffset:8 ItemSize:4
 INFO : Packed charger_vthm_region Id="Charger Vthm Region" - Type:enum into BlockId:Relative Word:1 BitOffset:12 ItemSize:4
-INFO : PS key:162 maps BlockId:1081 'Charger Vthm Control'
+INFO : PS key:162 maps BlockId:1079 'Charger Vthm Control'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_power_manager_vthm_config_def.h
 INFO : Mapping PS key:163
-INFO : Packed Vchg_Read_Period_Not_Charging Id="Vchg Read Period When Not Charging [s]" - Type:uint into BlockId:1101 Word:1 BitOffset:0 ItemSize:16
-INFO : Packed Vchg_Read_Period_Charging Id="Vchg Read Period When Charging [s]" - Type:uint into BlockId:1101 Word:2 BitOffset:0 ItemSize:8
-INFO : Packed Vchg_ADC_Source Id="Vchg ADC Source" - Type:enum into BlockId:1101 Word:2 BitOffset:8 ItemSize:8
-INFO : PS key:163 maps BlockId:1101 'Sink Power Readonly Vchg'
+INFO : Packed Vchg_Read_Period_Not_Charging Id="Vchg Read Period When Not Charging [s]" - Type:uint into BlockId:1099 Word:1 BitOffset:0 ItemSize:16
+INFO : Packed Vchg_Read_Period_Charging Id="Vchg Read Period When Charging [s]" - Type:uint into BlockId:1099 Word:2 BitOffset:0 ItemSize:8
+INFO : Packed Vchg_ADC_Source Id="Vchg ADC Source" - Type:enum into BlockId:1099 Word:2 BitOffset:8 ItemSize:8
+INFO : PS key:163 maps BlockId:1099 'Sink Power Readonly Vchg'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_power_manager_vchg_config_def.h
 INFO : Mapping PS key:164
-INFO : Packed limit Id="Vchg Termination Voltage (Vfloat) [mV]" - Type:uint into BlockId:1107 Word:1 BitOffset:0 ItemSize:16
-INFO : Packed current_external_devices Id="Current taken by external devices directly from charger [mA]" - Type:uint into BlockId:1107 Word:2 BitOffset:8 ItemSize:8
-INFO : PS key:164 maps BlockId:1107 'Charger Progress'
+INFO : Packed limit Id="Vchg Termination Voltage (Vfloat) [mV]" - Type:uint into BlockId:1105 Word:1 BitOffset:0 ItemSize:16
+INFO : Packed current_external_devices Id="Current taken by external devices directly from charger [mA]" - Type:uint into BlockId:1105 Word:2 BitOffset:8 ItemSize:8
+INFO : PS key:164 maps BlockId:1105 'Charger Progress'
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_power_manager_charger_configuration_config_def.h
-INFO : Mapping PS key:165
-INFO : Packed protect_audio_during_upgrade Id="Protect Audio During Upgrade" - Type:bool into BlockId:1113 Word:1 BitOffset:14 ItemSize:1
-INFO : Packed enable_app_config_reset Id="Enable Application Config Reset" - Type:bool into BlockId:1113 Word:1 BitOffset:15 ItemSize:1
-INFO : Packed physical_partition_2 Id="Partition #2" - Type:uint into BlockId:Relative Word:0 BitOffset:0 ItemSize:8
-INFO : Packed physical_partition_1 Id="Partition #1" - Type:uint into BlockId:Relative Word:0 BitOffset:8 ItemSize:8
-INFO : Packed logical_type Id="Logical Type" - Type:enum_disabler into BlockId:Relative Word:1 BitOffset:12 ItemSize:4
-INFO : PS key:165 maps BlockId:1113 'Sink Upgrade Readonly'
-INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\sink_upgrade_config_def.h
 INFO : Generating file: ./pskey_map.xml
 INFO : Preparations before writing: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\config_definition.xml
 INFO : Creating ConfigPatternArray group user_event_set
 INFO : Generating file: ./config_definition.xml
-INFO : ./config_definition.gz contains 41086 bytes of compressed data
-INFO : ./config_definition.xml signature is 891bc6f80223e241740a351bd3631d2c
+INFO : ./config_definition.gz contains 40490 bytes of compressed data
+INFO : ./config_definition.xml signature is e74f71022ec8b36d2d916873033d2469
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\config_definition.c
 INFO : Generating file: C:\ADK_CSR867x.WIN.4.4.0.21\apps\sink-talk\config_definition.h
 INFO : ********************************************************************
@@ -837,4 +822,4 @@ INFO : ***                                                              ***
 INFO : *** Build Config Script - Processing Completed Successfully      ***
 INFO : ***                                                              ***
 INFO : ********************************************************************
-INFO : Execution time: 0:00:04.546000
+INFO : Execution time: 0:00:10.302000

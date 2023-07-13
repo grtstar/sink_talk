@@ -37,6 +37,9 @@
         "initializer_list": "c",
         "headset_multi_pair.h": "c",
         "csr_cvc_common.h": "c",
-        "csr_cvc_common_plugin.h": "c"
+        "csr_cvc_common_plugin.h": "c",
+        "audio_plugin_if.h": "c",
+        "config_definition.h": "c",
+        "sink_volume.h": "c"
     }
 }

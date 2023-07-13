@@ -981,6 +981,7 @@ RETURNS
 bool audioRouteIsScoActive(void);
 
 
-
+void disableTalk(void);
+void enableTalk(void);
 #endif /* _SINK_AUDIO_ROUTING_H_ */
 

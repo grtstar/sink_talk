@@ -481,9 +481,7 @@ static void profile_handler(Task task, MessageId id, Message message)
 		{
 			uint8 *state = (uint8*)malloc(1);
 			*state = msg->status;
-			MessageSend(SIMPLE->app_task, EventSysAGSlcDisconnectInd, (void*)state);
-
-			disableAudioActivePio();
+			MessageSend(SIMPLE->app_task, EventSysAGSlcDisconnectInd, (void*)state);			
 		}
 	}
 	break;
@@ -775,7 +773,7 @@ int AgInit(Task task)
 
 	read_config();
 
-	AghfpInit(&SIMPLE->task, aghfp_handsfree_16_profile, 0);
+	AghfpInit(&SIMPLE->task, aghfp_handsfree_15_profile, 0);
 	return 0; 
 }
 

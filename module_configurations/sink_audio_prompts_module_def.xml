@@ -154,244 +154,236 @@
 
             <BuildVariant HwVariant="H13672v2 R13568v4 R13568v4_A05 H13503v2 CE446_CE692 CF133 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA"
                           SwVariant="Headset-Gaming">
-                <PatternArrayRow Id="Event_0_Headset"
-                                 ShortId="event_0_headset"
-                                 Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="UserEventPowerOn"
+
+
+
+
+
+
+
+
+
+
+
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
                         DefaultValue="Power On" />
-                    <PatternArrayConfigItem
-                        ShortId="promptIndex"
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
                         DefaultValue="0" />
-                    <PatternArrayConfigItem
-                        ShortId="state_mask"
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
                         DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
-                    <PatternArrayConfigItem
-                        ShortId="sco_block"
-                        DefaultValue="false" />
-                    <PatternArrayConfigItem
-                        ShortId="cancel_queue_play_immediate_0"
-                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
                 </PatternArrayRow>
-
-                <PatternArrayRow Id="Event_1_Headset"
-                                 ShortId="event_1_headset"
-                                 Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="UserEventPowerOff"
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
                         DefaultValue="Power Off" />
-                    <PatternArrayConfigItem
-                        ShortId="promptIndex"
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
                         DefaultValue="1" />
-                    <PatternArrayConfigItem
-                        ShortId="state_mask"
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
                         DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
-                    <PatternArrayConfigItem
-                        ShortId="sco_block"
-                        DefaultValue="false" />
-                    <PatternArrayConfigItem
-                        ShortId="cancel_queue_play_immediate_1"
-                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
                 </PatternArrayRow>
-
-                <PatternArrayRow Id="Event_2_Headset"
-                                 ShortId="event_2_headset"
-                                 Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="UserEventEnterPairing"
-                        DefaultValue="Enter Pairing" />
-                    <PatternArrayConfigItem
-                        ShortId="promptIndex"
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Gas Gauge 3" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
                         DefaultValue="2" />
-                    <PatternArrayConfigItem
-                        ShortId="state_mask"
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
                         DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
-                    <PatternArrayConfigItem
-                        ShortId="sco_block"
-                        DefaultValue="false" />
-                    <PatternArrayConfigItem
-                        ShortId="cancel_queue_play_immediate_2"
-                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
                 </PatternArrayRow>
-
-                <PatternArrayRow Id="Event_3_Headset"
-                                 ShortId="event_3_headset"
-                                 Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="SysEventPairingSuccessful"
-                        DefaultValue="Pairing Successful" />
-                    <PatternArrayConfigItem
-                        ShortId="promptIndex"
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Gas Gauge 1" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
                         DefaultValue="3" />
-                    <PatternArrayConfigItem
-                        ShortId="state_mask"
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
                         DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
-                    <PatternArrayConfigItem
-                        ShortId="sco_block"
-                        DefaultValue="false" />
-                    <PatternArrayConfigItem
-                        ShortId="cancel_queue_play_immediate_3"
-                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
                 </PatternArrayRow>
-
-                <PatternArrayRow Id="Event_4_Headset"
-                                 ShortId="event_4_headset"
-                                 Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="SysEventPairingFailed"
-                        DefaultValue="Pairing Fail" />
-                    <PatternArrayConfigItem
-                        ShortId="promptIndex"
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Gas Gauge 0" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
                         DefaultValue="4" />
-                    <PatternArrayConfigItem
-                        ShortId="state_mask"
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
                         DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
-                    <PatternArrayConfigItem
-                        ShortId="sco_block"
-                        DefaultValue="false" />
-                    <PatternArrayConfigItem
-                        ShortId="cancel_queue_play_immediate_4"
-                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
                 </PatternArrayRow>
-
-                <PatternArrayRow Id="Event_5_Headset"
-                                 ShortId="event_5_headset"
-                                 Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="SysEventSLCConnected"
-                        DefaultValue="SLC Connected" />
-                    <PatternArrayConfigItem
-                        ShortId="promptIndex"
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Enter Pairing" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
                         DefaultValue="5" />
-                    <PatternArrayConfigItem
-                        ShortId="state_mask"
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
                         DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
-                    <PatternArrayConfigItem
-                        ShortId="sco_block"
-                        DefaultValue="false" />
-                    <PatternArrayConfigItem
-                        ShortId="cancel_queue_play_immediate_5"
-                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
                 </PatternArrayRow>
-
-                <PatternArrayRow Id="Event_6_Headset"
-                                 ShortId="event_6_headset"
-                                 Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="SysEventSLCDisconnected"
-                        DefaultValue="SLC Disconnected" />
-                    <PatternArrayConfigItem
-                        ShortId="promptIndex"
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Primary Device Connected" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
                         DefaultValue="6" />
-                    <PatternArrayConfigItem
-                        ShortId="state_mask"
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
                         DefaultValue="Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
-                    <PatternArrayConfigItem
-                        ShortId="sco_block"
-                        DefaultValue="false" />
-                    <PatternArrayConfigItem
-                        ShortId="cancel_queue_play_immediate_7"
-                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
                 </PatternArrayRow>
-
-                <PatternArrayRow Id="Event_7_Headset"
-                                 ShortId="event_7_headset"
-                                 Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="SysEventVoiceRecognitionDisabled"
-                        DefaultValue="Voice Recognition Disabled" />
-                    <PatternArrayConfigItem
-                        ShortId="promptIndex"
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Secondary Device Connected" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
                         DefaultValue="7" />
-                    <PatternArrayConfigItem
-                        ShortId="state_mask"
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
                         DefaultValue="Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
-                    <PatternArrayConfigItem
-                        ShortId="sco_block"
-                        DefaultValue="false" />
-                    <PatternArrayConfigItem
-                        ShortId="cancel_queue_play_immediate_0"
-                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
                 </PatternArrayRow>
-
-                <PatternArrayRow Id="Event_8_Headset"
-                                 ShortId="event_8_headset"
-                                 Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="SysEventCodecAptxInUse"
-                        DefaultValue="Codec aptX In Use" />
-                    <PatternArrayConfigItem
-                        ShortId="promptIndex"
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="VA Tap To Talk Start" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
                         DefaultValue="8" />
-                    <PatternArrayConfigItem
-                        ShortId="state_mask"
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
                         DefaultValue="Connected | Streaming A2DP" />
-                    <PatternArrayConfigItem
-                        ShortId="sco_block"
-                        DefaultValue="false" />
-                    <PatternArrayConfigItem
-                        ShortId="cancel_queue_play_immediate_8"
-                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
                 </PatternArrayRow>
-
-                <PatternArrayRow Id="Event_9_Headset"
-                                 ShortId="event_9_headset"
-                                 Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="SysEventCodecAptxHDInUse"
-                        DefaultValue="Codec aptX HD In Use" />
-                    <PatternArrayConfigItem
-                        ShortId="promptIndex"
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Microphone Mute Off" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
                         DefaultValue="9" />
-                    <PatternArrayConfigItem
-                        ShortId="state_mask"
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
                         DefaultValue="Connected | Streaming A2DP" />
-                    <PatternArrayConfigItem
-                        ShortId="sco_block"
-                        DefaultValue="false" />
-                    <PatternArrayConfigItem
-                        ShortId="cancel_queue_play_immediate_9"
-                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
                 </PatternArrayRow>
-
-                <PatternArrayRow Id="Event_10_Headset"
-                                 ShortId="event_10_headset"
-                                 Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="SysEventCodecAptxLLInUse"
-                        DefaultValue="Codec aptX Low Latency In Use" />
-                    <PatternArrayConfigItem
-                        ShortId="promptIndex"
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Microphone Mute On" />
+                    <PatternArrayConfigItem 
+                        ShortId="prompt_id" 
                         DefaultValue="10" />
-                    <PatternArrayConfigItem
-                        ShortId="state_mask"
+                    <PatternArrayConfigItem 
+                        ShortId="state_mask" 
                         DefaultValue="Connected | Streaming A2DP" />
-                    <PatternArrayConfigItem
-                        ShortId="sco_block"
-                        DefaultValue="false" />
-                    <PatternArrayConfigItem
-                        ShortId="cancel_queue_play_immediate_10"
-                        DefaultValue="false" />
-                </PatternArrayRow>
-
-                <PatternArrayRow Id="Event_11_Headset"
-                                 ShortId="event_11_headset"
-                                 Node="Basic">
-                    <PatternArrayConfigItem
-                        ShortId="SysEventCodecAptxAdaptiveInUse"
-                        DefaultValue="Codec aptX Adaptive In Use" />
-                    <PatternArrayConfigItem
-                        ShortId="promptIndex"
-                        DefaultValue="11" />
-                    <PatternArrayConfigItem
-                        ShortId="state_mask"
-                        DefaultValue="Connected | Streaming A2DP" />
-                    <PatternArrayConfigItem
-                        ShortId="sco_block"
-                        DefaultValue="false" />
-                    <PatternArrayConfigItem
-                        ShortId="cancel_queue_play_immediate_11"
-                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="sco_block" 
+                        DefaultValue="False" />
+                    <PatternArrayConfigItem 
+                        ShortId="cancel_queue_play_immediate" 
+                        DefaultValue="False" />
                 </PatternArrayRow>
             </BuildVariant>
 

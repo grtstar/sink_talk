@@ -485,7 +485,12 @@
                     ShortId="gain_mic_1a"
                     Desc="Sets the gain of the microphone input path. Only values 0-22 are valid, where the gain of the input path is configured in steps of 2.5dB and 3.5dB alternately, from -45dB to 21dB."
                     ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_1a_parameters']"
-                    DefaultValue="0x5"/>
+                    DefaultValue="0x5" >
+                    <BuildVariant
+                        HwVariant="CNS10001v4"
+                        SwVariant="Headset-Gaming"
+                        Value="0" />
+                </StructElementConfigItem>
                 <StructElementConfigItem
                     Id="Audio Instance for Voice Mic 1-a"
                     ShortId="instance_mic_1a"
@@ -536,7 +541,12 @@
                     ShortId="gain_mic_1b"
                     Desc="Sets the gain of the microphone input path. Only values 0-22 are valid, where the gain of the input path is configured in steps of 2.5dB and 3.5dB alternately, from -45dB to 21dB."
                     ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_1b_parameters']"
-                    DefaultValue="0x5"/>
+                    DefaultValue="0x5" >
+                    <BuildVariant
+                        HwVariant="CNS10001v4"
+                        SwVariant="Headset-Gaming"
+                        Value="5" />
+                </StructElementConfigItem>
                 <StructElementConfigItem
                     Id="Audio Instance for Voice Mic 1-b"
                     ShortId="instance_mic_1b"
@@ -993,7 +1003,7 @@
             <BuildVariant
                 HwVariant="CNS10001v4"
                 SwVariant="Headset-Gaming"
-                Value="PIO 10" />
+                Value="N/A" />
         </ConfigItem>
         <ConfigItem
             Id="Power On Audio Mute"

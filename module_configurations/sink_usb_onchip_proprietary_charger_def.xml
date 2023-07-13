@@ -476,6 +476,126 @@
                                 DefaultValue="1800" />
                         </PatternArrayRow>
                     </BuildVariant>
+                    <BuildVariant
+                        HwVariant="QCC3024-AA_DEV-BRD-R2-AA"
+                        SwVariant="Headset-Gaming" >
+                        <PatternArrayRow 
+                            Node="Basic" 
+                            ShortId="pattern_row" 
+                            Id="Pattern Row" >
+                            <PatternArrayConfigItem 
+                                ShortId="dplus" 
+                                DefaultValue="2.0V" />
+                            <PatternArrayConfigItem 
+                                ShortId="dminus" 
+                                DefaultValue="2.7V" />
+                            <PatternArrayConfigItem 
+                                ShortId="tolerance" 
+                                DefaultValue="0.4V" />
+                            <PatternArrayConfigItem 
+                                ShortId="charge" 
+                                DefaultValue="True" />
+                            <PatternArrayConfigItem 
+                                ShortId="vsel" 
+                                DefaultValue="CHG" />
+                            <PatternArrayConfigItem 
+                                ShortId="power_off" 
+                                DefaultValue="False" />
+                            <PatternArrayConfigItem 
+                                ShortId="disable_leds" 
+                                DefaultValue="False" />
+                            <PatternArrayConfigItem 
+                                ShortId="current" 
+                                DefaultValue="1000" />
+                        </PatternArrayRow>
+                        <PatternArrayRow 
+                            Node="Basic" 
+                            ShortId="pattern_row" 
+                            Id="Pattern Row" >
+                            <PatternArrayConfigItem 
+                                ShortId="dplus" 
+                                DefaultValue="2.7V" />
+                            <PatternArrayConfigItem 
+                                ShortId="dminus" 
+                                DefaultValue="2.0V" />
+                            <PatternArrayConfigItem 
+                                ShortId="tolerance" 
+                                DefaultValue="0.4V" />
+                            <PatternArrayConfigItem 
+                                ShortId="charge" 
+                                DefaultValue="True" />
+                            <PatternArrayConfigItem 
+                                ShortId="vsel" 
+                                DefaultValue="CHG" />
+                            <PatternArrayConfigItem 
+                                ShortId="power_off" 
+                                DefaultValue="False" />
+                            <PatternArrayConfigItem 
+                                ShortId="disable_leds" 
+                                DefaultValue="False" />
+                            <PatternArrayConfigItem 
+                                ShortId="current" 
+                                DefaultValue="1800" />
+                        </PatternArrayRow>
+                        <PatternArrayRow 
+                            Node="Basic" 
+                            ShortId="pattern_row" 
+                            Id="Pattern Row" >
+                            <PatternArrayConfigItem 
+                                ShortId="dplus" 
+                                DefaultValue="2.7V" />
+                            <PatternArrayConfigItem 
+                                ShortId="dminus" 
+                                DefaultValue="2.7V" />
+                            <PatternArrayConfigItem 
+                                ShortId="tolerance" 
+                                DefaultValue="0.4V" />
+                            <PatternArrayConfigItem 
+                                ShortId="charge" 
+                                DefaultValue="True" />
+                            <PatternArrayConfigItem 
+                                ShortId="vsel" 
+                                DefaultValue="CHG" />
+                            <PatternArrayConfigItem 
+                                ShortId="power_off" 
+                                DefaultValue="False" />
+                            <PatternArrayConfigItem 
+                                ShortId="disable_leds" 
+                                DefaultValue="False" />
+                            <PatternArrayConfigItem 
+                                ShortId="current" 
+                                DefaultValue="1800" />
+                        </PatternArrayRow>
+                        <PatternArrayRow 
+                            Node="Basic" 
+                            ShortId="pattern_row" 
+                            Id="Pattern Row" >
+                            <PatternArrayConfigItem 
+                                ShortId="dplus" 
+                                DefaultValue="1.2V" />
+                            <PatternArrayConfigItem 
+                                ShortId="dminus" 
+                                DefaultValue="1.2V" />
+                            <PatternArrayConfigItem 
+                                ShortId="tolerance" 
+                                DefaultValue="0.4V" />
+                            <PatternArrayConfigItem 
+                                ShortId="charge" 
+                                DefaultValue="True" />
+                            <PatternArrayConfigItem 
+                                ShortId="vsel" 
+                                DefaultValue="CHG" />
+                            <PatternArrayConfigItem 
+                                ShortId="power_off" 
+                                DefaultValue="False" />
+                            <PatternArrayConfigItem 
+                                ShortId="disable_leds" 
+                                DefaultValue="False" />
+                            <PatternArrayConfigItem 
+                                ShortId="current" 
+                                DefaultValue="1800" />
+                        </PatternArrayRow>
+                    </BuildVariant>
                 </ConfigPatternArray>
     
             </ConfigGroup>

@@ -531,19 +531,33 @@
                     HwVariant="CNS10001v4"
                     SwVariant="Headset-Gaming"
                     Value="N/A" />
+                <BuildVariant
+                    HwVariant="QCC3024-AA_DEV-BRD-R2-AA"
+                    SwVariant="Headset-Gaming"
+                    Value="PIO 21" />
             </StructElementConfigItem>
             <StructElementConfigItem
                 Id="Incoming"
                 Desc="Configures the PIO to drive when an incoming call is ringing."
                 ShortId="IncomingRingPIO"
                 DefaultValue="N/A"
-                ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='output_pios']"/>
+                ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='output_pios']" >
+                <BuildVariant
+                    HwVariant="QCC3024-AA_DEV-BRD-R2-AA"
+                    SwVariant="Headset-Gaming"
+                    Value="PIO 21" />
+            </StructElementConfigItem>
             <StructElementConfigItem
                 Id="Outgoing"
                 Desc="Configures the PIO to drive when an outgoing call is ringing."
                 ShortId="OutgoingRingPIO"
                 DefaultValue="N/A"
-                ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='output_pios']"/>
+                ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='output_pios']" >
+                <BuildVariant
+                    HwVariant="QCC3024-AA_DEV-BRD-R2-AA"
+                    SwVariant="Headset-Gaming"
+                    Value="PIO 21" />
+            </StructElementConfigItem>
         </ConfigStruct>
 
         <ConfigStruct
@@ -629,7 +643,12 @@
                 ShortId="supported_wbs_codecs"
                 Desc="The bitmask containing the supported HFP codecs. Regardless of this setting, the application will automatically select mandatory codecs of the selected HFP profile version."
                 DefaultValue="CVSD | Modified SBC"
-                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']"/>
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']" >
+                <BuildVariant
+                    HwVariant="QCC3024-AA_DEV-BRD-R2-AA"
+                    SwVariant="Headset-Gaming"
+                    Value="Narrow-band/CVSD | Wide-band/Modified SBC" />
+            </StructElementConfigItem>
             <StructElementConfigItem
                 Id="Disable NREC"
                 ShortId="disable_nrec"
@@ -754,6 +773,10 @@
             Desc="This is the HFP volume level used after initial power up. The default volume can be set in the range 0 to 15. The sixteen levels are the 'Speaker Gain' settings in the Voice pane."
             ConfigGroupPath="./[@ShortId='hfp_voice']/[@ShortId='volume_control']">
             <List use="hfp"/>
+            <BuildVariant
+                HwVariant="CNS10001v4"
+                SwVariant="Headset-Gaming"
+                Value="HFP 10" />
         </ConfigItem>
     </ConfigGroup>
 

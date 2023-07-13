@@ -356,7 +356,12 @@
             Type="bool"
             Size="1"
             DefaultValue="false"
-            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='at_power_on']"/>
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='at_power_on']" >
+            <BuildVariant
+                HwVariant="QCC3024-AA_DEV-BRD-R2-AA"
+                SwVariant="Headset-Gaming"
+                Value="true" />
+        </ConfigItem>
         <ConfigItem
             Id="Action on Pairing Timeout"
             ShortId="PowerDownOnDiscoTimeout"
@@ -381,6 +386,10 @@
             DefaultValue="Initiate RSSI Inquiry (proximity pairing) mode"
             ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='at_power_on']">
             <List use="g_ActionOn"/>
+            <BuildVariant
+                HwVariant="QCC3024-AA_DEV-BRD-R2-AA"
+                SwVariant="Headset-Gaming"
+                Value="Attempt to Reconnect to the last connected AG" />
         </ConfigItem>
         <ConfigItem
             Id="Discoverable if PDL Less Than"
@@ -389,7 +398,12 @@
             Type="uint"
             Size="4"
             DefaultValue="0x01"
-            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='discovery']"/>
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='discovery']" >
+            <BuildVariant
+                HwVariant="QCC3024-AA_DEV-BRD-R2-AA"
+                SwVariant="Headset-Gaming"
+                Value="0" />
+        </ConfigItem>
        <ConfigItem
             Id="Enter Pairing Mode on Failure to Connect to AG"
             ShortId="EnterPairingModeOnFailureToConn"

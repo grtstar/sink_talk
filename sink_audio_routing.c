@@ -1643,14 +1643,36 @@ void audioUpdateAudioActivePio(void)
     }
 }
 
+bool gDisableTalk = FALSE;
+bool bAudioPioState = FALSE;
 void enableAudioActivePio(void)
 {
-    PioDrivePio(PIO_AUDIO_ACTIVE, TRUE);
+    if(gDisableTalk == FALSE)
+    {
+        PioDrivePio(PIO_AUDIO_ACTIVE, TRUE);
+    }
+    bAudioPioState = TRUE;
 }
 
 void disableAudioActivePio(void)
 {
     PioDrivePio(PIO_AUDIO_ACTIVE, FALSE);
+    bAudioPioState = FALSE;
+}
+
+void disableTalk(void)
+{
+    gDisableTalk = TRUE;
+    PioDrivePio(PIO_AUDIO_ACTIVE, FALSE);
+}
+
+void enableTalk(void)
+{
+    gDisableTalk = FALSE;
+    if(bAudioPioState)
+    {
+        enableAudioActivePio();
+    }
 }
 
 void disableAudioActivePioWhenAudioNotBusy(void)
@@ -2359,13 +2381,22 @@ static void updateVolumeBasedOnRoutedSources(void)
 {
     if(sinkAudioIsVoiceRouted())
     {
-        hfp_link_priority link_priority = HfpLinkPriorityFromAudioSink(sinkAudioGetRoutedVoiceSink());
-        audioControlLowPowerCodecs(TRUE);
-
-        AudioSetVolume( sinkVolumeGetVolumeMappingforCVC(sinkHfpDataGetAudioSMVolumeLevel(PROFILE_INDEX(link_priority))),
-                                                            (int16)TonesGetToneVolume());
-        VolumeSetHfpMicrophoneGain(link_priority,
-                            (sinkHfpDataGetAudioGMuted(PROFILE_INDEX(link_priority)) ? MICROPHONE_MUTE_ON : MICROPHONE_MUTE_OFF));
+        if(mtGetConnectDevices() > 0 || AgIsConnected())
+        {
+            volume_info fm_volume_info = {0};
+            sinkGetMTVolume(&fm_volume_info);
+            AudioSetVolume(fm_volume_info.main_volume, (int16)TonesGetToneVolume());
+        }
+        else
+        {
+            hfp_link_priority link_priority = HfpLinkPriorityFromAudioSink(sinkAudioGetRoutedVoiceSink());
+            audioControlLowPowerCodecs(TRUE);
+    
+            AudioSetVolume( sinkVolumeGetVolumeMappingforCVC(sinkHfpDataGetAudioSMVolumeLevel(PROFILE_INDEX(link_priority))),
+                                                                (int16)TonesGetToneVolume());
+            VolumeSetHfpMicrophoneGain(link_priority,
+                                (sinkHfpDataGetAudioGMuted(PROFILE_INDEX(link_priority)) ? MICROPHONE_MUTE_ON : MICROPHONE_MUTE_OFF));
+        }
     }
     else if(sinkAudioIsAudioRouted())
     {

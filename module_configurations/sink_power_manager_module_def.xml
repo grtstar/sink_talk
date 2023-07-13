@@ -40,6 +40,10 @@
 		        HwVariant="CNS10001v4"
 		        SwVariant="Headset-Gaming"
 		        Value="Take no action" />
+		    <BuildVariant
+		        HwVariant="QCC3024-AA_DEV-BRD-R2-AA"
+		        SwVariant="Headset-Gaming"
+		        Value="Take no action" />
 		</ConfigItem>
 		
                 <ConfigItem	Id="Maximum volume level limit whilst charging when the battery is getting low [%]"

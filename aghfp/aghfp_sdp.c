@@ -503,7 +503,7 @@ void aghfpHandleServiceSearchAttributeCfm(AGHFP *aghfp, const CL_SDP_SERVICE_SEA
 void aghfpHandleServiceSearchCfm(AGHFP *aghfp, const CL_SDP_SERVICE_SEARCH_CFM_T *cfm)
 {
 	/* Check the outcome of the service search */
-	if (cfm->status == sdp_response_success)
+	if (cfm->status == sdp_response_success && cfm->num_records > 1)
 	{
         /* Remote device is an AG, don't connect */
         aghfpServiceSearchCheckFailed(aghfp, cfm->status);

@@ -39,26 +39,29 @@ Index 32: 当前人数5人_8k.sbc
 Index 33: 当前人数6人_8k.sbc
 Index 34: 当前人数7人_8k.sbc
 Index 35: 当前人数8人_8k.sbc
-Index 36: 取消组网_8k.sbc
-Index 37: 音乐分享开启_8k.sbc
-Index 38: 音乐分享关闭_8k.sbc
-Index 39: 保存组网失败_8k.sbc
-Index 40: 自动接听已打开_8k.sbc
-Index 41: 自动接听已关闭_8k.sbc
-Index 42: 对讲已连接_8k.sbc
-Index 43: 配对失败退出双人对讲配对_8k.sbc
-Index 44: 对讲记录已清除_8k.sbc
-Index 45: 退出配对_8k.sbc
-Index 46: 手机1已断开_8k.sbc
-Index 47: 手机2已断开_8k.sbc
-Index 48: 组网人数1人_8k.sbc
-Index 49: 组网人数2人_8k.sbc
-Index 50: 组网人数3人_8k.sbc
-Index 51: 组网人数4人_8k.sbc
-Index 52: 组网人数5人_8k.sbc
-Index 53: 组网人数6人_8k.sbc
-Index 54: 组网人数7人_8k.sbc
-Index 55: 组网人数8人_8k.sbc
+Index 36: 当前人数超过8人_8k.sbc
+Index 37: 取消组网_8k.sbc
+Index 38: 音乐分享开启_8k.sbc
+Index 39: 音乐分享关闭_8k.sbc
+Index 40: 保存组网失败_8k.sbc
+Index 41: 自动接听已打开_8k.sbc
+Index 42: 自动接听已关闭_8k.sbc
+Index 43: 对讲已连接_8k.sbc
+Index 44: 配对失败退出双人对讲配对_8k.sbc
+Index 45: 恢复出厂设置_8k.sbc
+Index 46: 退出配对_8k.sbc
+Index 47: 手机1已断开_8k.sbc
+Index 48: 手机2已断开_8k.sbc
+Index 49: 组网人数1人_8k.sbc
+Index 50: 组网人数2人_8k.sbc
+Index 51: 组网人数3人_8k.sbc
+Index 52: 组网人数4人_8k.sbc
+Index 53: 组网人数5人_8k.sbc
+Index 54: 组网人数6人_8k.sbc
+Index 55: 组网人数7人_8k.sbc
+Index 56: 组网人数8人_8k.sbc
+Index 57: 组网人数超过8人_8k.sbc
+Index 58: 进入USB升级模式_8k.sbc
 */
 enum
 {
@@ -98,6 +101,7 @@ enum
     AP_MULTI_TALK_6_PERSON,
     AP_MULTI_TALK_7_PERSON,
     AP_MULTI_TALK_8_PERSON,
+    AP_MULTI_TALK_9_PERSON,
     AP_MULTI_TALK_QUIT_PAIR,
     AP_MUSIC_SHARE_ON,
     AP_MUSIC_SHARE_OFF,
@@ -118,13 +122,15 @@ enum
     AP_MULTI_TALK_6_PAIRED,
     AP_MULTI_TALK_7_PAIRED,
     AP_MULTI_TALK_8_PAIRED,
+    AP_MULTI_TALK_9_PAIRED,
+    AP_DFU,
     AP_END
 };
 
 void AudioPlay(int event, bool queue);
 void AudioPlayFinish(void);
 
-
+#ifndef RUN_ON_M2
 #define PROMPT_REMOTE
-
+#endif
 #endif

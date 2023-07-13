@@ -157,14 +157,21 @@ static uint32 calculateDacRate (const ExamplePluginTaskdata * const task, const 
     return rate;
 }
 
-const T_mic_gain MIC_GAIN = {1,0,0x1,0x5}; /* +3db for digital and analog, preamp=in */
+T_mic_gain MIC_GAIN = {1,0,0x1,0x5}; /* +3db for digital and analog, preamp=in */
+#define PS_MIC_GAIN 0x27CE
 
 static void populatePluginFromAudioConnectData(const AUDIO_PLUGIN_CONNECT_MSG_T * const connect_message)
 {
+    uint16 mic_gain = 0;
+
     hfp_common_plugin_params_t *params = (hfp_common_plugin_params_t*)connect_message->params;
-
+    
+    if(PsFullRetrieve(PS_MIC_GAIN, &mic_gain, 1) == 1)
+    {
+        MIC_GAIN.analogue_gain = mic_gain & 0x1F;    
+    }
+    
     CSR_COMMON_EXAMPLE = PanicUnlessNew(EXAMPLE_t);
-
     CSR_COMMON_EXAMPLE->running         = FALSE;
     CSR_COMMON_EXAMPLE->link_type       = connect_message->sink_type ;
     CSR_COMMON_EXAMPLE->volume          = ((connect_message->volume > 0xf) ? VOLUME_0DB : connect_message->volume);
@@ -345,7 +352,10 @@ static void connectAudio(const ExamplePluginTaskdata * const task)
         params.sample_rate = CSR_COMMON_EXAMPLE->dac_rate;
         adc_rate = AudioOutputGetSampleRate(&params, 0);
 
-        connectMicrophones(task, adc_rate);
+        if(!CSR_COMMON_EXAMPLE->mic_muted)
+        {
+            connectMicrophones(task, adc_rate);
+        }
 
         if(CSR_COMMON_EXAMPLE->kap_type == 2)
         {
@@ -568,10 +578,7 @@ void CsrExamplePluginSetSoftMute(const ExamplePluginTaskdata * const task, const
     bool mute_mic = FALSE;
     bool mute_speaker = FALSE;
 
-    if(isPluginRunning() == FALSE)
-    {
-        return;
-    }
+   
 
     if(message->mute_states & AUDIO_MUTE_MASK(audio_mute_group_main))
     {
@@ -581,6 +588,12 @@ void CsrExamplePluginSetSoftMute(const ExamplePluginTaskdata * const task, const
     if(message->mute_states & AUDIO_MUTE_MASK(audio_mute_group_mic))
     {
         mute_mic = TRUE;
+    }
+
+    if(isPluginRunning() == FALSE)
+    {
+        CSR_COMMON_EXAMPLE->mic_muted = mute_mic;
+        return;
     }
 
     if(CSR_COMMON_EXAMPLE->mic_muted != mute_mic)

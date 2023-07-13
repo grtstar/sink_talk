@@ -29,6 +29,10 @@
                 HwVariant="CNS10001v4"
                 SwVariant="Headset-Gaming"
                 Value="30600" />
+            <BuildVariant
+                HwVariant="QCC3024-AA_DEV-BRD-R2-AA"
+                SwVariant="Headset-Gaming"
+                Value="165" />
         </ConfigItem>
         <ConfigItem
             Id="Product ID [hex]"
@@ -43,6 +47,10 @@
                 HwVariant="CNS10001v4"
                 SwVariant="Headset-Gaming"
                 Value="1044" />
+            <BuildVariant
+                HwVariant="QCC3024-AA_DEV-BRD-R2-AA"
+                SwVariant="Headset-Gaming"
+                Value="43605" />
         </ConfigItem>
         <ConfigItem
             Id="BCD Version [hex]"

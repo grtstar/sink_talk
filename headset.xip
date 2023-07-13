@@ -524,7 +524,7 @@
    <property key="enable_peer_device" >0</property>
    <property key="enable_selfie" >0</property>
    <property key="enable_speech_regcognition" >0</property>
-   <property key="enable_upgrade" >1</property>
+   <property key="enable_upgrade" >0</property>
    <property key="enable_usb" >1</property>
    <property key="enable_usb_audio" >0</property>
    <property key="enable_voice_assistant" >0</property>

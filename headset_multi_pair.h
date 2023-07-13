@@ -10,4 +10,5 @@ uint8 mtGetAdvDataLen(void);
 bool sinkMultiTalkPairServiceEnabled(void);
 uint16 mtGetPairServiceUuid(void);
 uint8* mtGetAdvertisingFilter(void);
+bool mtIs2TalkPairingSession(void);
 #endif

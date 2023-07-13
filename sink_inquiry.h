@@ -59,6 +59,8 @@ typedef enum
     inquiry_session_multi_talk,
     inquiry_session_friend,
     inquiry_session_nearby,
+    inquiry_session_2talk,
+    inquiry_session_2talk_pairing,
     inquiry_session_ag
 } inquiry_session;
 
@@ -105,6 +107,8 @@ typedef struct
     remote_device      peer_device:2;       /* Indicates that the remote device is of the same type as the local one */
     remote_features    peer_features:7;     /* Bitmask of Peer device features supported on remote device */
     supported_profiles remote_profiles:4;   /* Bitmask of profiles supported by a remote device */
+#else 
+    remote_device      peer_device;
 #endif
 }inquiry_result_t;
 

@@ -292,7 +292,7 @@
         Id="Charger Progress" />
 
     <ConfigGroup 
-        Active="True" 
+        Active="False" 
         PsKeyNumber="165" 
         Id="Sink Upgrade Readonly" />
 

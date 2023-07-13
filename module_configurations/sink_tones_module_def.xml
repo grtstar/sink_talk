@@ -155,14 +155,6 @@
                     ShortId="Tone"
                     DefaultValue="Short 1" />
             </PatternArrayRow>
-            <PatternArrayRow Id="Tone_Config_16" ShortId="tone_config_16" Node="Basic" >
-                <PatternArrayConfigItem
-                    ShortId="Event"
-                    DefaultValue="Establish SLC"/>
-                <PatternArrayConfigItem
-                    ShortId="Tone"
-                    DefaultValue="V Long High" />
-            </PatternArrayRow>
             <PatternArrayRow Id="Tone_Config_17" ShortId="tone_config_17" Node="Basic" >
                 <PatternArrayConfigItem
                     ShortId="Event"
@@ -211,14 +203,6 @@
                     ShortId="Tone"
                     DefaultValue="G Major Arp Up" />
             </PatternArrayRow>
-                <PatternArrayRow Id="Tone_Config_24" ShortId="tone_config_24" Node="Basic" >
-                    <PatternArrayConfigItem
-                        ShortId="Event"
-                        DefaultValue="Reset Paired Device List"/>
-                    <PatternArrayConfigItem
-                        ShortId="Tone"
-                        DefaultValue="Long Double Low" />
-                </PatternArrayRow>
             <PatternArrayRow Id="Tone_Config_26" ShortId="tone_config_26" Node="Basic" >
                 <PatternArrayConfigItem
                     ShortId="Event"
@@ -407,6 +391,17 @@
                         ShortId="tone" 
                         DefaultValue="Short 2" />
                 </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Establish SLC" />
+                    <PatternArrayConfigItem 
+                        ShortId="tone" 
+                        DefaultValue="V Long High" />
+                </PatternArrayRow>
             </BuildVariant>
             <BuildVariant
                 HwVariant="All"
@@ -443,6 +438,92 @@
                             ShortId="Tone"
                             DefaultValue="Long Low" />
                     </PatternArrayRow>
+                <PatternArrayRow Id="Tone_Config_16" ShortId="tone_config_16" Node="Basic" >
+                    <PatternArrayConfigItem
+                        ShortId="Event"
+                        DefaultValue="Establish SLC"/>
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="V Long High" />
+                </PatternArrayRow>
+                    <PatternArrayRow Id="Tone_Config_24" ShortId="tone_config_24" Node="Basic" >
+                        <PatternArrayConfigItem
+                            ShortId="Event"
+                            DefaultValue="Reset Paired Device List"/>
+                        <PatternArrayConfigItem
+                            ShortId="Tone"
+                            DefaultValue="Long Double Low" />
+                    </PatternArrayRow>
+            </BuildVariant>
+            <BuildVariant
+                HwVariant="QCC3024-AA_DEV-BRD-R2-AA"
+                SwVariant="Headset-Gaming" >
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="RSSI Pair" />
+                    <PatternArrayConfigItem 
+                        ShortId="tone" 
+                        DefaultValue="V Long High" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="Pairing Fail" />
+                    <PatternArrayConfigItem 
+                        ShortId="tone" 
+                        DefaultValue="Long Low" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="RSSI Pair Reminder" />
+                    <PatternArrayConfigItem 
+                        ShortId="tone" 
+                        DefaultValue="Long Low" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="RSSI Pair Timeout" />
+                    <PatternArrayConfigItem 
+                        ShortId="tone" 
+                        DefaultValue="Long Low" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="AVRCP Play Pause" />
+                    <PatternArrayConfigItem 
+                        ShortId="tone" 
+                        DefaultValue="Short 1" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="event" 
+                        DefaultValue="..." />
+                    <PatternArrayConfigItem 
+                        ShortId="tone" 
+                        DefaultValue="No Tone" />
+                </PatternArrayRow>
             </BuildVariant>
         </ConfigPatternArray>
     </ConfigGroup>
@@ -524,6 +605,14 @@
                 HwVariant="CF819"
                 SwVariant="Headset-Gaming"
                 Value="8" />
+            <BuildVariant
+                HwVariant="QCC3024-AA_DEV-BRD-R2-AA"
+                SwVariant="Headset-Gaming"
+                Value="10" />
+            <BuildVariant
+                HwVariant="CNS10001v4"
+                SwVariant="Headset-Gaming"
+                Value="13" />
         </ConfigItem>
     </ConfigGroup>
 </ModuleData>

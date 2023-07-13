@@ -141,6 +141,7 @@ Part of ADK_CSR867x.WIN. 4.4
 
 #ifdef ENABLE_MULTI_TALK
 #include "headset_multi_talk.h"
+#include "headset_multi_pair.h"
 #endif
 
 #include "headset_ag.h"
@@ -731,6 +732,7 @@ static bool sinkPowerProcessEventPower(const MessageId EventPower)
             
                  /* Power on BLE */
                  /* sinkBlePowerOnEvent();*/
+                 MessageSend(&theSink.task, EventSysMuiltTalkPowerOn, NULL);
 
                 sinkBroadcastAudioHandleUserPowerOn();
                 
@@ -837,6 +839,7 @@ static bool sinkPowerProcessEventPower(const MessageId EventPower)
 					sinkAudioEQOperatingStateIndication();
 
                      /* Power off BLE if not in BA mode*/
+                     mtInquiryStop();
                         sinkBlePowerOffEvent();
                     sinkAncHandlePowerOff();
 
@@ -1200,7 +1203,7 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
 
             if(id == EventUsrMainOutVolumeDown || id == EventUsrMainOutVolumeUp || id == EventSysVolumeMax || id == EventSysVolumeMin)
             {
-                if(mtGetConnectDevices() == 0)
+                if(mtGetConnectDevices() == 0 && !AgIsConnected())
                 {
                     return;
                 }
@@ -1213,14 +1216,14 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
 
             if(id == EventUsrMicrophoneMuteToggle)
             {
-                if(mtGetConnectDevices() == 0)
+                if(mtGetConnectDevices() == 0 && !AgIsConnected())
                 {
                     return;
                 }
             }
             if(id == EventUsrMicrophoneMuteOn)
             {
-                if(mtGetConnectDevices())
+                if(mtGetConnectDevices() || AgIsConnected())
                 {
                     AudioPlay(AP_MIC_OFF, TRUE);
                     lIndicateEvent = FALSE;
@@ -1228,7 +1231,7 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
             }
             if(id == EventUsrMicrophoneMuteOff)
             {
-                if(mtGetConnectDevices())
+                if(mtGetConnectDevices()|| AgIsConnected())
                 {
                     AudioPlay(AP_MIC_ON, TRUE);
                     lIndicateEvent = FALSE;
@@ -1299,6 +1302,9 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
         case (EventSysPairingFail):
             /*we have failed to pair in the alloted time - return to the connectable state*/
             MAIN_DEBUG(("HS: Pairing Fail\n")) ;
+ #ifdef ENABLE_MULTI_TALK
+            break;
+ #endif
             if (lState != deviceTestMode)
             {
                 inquiryStop();
@@ -1689,7 +1695,7 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
                     MessageSend(&theSink.task, EventUsrRssiPair, 0);
                 AudioPlay(AP_RESET_PAIR_LIST, TRUE);
 
-                MessageSendLater(&theSink.task, EventUsrPowerOff, NULL, 500);
+                sinkHfpDataSetDefaultVolume(7);
             }
         break ;
         case ( EventSysLimboTimeout ):
@@ -1934,6 +1940,7 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
         case EventSysSecondaryDeviceConnected:
             MAIN_DEBUG(("HS:Device Connected [%c]\n " , (id - EventSysPrimaryDeviceConnected)? 'S' : 'P'  )); 
  #ifdef     ENABLE_MULTI_TALK
+            lIndicateEvent = FALSE;
             break;
  #else
             sinkNfcBTDeviceConnectedInd(task);
@@ -1959,9 +1966,11 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
              /*they are received here so that LED patterns and Tones can be assigned*/
         case EventSysSCOLinkOpen :
             MAIN_DEBUG(("EventSysSCOLinkOpen\n")) ;
+            disableTalk();
         break ;
         case EventSysSCOLinkClose:
             MAIN_DEBUG(("EventSysSCOLinkClose\n")) ;
+            enableTalk();
         break ;
         case EventSysEndOfCall :
             MAIN_DEBUG(("EventSysEndOfCall\n")) ;
@@ -2024,6 +2033,7 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
         case EventUsrEnterDFUMode:
         {
             MAIN_DEBUG(("EventUsrEnterDFUMode\n")) ;
+            AudioPlay(AP_DFU, TRUE);
             BootSetMode(BOOTMODE_DFU);
         }
         break;
@@ -3705,10 +3715,16 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
 #endif
 
 #ifdef ENABLE_MULTI_TALK
-    processEventMultiTalk(task, id, message);
-    processEventMultiTalkFriendMode(task, id, message);
-    processEventMultiTalkNearbyMode(task, id, message);
-    processEventMultiTalkCoupleMode(task, id, message);
+    if(stateManagerGetState() != deviceInConfigMode)
+    {
+        if(stateManagerGetState() != deviceLimbo || EventUsrPowerOff == id)
+        {
+            processEventMultiTalk(task, id, message);
+            processEventMultiTalkFriendMode(task, id, message);
+            processEventMultiTalkNearbyMode(task, id, message);
+            processEventMultiTalkCoupleMode(task, id, message);
+        }
+    }
 #endif
 }
 
@@ -4643,9 +4659,10 @@ int main(void)
             }
             
             UartInit(&theSink.task);
-            MessageSendLater(&theSink.task, EventMultiTalkUser1, NULL,D_SEC(100));
+            MessageSendLater(&theSink.task, EventMultiTalkUser1, NULL,D_SEC(30));
+#ifndef RUN_ON_M2
             LedManagerForceDisable(TRUE);
-
+#endif
         }
         break;
     }

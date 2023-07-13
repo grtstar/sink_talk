@@ -78,6 +78,7 @@ typedef enum
     sink_ext_state_multiTalkSlow3,
     sink_ext_state_multiTalkSlow2,
     sink_ext_state_multiTalkFast,
+    sink_ext_state_multiTalkAlternate,
         /*! The maximum number of device extended states - must always be the last enum item */
     SINK_NUM_EXTENDED_STATES
 

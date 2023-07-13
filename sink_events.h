@@ -696,6 +696,7 @@ typedef enum sinkEventsTag
 
 /*0x47F4*/    EventSysBAReceiverModeActive,
 
+              EventSysMultiTalkConnect,
               EventSysMultiTalkReconnect,
               EventSysMultiTalkCheckLoop,
               EventSysMultiTalkCheckLoopTimeout,
@@ -731,6 +732,7 @@ typedef enum sinkEventsTag
               EventSysAGSlcConnectCfm,
               EventSysAGSlcDisconnectInd,
               EventSysAGAudioConnectCfm,
+              EventSysMuiltTalkPowerOn,
 
               EventSysLast
 

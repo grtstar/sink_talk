@@ -43,6 +43,7 @@ Copyright (c) 2004 - 2017 Qualcomm Technologies International, Ltd.
 #include "sink_accessory.h"
 
 #include "headset_multi_talk.h"
+#include "headset_ag.h"
 
 #include <audio.h>
 #include <sink.h>
@@ -788,9 +789,9 @@ void VolumeSetMicrophoneMute(AUDIO_MUTE_STATE_T state)
         VolumeSetA2dpMicrophoneGain(state);
     }
 #endif /* defined(APTX_LL_BACK_CHANNEL) || defined(INCLUDE_FASTSTREAM)*/
-    else if(mtGetConnectDevices() > 0)
+    else if(mtGetConnectDevices() > 0 || AgIsConnected())
     {
-        mtMicMute(state);
+        mtMicMute(state, FALSE);
     }
 }
 
@@ -1199,7 +1200,11 @@ static void VolumeSetNewVolume(const volume_info * const volumes, const int16 pr
         updateVolume(volumes, group);
     }
 
-    VolumeSetDSPOperatingMode(volumes, group, previousVolume);
+    /* mask by grt */
+    if(0)
+    {
+        VolumeSetDSPOperatingMode(volumes, group, previousVolume);
+    }
 }
 
 static void VolumeIncrementGroupVolumeAndCheckLimit(volume_info * const volume, const audio_output_group_t group)
@@ -1222,6 +1227,7 @@ static void VolumeIncrementGroupVolumeAndCheckLimit(volume_info * const volume, 
     if(*groupVolume >= upperVolumeLimit)
     {
         *groupVolume = upperVolumeLimit;
+        GSINK_VOLUME_DATA.vol_at_max = TRUE;
         MessageSend(&theSink.task, EventSysVolumeMax, 0);
     }
 }
@@ -1240,6 +1246,7 @@ static void VolumeDecrementGroupVolumeAndCheckLimit(volume_info * const volume, 
     if(*groupVolume <= VOLUME_A2DP_MIN_LEVEL)
     {
         *groupVolume = VOLUME_A2DP_MIN_LEVEL;
+        GSINK_VOLUME_DATA.vol_at_min = TRUE;
         MessageSend(&theSink.task, EventSysVolumeMin, 0);
     }
 }
@@ -1749,7 +1756,7 @@ static bool ifUsbSinkExistsModifyAndUpdateVolume(const volume_direction directio
 
 static bool ifMtTalkExistsModifyAndUpdateVolume(const volume_direction direction, const audio_output_group_t group, const bool unmuteOnChange)
 {
-    if(mtGetConnectDevices() > 0)
+    if(mtGetConnectDevices() > 0 || AgIsConnected())
     {
         volume_info fm_volume_info = {0};
 
@@ -2016,19 +2023,19 @@ bool sinkVolumeProcessEventVolume(const MessageId volume_event)
 
             case EventUsrMainOutVolumeUp:
                 VOL_DEBUG(("EventUsrMainOutVolumeUp\n"));
+                sinkVolumeModifyAndUpdateRoutedAudioMainVolume(increase_volume);
                 if(GSINK_VOLUME_DATA.vol_at_max)
                 {
                     indicate_event = FALSE;
                 }
-                sinkVolumeModifyAndUpdateRoutedAudioMainVolume(increase_volume);
                 break;
             case EventUsrMainOutVolumeDown:
-                VOL_DEBUG(("EventUsrMainOutVolumeDown\n"));
+                VOL_DEBUG(("EventUsrMainOutVolumeDown\n"));                
+                sinkVolumeModifyAndUpdateRoutedAudioMainVolume(decrease_volume);
                 if(GSINK_VOLUME_DATA.vol_at_min)
                 {
                     indicate_event = FALSE;
                 }
-                sinkVolumeModifyAndUpdateRoutedAudioMainVolume(decrease_volume);
                 break;
             case EventUsrAuxOutVolumeUp:
                 VOL_DEBUG(( "HS : Aux Out Vol Up\n" ));

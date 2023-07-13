@@ -11,7 +11,6 @@ enum
 
 void mtInit(Task task);
 bool mtEnterPairing(void);
-void mtInquiry(void);
 void mtACLConnect(bdaddr *bd_addr, uint16 psm);
 void mtACLDisconnect(int device);
 void mtScoConnect(Sink sink);
@@ -20,6 +19,7 @@ void mtScoDisconnect(int device);
 bool mtConnect(bdaddr *bd_addr);
 void mtReconnect(void);
 void mtDisconnect(void);
+void mtPowerOff(void);
 
 void handleMTL2capRegisterCfm(CL_L2CAP_REGISTER_CFM_T *msg);
 void handleMTL2capConnectInd(CL_L2CAP_CONNECT_IND_T *msg);
@@ -53,6 +53,7 @@ Sink mtGetSink(int type);
 
 bool mtHeadConnected(void);
 bool mtNodeConnected(void);
+bool mtIsFriendPairing(void);
 
 bool processEventMultiTalk(Task task, MessageId id, Message message);
 
@@ -93,6 +94,7 @@ typedef enum MTStatus
     MT_ST_PARING,
     MT_ST_CONNECTING,
     MT_ST_CHECKLOOP,
+    MT_ST_NOLOOP,
     MT_ST_CONNECTED,
     MT_ST_LINKLOSS,
     MT_ST_WAITING_CONNECT,
@@ -168,6 +170,7 @@ typedef struct MTData
     bdaddr couple_addr;
     bdaddr headset_addr;
     uint8_t couple_type;
+    uint8_t couple_reconnect_retry;
 
     bdaddr header_addr[2];
     uint8 sco_expend_dev;
@@ -276,8 +279,12 @@ bool mtSendPeerAddr(int ch, bdaddr *addr);
 void mtPeerStateCoupleMode(uint8 state);
 void MTResetDeviceList(void);
 bool mtCheckPeerDevice(bdaddr *addr);
-void mtMicMute(uint8 mic_gain);
+void mtMicMute(uint8 mic_gain, bool force);
 
 void sinkGetMTVolume(volume_info * volume);
 void sinkSetMTVolume(volume_info * volume);
+
+#define PROJECT_ID  0x3741
+#define COMPANY_ID  0x0272
+uint32 CalcEncryptKey(uint32 address_nap, uint32 address_uap, uint32 address_lap, uint32 projectId, uint32 companyId);
 #endif

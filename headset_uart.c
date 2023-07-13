@@ -231,7 +231,17 @@ void UartProcessData(const uint8_t *data, int size)
             {
                 uint16 event = ud->uart_buff[4] << 8 | ud->uart_buff[5];
                 UART_DEBUG(("UART: evnet = 0x%x\n", event));
-                MessageSend(ud->app_task, event, NULL);
+                if(event == EventUsrPowerOff)
+                {
+                    if(stateManagerGetState() != deviceLimbo)
+                    {
+                        MessageSend(ud->app_task, event, NULL);
+                    }
+                }
+                else
+                {
+                    MessageSend(ud->app_task, event, NULL);
+                }
             }
             if (ud->uart_buff[3] == UTYPE_STATE)
             {
@@ -343,6 +353,7 @@ void UartSendState(int state)
     case sink_ext_state_multiTalkSlow3:
     case sink_ext_state_multiTalkSlow2:
     case sink_ext_state_multiTalkFast:
+    case sink_ext_state_connDiscoverableToSource:
     {
         uint8 d[6] = {0xAA, 0x55, 2, UTYPE_STATE};
         d[4] = state;

@@ -343,6 +343,98 @@
                             DefaultValue="0x4082"/>
                 </PatternArrayRow>      
             </BuildVariant>
+            <BuildVariant
+                HwVariant="QCC3024-AA_DEV-BRD-R2-AA"
+                SwVariant="Headset-Gaming" >
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="original_cap_id" 
+                        DefaultValue="AEC 4-MIC" />
+                    <PatternArrayConfigItem 
+                        ShortId="new_cap_id" 
+                        DefaultValue="16391" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="original_cap_id" 
+                        DefaultValue="ANC Tuning" />
+                    <PatternArrayConfigItem 
+                        ShortId="new_cap_id" 
+                        DefaultValue="16514" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="original_cap_id" 
+                        DefaultValue="aptX Adaptive Decoder" />
+                    <PatternArrayConfigItem 
+                        ShortId="new_cap_id" 
+                        DefaultValue="16513" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="original_cap_id" 
+                        DefaultValue="aptX Adaptive Demux" />
+                    <PatternArrayConfigItem 
+                        ShortId="new_cap_id" 
+                        DefaultValue="16512" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="original_cap_id" 
+                        DefaultValue="aptX Demux" />
+                    <PatternArrayConfigItem 
+                        ShortId="new_cap_id" 
+                        DefaultValue="16493" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="original_cap_id" 
+                        DefaultValue="async_wbs_encoder" />
+                    <PatternArrayConfigItem 
+                        ShortId="new_cap_id" 
+                        DefaultValue="16509" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="original_cap_id" 
+                        DefaultValue="Switched Passthrough Consumer" />
+                    <PatternArrayConfigItem 
+                        ShortId="new_cap_id" 
+                        DefaultValue="16511" />
+                </PatternArrayRow>
+                <PatternArrayRow 
+                    Node="Basic" 
+                    ShortId="pattern_row" 
+                    Id="Pattern Row" >
+                    <PatternArrayConfigItem 
+                        ShortId="original_cap_id" 
+                        DefaultValue="aptX Classic Decoder" />
+                    <PatternArrayConfigItem 
+                        ShortId="new_cap_id" 
+                        DefaultValue="16465" />
+                </PatternArrayRow>
+            </BuildVariant>
          </ConfigPatternArray>
     </ConfigGroup>
 </ModuleData>
