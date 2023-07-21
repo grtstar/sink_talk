@@ -846,7 +846,8 @@ bool sinkA2dpEnabled(void)
         enabled = a2dp_config_data->EnableA2dpStreaming;
         configManagerReleaseConfig(A2DP_CONFIG_BLK_ID);
     }
-    return enabled;
+    return FALSE;
+    /* return enabled; grt*/
 }
 
 /*************************************************************************

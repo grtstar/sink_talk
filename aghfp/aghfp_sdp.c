@@ -14,6 +14,7 @@ Part of ADK_CSR867x.WIN. 4.4
 #include "aghfp_slc_handler.h"
 #include "aghfp_wbs.h"
 
+#include <stdio.h>
 #include <panic.h>
 #include <service.h>
 #include <string.h>
@@ -466,8 +467,8 @@ void aghfpHandleServiceSearchAttributeCfm(AGHFP *aghfp, const CL_SDP_SERVICE_SEA
         if (getRfcommChannelNumber(cfm->attributes,
 			cfm->attributes + cfm->size_attributes,
 			&sdp_data))
-		{        
-            if (agSupportedProfileIsHfp(aghfp->supported_profile))
+		{   
+            if (agSupportedProfileIsHfp(aghfp->supported_profile) && cfm->bd_addr.nap != 0x10dc)
             {
                 /* check this isn't an AG before trying to connect */
                 aghfp->rfc_channel = sdp_data;
@@ -503,7 +504,7 @@ void aghfpHandleServiceSearchAttributeCfm(AGHFP *aghfp, const CL_SDP_SERVICE_SEA
 void aghfpHandleServiceSearchCfm(AGHFP *aghfp, const CL_SDP_SERVICE_SEARCH_CFM_T *cfm)
 {
 	/* Check the outcome of the service search */
-	if (cfm->status == sdp_response_success && cfm->num_records > 1)
+	if (cfm->status == sdp_response_success)
 	{
         /* Remote device is an AG, don't connect */
         aghfpServiceSearchCheckFailed(aghfp, cfm->status);

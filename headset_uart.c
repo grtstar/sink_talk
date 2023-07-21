@@ -304,6 +304,7 @@ void UartSendTone(uint16 event)
     case EventUsrMainOutVolumeUp:
     case EventSysVolumeMax:
     case EventSysVolumeMin:
+    case EventSysRssiPairReminder:
     {
         uint8 d[7] = {0xAA, 0x55, 3, UTYPE_TONE};
         d[4] = event >> 8;
@@ -353,7 +354,7 @@ void UartSendState(int state)
     case sink_ext_state_multiTalkSlow3:
     case sink_ext_state_multiTalkSlow2:
     case sink_ext_state_multiTalkFast:
-    case sink_ext_state_connDiscoverableToSource:
+    /*case sink_ext_state_connDiscoverableToSource:*/
     {
         uint8 d[6] = {0xAA, 0x55, 2, UTYPE_STATE};
         d[4] = state;

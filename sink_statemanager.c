@@ -51,6 +51,7 @@ Copyright (c) 2004 - 2017 Qualcomm Technologies International, Ltd.
 #include "headset_multi_talk.h"    
 #include "headset_uart.h"
 #include "headset_multi_pair.h"
+#include "headset_ag.h"
 #endif
 
 #include <stdlib.h>
@@ -345,7 +346,7 @@ static sink_extended_state_t getConnectedExtendedStates(void)
     {
         return sink_ext_state_multiTalkFast;
     }
-    if(mtHeadConnected())
+    if(mtHeadConnected() || AgIsConnected())
     {
         return sink_ext_state_multiTalkSlow2;
     }

@@ -446,6 +446,7 @@ void mtDisconnect(void)
 {
     if (mt->mt_device[MT_LEFT].state >= MT_SYN_Connecting)
     {
+        MT_DEBUG(("MT: mtDisconnect left sco\n"));
         mtScoDisconnect(MT_LEFT);
     }
     else 
@@ -455,6 +456,7 @@ void mtDisconnect(void)
 
     if (mt->mt_device[MT_RIGHT].state >= MT_SYN_Connecting)
     {
+        MT_DEBUG(("MT: mtDisconnect right sco\n"));
         mtScoDisconnect(MT_RIGHT);
     }
     else 
@@ -506,11 +508,13 @@ void mtScoDisconnect(int device)
 {
     if (mt->mt_device[device].audio_sink != NULL)
     {
+        MT_DEBUG(("MT: Disconnect sco 0\n"));
         mt->mt_device[device].state = MT_SYN_Disconnecting;
         ConnectionSyncDisconnect(mt->mt_device[device].audio_sink, hci_error_oetc_user);
     }
     else if (mt->mt_device[device].state == MT_SYN_Connecting)
     {
+        MT_DEBUG(("MT: Disconnect sco 0\n"));
         mt->mt_device[device].state = MT_L2CAP_Connected;
         mtACLDisconnect(device);
     }
@@ -971,6 +975,7 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
         }
         mt->mt_mode = CLOSE_MODE;
         PowerAmpOff();
+        disableAudioActivePio();
         return FALSE;
     }
     if (id == EventSysMuiltTalkPowerOn)
@@ -1002,7 +1007,7 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
     {
         mt->prepare_paring = 1;
     }
-    if (id == EventSysPairingFail || id == EventUsrCancelPairing)
+    if (id == EventUsrCancelPairing)
     {
         if (mt->prepare_paring == 1)
         {
@@ -1013,11 +1018,23 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
             }
         }
     }
-
-    if (id == EventSysPrimaryDeviceConnected || id == EventSysSecondaryDeviceConnected  || id == EventSysSCOLinkOpen)
+    if(id == EventSysPairingFail)
     {
         if (mt->prepare_paring == 1)
         {
+            mt->prepare_paring = 0;
+            if (mt->mt_mode == COUPLE_MODE_PAIRING)
+            {
+                MessageSendLater(task, EventSysMultiTalkPairingTimeoutCoupleMode, NULL, D_SEC(2));
+            }
+        }
+    }
+
+    if (id == EventSysPrimaryDeviceConnected || id == EventSysSecondaryDeviceConnected  || id == EventSysSCOLinkOpen || id == EventSysPairingSuccessful)
+    {
+        if (mt->prepare_paring == 1)
+        {
+            mt->prepare_paring = 0;
             if (mt->mt_mode == COUPLE_MODE_PAIRING)
             {
                 MessageSendLater(task, EventSysMultiTalkQuitPairingCoupleMode, NULL, D_SEC(2));
@@ -1228,6 +1245,7 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
             mt->prepare_paring = 0;
             mt->mt_mode = FREIEND_MODE_PAIRING;
             MessageSend(task, EventMultiTalkEnterPair, NULL);
+            MessageCancelAll(mt->app_task, EventSysMultiTalkLeaveCoupleModeDelay);
             return FALSE;
         }
         if (mt->mt_mode == COUPLE_MODE)
@@ -1243,7 +1261,6 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
             {
                 AudioPlay(AP_TWO_TALK_QUIT_PAIR, TRUE);
             }
-            mt->prepare_paring = 0;
             PowerAmpOff();
         }
     }

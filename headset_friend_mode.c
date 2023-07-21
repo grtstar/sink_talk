@@ -101,7 +101,11 @@ bool handleMTL2capConnectIndFriendMode(CL_L2CAP_CONNECT_IND_T *msg)
         MT_DEBUG(("MT: psm error\n"));
         return FALSE;
     }
-
+    if (mt->total_connected >= 8)
+    {
+        MT_DEBUG(("MT: connected device >= 8\n"));
+        return FALSE;
+    }
     if (mt->mt_mode == FREIEND_MODE)
     {
         if (!RouteTableIsContain(&mt->route_table, &msg->bd_addr))
@@ -653,6 +657,10 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
             }
             else
             {
+                if(mt->total_connected > 8)
+                {
+                    AudioPlay(AP_MULTI_TALK_9_PAIRED, TRUE);
+                }
                 AudioPlay(AP_SAVE_FREIND_FAILED, TRUE);
                 MT_DEBUG(("MT: No connect, do nothing\n"));
             }
@@ -733,6 +741,11 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
                     ind->current_taddr.addr.nap,
                         ind->current_taddr.addr.uap,
                         ind->current_taddr.addr.lap)); */
+        }
+        if (mt->total_connected >= 8)
+        {
+            MT_DEBUG(("MT: but total_connected >= 8\n"));
+            break;
         }
         if (mt->status != MT_ST_SEARCHING && mt->status != MT_ST_PARING)
         {

@@ -512,7 +512,7 @@ void sinkHandleAuthenticateCfm(const CL_SM_AUTHENTICATE_CFM_T *cfm)
         {
             /* Mark the device as trusted */
             deviceManagerMarkTrusted(&cfm->bd_addr);
-            MessageSend (&theSink.task , EventSysPairingSuccessful , 0 );
+            /*MessageSend (&theSink.task , EventSysPairingSuccessful , 0 ); grt*/
             sinkNfcAuthenticationSuccessInd(&theSink.task);
         }
     }

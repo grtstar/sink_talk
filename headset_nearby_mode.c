@@ -154,7 +154,7 @@ bool handleMTL2capConnectIndNearbyMode(CL_L2CAP_CONNECT_IND_T *msg)
         MT_DEBUG(("MT: psm error\n"));
         return FALSE;
     }
-    if (mt->nearby_connected == 8)
+    if (mt->nearby_connected >= 8)
     {
         MT_DEBUG(("MT: connected device is 8\n"));
         return FALSE;

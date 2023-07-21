@@ -512,13 +512,9 @@ static void profile_handler(Task task, MessageId id, Message message)
 	{
 		AGHFP_SLC_CONNECT_IND_T *msg = (AGHFP_SLC_CONNECT_IND_T *)message;
 		AG_DEBUG(("AGHFP_SLC_CONNECT_IND\n"));
-		if(mt != NULL && (mt->mt_mode == COUPLE_MODE || mt->mt_mode == COUPLE_MODE_PAIRING || mt->mt_mode == CLOSE_MODE))
+		if(mt != NULL && (mt->mt_mode == COUPLE_MODE))
 		{
 			AghfpSlcConnectResponse(SIMPLE->aghfp, TRUE);
-			if(mt->mt_mode == CLOSE_MODE)
-			{
-				mt->mt_mode = COUPLE_MODE;
-			}
 		}
 		else
 		{

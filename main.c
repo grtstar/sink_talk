@@ -1461,9 +1461,8 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
             MAIN_DEBUG(("HS: RSSI Pair Reminder\n"));
             if (stateManagerGetState() != deviceLimbo )
                 MessageSendLater(&theSink.task, EventSysRssiPairReminder, 0, D_SEC(INQUIRY_REMINDER_TIMEOUT_SECS));
-            else
-                lIndicateEvent = FALSE;
-
+            UartSendTone(EventSysRssiPairReminder);
+            lIndicateEvent = FALSE;
         break;
         case ( EventSysRssiPairTimeout ):
             MAIN_DEBUG(("HS: RSSI Pair Timeout\n"));
