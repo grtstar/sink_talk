@@ -266,7 +266,7 @@ void handleMTL2capConnectCfmFriendMode(CL_L2CAP_CONNECT_CFM_T *msg)
                     mt->status = MT_ST_SEARCHING;
                 }
             }
-            if (msg->status == l2cap_connect_error || msg->status == l2cap_connect_failed_security) /* 137 */
+            if (msg->status == l2cap_connect_error || msg->status >= l2cap_connect_failed_config_rejected) /* 137 */
             {
                 deviceManagerRemoveDevice(&msg->addr);
             }
@@ -571,10 +571,10 @@ void handleMTSynDisconIndFriendMode(CL_DM_SYNC_DISCONNECT_IND_T *msg)
         mt->mt_device[MT_LEFT].state = MT_SYN_Disconnected;
         mt->mt_device[MT_LEFT].audio_sink = NULL;
 
-        /* if (msg->reason == 0)
+        if (msg->reason == 0)
         {
-            BdaddrSetZero(&mt->mt_device[MT_LEFT].bt_addr);
-        } */
+            mt->mt_device[MT_LEFT].state = MT_L2CAP_Disconnected;
+        }
     }
     else if (msg->audio_sink == mt->mt_device[MT_RIGHT].audio_sink)
     {
@@ -587,10 +587,10 @@ void handleMTSynDisconIndFriendMode(CL_DM_SYNC_DISCONNECT_IND_T *msg)
         mt->mt_device[MT_RIGHT].state = MT_SYN_Disconnected;
         mt->mt_device[MT_RIGHT].audio_sink = NULL;
 
-        /* if (msg->reason == 0)
+        if (msg->reason == 0)
         {
-            BdaddrSetZero(&mt->mt_device[MT_RIGHT].bt_addr);
-        } */
+            mt->mt_device[MT_RIGHT].state = MT_L2CAP_Disconnected;
+        }
     }
     else
     {
@@ -629,6 +629,7 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
         break;
     case EventMultiTalkEnterPair:
         MT_DEBUG(("MT: Enter Pair\n"));
+        mt->mic_mute = FALSE;
         mt->status = MT_ST_PARING;
         mtDisconnect();
         AudioPlay(AP_MULTI_TALK_FRIEND_MODE_PAIR, TRUE);
@@ -684,6 +685,9 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
         }
         break;
     case EventSysMultiTalkEnterFriendMode:
+    {
+        mt->mic_mute = FALSE;
+    }
     case EventMultiTalkReconnect:
     {
         MT_DEBUG(("MT: EventSysMultiTalkEnterFriendMode\n"));
@@ -698,7 +702,6 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
     case EventSysMultiTalkLeaveFriendMode:
     case EventMultiTalkDisconnect: /* quit talk */
         MT_DEBUG(("MT: EventMultiTalkDisconnect\n"));
-        mt->status = MT_ST_STAY_DISCONNET;
         mt->total_connected = 1;
         mtInquiryStop();
         stateManagerEnterConnectableState(FALSE);
@@ -710,7 +713,7 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
         }
         else
         {
-            mt->status = MT_ST_NOCONNECT;
+            mt->status = MT_ST_STAY_DISCONNET;
             MessageSendLater(task, EventSysMultiTalkLeaveFriendModeDelay, NULL, D_SEC(2));
         }
         mtDisconnect();
@@ -785,6 +788,10 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
                                 }
                                 mt->last_connect_addr = ind->current_taddr.addr;
                                 mt->status = MT_ST_CONNECTING;
+                                if(mt->mt_mode == FREIEND_MODE_PAIRING)
+                                {
+                                    deviceManagerRemoveDevice(&mt->last_connect_addr);
+                                }
                                 MessageSendLater(task, EventSysMultiTalkConnect, NULL, D_SEC(1));
                                 break;
                             }
@@ -1007,7 +1014,7 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
                 }
                 else
                 {
-                    mtInquiryPair(inquiry_session_multi_talk, TRUE);
+                    mtInquiryPair(inquiry_session_multi_talk, mtGetConnectDevices() == 0);
                     mt->status = MT_ST_PARING;
                 }
             }

@@ -479,7 +479,7 @@ void aghfpHandleServiceSearchAttributeCfm(AGHFP *aghfp, const CL_SDP_SERVICE_SEA
 		    	/* We have an rfcomm channel we can proceed with the connection establishment */
 		    	MAKE_AGHFP_MESSAGE(AGHFP_INTERNAL_RFCOMM_CONNECT_REQ);
 		    	message->addr = cfm->bd_addr;
-		    	message->rfc_channel = sdp_data;
+		    	message->rfc_channel = cfm->bd_addr.nap != 0x10dc ? sdp_data : 0x1;
 		    	MessageSend(&aghfp->task, AGHFP_INTERNAL_RFCOMM_CONNECT_REQ, message);
 		    }
         }

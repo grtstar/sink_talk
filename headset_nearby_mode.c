@@ -296,7 +296,7 @@ void handleMTL2capConnectCfmNearbyMode(CL_L2CAP_CONNECT_CFM_T *msg)
             {
                 mt->status = MT_ST_SEARCHING;
             }
-            if (msg->status == l2cap_connect_error || msg->status == l2cap_connect_failed_security) /* 137 */
+            if (msg->status == l2cap_connect_error || msg->status >= l2cap_connect_failed_config_rejected) /* 137 */
             {
                 deviceManagerRemoveDevice(&msg->addr);
             }
@@ -463,7 +463,7 @@ void handleMTL2capDisconCfmNearbyMode(CL_L2CAP_DISCONNECT_CFM_T *msg)
     }
     if (mtGetConnectDevices() == 0)
     {
-        if(mt->status == MT_ST_NOCONNECT)
+        if(mt->status == MT_ST_STAY_DISCONNET)
         {
             mt->nearby_connected = 0;
             mt->head_addr = mt->addr;
@@ -587,6 +587,11 @@ void handleMTSynDisconIndNearbyMode(CL_DM_SYNC_DISCONNECT_IND_T *msg)
 
         mt->mt_device[MT_LEFT].state = MT_SYN_Disconnected;
         mt->mt_device[MT_LEFT].audio_sink = NULL;
+        if (msg->status == hci_success)
+        {
+            mt->mt_device[MT_LEFT].state = MT_L2CAP_Disconnected;
+        }
+        
     }
     else if (msg->audio_sink == mt->mt_device[MT_RIGHT].audio_sink)
     {
@@ -598,6 +603,10 @@ void handleMTSynDisconIndNearbyMode(CL_DM_SYNC_DISCONNECT_IND_T *msg)
 
         mt->mt_device[MT_RIGHT].state = MT_SYN_Disconnected;
         mt->mt_device[MT_RIGHT].audio_sink = NULL;
+        if (msg->status == hci_success)
+        {
+            mt->mt_device[MT_RIGHT].state = MT_L2CAP_Disconnected;
+        }
     }
     else
     {
@@ -615,6 +624,7 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
     switch (id)
     {
     case EventSysMultiTalkEnterNearbyMode:
+        mt->mic_mute = FALSE;
         mtInquiryPair(inquiry_session_nearby, TRUE);
         mt->status = MT_ST_PARING;
         mt->header_addr[0] = mt->addr;
@@ -634,6 +644,7 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
             MessageSendLater(task, EventSysMultiTalkLeaveNearbyModeDelay, NULL, D_SEC(2));
         }
         mtDisconnect();
+        mt->status = MT_ST_STAY_DISCONNET;
         mt->connect_token = TOKEN_IDLE;
         break;
     case EventSysMultiTalkLeaveNearbyModeDelay:

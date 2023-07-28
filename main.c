@@ -1694,7 +1694,7 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
                     MessageSend(&theSink.task, EventUsrRssiPair, 0);
                 AudioPlay(AP_RESET_PAIR_LIST, TRUE);
 
-                sinkHfpDataSetDefaultVolume(7);
+                sinkHfpDataSetDefaultVolume(12);
             }
         break ;
         case ( EventSysLimboTimeout ):
@@ -3763,7 +3763,9 @@ static void handleHFPMessage  ( Task task, MessageId id, Message message )
                 if ( ((const HFP_INIT_CFM_T*)message)->status == hfp_success )
                 {
                     sinkAppInit( (const HFP_INIT_CFM_T*)message );
+                    #ifdef DEBUG_PRINT_ENABLED
                     MessageSendLater(&theSink.task, EventUsrPowerOn, NULL, D_SEC(1));
+                    #endif
                 }
                 else
                 {

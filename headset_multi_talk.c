@@ -1308,20 +1308,20 @@ bool mtVoicePopulateConnectParameters(audio_connect_parameters *connect_paramete
         connect_parameters->sink_type = AUDIO_SINK_ESCO;
         if (mt->mt_mode == FREIEND_MODE_PAIRING || mt->mt_mode == COUPLE_MODE_PAIRING)
         {
-            sinkHfpDataSetDefaultVolume(7);
-            connect_parameters->volume = 7;
+            sinkHfpDataSetDefaultVolume(12);
+            connect_parameters->volume = 12;
             if(mt->mt_mode == FREIEND_MODE_PAIRING)
             {
                 mtMicMute(AUDIO_MUTE_ENABLE, TRUE);
             }
-            else
+            else 
             {
                 mtMicMute(AUDIO_MUTE_DISABLE, TRUE);
             }
         }
-        else
+        else 
         {
-            mtMicMute(AUDIO_MUTE_DISABLE, TRUE);
+            if(!mt->mic_mute) mtMicMute(AUDIO_MUTE_DISABLE, TRUE);
             connect_parameters->volume = sinkHfpDataGetDefaultVolume();
         }
         DEBUG(("volume = %d\n", connect_parameters->volume));
@@ -1490,6 +1490,7 @@ void mtMicMute(uint8 state, bool force)
         if (state == AUDIO_MUTE_ENABLE)
         {
             MT_DEBUG(("Mute On\n"));
+            mt->mic_mute = TRUE;
             volumeSetMuteState(audio_mute_group_mic, AUDIO_MUTE_ENABLE);
         }
         else

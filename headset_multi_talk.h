@@ -179,6 +179,8 @@ typedef struct MTData
 
     bdaddr last_connect_addr;
     uint32 last_connect_time;
+
+    bool mic_mute;
 } MTData;
 
 #define MULTITALK_FRIEND_PSM 0x0055

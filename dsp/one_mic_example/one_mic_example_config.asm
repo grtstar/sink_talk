@@ -81,9 +81,9 @@
 
 .MODULE $M.system_config.data;
    .DATASEGMENT DM;
-   .VAR adc_mantissa = 0.5;
-   .VAR left_mantissa = 0.5;
-   .VAR right_mantissa = 0.5;
+   .VAR adc_mantissa = 0.8;
+   .VAR left_mantissa = 1.0;
+   .VAR right_mantissa = 1.0;
    .VAR exponent = 0;
    
 // -----------------------------------------------------------------------------

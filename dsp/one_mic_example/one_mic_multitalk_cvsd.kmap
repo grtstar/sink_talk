@@ -7776,7 +7776,7 @@ Region: DM1_REGION
         000000 
 
 0x0005FF	$M.system_config.data.adc_mantissa
-        400000 
+        666666 
 
 0x000600	$sco_data.mem3
         000000 000000 000000 000000 
@@ -8485,7 +8485,7 @@ Region: DM1_REGION
         000000 00080C 000668 
 
 0x000C1A	$M.system_config.data.left_mantissa
-        400000 
+        7FFFFF 
 
 0x000C1B	$M.system_config.data.exponent
         000000 
@@ -10543,7 +10543,7 @@ Region: DM2_REGION
         000B9D 000000 
 
 0xFF3C1A	$M.system_config.data.right_mantissa
-        400000 
+        7FFFFF 
 
 0xFF3C1B	$dac_out.RightPortEnabled
         000000 
