@@ -23,7 +23,7 @@
 #include "sink_devicemanager.h"
 #include "sink_device_id.h"
 #include "sink_events.h"
-#define ENABLE_MT_DEBUG
+#define ENABLE_MT_DEBUGx
 #include "sink_debug.h"
 #include "sink_audio_prompts.h"
 #include "sink_statemanager.h"
@@ -704,8 +704,6 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
         MT_DEBUG(("MT: EventMultiTalkDisconnect\n"));
         mt->total_connected = 1;
         mtInquiryStop();
-        stateManagerEnterConnectableState(FALSE);
-        stateManagerUpdateState();
         if (mtGetConnectDevices() == 0)
         {
             mt->status = MT_ST_NOCONNECT;
@@ -728,6 +726,7 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
         mt->mt_device[MT_RIGHT].acl_sink = NULL;
         mt->status = MT_ST_NOCONNECT;
         mt->total_connected = 0;
+        stateManagerEnterConnectableState(FALSE);
         stateManagerUpdateState();
         MessageSend(mt->app_task, EventSysMultiTalkFriendModeLeaved, NULL);
         break;
@@ -994,9 +993,9 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
         }
         MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoopTimeout);
         MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoop);
+        mtInquiryStop();
         if(mtGetConnectDevices() < 2)
         {
-            mtInquiryStop();
             if (mt->status != MT_ST_NOCONNECT)
             {
                 if (mt->mt_mode == FREIEND_MODE)
@@ -1048,6 +1047,7 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
     case EventSysMultiTalkCheckLoopTimeout:
     {
         MT_DEBUG(("MT: check loop timeout, disconnect\n"));
+        MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoop);
         MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoopTimeout);
         mtACLDisconnect(mt->sco_expend_dev);
     }

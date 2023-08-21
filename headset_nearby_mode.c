@@ -381,14 +381,6 @@ void handleMTL2capDisconIndNearbyMode(CL_L2CAP_DISCONNECT_IND_T *msg)
             ConnectionL2capDisconnectResponse(msg->identifier, msg->sink);
         }
 
-        mtInquiryStop();
-        if (mt->status != MT_ST_NOCONNECT)
-        {
-            mtInquiryPair(inquiry_session_nearby, mtGetConnectDevices() == 0);
-
-            mt->status = MT_ST_SEARCHING;
-        }
-
         mt->header_addr[0] = mt->addr;
         BdaddrSetZero(&mt->header_addr[1]);
         if (!mtBroadcastHeaderAddr1(MT_RIGHT, 1, &mt->addr))
@@ -633,7 +625,6 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
         break;
     case EventSysMultiTalkLeaveNearbyMode:
         mtInquiryStop();
-        stateManagerEnterConnectableState(FALSE);
         if (mtGetConnectDevices() == 0)
         {
             mt->status = MT_ST_NOCONNECT;
@@ -654,7 +645,7 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
         mt->mt_device[MT_RIGHT].state = MT_L2CAP_Disconnected;
         BdaddrSetZero(&mt->mt_device[MT_RIGHT].bt_addr);
         mt->mt_device[MT_RIGHT].acl_sink = NULL;
-
+        stateManagerEnterConnectableState(FALSE);
         stateManagerUpdateState();
         mt->status = MT_ST_NOCONNECT;
         mt->nearby_connected = 0;
@@ -842,9 +833,9 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
         MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoopTimeout);
         MT_DEBUG(("Play nearby connected:%d\n", mt->nearby_connected));
         AudioPlay(AP_MULTI_TALK_1_PERSON + nearby_connected - 1, TRUE);
+        mtInquiryStop();
         if(mtGetConnectDevices() < 2)
         {
-            mtInquiryStop();
             if (mt->status != MT_ST_NOCONNECT)
             {
                 if(mtGetConnectDevices() == 0)
@@ -855,6 +846,7 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
                 {
                     mtInquiryPair(inquiry_session_nearby, FALSE); 
                 }
+                mt->status = MT_ST_SEARCHING;
             }
         } 
     }
@@ -884,6 +876,7 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
     case EventSysMultiTalkCheckLoopTimeout:
     {
         MT_DEBUG(("MT: check loop timeout, disconnect\n"));
+        MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoop);
         MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoopTimeout);
         mtACLDisconnect(mt->sco_expend_dev);
     }

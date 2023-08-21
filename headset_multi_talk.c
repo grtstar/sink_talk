@@ -532,31 +532,27 @@ void handleMTL2capRegisterCfm(CL_L2CAP_REGISTER_CFM_T *msg)
 void handleMTL2capConnectInd(CL_L2CAP_CONNECT_IND_T *msg)
 {
     bool can_recv = FALSE;
-    uint16 psm = MULTITALK_FRIEND_PSM;
     if (mt->mt_mode == FREIEND_MODE || mt->mt_mode == FREIEND_MODE_PAIRING)
     {
         can_recv = handleMTL2capConnectIndFriendMode(msg);
-        psm = MULTITALK_FRIEND_PSM;
     }
-    if (mt->mt_mode == NEARBY_MODE)
+    else if (mt->mt_mode == NEARBY_MODE)
     {
         can_recv = handleMTL2capConnectIndNearbyMode(msg);
-        psm = MULTITALK_NEARBY_PSM;
     }
-    if (mt->mt_mode == COUPLE_MODE || mt->mt_mode == COUPLE_MODE_PAIRING || mt->mt_mode == CLOSE_MODE)
+    else if (mt->mt_mode == COUPLE_MODE || mt->mt_mode == COUPLE_MODE_PAIRING || mt->mt_mode == CLOSE_MODE)
     {
         can_recv = handleMTL2capConnectIndCoupleMode(msg);
-        psm = MULTITALK_COUPLE_PSM;
     }
 
     if (can_recv)
     {
-        ConnectionL2capConnectResponse(&mt->mt_task, TRUE, psm, msg->connection_id,
+        ConnectionL2capConnectResponse(&mt->mt_task, TRUE, msg->psm, msg->connection_id,
                                        msg->identifier, 0, 0);
     }
     else
     {
-        ConnectionL2capConnectResponse(&mt->mt_task, FALSE, psm, msg->connection_id,
+        ConnectionL2capConnectResponse(&mt->mt_task, FALSE, msg->psm, msg->connection_id,
                                        msg->identifier, 0, 0);
     }
 }

@@ -291,7 +291,6 @@ void handleMTL2capDisconIndCoupleMode(CL_L2CAP_DISCONNECT_IND_T *msg)
         MT_DEBUG(("MT: handleMTL2capDisconIndCoupleMode: parent\n"));
         mt->mt_device[MT_LEFT].state = MT_L2CAP_Disconnected;
         mt->mt_device[MT_LEFT].acl_sink = NULL;
-        stateManagerEnterConnectableState(FALSE);
 
         if (msg->status == l2cap_disconnect_successful)
         {
@@ -512,10 +511,8 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
         break;
     case EventSysMultiTalkLeaveCoupleMode:
         MessageCancelAll(task, EventSysRssiPairReminder);
-        stateManagerEnterConnectableState(FALSE);
         mtInquiryStop();
         MessageCancelAll(task, EventSysMultiTalkCoupleModeReconnect);
-        mt->status = MT_ST_STAY_DISCONNET;
         if (mt->couple_type == COUPLE_MT_WITH_PEER || mt->couple_type == COUPLE_MT_NO_PEER)
         {
             if (mtGetConnectDevices() == 0)
@@ -527,7 +524,7 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
                 MessageSendLater(task, EventSysMultiTalkLeaveCoupleModeDelay, NULL, D_SEC(2));
             }
             mtDisconnect();
-
+            mt->status = MT_ST_STAY_DISCONNET;
         }
         else
         {
@@ -537,7 +534,6 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
                 if (AgIsConnected())
                 {
                     AgDisconnect();
-                    mt->status = MT_ST_STAY_DISCONNET;
                     MessageSendLater(task, EventSysMultiTalkLeaveCoupleModeDelay, NULL, D_SEC(2));
                 }
                 else
@@ -549,6 +545,7 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
             {
                 MessageSend(task, EventSysMultiTalkCoupleModeLeaved, NULL);
             }
+            mt->status = MT_ST_STAY_DISCONNET;
             mtInquiryStop();
             MessageCancelAll(task, EventSysMultiTalkCoupleModeReconnect);
         }
@@ -718,6 +715,7 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
     case EventSysMultiTalkCurrentDevices:
     {
         AudioPlay(AP_TALK_DISCONNECTED, TRUE);
+        stateManagerEnterConnectableState(FALSE);
         stateManagerUpdateState();
         MessageSendLater(task, EventSysRssiPairReminder, NULL, D_SEC(5));
         MessageCancelAll(task, EventSysMultiTalkCoupleModeReconnect);

@@ -33,7 +33,10 @@ enum
     UTYPE_HEADSET_ADDR,
     UTYPE_PEER_STATE,
     UTYPE_GET_HEADSET_ADDR,
-    UTYPE_TONE
+    UTYPE_TONE,
+    UTYPE_PIOW,
+    UTYPE_PIOR,
+    UTYPE_LED
 };
 
 enum
@@ -54,6 +57,8 @@ static void UartMessageHandler(Task pTask, MessageId pId, Message pMessage);
 static void UartProcessData(const uint8 *data, int size);
 static uint8 UartCalcCRC(uint8 *d, int len);
 static void UartTxData(const uint8 *data, uint16 packet_size);
+static void UartSendIO(uint8 type, uint8 io, uint8 lvl);
+static void UartRsqIO(uint8 type, uint8 io, uint8 lvl);
 
 static TaskData message_task = {UartMessageHandler};
 
@@ -226,40 +231,63 @@ void UartProcessData(const uint8_t *data, int size)
             }
             break;
         case P_CRC:
-        {
-            if (ud->uart_buff[3] == UTYPE_EVENT)
             {
-                uint16 event = ud->uart_buff[4] << 8 | ud->uart_buff[5];
-                UART_DEBUG(("UART: evnet = 0x%x\n", event));
-                if(event == EventUsrPowerOff)
+                if (ud->uart_buff[3] == UTYPE_EVENT)
                 {
-                    if(stateManagerGetState() != deviceLimbo)
+                    uint16 event = ud->uart_buff[4] << 8 | ud->uart_buff[5];
+                    UART_DEBUG(("UART: evnet = 0x%x\n", event));
+                    if(event == EventUsrPowerOff)
+                    {
+                        if(stateManagerGetState() != deviceLimbo)
+                        {
+                            MessageSend(ud->app_task, event, NULL);
+                        }
+                    }
+                    else
                     {
                         MessageSend(ud->app_task, event, NULL);
                     }
                 }
-                else
+                if (ud->uart_buff[3] == UTYPE_STATE)
                 {
-                    MessageSend(ud->app_task, event, NULL);
+                    ud->uart_state = ud->uart_buff[4];
+                    UART_DEBUG(("UART: state = 0x%x\n", ud->uart_state));
+                    stateManagerUpdateState();
+                }
+                if (ud->uart_buff[3] == UTYPE_HEADSET_ADDR)
+                {
+                    bdaddr addr = ArrayToBdaddr(&ud->uart_buff[4]);
+                    mtSetHeadsetAddr(&addr);
+                    UART_DEBUG(("UART: headset addr: %x:%x:%lx\n", addr.nap, addr.uap, addr.lap));
+                }
+                if (ud->uart_buff[3] == UTYPE_PEER_STATE) /* 3024 peer connect state */
+                {
+                    mtPeerStateCoupleMode(ud->uart_buff[4]);
+                }
+                if (ud->uart_buff[3] == UTYPE_PIOW)
+                {
+                    uint8 type = ud->uart_buff[4];
+                    uint8 io = ud->uart_buff[5];
+                    uint8 lvl = !!ud->uart_buff[6];
+                    if(type == 0)
+                    {
+                        PioSetDir32(1<<io, 1<<io);
+                        PioSet32(1<<io, lvl<<io);
+                        UartRsqIO(type, io, lvl);
+                    }
+                }
+                if (ud->uart_buff[3] == UTYPE_PIOR)
+                {
+                    uint8 type = ud->uart_buff[4];
+                    uint8 io = ud->uart_buff[5];
+                    PioSetDir32(1<<io, 0<<io);
+                    UartSendIO(type, io, !!(PioGet32() & (1<<io)));
+                }
+                if (ud->uart_buff[3] == UTYPE_LED)
+                {
+                    
                 }
             }
-            if (ud->uart_buff[3] == UTYPE_STATE)
-            {
-                ud->uart_state = ud->uart_buff[4];
-                UART_DEBUG(("UART: state = 0x%x\n", ud->uart_state));
-                stateManagerUpdateState();
-            }
-            if (ud->uart_buff[3] == UTYPE_HEADSET_ADDR)
-            {
-                bdaddr addr = ArrayToBdaddr(&ud->uart_buff[4]);
-                mtSetHeadsetAddr(&addr);
-                UART_DEBUG(("UART: headset addr: %x:%x:%lx\n", addr.nap, addr.uap, addr.lap));
-            }
-            if (ud->uart_buff[3] == UTYPE_PEER_STATE) /* 3024 peer connect state */
-            {
-                mtPeerStateCoupleMode(ud->uart_buff[4]);
-            }
-        }
             ud->uart_stage = P_HEAD1;
             break;
         }
@@ -339,6 +367,26 @@ void UartSendPrompt(int prompt, uint8 queue)
     d[4] = prompt;
     d[5] = queue;
     d[6] = UartCalcCRC(d, 6);
+    UartTxData(d, sizeof(d));
+}
+
+void UartSendIO(uint8 type, uint8 io, uint8 lvl)
+{
+    uint8 d[3 + 5] = {0xAA, 0x55, 4, UTYPE_PIOR};
+    d[4] = type;
+    d[5] = io;
+    d[6] = lvl;
+    d[7] = UartCalcCRC(d, 7);
+    UartTxData(d, sizeof(d));
+}
+
+void UartRsqIO(uint8 type, uint8 io, uint8 lvl)
+{
+    uint8 d[3 + 5] = {0xAA, 0x55, 4, UTYPE_PIOW};
+    d[4] = type;
+    d[5] = io;
+    d[6] = lvl;
+    d[7] = UartCalcCRC(d, 7);
     UartTxData(d, sizeof(d));
 }
 
