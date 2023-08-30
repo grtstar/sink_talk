@@ -327,7 +327,15 @@ static void bmCheckForButtonMatch ( uint32 pButtonMask , ButtonsTime_t  pDuratio
                             if(!bmCheckButtonLock(event_config->user_event + EVENTS_MESSAGE_BASE))
                             {
                                 /*we have fully matched an event....so tell the main task about it*/
+                                #ifdef RUN_ON_M2
                                 MessageSend(BUTTON_GDATA->client, (event_config->user_event + EVENTS_MESSAGE_BASE), 0);
+                                #else
+                                if(event_config->user_event + EVENTS_MESSAGE_BASE != EventUsrPowerOn && 
+                                    event_config->user_event + EVENTS_MESSAGE_BASE != EventUsrEnterPairing)
+                                {
+                                    MessageSend(BUTTON_GDATA->client, (event_config->user_event + EVENTS_MESSAGE_BASE), 0);
+                                }
+                                #endif
                             }
                             else
                             {

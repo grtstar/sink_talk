@@ -492,7 +492,7 @@ void mtScoConnect(Sink sink_acl)
     config_params.packet_type = sync_all_sco;
     config_params.tx_bandwidth = 8000;
     config_params.rx_bandwidth = 8000;
-    config_params.retx_effort = sync_retx_disabled;
+    config_params.retx_effort = sync_retx_link_quality;
     config_params.max_latency = 16;
     config_params.voice_settings = sync_air_coding_cvsd;
     MT_DEBUG(("MT: Connect sco\n"));

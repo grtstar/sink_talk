@@ -23,7 +23,7 @@
 #include "sink_devicemanager.h"
 #include "sink_device_id.h"
 #include "sink_events.h"
-#define ENABLE_MT_DEBUG
+#define ENABLE_MT_DEBUGx
 #include "sink_debug.h"
 #include "sink_audio_prompts.h"
 #include "sink_statemanager.h"

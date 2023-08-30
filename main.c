@@ -1239,10 +1239,10 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
             }
             break;
 
-        /*case (EventSysEnterPairingEmptyPDL):*/
+        case (EventSysEnterPairingEmptyPDL):
         case (EventUsrEnterPairing):
-            #ifndef ENABLE_MULTI_TALK
-            MAIN_DEBUG(("HS: EnterPair [%d]\n" , lState )) ;
+            #ifdef RUN_ON_M2
+            DEBUG(("HS: EnterPair [%d]\n" , lState )) ;
 
             /*go into pairing mode*/
             if (( lState != deviceLimbo) && (lState != deviceConnDiscoverable ))

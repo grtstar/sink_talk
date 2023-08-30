@@ -54,9 +54,11 @@ bool mtInquiryPair(inquiry_session session, bool remind)
     {
         MessageSendLater(&theSink.task, EventSysRssiPairReminder, 0, D_SEC(INQUIRY_REMINDER_TIMEOUT_SECS));
     }
+#if 1
     stateManagerEnterConnectableState(FALSE);
     sinkBlePowerOffEvent();    
     sinkBlePowerOnEvent();
+#endif
     return TRUE;
 }
 
@@ -67,8 +69,10 @@ void mtInquiryStop(void)
         inquiryStop();
     }
     inqSesson = inquiry_session_normal;
+#if 1
     MessageCancelAll(&theSink.task, EventSysRssiPairReminder);
     sinkBlePowerOffEvent();
+#endif
 }
 
 uint8* mtGetAdvData(void)

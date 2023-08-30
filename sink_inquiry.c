@@ -747,6 +747,7 @@ void inquiryStart(bool req_disc)
             }
             else
             {
+                /* fix */
                 stateManagerEnterConnDiscoverableState(FALSE);
             }
         }

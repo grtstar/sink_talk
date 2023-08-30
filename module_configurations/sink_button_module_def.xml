@@ -9925,19 +9925,19 @@
                         DefaultValue="" />
                     <PatternArrayConfigItem 
                         ShortId="vreg_enabled" 
-                        DefaultValue="False" />
+                        DefaultValue="True" />
                     <PatternArrayConfigItem 
                         ShortId="chg_enabled" 
                         DefaultValue="False" />
                     <PatternArrayConfigItem 
                         ShortId="state_mask" 
-                        DefaultValue="" />
+                        DefaultValue="Powering On" />
                     <PatternArrayConfigItem 
                         ShortId="user_event" 
-                        DefaultValue="..." />
+                        DefaultValue="Power On" />
                     <PatternArrayConfigItem 
                         ShortId="type" 
-                        DefaultValue="..." />
+                        DefaultValue="LONG" />
                 </PatternArrayRow>
                 <PatternArrayRow 
                     Node="Basic" 
@@ -9948,19 +9948,19 @@
                         DefaultValue="" />
                     <PatternArrayConfigItem 
                         ShortId="vreg_enabled" 
-                        DefaultValue="False" />
+                        DefaultValue="True" />
                     <PatternArrayConfigItem 
                         ShortId="chg_enabled" 
                         DefaultValue="False" />
                     <PatternArrayConfigItem 
                         ShortId="state_mask" 
-                        DefaultValue="" />
+                        DefaultValue="Connectable | Connected | Streaming A2DP" />
                     <PatternArrayConfigItem 
                         ShortId="user_event" 
-                        DefaultValue="..." />
+                        DefaultValue="Enter Pairing" />
                     <PatternArrayConfigItem 
                         ShortId="type" 
-                        DefaultValue="..." />
+                        DefaultValue="DOUBLE" />
                 </PatternArrayRow>
                 <PatternArrayRow 
                     Node="Basic" 

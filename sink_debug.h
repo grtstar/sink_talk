@@ -62,7 +62,7 @@ void printVmLogsInTestSystem (const char *format, ...);
 
         #define DEBUG_A2DPx
         #define DEBUG_ACCESSORYx
-        #define DEBUG_AHI
+        #define DEBUG_AHIx
         /* Debug Always-on-Voice (AoV) module */
         #define DEBUG_AOVx
         #define DEBUG_AT_COMMANDSx

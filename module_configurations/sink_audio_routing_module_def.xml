@@ -1003,7 +1003,7 @@
             <BuildVariant
                 HwVariant="CNS10001v4"
                 SwVariant="Headset-Gaming"
-                Value="N/A" />
+                Value="PIO 10" />
         </ConfigItem>
         <ConfigItem
             Id="Power On Audio Mute"
