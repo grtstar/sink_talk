@@ -499,7 +499,10 @@ void handleMTSynConnCfmFriendMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
         case hci_error_max_nr_of_sco:
         case hci_error_rej_by_remote_no_res:
         default:
-            mtACLDisconnect(MT_LEFT);
+            if(mt->mt_device[MT_LEFT].state == MT_SYN_Connecting)
+            {
+                mtACLDisconnect(MT_LEFT);
+            }
             break;
         }
     }
@@ -538,7 +541,10 @@ void handleMTSynConnCfmFriendMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
         case hci_error_max_nr_of_sco:
         case hci_error_rej_by_remote_no_res:
         default:
-            mtACLDisconnect(MT_RIGHT);
+            if(mt->mt_device[MT_RIGHT].state == MT_SYN_Connecting)
+            {
+                mtACLDisconnect(MT_RIGHT);
+            }
             break;
         }
     }

@@ -6,6 +6,7 @@
                 "${workspaceFolder}/**",
                 "C:\\ADK_CSR867x.WIN.4.4.0.21\\src\\lib/**",
                 "C:\\ADK_CSR867x.WIN.4.4.0.21\\tools\\include/**"
+                "C:\\ADK_CSR867x.WIN.4.4.0.21\\tools\\include\\firmware"
             ],
             "defines": [
                 "_DEBUG",

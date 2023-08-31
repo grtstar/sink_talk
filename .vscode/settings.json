@@ -43,6 +43,11 @@
         "sink_volume.h": "c",
         "tuple": "c",
         "utility": "c",
-        "xtr1common": "c"
+        "xtr1common": "c",
+        "power_onchip.h": "c",
+        "adc.h": "c",
+        "pio.h": "c",
+        "headset_multi_comm.h": "c",
+        "adc_if.h": "c"
     }
 }

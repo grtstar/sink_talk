@@ -217,10 +217,7 @@ void handleMTL2capConnectCfmCoupleMode(CL_L2CAP_CONNECT_CFM_T *msg)
                 if (mt->status == MT_ST_CONNECTED  || mt->status == MT_ST_CONNECTING)
                 {
                     mt->status = MT_ST_SEARCHING;
-                    if(mt->couple_reconnect_retry-- > 0)
-                    {
-                        MessageSendLater(mt->app_task, EventSysMultiTalkCoupleModeReconnect, NULL, 500);
-                    }
+                    MessageSendLater(mt->app_task, EventSysMultiTalkCoupleModeReconnect, NULL, 500);
                 }
             }
         }
@@ -271,10 +268,7 @@ void handleMTL2capConnectCfmCoupleMode(CL_L2CAP_CONNECT_CFM_T *msg)
                 if (mt->status == MT_ST_CONNECTED  || mt->status == MT_ST_CONNECTING)
                 {
                     mt->status = MT_ST_SEARCHING;
-                    if(mt->couple_reconnect_retry-- > 0)
-                    {
-                        MessageSendLater(mt->app_task, EventSysMultiTalkCoupleModeReconnect, NULL, 500);
-                    }
+                    MessageSendLater(mt->app_task, EventSysMultiTalkCoupleModeReconnect, NULL, 500);
                 }
             }
         }
@@ -554,7 +548,7 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
         if (mt->couple_type == COUPLE_MT_WITH_PEER || mt->couple_type == COUPLE_MT_NO_PEER)
         {
             /* attemp to reconnect close mode peer */
-            if (mt->couple_reconnect_retry > 0)
+            if (mt->couple_reconnect_retry-- > 0)
             {
                 mtConnectCouple(&mt->couple_addr);
             }
@@ -738,7 +732,7 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
             else if(mt->couple_type == COUPLE_AG)
             {
                 /* todo: reconnect? */
-                if(mt->couple_reconnect_retry-- > 0)
+                if(mt->couple_reconnect_retry > 0)
                 {
                     mt->status = MT_ST_RECONNECTING;
                     MessageCancelAll(task, EventSysMultiTalkCoupleModeReconnect);

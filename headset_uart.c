@@ -11,12 +11,14 @@
 #include <message.h>
 #include <boot.h>
 #include <pio.h>
+#include <adc.h>
 
 #include "protocol_hex.h"
 #include "sink_events.h"
 #include "sink_debug.h"
 #include "headset_uart.h"
 #include "sink_statemanager.h"
+#include "sink_leds.h"
 
 #define UART_DEBUG(x) DEBUG(x)
 /*
@@ -47,6 +49,10 @@ enum
     P_DATA,
     P_CRC
 };
+
+#define LED_0_PIOPIN      30
+#define LED_1_PIOPIN      31
+#define LED_2_PIOPIN      29
 
 extern void BdaddrToArray(bdaddr *addr, uint8 *d);
 extern bdaddr ArrayToBdaddr(const uint8 *data);
@@ -132,6 +138,27 @@ static void UartMessageHandler(Task pTask, MessageId pId, Message pMessage)
     case MESSAGE_MORE_SPACE:
 
         break;
+    case MESSAGE_ADC_RESULT:
+        {
+            MessageAdcResult *msg = (MessageAdcResult *)pMessage;
+            if(msg->adc_source == adcsel_aio0)
+            {
+                UartSendIO(1, 0, msg->reading/4);
+            }
+            if(msg->adc_source == adcsel_aio1)
+            {
+                UartSendIO(1, 1, msg->reading/4);
+            }
+            if(msg->adc_source == adcsel_aio2)
+            {
+                UartSendIO(1, 2, msg->reading/4);
+            }
+            if(msg->adc_source == adcsel_aio3)
+            {
+                UartSendIO(1, 3, msg->reading/4);
+            }
+        }
+        break;
     }
 }
 
@@ -154,6 +181,8 @@ void UartInit(Task task)
     ud->uart_index = 0;
     ud->uart_stage= 0;
     ud->uart_state = 0;
+    
+    AdcRequest(&message_task, adcsel_aio0);
 }
 
 void UartSend(const uint8_t *data, uint16 packet_size)
@@ -281,11 +310,40 @@ void UartProcessData(const uint8_t *data, int size)
                     uint8 type = ud->uart_buff[4];
                     uint8 io = ud->uart_buff[5];
                     PioSetDir32(1<<io, 0<<io);
-                    UartSendIO(type, io, !!(PioGet32() & (1<<io)));
+                    if(type == 0)
+                    {
+                        UartSendIO(type, io, !!(PioGet32() & (1<<io)));
+                    }
+                    if(type == 1)
+                    {
+                        if(io == 0)
+                        {
+                            AdcRequest(&message_task, adcsel_aio0);
+                        }
+                        if(io == 1)
+                        {
+                            AdcRequest(&message_task, adcsel_aio1);
+                        }
+                        if(io == 2)
+                        {
+                            AdcRequest(&message_task, adcsel_aio2);
+                        }
+                        if(io == 3)
+                        {
+                            AdcRequest(&message_task, adcsel_aio3);
+                        }
+                    }
                 }
                 if (ud->uart_buff[3] == UTYPE_LED)
                 {
-                    
+                    uint8 io = ud->uart_buff[4];
+                    uint8 lvl = !!ud->uart_buff[5];
+                    if(io == 0)
+                        PioSetLedPin ( LED_0_PIOPIN , lvl )  ;
+                    if(io == 1)
+                        PioSetLedPin ( LED_1_PIOPIN , lvl )  ;
+                    if(io == 2)
+                        PioSetLedPin ( LED_2_PIOPIN , lvl )  ;
                 }
             }
             ud->uart_stage = P_HEAD1;

@@ -489,10 +489,10 @@ void mtACLDisconnect(int device)
 void mtScoConnect(Sink sink_acl)
 {
     sync_config_params config_params;
-    config_params.packet_type = sync_all_sco;
+    config_params.packet_type = sync_3ev5|sync_3ev3|sync_all_esco |sync_all_sco;
     config_params.tx_bandwidth = 8000;
     config_params.rx_bandwidth = 8000;
-    config_params.retx_effort = sync_retx_disabled;
+    config_params.retx_effort = sync_retx_link_quality;
     config_params.max_latency = 16;
     config_params.voice_settings = sync_air_coding_cvsd;
     MT_DEBUG(("MT: Connect sco\n"));
@@ -612,22 +612,22 @@ void handleMTSynRegisterCfm(CL_DM_SYNC_REGISTER_CFM_T *msg)
 void handleMTSynConnInd(CL_DM_SYNC_CONNECT_IND_T *msg)
 {
     sync_config_params config_params;
-    config_params.packet_type = sync_all_sco;
+    config_params.packet_type = sync_3ev5|sync_3ev3|sync_all_esco |sync_all_sco;
     config_params.tx_bandwidth = 8000;
     config_params.rx_bandwidth = 8000;
-    config_params.retx_effort = sync_retx_disabled;
+    config_params.retx_effort = sync_retx_link_quality;
     config_params.max_latency = 16;
     config_params.voice_settings = sync_air_coding_cvsd;
 
     if (BdaddrIsSame(&msg->bd_addr, &mt->mt_device[MT_LEFT].bt_addr) && mt->mt_device[MT_LEFT].state == MT_L2CAP_Connected)
     {
         ConnectionSyncConnectResponse(&mt->mt_task, &msg->bd_addr, TRUE, &config_params);
-        mt->mt_device[MT_LEFT].state = MT_SYN_Connecting;
+        /* mt->mt_device[MT_LEFT].state = MT_SYN_Connecting; */
     }
     if (BdaddrIsSame(&msg->bd_addr, &mt->mt_device[MT_RIGHT].bt_addr) && mt->mt_device[MT_RIGHT].state == MT_L2CAP_Connected)
     {
         ConnectionSyncConnectResponse(&mt->mt_task, &msg->bd_addr, TRUE, &config_params);
-        mt->mt_device[MT_RIGHT].state = MT_SYN_Connecting;
+        /* mt->mt_device[MT_RIGHT].state = MT_SYN_Connecting; */
     }
     else
     {
