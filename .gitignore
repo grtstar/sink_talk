@@ -2,3 +2,5 @@
 *.pp
 /depend
 *.flags
+/TabToFileCapture/Bluestack.htm
+/TabToFileCapture/Messages.txt

@@ -151,4 +151,5 @@ void AgDisconnect(void);
 bool agVoicePopulateConnectParameters(audio_connect_parameters *connect_parameters);
 Sink agGetActiveScoSink(void);
 bool AgIsConnected(void);
+bdaddr* AgGetBdaddr(void);
 #endif

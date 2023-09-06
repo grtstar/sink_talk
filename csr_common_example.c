@@ -157,7 +157,7 @@ static uint32 calculateDacRate (const ExamplePluginTaskdata * const task, const 
     return rate;
 }
 
-T_mic_gain MIC_GAIN = {1,0,0x1,0x5}; /* +3db for digital and analog, preamp=in */
+T_mic_gain MIC_GAIN = {1,0,0x1,0x7}; /* +3db for digital and analog, preamp=in */
 #define PS_MIC_GAIN 0x27CE
 
 static void populatePluginFromAudioConnectData(const AUDIO_PLUGIN_CONNECT_MSG_T * const connect_message)

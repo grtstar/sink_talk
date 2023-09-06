@@ -469,7 +469,7 @@ void mtACLConnect(bdaddr *bd_addr, uint16 psm)
 {
     MT_DEBUG(("MT: mtACLConnect to "));
     MT_DEBUG_ADDR((*bd_addr));
-    ConnectionSetPageTimeout(16384);
+    ConnectionSetPageTimeout(16384/2);
     ConnectionL2capConnectRequest(&mt->mt_task, bd_addr, psm, psm, 0, 0);
 }
 

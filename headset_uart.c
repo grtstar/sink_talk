@@ -181,8 +181,6 @@ void UartInit(Task task)
     ud->uart_index = 0;
     ud->uart_stage= 0;
     ud->uart_state = 0;
-    
-    AdcRequest(&message_task, adcsel_aio0);
 }
 
 void UartSend(const uint8_t *data, uint16 packet_size)
@@ -339,11 +337,20 @@ void UartProcessData(const uint8_t *data, int size)
                     uint8 io = ud->uart_buff[4];
                     uint8 lvl = !!ud->uart_buff[5];
                     if(io == 0)
-                        PioSetLedPin ( LED_0_PIOPIN , lvl )  ;
+                    {
+                        PioSetLedPin(96, lvl);
+                        UartSend(ud->uart_buff, ud->uart_buff[2] + 3);
+                    }
                     if(io == 1)
-                        PioSetLedPin ( LED_1_PIOPIN , lvl )  ;
+                    {
+                        PioSetLedPin(97, lvl);
+                        UartSend(ud->uart_buff, ud->uart_buff[2] + 3);
+                    }
                     if(io == 2)
-                        PioSetLedPin ( LED_2_PIOPIN , lvl )  ;
+                    {
+                        PioSetLedPin(98, lvl);
+                        UartSend(ud->uart_buff, ud->uart_buff[2] + 3);
+                    }
                 }
             }
             ud->uart_stage = P_HEAD1;

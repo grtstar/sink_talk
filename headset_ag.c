@@ -483,6 +483,7 @@ static void profile_handler(Task task, MessageId id, Message message)
 			*state = msg->status;
 			MessageSend(SIMPLE->app_task, EventSysAGSlcDisconnectInd, (void*)state);			
 		}
+		SIMPLE->connected = FALSE;
 	}
 	break;
 	case AGHFP_AUDIO_DISCONNECT_IND:
@@ -777,7 +778,13 @@ void AgConnect(bdaddr *addr)
 {
 	AG_DEBUG(("AG: connect to bdaddr = %x:%x:%lx\n", addr->nap, addr->uap, addr->lap));
 	SIMPLE->bd_addr = *addr;
+	ConnectionSetPageTimeout(2048);
 	AghfpSlcConnect(SIMPLE->aghfp, addr);
+}
+
+bdaddr* AgGetBdaddr(void)
+{
+	return &SIMPLE->bd_addr;
 }
 
 void AgDisconnect(void)

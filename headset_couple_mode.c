@@ -201,9 +201,9 @@ void handleMTL2capConnectCfmCoupleMode(CL_L2CAP_CONNECT_CFM_T *msg)
             BdaddrSetZero(&mt->mt_device[MT_RIGHT].bt_addr);
             mt->mt_device[MT_RIGHT].state = MT_L2CAP_Disconnected;
 
-            if (msg->status == l2cap_connect_error || msg->status >= l2cap_connect_failed_config_rejected) /* 137 */
+            if (msg->status == l2cap_connect_error || msg->status >= l2cap_connect_failed_security) /* 137 */
             {
-                if(mt->mt_mode == COUPLE_MODE_PAIRING)
+                /* if(mt->mt_mode == COUPLE_MODE_PAIRING) */
                 {
                     deviceManagerRemoveDevice(&msg->addr);
                 }
@@ -216,8 +216,7 @@ void handleMTL2capConnectCfmCoupleMode(CL_L2CAP_CONNECT_CFM_T *msg)
             {
                 if (mt->status == MT_ST_CONNECTED  || mt->status == MT_ST_CONNECTING)
                 {
-                    mt->status = MT_ST_SEARCHING;
-                    MessageSendLater(mt->app_task, EventSysMultiTalkCoupleModeReconnect, NULL, 500);
+                    MessageSendLater(mt->app_task, EventSysMultiTalkCoupleModeReconnect, NULL, 5000);
                 }
             }
         }
@@ -252,9 +251,9 @@ void handleMTL2capConnectCfmCoupleMode(CL_L2CAP_CONNECT_CFM_T *msg)
             BdaddrSetZero(&mt->mt_device[MT_LEFT].bt_addr);
             mt->mt_device[MT_LEFT].state = MT_L2CAP_Disconnected;
 
-            if (msg->status == l2cap_connect_failed_security) /* 137 */
+            if (msg->status == l2cap_connect_error || msg->status >= l2cap_connect_failed_security) /* 137 */
             {
-                if(mt->mt_mode == COUPLE_MODE_PAIRING)
+                /* if(mt->mt_mode == COUPLE_MODE_PAIRING) */
                 {
                     deviceManagerRemoveDevice(&msg->addr);
                 }
@@ -267,8 +266,7 @@ void handleMTL2capConnectCfmCoupleMode(CL_L2CAP_CONNECT_CFM_T *msg)
             {
                 if (mt->status == MT_ST_CONNECTED  || mt->status == MT_ST_CONNECTING)
                 {
-                    mt->status = MT_ST_SEARCHING;
-                    MessageSendLater(mt->app_task, EventSysMultiTalkCoupleModeReconnect, NULL, 500);
+                    MessageSendLater(mt->app_task, EventSysMultiTalkCoupleModeReconnect, NULL, 5000);
                 }
             }
         }
@@ -370,7 +368,7 @@ void handleMTSynConnCfmCoupleMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
             stateManagerEnterConnectedState();
             stateManagerUpdateState();
             MessageCancelAll(mt->app_task, EventSysRssiPairReminder);
-            if(!BdaddrIsZero(&mt->couple_addr))
+            if(!BdaddrIsSame(&mt->couple_addr, &msg->bd_addr))
             {
                 deviceManagerRemoveDevice(&mt->couple_addr);
             }
@@ -411,7 +409,7 @@ void handleMTSynConnCfmCoupleMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
             stateManagerEnterConnectedState();
             stateManagerUpdateState();
             MessageCancelAll(mt->app_task, EventSysRssiPairReminder);
-            if(!BdaddrIsZero(&mt->couple_addr))
+            if(!BdaddrIsSame(&mt->couple_addr, &msg->bd_addr))
             {
                 deviceManagerRemoveDevice(&mt->couple_addr);
             }
@@ -548,8 +546,9 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
         if (mt->couple_type == COUPLE_MT_WITH_PEER || mt->couple_type == COUPLE_MT_NO_PEER)
         {
             /* attemp to reconnect close mode peer */
-            if (mt->couple_reconnect_retry-- > 0)
+            if (mt->couple_reconnect_retry > 0)
             {
+                mt->couple_reconnect_retry--;
                 mtConnectCouple(&mt->couple_addr);
             }
             else
@@ -563,7 +562,6 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
             {
                 AgConnect(&mt->couple_addr);
                 mt->status = MT_ST_CONNECTING;
-                mt->couple_type = COUPLE_AG;
             }
             
         }
@@ -647,15 +645,8 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
                     if(!BdaddrIsZero(&result[0].bd_addr))
                     {
                         deviceManagerRemoveDevice(&result[0].bd_addr);
-                         
                         AgConnect(&result[0].bd_addr);
                         mt->status = MT_ST_CONNECTING;
-                        mt->couple_type = COUPLE_AG;
-                        if(!BdaddrIsZero(&mt->couple_addr))
-                        {
-                            deviceManagerRemoveDevice(&mt->couple_addr);
-                        }
-                        mt->couple_addr = result[0].bd_addr;
                     }
                 }
             }
@@ -724,15 +715,11 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
             if (mt->mt_mode == COUPLE_MODE_PAIRING)
             {
                 mt->status = MT_ST_PARING;
-                if(*status == aghfp_connect_failed)
-                {
-                    deviceManagerRemoveDevice(&mt->couple_addr);
-                }
+                deviceManagerRemoveDevice(AgGetBdaddr());
             }
             else if(mt->couple_type == COUPLE_AG)
             {
                 /* todo: reconnect? */
-                if(mt->couple_reconnect_retry > 0)
                 {
                     mt->status = MT_ST_RECONNECTING;
                     MessageCancelAll(task, EventSysMultiTalkCoupleModeReconnect);
@@ -753,6 +740,12 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
         uint8 *status = (uint8 *)message;
         if (*status == aghfp_success)
         {
+            if(!BdaddrIsSame(&mt->couple_addr, AgGetBdaddr()))
+            {
+                deviceManagerRemoveDevice(&mt->couple_addr);
+            }
+            mt->couple_addr = *AgGetBdaddr();
+            mt->couple_type = COUPLE_AG;
             mtSaveCoupleAddr(&mt->couple_addr, COUPLE_AG);
             MessageSend(mt->app_task, EventSysMultiTalkDeviceConnected, NULL);
             sinkInquirySetInquiryState(inquiry_complete);
