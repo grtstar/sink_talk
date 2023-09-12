@@ -1218,6 +1218,13 @@ bool connectionAuthDeleteAllDevice(uint16 ps_base)
                 tdi.element[rec].hash  = TDI_HASH_UNUSED;
             }
         }
+        else if(tdi.element[rec].order != TDI_ORDER_UNUSED)
+        {
+            /* set index value to unused after device is deleted */
+            tdi.element[rec].order = TDI_ORDER_UNUSED;
+            tdi.element[rec].hash  = TDI_HASH_UNUSED;
+            deleted = TRUE;
+        }
     }
 
     /* if any deletions were made store index persistently */

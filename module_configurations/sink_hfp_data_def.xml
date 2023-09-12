@@ -776,7 +776,7 @@
             <BuildVariant
                 HwVariant="CNS10001v4"
                 SwVariant="Headset-Gaming"
-                Value="HFP 10" />
+                Value="HFP 12" />
         </ConfigItem>
     </ConfigGroup>
 

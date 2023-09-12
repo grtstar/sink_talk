@@ -519,16 +519,19 @@ void connectionHandleRfcommDisconnectCfm(const RFC_DISCONNECT_CFM_T *cfm)
     if (cfm->status != RFC_INVALID_CHANNEL)
     {
         /* Get the Sink from the Conn_id and then the app task from the Sink. */
-        Sink sink       = (Sink) PanicNull( StreamRfcommSink(cfm->conn_id) );
-        Task appTask    = VmalMessageSinkGetTask(sink);
-
-        if (appTask)
+        Sink sink       = (Sink)( StreamRfcommSink(cfm->conn_id) );
+        if(sink != NULL)
         {
-            sendRfcommDisconnectCfm(
-                appTask ,
-                sink,
-                connectionConvertRfcommDisconnectStatus(cfm->status)
-                );
+            Task appTask    = VmalMessageSinkGetTask(sink);
+    
+            if (appTask)
+            {
+                sendRfcommDisconnectCfm(
+                    appTask ,
+                    sink,
+                    connectionConvertRfcommDisconnectStatus(cfm->status)
+                    );
+            }
         }
 #ifdef CONNECTION_DEBUG_LIB
         else

@@ -48,6 +48,7 @@
         "adc.h": "c",
         "pio.h": "c",
         "headset_multi_comm.h": "c",
-        "adc_if.h": "c"
+        "adc_if.h": "c",
+        "aghfp.h": "c"
     }
 }

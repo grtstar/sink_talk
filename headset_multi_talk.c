@@ -1184,9 +1184,9 @@ bool processEventMultiTalk(Task task, MessageId id, Message message)
         }
         else if (!BdaddrIsZero(&mt->couple_addr)) /* couple talk */
         {
+            AudioPlay(AP_TWO_TALK_ON, TRUE);
             mt->mt_mode = COUPLE_MODE;
             MessageSend(task, EventSysMultiTalkEnterCoupleMode, NULL);
-            AudioPlay(AP_TWO_TALK_ON, TRUE);
             /*AudioPlay(AP_MULTI_TALK_COUPLE_MODE, TRUE);*/
         }
         else

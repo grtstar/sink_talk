@@ -137,7 +137,7 @@
                 <BuildVariant
                     HwVariant="CNS10001v4"
                     SwVariant="Headset-Gaming"
-                    Value="-55" />
+                    Value="-60" />
             </StructElementConfigItem>
             <StructElementConfigItem
                 Id="RSSI Difference Threshold"
@@ -173,7 +173,12 @@
                 Id="Inquiry Timeout [1.28*s]"
                 ShortId="timeout" 
                 Desc="Specifies the maximum inquiry time for device searching, in units of 1.28 seconds"
-                DefaultValue="10" />
+                DefaultValue="10"  >
+                <BuildVariant
+                    HwVariant="CNS10001v4"
+                    SwVariant="Headset-Gaming"
+                    Value="15" />
+            </StructElementConfigItem>
             <StructElementConfigItem 
                 Id="Resume Timeout [s]"
                 ShortId="resume_timeout" 

@@ -730,7 +730,14 @@ static void profile_handler(Task task, MessageId id, Message message)
 	case EventSysAGAudioDisconnect:
 	{
 		AG_DEBUG(("AUDIO DISCONNECT\n"));
-		AghfpAudioDisconnect(SIMPLE->aghfp);
+		if(SIMPLE->audio)
+		{
+			AghfpAudioDisconnect(SIMPLE->aghfp);
+		}
+		else if(SIMPLE->connected)
+		{
+			AghfpSlcDisconnect(SIMPLE->aghfp);
+		}	
 	}
 	break;
 	default:
@@ -778,7 +785,6 @@ void AgConnect(bdaddr *addr)
 {
 	AG_DEBUG(("AG: connect to bdaddr = %x:%x:%lx\n", addr->nap, addr->uap, addr->lap));
 	SIMPLE->bd_addr = *addr;
-	ConnectionSetPageTimeout(2048);
 	AghfpSlcConnect(SIMPLE->aghfp, addr);
 }
 

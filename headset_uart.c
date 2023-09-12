@@ -287,7 +287,7 @@ void UartProcessData(const uint8_t *data, int size)
                     mtSetHeadsetAddr(&addr);
                     UART_DEBUG(("UART: headset addr: %x:%x:%lx\n", addr.nap, addr.uap, addr.lap));
                 }
-                if (ud->uart_buff[3] == UTYPE_PEER_STATE) /* 3024 peer connect state */
+                if (ud->uart_buff[3] == UTYPE_PEER_STATE) /* 3024 peer connect state not use*/
                 {
                     mtPeerStateCoupleMode(ud->uart_buff[4]);
                 }

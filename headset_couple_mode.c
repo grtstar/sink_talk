@@ -203,7 +203,7 @@ void handleMTL2capConnectCfmCoupleMode(CL_L2CAP_CONNECT_CFM_T *msg)
 
             if (msg->status == l2cap_connect_error || msg->status >= l2cap_connect_failed_security) /* 137 */
             {
-                /* if(mt->mt_mode == COUPLE_MODE_PAIRING) */
+                if(mt->mt_mode == COUPLE_MODE_PAIRING)
                 {
                     deviceManagerRemoveDevice(&msg->addr);
                 }
@@ -253,7 +253,7 @@ void handleMTL2capConnectCfmCoupleMode(CL_L2CAP_CONNECT_CFM_T *msg)
 
             if (msg->status == l2cap_connect_error || msg->status >= l2cap_connect_failed_security) /* 137 */
             {
-                /* if(mt->mt_mode == COUPLE_MODE_PAIRING) */
+                if(mt->mt_mode == COUPLE_MODE_PAIRING)
                 {
                     deviceManagerRemoveDevice(&msg->addr);
                 }
@@ -373,6 +373,7 @@ void handleMTSynConnCfmCoupleMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
                 deviceManagerRemoveDevice(&mt->couple_addr);
             }
             mt->couple_addr = msg->bd_addr;
+            mt->couple_type = COUPLE_MT_WITH_PEER;
             mtSaveCoupleAddr(&mt->couple_addr, COUPLE_MT_WITH_PEER);
             mtSendPeerAddr(MT_LEFT, &mt->headset_addr);
             MessageSend(mt->app_task, EventSysMultiTalkDeviceConnected, NULL);
@@ -414,6 +415,7 @@ void handleMTSynConnCfmCoupleMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
                 deviceManagerRemoveDevice(&mt->couple_addr);
             }
             mt->couple_addr = msg->bd_addr;
+            mt->couple_type = COUPLE_MT_WITH_PEER;
             mtSaveCoupleAddr(&mt->couple_addr, COUPLE_MT_WITH_PEER);
             mtSendPeerAddr(MT_RIGHT, &mt->headset_addr);
             MessageSend(mt->app_task, EventSysMultiTalkDeviceConnected, NULL);
@@ -496,7 +498,7 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
         if (!BdaddrIsZero(&mt->couple_addr))
         {
             mt->status = MT_ST_CONNECTING;
-            mt->couple_reconnect_retry = 3;
+            mt->couple_reconnect_retry = 10000;
             MessageSendLater(task, EventSysRssiPairReminder, NULL, D_SEC(5));
             MessageSend(task, EventSysMultiTalkCoupleModeReconnect, NULL);
         }
@@ -549,6 +551,7 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
             if (mt->couple_reconnect_retry > 0)
             {
                 mt->couple_reconnect_retry--;
+				mt->status = MT_ST_CONNECTING;
                 mtConnectCouple(&mt->couple_addr);
             }
             else
@@ -560,6 +563,7 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
         else /* ag */
         {
             {
+	            ConnectionSetPageTimeout(0);
                 AgConnect(&mt->couple_addr);
                 mt->status = MT_ST_CONNECTING;
             }
@@ -715,7 +719,10 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
             if (mt->mt_mode == COUPLE_MODE_PAIRING)
             {
                 mt->status = MT_ST_PARING;
-                deviceManagerRemoveDevice(AgGetBdaddr());
+				if(*status == aghfp_connect_failed)
+				{
+                	deviceManagerRemoveDevice(AgGetBdaddr());
+				}
             }
             else if(mt->couple_type == COUPLE_AG)
             {

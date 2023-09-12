@@ -757,7 +757,7 @@ void inquiryStart(bool req_disc)
         GINQDATA.inquiry.state = inquiry_idle;
 
         /* Increase page timeout */
-        ConnectionSetPageTimeout(16384);
+        ConnectionSetPageTimeout(16384 + 8192);
 
         GINQDATA.inquiry.result_count = 0;
 
@@ -1563,7 +1563,7 @@ void inquiryHandleTalkResult(CL_DM_INQUIRE_RESULT_T *result)
            result->bd_addr.uap,
            result->bd_addr.lap,
            result->rssi));
-#if 0           
+#if 1           
     {
         uint8 debug_idx;
         if(GINQDATA.inquiry.results != NULL)
