@@ -223,7 +223,7 @@ void mtResetCoupleAddr(void)
     }
 }
 
-#if 0
+#if 1
 const uint16 syn_conftab[] =
     {
         L2CAP_AUTOPT_SEPARATOR,                 /* START */
@@ -237,8 +237,20 @@ const uint16 syn_conftab[] =
 };
 #endif
 
+
+
 TaskData acl_parent_task = {acl_parent_handler};
 TaskData acl_child_task = {acl_child_handler};
+
+const uint16* mtGetSynConfig(void)
+{
+    return syn_conftab;
+}
+
+int mtGetSynConfigSize(void)
+{
+    return sizeof(syn_conftab);
+}
 
 void mt_handler(Task task, MessageId id, Message message)
 {
@@ -469,8 +481,8 @@ void mtACLConnect(bdaddr *bd_addr, uint16 psm)
 {
     MT_DEBUG(("MT: mtACLConnect to "));
     MT_DEBUG_ADDR((*bd_addr));
-    ConnectionSetPageTimeout(16384/2);
-    ConnectionL2capConnectRequest(&mt->mt_task, bd_addr, psm, psm, 0, 0);
+    ConnectionSetPageTimeout(0);
+    ConnectionL2capConnectRequest(&mt->mt_task, bd_addr, psm, psm, mtGetSynConfigSize(), mtGetSynConfig());
 }
 
 void mtACLDisconnect(int device)
@@ -492,7 +504,7 @@ void mtScoConnect(Sink sink_acl)
     config_params.packet_type = sync_3ev5|sync_3ev3|sync_all_esco |sync_all_sco;
     config_params.tx_bandwidth = 8000;
     config_params.rx_bandwidth = 8000;
-    config_params.retx_effort = sync_retx_link_quality;
+    config_params.retx_effort = sync_retx_power_usage;  /*todo*/
     config_params.max_latency = 16;
     config_params.voice_settings = sync_air_coding_cvsd;
     MT_DEBUG(("MT: Connect sco\n"));
@@ -548,12 +560,12 @@ void handleMTL2capConnectInd(CL_L2CAP_CONNECT_IND_T *msg)
     if (can_recv)
     {
         ConnectionL2capConnectResponse(&mt->mt_task, TRUE, msg->psm, msg->connection_id,
-                                       msg->identifier, 0, 0);
+                                       msg->identifier, mtGetSynConfigSize(), mtGetSynConfig());
     }
     else
     {
         ConnectionL2capConnectResponse(&mt->mt_task, FALSE, msg->psm, msg->connection_id,
-                                       msg->identifier, 0, 0);
+                                       msg->identifier, mtGetSynConfigSize(), mtGetSynConfig());
     }
 }
 

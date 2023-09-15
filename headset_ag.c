@@ -361,13 +361,21 @@ static void profile_handler(Task task, MessageId id, Message message)
 		AG_DEBUG(("AGHFP_SLC_CONNECT_CFM status = %d\n", msg->status));
 		if (msg->status == aghfp_connect_success)
 		{
-			SIMPLE->connected = TRUE;
+            if(mt != NULL && (mt->mt_mode != COUPLE_MODE && mt->mt_mode != COUPLE_MODE_PAIRING))
+            {
+                AghfpSlcDisconnect(SIMPLE->aghfp);
+                return;
+            }
+            else
+            {
+                SIMPLE->connected = TRUE;
 
-			SIMPLE->rfcomm_sink = msg->rfcomm_sink;
-
-			MessageSend(task, EventSysAGAudioConnect, NULL);
-
-			enableAudioActivePio();
+               SIMPLE->rfcomm_sink = msg->rfcomm_sink;
+            
+               MessageSend(task, EventSysAGAudioConnect, NULL);
+            
+               enableAudioActivePio();
+            }
 		}
 		{
 			uint8 *state = (uint8*)malloc(1);
@@ -734,7 +742,7 @@ static void profile_handler(Task task, MessageId id, Message message)
 		{
 			AghfpAudioDisconnect(SIMPLE->aghfp);
 		}
-		else if(SIMPLE->connected)
+		else /* if(SIMPLE->connected) */
 		{
 			AghfpSlcDisconnect(SIMPLE->aghfp);
 		}	

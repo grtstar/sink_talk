@@ -28,7 +28,7 @@ typedef struct {
     unsigned padding:13;
 } vbat_battery_threshold_config_t;
 
-#define SINK_POWER_SETTINGS_VBAT_CONFIG_BLK_ID 1039
+#define SINK_POWER_SETTINGS_VBAT_CONFIG_BLK_ID 969
 
 typedef struct {
     sink_power_config_vbat_t config_p_vbat;

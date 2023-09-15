@@ -20,7 +20,7 @@ DESCRIPTION
 
 #include "config_definition.h"
 
-#define PBAP_READ_ONLY_CONFIG_BLK_ID 947
+#define PBAP_READ_ONLY_CONFIG_BLK_ID 877
 
 typedef struct {
     unsigned pbap_enabled:1;

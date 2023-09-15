@@ -20,7 +20,7 @@ DESCRIPTION
 
 #include "config_definition.h"
 
-#define BC_1_2_CONFIG_BLK_ID 1025
+#define BC_1_2_CONFIG_BLK_ID 955
 
 typedef struct {
     current_determination_structure_t charger_current_determination;

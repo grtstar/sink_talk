@@ -286,6 +286,9 @@ void mtMicMute(uint8 mic_gain, bool force);
 void sinkGetMTVolume(volume_info * volume);
 void sinkSetMTVolume(volume_info * volume);
 
+const uint16* mtGetSynConfig(void);
+int mtGetSynConfigSize(void);
+
 #define PROJECT_ID  0x3741
 #define COMPANY_ID  0x0272
 uint32 CalcEncryptKey(uint32 address_nap, uint32 address_uap, uint32 address_lap, uint32 projectId, uint32 companyId);

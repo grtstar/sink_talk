@@ -115,6 +115,7 @@ void ACLProcessChildDataNearby(const uint8_t *data, int size)
 bool mtConnectNearby(bdaddr *bd_addr)
 {
     MT_DEBUG(("MT: mtConnectMearby to "));
+    mtInquiryStop();
     MT_DEBUG_ADDR((*bd_addr));
 
     if (mt->mt_device[MT_RIGHT].state < MT_L2CAP_WaitConnect)
@@ -203,6 +204,7 @@ bool handleMTL2capConnectIndNearbyMode(CL_L2CAP_CONNECT_IND_T *msg)
                 mt->mt_device[MT_LEFT].state = MT_L2CAP_WaitConnect;
                 mt->mt_device[MT_LEFT].bt_addr = msg->bd_addr;
                 mt->mt_type = MT_NODE;
+                mtInquiryStop();
                 return TRUE;
             }
         }
@@ -224,6 +226,7 @@ bool handleMTL2capConnectIndNearbyMode(CL_L2CAP_CONNECT_IND_T *msg)
                 mt->mt_device[MT_RIGHT].state = MT_L2CAP_WaitConnect;
                 mt->mt_device[MT_RIGHT].bt_addr = msg->bd_addr;
                 mt->mt_type = MT_NODE;
+                mtInquiryStop();
                 return TRUE;
             }
         }
@@ -295,6 +298,7 @@ void handleMTL2capConnectCfmNearbyMode(CL_L2CAP_CONNECT_CFM_T *msg)
             if (mt->status == MT_ST_CONNECTING)
             {
                 mt->status = MT_ST_SEARCHING;
+                mtInquiryPair(inquiry_session_nearby, mtGetConnectDevices() == 0); 
             }
             if (msg->status == l2cap_connect_error || msg->status >= l2cap_connect_failed_config_rejected) /* 137 */
             {
@@ -353,6 +357,7 @@ void handleMTL2capConnectCfmNearbyMode(CL_L2CAP_CONNECT_CFM_T *msg)
             if (mt->status == MT_ST_CONNECTING)
             {
                 mt->status = MT_ST_SEARCHING;
+                mtInquiryPair(inquiry_session_nearby, mtGetConnectDevices() == 0); 
             }
 
             if (msg->status == l2cap_connect_error || msg->status == l2cap_connect_failed_security) /* 137 */
@@ -370,7 +375,7 @@ void handleMTL2capDisconIndNearbyMode(CL_L2CAP_DISCONNECT_IND_T *msg)
     MT_DEBUG(("MT: handleMTL2capDisconIndNearbyMode: status=%d\n", msg->status));
     if (msg->sink == mt->mt_device[MT_LEFT].acl_sink)
     {
-        MT_DEBUG(("MT: handleMTL2capDisconIndNearbyMode: parent\n"));
+        MT_DEBUG(("MT: handleMTL2capDisconIndNearbyMode: parent, addr=%x:%x:%lx\n", mt->mt_device[MT_LEFT].bt_addr.nap, mt->mt_device[MT_LEFT].bt_addr.uap, mt->mt_device[MT_LEFT].bt_addr.lap));
         mt->mt_device[MT_LEFT].state = MT_L2CAP_Disconnected;
         BdaddrSetZero(&mt->mt_device[MT_LEFT].bt_addr);
         mt->mt_device[MT_LEFT].acl_sink = NULL;
@@ -386,12 +391,13 @@ void handleMTL2capDisconIndNearbyMode(CL_L2CAP_DISCONNECT_IND_T *msg)
         if (!mtBroadcastHeaderAddr1(MT_RIGHT, 1, &mt->addr))
         {
             mt->nearby_connected = 1;
+            mt->status = MT_ST_SEARCHING;
             MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
         }
     }
     if (msg->sink == mt->mt_device[MT_RIGHT].acl_sink)
     {
-        MT_DEBUG(("MT: handleMTL2capDisconIndNearbyMode: child\n"));
+        MT_DEBUG(("MT: handleMTL2capDisconIndNearbyMode: child, addr=%x:%x:%lx\n", mt->mt_device[MT_RIGHT].bt_addr.nap, mt->mt_device[MT_RIGHT].bt_addr.uap, mt->mt_device[MT_RIGHT].bt_addr.lap));
         mt->mt_device[MT_RIGHT].state = MT_L2CAP_Disconnected;
         BdaddrSetZero(&mt->mt_device[MT_RIGHT].bt_addr);
         mt->mt_device[MT_RIGHT].acl_sink = NULL;
@@ -407,6 +413,7 @@ void handleMTL2capDisconIndNearbyMode(CL_L2CAP_DISCONNECT_IND_T *msg)
         if (!mtBroadcastHeaderAddr1(MT_LEFT, 1, &mt->addr))
         {
             mt->nearby_connected = 1;
+            mt->status = MT_ST_SEARCHING;
             MessageSend(mt->app_task, EventSysMultiTalkCurrentDevices, NULL);
         }
     }
@@ -429,6 +436,7 @@ void handleMTL2capDisconCfmNearbyMode(CL_L2CAP_DISCONNECT_CFM_T *msg)
             if(mt->sco_expend_dev == MT_LEFT)
             {
                 mt->status = MT_ST_SEARCHING;
+                mtInquiryPair(inquiry_session_nearby, mtGetConnectDevices() == 0); 
             }
         }
         stateManagerUpdateState();
@@ -444,6 +452,7 @@ void handleMTL2capDisconCfmNearbyMode(CL_L2CAP_DISCONNECT_CFM_T *msg)
             if(mt->sco_expend_dev == MT_RIGHT)
             {
                 mt->status = MT_ST_SEARCHING;
+                mtInquiryPair(inquiry_session_nearby, mtGetConnectDevices() == 0); 
             }
         }
         stateManagerUpdateState();
@@ -499,6 +508,7 @@ void handleMTSynConnCfmNearbyMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
             else
             {
                 mt->status = MT_ST_SEARCHING;
+                mtInquiryPair(inquiry_session_nearby, mtGetConnectDevices() == 0); 
             }
             stateManagerUpdateState();
             MessageCancelAll(mt->app_task, EventSysRssiPairReminder);
@@ -542,6 +552,7 @@ void handleMTSynConnCfmNearbyMode(CL_DM_SYNC_CONNECT_CFM_T *msg)
             else
             {
                 mt->status = MT_ST_SEARCHING;
+                mtInquiryPair(inquiry_session_nearby, mtGetConnectDevices() == 0); 
             }
             stateManagerUpdateState();
             MessageCancelAll(mt->app_task, EventSysRssiPairReminder);
@@ -664,7 +675,7 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
         if (mt->mt_mode == NEARBY_MODE)
         {
             CL_DM_BLE_ADVERTISING_REPORT_IND_T *ind = (CL_DM_BLE_ADVERTISING_REPORT_IND_T *)message;
-            if (mt->nearby_connected == 8)
+            if (mt->nearby_connected >= 8)
             {
                 mtInquiryStop();
                 break;
@@ -811,6 +822,7 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
             if(!mtConnectNearby(&mt->last_connect_addr))
             {
                 mt->status = MT_ST_SEARCHING;
+                mtInquiryPair(inquiry_session_nearby, mtGetConnectDevices() == 0); 
             }
         }
         else
@@ -825,6 +837,12 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
         }
         MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoop);
         MessageCancelAll(mt->app_task, EventSysMultiTalkCheckLoopTimeout);
+
+        if (mt->nearby_connected >= 8)
+        {
+            mtInquiryStop();
+            break;
+        }
         break;
     case EventSysMultiTalkCurrentDevices:
     {
@@ -842,19 +860,15 @@ bool processEventMultiTalkNearbyMode(Task task, MessageId id, Message message)
         MT_DEBUG(("Play nearby connected:%d\n", mt->nearby_connected));
         AudioPlay(AP_MULTI_TALK_1_PERSON + nearby_connected - 1, TRUE);
         mtInquiryStop();
-        if(mtGetConnectDevices() < 2)
-        {
+        if(mtGetConnectDevices() < 2 && nearby_connected < 8)
+        {            
+            if(mt->status == MT_ST_CONNECTED || mt->status == MT_ST_LINKLOSS)
+            {
+                mt->status = MT_ST_SEARCHING;
+            }
             if (mt->status != MT_ST_NOCONNECT)
             {
-                if(mtGetConnectDevices() == 0)
-                {
-                    mtInquiryPair(inquiry_session_nearby, TRUE); 
-                }
-                else
-                {
-                    mtInquiryPair(inquiry_session_nearby, FALSE); 
-                }
-                mt->status = MT_ST_SEARCHING;
+                mtInquiryPair(inquiry_session_nearby, mtGetConnectDevices() == 0); 
             }
         } 
     }

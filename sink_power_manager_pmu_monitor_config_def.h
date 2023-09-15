@@ -20,7 +20,7 @@ DESCRIPTION
 
 #include "config_definition.h"
 
-#define SINK_PMU_MON_CONFIG_CONFIG_BLK_ID 1014
+#define SINK_PMU_MON_CONFIG_CONFIG_BLK_ID 944
 
 typedef struct {
     unsigned min_charge_i;

@@ -58,10 +58,26 @@ extern TaskData acl_child_task;
 
 #define MT_DEBUGx(x)
 
+#define mtInquiryStart() \
+{\
+    if(mt->mt_mode == FREIEND_MODE)\
+    {\
+        if(mtGetConnectDevices())\
+            mtInquiryPair(inquiry_session_friend, FALSE);\
+        else\
+            mtInquiryPair(inquiry_session_friend, TRUE);\
+    }\
+    if(mt->mt_mode == FREIEND_MODE_PAIRING)\
+    {\
+        mtInquiryPair(inquiry_session_multi_talk, TRUE);\
+    }\
+}
+
 bool mtConnect(bdaddr *bd_addr)
 {
     MT_DEBUG(("MT: mtConnect to "));
     MT_DEBUG_ADDR((*bd_addr));
+    mtInquiryStop();
     if (RouteTableIsNotSaved(&mt->route_table) || RouteTableIsContain(&mt->route_table, bd_addr))
     {
         if (mt->mt_device[MT_RIGHT].state < MT_L2CAP_WaitConnect)
@@ -263,6 +279,7 @@ void handleMTL2capConnectCfmFriendMode(CL_L2CAP_CONNECT_CFM_T *msg)
                 }
                 else
                 {
+                    mtInquiryStart();
                     mt->status = MT_ST_SEARCHING;
                 }
             }
@@ -321,6 +338,7 @@ void handleMTL2capConnectCfmFriendMode(CL_L2CAP_CONNECT_CFM_T *msg)
             mt->mt_device[MT_RIGHT].state = MT_L2CAP_Disconnected;
             if (mt->status == MT_ST_CONNECTING)
             {
+                mtInquiryStart();
                 mt->status = MT_ST_SEARCHING;
             }
 
@@ -352,6 +370,19 @@ void handleMTL2capDisconIndFriendMode(CL_L2CAP_DISCONNECT_IND_T *msg)
         {
             ConnectionL2capDisconnectResponse(msg->identifier, msg->sink);
         }
+         mtInquiryStop();
+        if (mt->status != MT_ST_NOCONNECT)
+        {
+            if (mt->mt_mode == FREIEND_MODE)
+            {
+                mt->status = MT_ST_SEARCHING;
+            }
+            else
+            {
+                mt->status = MT_ST_PARING;
+            }
+            mtInquiryStart();
+        }
         mt->header_addr[0] = mt->addr;
         BdaddrSetZero(&mt->header_addr[1]);
         if (!mtBroadcastHeaderAddr1(MT_RIGHT, 1, &mt->addr))
@@ -376,14 +407,13 @@ void handleMTL2capDisconIndFriendMode(CL_L2CAP_DISCONNECT_IND_T *msg)
         {
             if (mt->mt_mode == FREIEND_MODE)
             {
-                mtInquiryPair(inquiry_session_friend, mtGetConnectDevices() == 0);
                 mt->status = MT_ST_SEARCHING;
             }
             else
             {
-                mtInquiryPair(inquiry_session_multi_talk, TRUE);
                 mt->status = MT_ST_PARING;
             }
+            mtInquiryStart();
         }
         mt->header_addr[0] = mt->addr;
         BdaddrSetZero(&mt->header_addr[1]);
@@ -640,12 +670,12 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
         mtDisconnect();
         AudioPlay(AP_MULTI_TALK_FRIEND_MODE_PAIR, TRUE);
         mtInquiryStop();
-        mtInquiryPair(inquiry_session_multi_talk, TRUE);
         memset(&mt->route_table, 0, sizeof(RouteTable));
         mt->header_addr[0] = mt->addr;
         BdaddrSetZero(&mt->header_addr[1]);
         mt->total_connected = 1;
         mt->mt_type = MT_NODE;
+        mtInquiryPair(inquiry_session_multi_talk, TRUE);
         PowerAmpOn();
         MessageCancelAll(task, EventSysMultiTalkFriendSaveListDelay);
         break;
@@ -968,7 +998,7 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
             AudioPlay(AP_MULTI_TALK_2_CONNECTED + mt->total_connected - 2, TRUE);
         }
         mtInquiryStop();
-        if (mtGetConnectDevices() == 1)
+        if (mtGetConnectDevices() <= 1)
         {
             mtInquiryPair(inquiry_session_friend, FALSE);
         }
@@ -1006,22 +1036,16 @@ bool processEventMultiTalkFriendMode(Task task, MessageId id, Message message)
             {
                 if (mt->mt_mode == FREIEND_MODE)
                 {
-                    if(mtGetConnectDevices() == 0)
-                    {
-                        mtInquiryPair(inquiry_session_friend, TRUE); 
-                    }
-                    else
-                    {
-                        mtInquiryPair(inquiry_session_friend, FALSE); 
-                    }
-                    /* mtInquiryPair(inquiry_session_friend, mtGetConnectDevices() == 0); */
-                    mt->status = MT_ST_SEARCHING;
+                    if(mt->status == MT_ST_CONNECTED || mt->status == MT_ST_LINKLOSS)
+		            {
+		                mt->status = MT_ST_SEARCHING;
+		            }
                 }
                 else
                 {
-                    mtInquiryPair(inquiry_session_multi_talk, mtGetConnectDevices() == 0);
                     mt->status = MT_ST_PARING;
                 }
+                mtInquiryStart();
             }
         } 
     } 

@@ -499,8 +499,8 @@ bool processEventMultiTalkCoupleMode(Task task, MessageId id, Message message)
         {
             mt->status = MT_ST_CONNECTING;
             mt->couple_reconnect_retry = 10000;
-            MessageSendLater(task, EventSysRssiPairReminder, NULL, D_SEC(5));
-            MessageSend(task, EventSysMultiTalkCoupleModeReconnect, NULL);
+            MessageSendLater(task, EventSysRssiPairReminder, NULL, D_SEC(6));
+            MessageSendLater(task, EventSysMultiTalkCoupleModeReconnect, NULL, 1200);
         }
         break;
     case EventSysMultiTalkLeaveCoupleMode:
