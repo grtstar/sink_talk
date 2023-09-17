@@ -126,12 +126,12 @@ static const ble_configuration_t ble_config = {
 static const ble_configuration_t ble_config = {
                                 10,     /* Bondable Pairing timeout (secs) */
                                 60,     /* Bondable Connection Timeout (secs) */
-                                512,    /* Fast scan interval */
-                                24,     /* Fast scan window */
+                                128,    /* Fast scan interval */
+                                12,     /* Fast scan window */
                                 120,    /* Gap mode switch timer */
                                 10,     /* Time to scan for whitelist devices before reverting to general scanning, 
                                             if a private device has been paired with */
-                                5,     /* Fast scan timer */
+                                1,     /* Fast scan timer */
                                 512,   /* Slow scan interval */
                                 24,     /* Slow scan window */
                                 32,     /* Fast adv interval min */

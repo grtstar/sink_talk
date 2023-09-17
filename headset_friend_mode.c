@@ -69,7 +69,10 @@ extern TaskData acl_child_task;
     }\
     if(mt->mt_mode == FREIEND_MODE_PAIRING)\
     {\
-        mtInquiryPair(inquiry_session_multi_talk, TRUE);\
+        if(mtGetConnectDevices())\
+            mtInquiryPair(inquiry_session_multi_talk, FALSE);\
+        else\
+            mtInquiryPair(inquiry_session_multi_talk, TRUE);\
     }\
 }
 
