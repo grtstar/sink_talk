@@ -42,7 +42,7 @@ Region: PM_REGION
 0x00001D        D1520BBA                 r3 = M[r0 + 3002];
 0x00001E        01E00080                 rFlags = Null + 128;
 0x00001F        E420002F                 r0 = Null + 1;
-0x000020        FD0000FF 09003C29        Null = Null + M[$interrupt.block_count];
+0x000020        FD0000FF 09003C2A        Null = Null + M[$interrupt.block_count];
 0x000022        00200001                 if NE r0 = Null + Null;
 0x000023        1920FE12                 M[0xfffe12] = r0 + Null;
 0x000024        E005000F                 call r3;
@@ -53,10 +53,10 @@ Region: PM_REGION
 0x000029        1940FE44                 M[0xfffe44] = r2 + Null;
 0x00002A        85334000                 r1 = r1 OR 0x4000;
 0x00002B        1930FE16                 M[0xfffe16] = r1 + Null;
-0x00002C        09300C2A                 r1 = Null + M[$interrupt.total_time];
+0x00002C        09300C2B                 r1 = Null + M[$interrupt.total_time];
 0x00002D        2933000C                 r1 = r1 - M[$interrupt.start_time];
 0x00002E        0933FE71                 r1 = r1 + M[0xfffe71];
-0x00002F        19300C2A                 M[$interrupt.total_time] = r1 + Null;
+0x00002F        19300C2B                 M[$interrupt.total_time] = r1 + Null;
 0x000030        F104000C                 popm <r0, r1>;
 0x000031        1930FE93                 M[0xfffe93] = r1 + Null;
 0x000032        1920FE4D                 M[0xfffe4d] = r0 + Null;
@@ -2633,10 +2633,10 @@ Region: PM_REGION
 0x0005A4        DD10001E                 if NE jump $M.message.received_service_routine.non_long_message;
 0x0005A5        81020001                 Null = r0 AND 0x1;
 0x0005A6        DD000003                 if EQ jump $M.message.received_service_routine.not_initial_packet;
-0x0005A7        FD0000FF 19003C2C        M[$message.long_message_size] = Null + Null;
+0x0005A7        FD0000FF 19003C2D        M[$message.long_message_size] = Null + Null;
 
  <$M.message.received_service_routine.not_initial_packet>
-0x0005A9        FD0000FF 09303C2C        r1 = Null + M[$message.long_message_size];
+0x0005A9        FD0000FF 09303C2D        r1 = Null + M[$message.long_message_size];
 0x0005AB        21030052                 Null = r1 - 82;
 0x0005AC        DD400002                 if NEG jump $M.message.received_service_routine.message_not_too_long;
 0x0005AD        21330004                 r1 = r1 - 4;
@@ -2651,7 +2651,7 @@ Region: PM_REGION
 0x0005B4        0940E009                 r2 = Null + M[0xffe009];
 0x0005B5        D5430711                 M[r1 + 1809] = r2;
 0x0005B6        01330004                 r1 = r1 + 4;
-0x0005B7        FD0000FF 19303C2C        M[$message.long_message_size] = r1 + Null;
+0x0005B7        FD0000FF 19303C2D        M[$message.long_message_size] = r1 + Null;
 0x0005B9        81020002                 Null = r0 AND 0x2;
 0x0005BA        DD100005                 if NE jump $M.message.received_service_routine.final_packet;
 
@@ -2668,7 +2668,7 @@ Region: PM_REGION
 
  <$M.message.received_service_routine.non_long_message>
 0x0005C2        01C00032                 r10 = Null + 50;
-0x0005C3        FD0000FF 09303C2A        r1 = Null + M[$message.last_addr];
+0x0005C3        FD0000FF 09303C2B        r1 = Null + M[$message.last_addr];
 0x0005C5        E5F00009                 do $M.message.received_service_routine.loop;
 0x0005C6        E403002F                 Null = r1 + 1;
 0x0005C7        DD000008                 if EQ jump $M.message.received_service_routine.no_handler;
@@ -2680,7 +2680,7 @@ Region: PM_REGION
 0x0005CD        D1330000                 r1 = M[r1 + 0];
 
  <$M.message.received_service_routine.loop>
-0x0005CE        E1F00A14                 call $error;
+0x0005CE        E1F00A43                 call $error;
 
  <$M.message.received_service_routine.no_handler>
 0x0005CF        0970E001                 r5 = Null + M[0xffe001];
@@ -3213,7 +3213,7 @@ Region: PM_REGION
 
  <$M.cbuffer.configure_port_message_handler.read_port_disconnect>
 0x000733        01200000                 r0 = Null + 0;
-0x000734        FD0000FF 09D03C27        rLink = Null + M[$cbuffer.read_port_disconnect_address];
+0x000734        FD0000FF 09D03C28        rLink = Null + M[$cbuffer.read_port_disconnect_address];
 0x000736        E00D0001                 if NE call rLink;
 0x000737        DDF00587                 jump $pop_rLink_and_rts;
 
@@ -3236,7 +3236,7 @@ Region: PM_REGION
 0x000747        F1040014                 popm <r0, r2>;
 0x000748        0032000F                 r1 = r0 + Null;
 0x000749        E420002F                 r0 = Null + 1;
-0x00074A        09D00C27                 rLink = Null + M[$cbuffer.read_port_connect_address];
+0x00074A        09D00C28                 rLink = Null + M[$cbuffer.read_port_connect_address];
 0x00074B        E00D0001                 if NE call rLink;
 0x00074C        DDF00572                 jump $pop_rLink_and_rts;
 
@@ -3247,7 +3247,7 @@ Region: PM_REGION
 
  <$M.cbuffer.configure_port_message_handler.write_port_disconnect>
 0x000750        01200000                 r0 = Null + 0;
-0x000751        FD0000FF 09D03C26        rLink = Null + M[$cbuffer.write_port_disconnect_address];
+0x000751        FD0000FF 09D03C27        rLink = Null + M[$cbuffer.write_port_disconnect_address];
 0x000753        E00D0001                 if NE call rLink;
 0x000754        DDF0056A                 jump $pop_rLink_and_rts;
 
@@ -3271,7 +3271,7 @@ Region: PM_REGION
 0x000765        F1040014                 popm <r0, r2>;
 0x000766        0032000F                 r1 = r0 + Null;
 0x000767        E420002F                 r0 = Null + 1;
-0x000768        09D00C26                 rLink = Null + M[$cbuffer.write_port_connect_address];
+0x000768        09D00C27                 rLink = Null + M[$cbuffer.write_port_connect_address];
 0x000769        E00D0001                 if NE call rLink;
 0x00076A        DDF00554                 jump $pop_rLink_and_rts;
 
@@ -3460,7 +3460,7 @@ Region: PM_REGION
 
  <$frame_sync.task_scheduler_run>
 0x0007A8        0930FE71                 r1 = Null + M[0xfffe71];
-0x0007A9        09600C2A                 r4 = Null + M[$interrupt.total_time];
+0x0007A9        09600C2B                 r4 = Null + M[$interrupt.total_time];
 0x0007AA        0980FE4D                 r6 = Null + M[0xfffe4d];
 0x0007AB        0120003F                 r0 = Null + 63;
 0x0007AC        1920FE4D                 M[0xfffe4d] = r0 + Null;
@@ -3472,7 +3472,7 @@ Region: PM_REGION
 0x0007B0        0950FE71                 r3 = Null + M[0xfffe71];
 0x0007B1        D12A0005                 r0 = M[r8 + 5];
 0x0007B2        2035003F                 r1 = r3 - r1;
-0x0007B3        29660C2A                 r4 = r4 - M[$interrupt.total_time];
+0x0007B3        29660C2B                 r4 = r4 - M[$interrupt.total_time];
 0x0007B4        03360000                 r1 = r1 + r4;
 0x0007B5        03320000                 r1 = r1 + r0;
 0x0007B6        D53A0005                 M[r8 + 5] = r1;
@@ -3518,7 +3518,7 @@ Region: PM_REGION
 0x0007DD        F3D00000                 push rLink;
 0x0007DE        E455002F                 r3 = r3 + 1;
 0x0007DF        01C00007                 r10 = Null + 7;
-0x0007E0        09800C2F                 r6 = Null + M[$wall_clock.last_addr];
+0x0007E0        09800C30                 r6 = Null + M[$wall_clock.last_addr];
 0x0007E1        E5F00014                 do $M.wall_clock.message_handler.loop;
 0x0007E2        E408002F                 Null = r6 + 1;
 0x0007E3        DD000013                 if EQ jump $M.wall_clock.message_handler.no_handler;
@@ -3543,7 +3543,7 @@ Region: PM_REGION
 0x0007F4        D1880000                 r6 = M[r6 + 0];
 
  <$M.wall_clock.message_handler.loop>
-0x0007F5        E1F007ED                 call $error;
+0x0007F5        E1F0081C                 call $error;
 
  <$M.wall_clock.message_handler.no_handler>
 0x0007F6        DDF004C8                 jump $pop_rLink_and_rts;
@@ -3868,10 +3868,10 @@ Region: PM_REGION
 0x000887        F3D00000                 push rLink;
 0x000888        E1F003F4                 call $block_interrupts;
 0x000889        0920E000                 r0 = Null + M[0xffe000];
-0x00088A        29220C2C                 r0 = r0 - M[$message.last_seq_sent];
+0x00088A        29220C2D                 r0 = r0 - M[$message.last_seq_sent];
 0x00088B        8102FFFF                 Null = r0 AND 0xffff;
 0x00088C        DD100016                 if NE jump $M.message.private.try_to_send_message.queue_not_empty;
-0x00088D        09300C2B                 r1 = Null + M[$message.queue_read_ptr];
+0x00088D        09300C2C                 r1 = Null + M[$message.queue_read_ptr];
 0x00088E        D1230555                 r0 = M[r1 + 1365];
 0x00088F        1920E002                 M[0xffe002] = r0 + Null;
 0x000890        D1230556                 r0 = M[r1 + 1366];
@@ -3880,16 +3880,16 @@ Region: PM_REGION
 0x000893        1920E004                 M[0xffe004] = r0 + Null;
 0x000894        D1230558                 r0 = M[r1 + 1368];
 0x000895        1920E005                 M[0xffe005] = r0 + Null;
-0x000896        09200C2C                 r0 = Null + M[$message.last_seq_sent];
+0x000896        09200C2D                 r0 = Null + M[$message.last_seq_sent];
 0x000897        E422002F                 r0 = r0 + 1;
-0x000898        19200C2C                 M[$message.last_seq_sent] = r0 + Null;
+0x000898        19200C2D                 M[$message.last_seq_sent] = r0 + Null;
 0x000899        D1230554                 r0 = M[r1 + 1364];
 0x00089A        1920FE1B                 M[0xfffe1b] = r0 + Null;
 0x00089B        01330005                 r1 = r1 + 5;
 0x00089C        2103006E                 Null = r1 - 110;
 0x00089D        00300000                 if EQ r1 = Null + Null;
-0x00089E        19300C2B                 M[$message.queue_read_ptr] = r1 + Null;
-0x00089F        FD0000FF 29033C2B        Null = r1 - M[$message.queue_write_ptr];
+0x00089E        19300C2C                 M[$message.queue_read_ptr] = r1 + Null;
+0x00089F        FD0000FF 29033C2C        Null = r1 - M[$message.queue_write_ptr];
 0x0008A1        DD000007                 if EQ jump $M.message.private.try_to_send_message.all_done;
 
  <$M.message.private.try_to_send_message.queue_not_empty>
@@ -3953,8 +3953,8 @@ Region: PM_REGION
 0x0008D1        F3D00000                 push rLink;
 0x0008D2        E1F003AA                 call $block_interrupts;
 0x0008D3        01C00032                 r10 = Null + 50;
-0x0008D4        FD0000FF 01603C2E        r4 = Null + -50130;
-0x0008D6        FD0000FF 09203C2E        r0 = Null + M[$timer.last_addr];
+0x0008D4        FD0000FF 01603C2F        r4 = Null + -50129;
+0x0008D6        FD0000FF 09203C2F        r0 = Null + M[$timer.last_addr];
 0x0008D8        E5F00008                 do $M.timer.schedule_event_at.loop;
 0x0008D9        E402002F                 Null = r0 + 1;
 0x0008DA        DD000007                 if EQ jump $M.timer.schedule_event_at.insert_here;
@@ -3965,18 +3965,18 @@ Region: PM_REGION
 0x0008DF        D1220000                 r0 = M[r0 + 0];
 
  <$M.timer.schedule_event_at.loop>
-0x0008E0        E1F00702                 call $error;
+0x0008E0        E1F00731                 call $error;
 
  <$M.timer.schedule_event_at.insert_here>
 0x0008E1        D5360000                 M[r4 + 0] = r1;
 0x0008E2        D5230000                 M[r1 + 0] = r0;
 0x0008E3        D5430001                 M[r1 + 1] = r2;
 0x0008E4        D5530002                 M[r1 + 2] = r3;
-0x0008E5        09500C2E                 r3 = Null + M[$timer.id];
+0x0008E5        09500C2F                 r3 = Null + M[$timer.id];
 0x0008E6        D5530003                 M[r1 + 3] = r3;
 0x0008E7        E425002F                 r0 = r3 + 1;
 0x0008E8        20200050                 if EQ r0 = Null - r3;
-0x0008E9        19200C2E                 M[$timer.id] = r0 + Null;
+0x0008E9        19200C2F                 M[$timer.id] = r0 + Null;
 0x0008EA        0900FE1F                 Null = Null + M[0xfffe1f];
 0x0008EB        DD000003                 if EQ jump $M.timer.schedule_event_at.no_current_timer_set;
 0x0008EC        2904FE21                 Null = r2 - M[0xfffe21];
@@ -4329,9 +4329,9 @@ Region: PM_REGION
 0x0009C0        E440003F                 r2 = Null - 1;
 
  <$M.pskey.result_message_handler.ready>
-0x0009C1        19000C2D                 M[$pskey.request_in_progress] = Null + Null;
-0x0009C2        FD0000FF 01703C2D        r5 = Null + -50131;
-0x0009C4        FD0000FF 09203C2D        r0 = Null + M[$pskey.last_addr];
+0x0009C1        19000C2E                 M[$pskey.request_in_progress] = Null + Null;
+0x0009C2        FD0000FF 01703C2E        r5 = Null + -50130;
+0x0009C4        FD0000FF 09203C2E        r0 = Null + M[$pskey.last_addr];
 
  <$M.pskey.result_message_handler.find_structure_loop>
 0x0009C6        D1620001                 r4 = M[r0 + 1];
@@ -4349,7 +4349,7 @@ Region: PM_REGION
 0x0009D0        D5670000                 M[r5 + 0] = r4;
 0x0009D1        D1D20002                 rLink = M[r0 + 2];
 0x0009D2        E00D000F                 call rLink;
-0x0009D3        FD0000FF 09303C2D        r1 = Null + M[$pskey.last_addr];
+0x0009D3        FD0000FF 09303C2E        r1 = Null + M[$pskey.last_addr];
 0x0009D5        E403002F                 Null = r1 + 1;
 0x0009D6        E1100021                 if NE call $pskey.private.send_request;
 0x0009D7        DDF002E7                 jump $pop_rLink_and_rts;
@@ -4448,7 +4448,7 @@ Region: PM_REGION
 0x0009F6        DC0D000F                 rts;
 
  <$pskey.private.send_request>
-0x0009F7        09000C2D                 Null = Null + M[$pskey.request_in_progress];
+0x0009F7        09000C2E                 Null = Null + M[$pskey.request_in_progress];
 0x0009F8        DC0D0001                 if NE rts;
 0x0009F9        F3D00000                 push rLink;
 0x0009FA        FD0000FF 09403C08        r2 = Null + M[0xff3c08];
@@ -4456,12 +4456,12 @@ Region: PM_REGION
 0x0009FD        E1F00288                 call $message.send_queue_space;
 0x0009FE        21020005                 Null = r0 - 5;
 0x0009FF        DD400009                 if NEG jump $M.pskey.private.send_request.try_to_send_later;
-0x000A00        FD0000FF 09303C2D        r1 = Null + M[$pskey.last_addr];
+0x000A00        FD0000FF 09303C2E        r1 = Null + M[$pskey.last_addr];
 0x000A02        85408006                 r2 = Null OR 0x8006;
 0x000A03        D1530001                 r3 = M[r1 + 1];
 0x000A04        E1F0011C                 call $message.send_short;
 0x000A05        E420002F                 r0 = Null + 1;
-0x000A06        19200C2D                 M[$pskey.request_in_progress] = r0 + Null;
+0x000A06        19200C2E                 M[$pskey.request_in_progress] = r0 + Null;
 0x000A07        DDF002B7                 jump $pop_rLink_and_rts;
 
  <$M.pskey.private.send_request.try_to_send_later>
@@ -4593,9 +4593,9 @@ Region: PM_REGION
 
  <$profiler.stop>
 0x000A48        0032000F                 r1 = r0 + Null;
-0x000A49        FD0000FF 09203C29        r0 = Null + M[$interrupt.block_count];
+0x000A49        FD0000FF 09203C2A        r0 = Null + M[$interrupt.block_count];
 0x000A4B        E422002F                 r0 = r0 + 1;
-0x000A4C        FD0000FF 19203C29        M[$interrupt.block_count] = r0 + Null;
+0x000A4C        FD0000FF 19203C2A        M[$interrupt.block_count] = r0 + Null;
 0x000A4E        1900FE12                 M[0xfffe12] = Null + Null;
 0x000A4F        03000000                 Null = Null + Null;
 0x000A50        03000000                 Null = Null + Null;
@@ -4607,11 +4607,11 @@ Region: PM_REGION
 0x000A56        03240000                 r0 = r0 + r2;
 0x000A57        0922FE71                 r0 = r0 + M[0xfffe71];
 0x000A58        D5230004                 M[r1 + 4] = r0;
-0x000A59        FD0000FF 09203C29        r0 = Null + M[$interrupt.block_count];
-0x000A5B        E1000587                 if EQ call $error;
+0x000A59        FD0000FF 09203C2A        r0 = Null + M[$interrupt.block_count];
+0x000A5B        E10005B6                 if EQ call $error;
 0x000A5C        E422003F                 r0 = r0 - 1;
 0x000A5D        E430002F                 r1 = Null + 1;
-0x000A5E        FD0000FF 19203C29        M[$interrupt.block_count] = r0 + Null;
+0x000A5E        FD0000FF 19203C2A        M[$interrupt.block_count] = r0 + Null;
 0x000A60        00300001                 if NE r1 = Null + Null;
 0x000A61        1930FE12                 M[0xfffe12] = r1 + Null;
 0x000A62        DC0D000F                 rts;
@@ -4770,7 +4770,7 @@ Region: PM_REGION
 0x000A95        F3D00000                 push rLink;
 
  <$M.timer.service_routine.search_again>
-0x000A96        FD0000FF 09303C2E        r1 = Null + M[$timer.last_addr];
+0x000A96        FD0000FF 09303C2F        r1 = Null + M[$timer.last_addr];
 0x000A98        E403002F                 Null = r1 + 1;
 0x000A99        DD000012                 if EQ jump $M.timer.service_routine.no_more_timers;
 0x000A9A        D1230001                 r0 = M[r1 + 1];
@@ -4781,7 +4781,7 @@ Region: PM_REGION
 0x000A9F        D1230003                 r0 = M[r1 + 3];
 0x000AA0        D5030003                 M[r1 + 3] = Null;
 0x000AA1        D1430000                 r2 = M[r1 + 0];
-0x000AA2        FD0000FF 19403C2E        M[$timer.last_addr] = r2 + Null;
+0x000AA2        FD0000FF 19403C2F        M[$timer.last_addr] = r2 + Null;
 0x000AA4        E00D000F                 call rLink;
 0x000AA5        DDF0FFF1                 jump $M.timer.service_routine.search_again;
 
@@ -4931,8 +4931,8 @@ Region: PM_REGION
 0x000AF4        F3D00000                 push rLink;
 0x000AF5        E1F00187                 call $block_interrupts;
 0x000AF6        01C00032                 r10 = Null + 50;
-0x000AF7        FD0000FF 01603C2E        r4 = Null + -50130;
-0x000AF9        FD0000FF 09203C2E        r0 = Null + M[$timer.last_addr];
+0x000AF7        FD0000FF 01603C2F        r4 = Null + -50129;
+0x000AF9        FD0000FF 09203C2F        r0 = Null + M[$timer.last_addr];
 0x000AFB        E5F00008                 do $M.timer.cancel_event.loop;
 0x000AFC        E402002F                 Null = r0 + 1;
 0x000AFD        DD000006                 if EQ jump $M.timer.cancel_event.loop;
@@ -5026,13 +5026,13 @@ Region: PM_REGION
  <$message.send_short>
 0x000B20        F3D00000                 push rLink;
 0x000B21        E1F0015B                 call $block_interrupts;
-0x000B22        FD0000FF 09303C2B        r1 = Null + M[$message.queue_write_ptr];
+0x000B22        FD0000FF 09303C2C        r1 = Null + M[$message.queue_write_ptr];
 0x000B24        01230005                 r0 = r1 + 5;
 0x000B25        2102006E                 Null = r0 - 110;
 0x000B26        00200000                 if EQ r0 = Null + Null;
-0x000B27        29020C2B                 Null = r0 - M[$message.queue_read_ptr];
+0x000B27        29020C2C                 Null = r0 - M[$message.queue_read_ptr];
 0x000B28        DD000009                 if EQ jump $M.message.send_short.all_done;
-0x000B29        FD0000FF 19203C2B        M[$message.queue_write_ptr] = r0 + Null;
+0x000B29        FD0000FF 19203C2C        M[$message.queue_write_ptr] = r0 + Null;
 0x000B2B        D5430554                 M[r1 + 1364] = r2;
 0x000B2C        D5530555                 M[r1 + 1365] = r3;
 0x000B2D        D5630556                 M[r1 + 1366] = r4;
@@ -5048,8 +5048,8 @@ Region: PM_REGION
 0x000B33        F3D00000                 push rLink;
 0x000B34        E1F00148                 call $block_interrupts;
 0x000B35        01C00007                 r10 = Null + 7;
-0x000B36        01200C2F                 r0 = Null + 3119;
-0x000B37        09400C2F                 r2 = Null + M[$wall_clock.last_addr];
+0x000B36        01200C30                 r0 = Null + 3120;
+0x000B37        09400C30                 r2 = Null + M[$wall_clock.last_addr];
 0x000B38        E5F00007                 do $M.wall_clock.disable.loop;
 0x000B39        E404002F                 Null = r2 + 1;
 0x000B3A        DD000005                 if EQ jump $M.wall_clock.disable.loop;
@@ -5104,7 +5104,7 @@ Region: PM_REGION
 0x000B5D        D5530002                 M[r1 + 2] = r3;
 0x000B5E        E450003F                 r3 = Null - 1;
 0x000B5F        D5530000                 M[r1 + 0] = r3;
-0x000B60        FD0000FF 01203C2D        r0 = Null + -50131;
+0x000B60        FD0000FF 01203C2E        r0 = Null + -50130;
 
  <$M.pskey.read_key.find_end_of_list>
 0x000B62        0042000F                 r2 = r0 + Null;
@@ -5112,7 +5112,7 @@ Region: PM_REGION
 0x000B64        E402002F                 Null = r0 + 1;
 0x000B65        DD10FFFD                 if NE jump $M.pskey.read_key.find_end_of_list;
 0x000B66        D5340000                 M[r2 + 0] = r1;
-0x000B67        FD0000FF 21043C2D        Null = r2 - -50131;
+0x000B67        FD0000FF 21043C2E        Null = r2 - -50130;
 0x000B69        E100FE8E                 if EQ call $pskey.private.send_request;
 0x000B6A        E1F000D4                 call $interrupt.unblock;
 0x000B6B        DDF00153                 jump $pop_rLink_and_rts;
@@ -5264,9 +5264,9 @@ Region: PM_REGION
  <$wall_clock.enable>
 0x000BCC        F3D00000                 push rLink;
 0x000BCD        E1F000AF                 call $block_interrupts;
-0x000BCE        09200C2F                 r0 = Null + M[$wall_clock.last_addr];
+0x000BCE        09200C30                 r0 = Null + M[$wall_clock.last_addr];
 0x000BCF        D5230000                 M[r1 + 0] = r0;
-0x000BD0        19300C2F                 M[$wall_clock.last_addr] = r1 + Null;
+0x000BD0        19300C30                 M[$wall_clock.last_addr] = r1 + Null;
 0x000BD1        01330007                 r1 = r1 + 7;
 0x000BD2        01400000                 r2 = Null + 0;
 0x000BD3        01500BAF                 r3 = Null + 2991;
@@ -5319,7 +5319,7 @@ Region: PM_REGION
 0x000BF8        8122001F                 r0 = r0 AND 0x1f;
 0x000BF9        2122000C                 r0 = r0 - 12;
 0x000BFA        0900FE33                 Null = Null + M[0xfffe33];
-0x000BFB        09000C28                 Null = Null + M[$cbuffer.auto_mcu_message];
+0x000BFB        09000C29                 Null = Null + M[$cbuffer.auto_mcu_message];
 0x000BFC        DD000007                 if EQ jump $M.cbuffer.set_write_address.its_a_port.dont_message_send;
 0x000BFD        D13209B8                 r1 = M[r0 + 2488];
 0x000BFE        2103F000                 Null = r1 - -4096;
@@ -5335,7 +5335,7 @@ Region: PM_REGION
 0x000C04        F3D00000                 push rLink;
 0x000C05        8152001F                 r3 = r0 AND 0x1f;
 0x000C06        0900FE33                 Null = Null + M[0xfffe33];
-0x000C07        09000C28                 Null = Null + M[$cbuffer.auto_mcu_message];
+0x000C07        09000C29                 Null = Null + M[$cbuffer.auto_mcu_message];
 0x000C08        DD000007                 if EQ jump $M.cbuffer.set_read_address.its_a_port.dont_message_send;
 0x000C09        D13509AC                 r1 = M[r3 + 2476];
 0x000C0A        2103F000                 Null = r1 - -4096;
@@ -5357,9 +5357,9 @@ Region: PM_REGION
 0x000C14        D1560002                 r3 = M[r4 + 2];
 0x000C15        D1260003                 r0 = M[r4 + 3];
 0x000C16        01660004                 r4 = r4 + 4;
-0x000C17        FD0000FF 19603C2F        M[$M.frame_sync.handlers.LOOP_COUNT] = r4 + Null;
+0x000C17        FD0000FF 19603C30        M[$M.frame_sync.handlers.LOOP_COUNT] = r4 + Null;
 0x000C19        E002000F                 call r0;
-0x000C1A        FD0000FF 09603C2F        r4 = Null + M[$M.frame_sync.handlers.LOOP_COUNT];
+0x000C1A        FD0000FF 09603C30        r4 = Null + M[$M.frame_sync.handlers.LOOP_COUNT];
 0x000C1C        DDF0FFF5                 jump $M.frame_sync.handlers.lp_proc_loop;
 
  <$sco2_timing.SyncClock>
@@ -5426,10 +5426,10 @@ Region: PM_REGION
 0x000C3D        DC0D000F                 rts;
 
  <$interrupt.unblock>
-0x000C3E        FD0000FF 09203C29        r0 = Null + M[$interrupt.block_count];
-0x000C40        E10003A2                 if EQ call $error;
+0x000C3E        FD0000FF 09203C2A        r0 = Null + M[$interrupt.block_count];
+0x000C40        E10003D1                 if EQ call $error;
 0x000C41        E422003F                 r0 = r0 - 1;
-0x000C42        FD0000FF 19203C29        M[$interrupt.block_count] = r0 + Null;
+0x000C42        FD0000FF 19203C2A        M[$interrupt.block_count] = r0 + Null;
 0x000C44        DC0D0001                 if NE rts;
 0x000C45        E420002F                 r0 = Null + 1;
 0x000C46        1920FE12                 M[0xfffe12] = r0 + Null;
@@ -5501,7 +5501,7 @@ Region: PM_REGION
 0x000C6C        2103FFFE                 Null = r1 - -2;
 0x000C6D        DD100004                 if NE jump $M.profiler.start.already_initialised;
 0x000C6E        F3D00000                 push rLink;
-0x000C6F        E1F00277                 call $profiler.register;
+0x000C6F        E1F002A6                 call $profiler.register;
 0x000C70        F3D40000                 pop rLink;
 
  <$M.profiler.start.already_initialised>
@@ -5522,17 +5522,17 @@ Region: PM_REGION
 0x000C7B        DC0D000F                 rts;
 
  <$block_interrupts>
-0x000C7C        FD0000FF 09203C29        r0 = Null + M[$interrupt.block_count];
+0x000C7C        FD0000FF 09203C2A        r0 = Null + M[$interrupt.block_count];
 0x000C7E        E422002F                 r0 = r0 + 1;
-0x000C7F        FD0000FF 19203C29        M[$interrupt.block_count] = r0 + Null;
+0x000C7F        FD0000FF 19203C2A        M[$interrupt.block_count] = r0 + Null;
 0x000C81        1900FE12                 M[0xfffe12] = Null + Null;
 0x000C82        03000000                 Null = Null + Null;
 0x000C83        03000000                 Null = Null + Null;
 0x000C84        DC0D000F                 rts;
 
  <$message.send_queue_space>
-0x000C85        09200C2B                 r0 = Null + M[$message.queue_read_ptr];
-0x000C86        FD0000FF 29223C2B        r0 = r0 - M[$message.queue_write_ptr];
+0x000C85        09200C2C                 r0 = Null + M[$message.queue_read_ptr];
+0x000C86        FD0000FF 29223C2C        r0 = r0 - M[$message.queue_write_ptr];
 0x000C88        E422003F                 r0 = r0 - 1;
 0x000C89        DC0D0005                 if POS rts;
 0x000C8A        0122006E                 r0 = r0 + 110;
@@ -5650,33 +5650,33 @@ Region: PM_REGION
 0x000CC0        DC0D000F                 rts;
 
  <$main>
-0x000CC1        E1F002E9                 call $stack.initialise;
-0x000CC2        E1F002DB                 call $interrupt.initialise;
-0x000CC3        E1F0032D                 call $message.initialise;
-0x000CC4        E1F002F1                 call $cbuffer.initialise;
-0x000CC5        E1F00291                 call $pskey.initialise;
+0x000CC1        E1F00318                 call $stack.initialise;
+0x000CC2        E1F0030A                 call $interrupt.initialise;
+0x000CC3        E1F0035C                 call $message.initialise;
+0x000CC4        E1F00320                 call $cbuffer.initialise;
+0x000CC5        E1F002C0                 call $pskey.initialise;
 0x000CC6        01401000                 r2 = Null + 4096;
 0x000CC7        E1F0FE59                 call $message.send_short;
 0x000CC8        FD0000FF 013037FC        r1 = Null + -51204;
 0x000CCA        01401070                 r2 = Null + 4208;
-0x000CCB        01500DE6                 r3 = Null + 3558;
-0x000CCC        E1F0027D                 call $message.register_handler;
-0x000CCD        E1F002C5                 call $wall_clock.initialise;
+0x000CCB        01500E15                 r3 = Null + 3605;
+0x000CCC        E1F002AC                 call $message.register_handler;
+0x000CCD        E1F002F4                 call $wall_clock.initialise;
 0x000CCE        0190090E                 r7 = Null + 2318;
 0x000CCF        01A0092D                 r8 = Null + 2349;
-0x000CD0        E1F001A8                 call $sco2_timing.initialize;
+0x000CD0        E1F001D7                 call $sco2_timing.initialize;
 0x000CD1        01A00A21                 r8 = Null + 2593;
-0x000CD2        E1F00229                 call $CVC.PowerUpReset;
+0x000CD2        E1F00258                 call $CVC.PowerUpReset;
 0x000CD3        FD000000 01408000        r2 = Null + 32768;
 0x000CD5        E1F0FE4B                 call $message.send_short;
 0x000CD6        FD0000FF 0130357C        r1 = Null + -51844;
 0x000CD8        01401072                 r2 = Null + 4210;
-0x000CD9        01500DD9                 r3 = Null + 3545;
-0x000CDA        E1F0026F                 call $message.register_handler;
+0x000CD9        01500E08                 r3 = Null + 3592;
+0x000CDA        E1F0029E                 call $message.register_handler;
 0x000CDB        E1F00032                 call $ConfigureFrontEnd;
 0x000CDC        01300BF0                 r1 = Null + 3056;
 0x000CDD        01400271                 r2 = Null + 625;
-0x000CDE        01500DA6                 r3 = Null + 3494;
+0x000CDE        01500DF1                 r3 = Null + 3569;
 0x000CDF        E1F0FFDB                 call $timer.schedule_event_in;
 
  <$M.main.main_loop>
@@ -5691,7 +5691,7 @@ Region: PM_REGION
  <$main_receive>
 0x000CE5        F3D00000                 push rLink;
 0x000CE6        FD0000FF 09003C1F        Null = Null + M[$one_mic_example.reinit];
-0x000CE8        E11000F8                 if NE call $one_mic_example_reinitialize;
+0x000CE8        E1100127                 if NE call $one_mic_example_reinitialize;
 0x000CE9        0190090E                 r7 = Null + 2318;
 0x000CEA        E1F0F69E                 call ALrYtClmXhG4b8GdfG6yhcsEkwc5+93FLGi1D2oh5B0=;
 0x000CEB        0190092D                 r7 = Null + 2349;
@@ -5707,7 +5707,7 @@ Region: PM_REGION
 0x000CF4        F3200000                 push r0;
 0x000CF5        1900FE93                 M[0xfffe93] = Null + Null;
 0x000CF6        FD0000FF 09003C1F        Null = Null + M[$one_mic_example.reinit];
-0x000CF8        E11000E8                 if NE call $one_mic_example_reinitialize;
+0x000CF8        E1100117                 if NE call $one_mic_example_reinitialize;
 0x000CF9        09200C1F                 r0 = Null + M[$one_mic_example.sys_mode];
 0x000CFA        FD0000FF D1623C16        r4 = M[r0 + -50154];
 0x000CFC        E1F0FF4C                 call $frame_sync.run_function_table;
@@ -5786,1438 +5786,1495 @@ Region: PM_REGION
 0x000D47        E1F0FDD9                 call $message.send_short;
 0x000D48        DDF0FF76                 jump $pop_rLink_and_rts;
 
- <BNDgaVwUJPX4rJhX3iSHAnah+YJch9wkT1IRfMpWT/w=>
-0x000D49        F3D00000                 push rLink;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D4A        D12A0000                 r0 = M[r8 + 0];
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D4B        D13A0001                 r1 = M[r8 + 1];
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D4C        E1F0F436                 call $cbops_multirate.GetTransferAndUpdateOutput;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D4D        00C4000F                 r10 = r2 + Null;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D4E        DDD0FF70                 if LE jump $pop_rLink_and_rts;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D4F        51900001                 M1 = Null + 1;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D50        D12A0000                 r0 = M[r8 + 0];
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D51        E1F0F446                 call $cbops_multirate.GetBuffer;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D52        5000002F                 I0 = Null + r0;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D53        50C0003F                 L0 = Null + r1;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D54        D12A0001                 r0 = M[r8 + 1];
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D55        E1F0F442                 call $cbops_multirate.GetBuffer;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D56        5040002F                 I4 = Null + r0;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D57        50E0003F                 L4 = Null + r1;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D58        D14A0002                 r2 = M[r8 + 2];
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D59        D13A0003                 r1 = M[r8 + 3];
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D5A        2003004F                 Null = r1 - r2;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D5B        DD00001A                 if EQ jump sonDgmOy1UbFXAOUqOZTwdrPTBUPzIuSxF//R8NEqHU=;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D5C        D15A0004                 r3 = M[r8 + 4];
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D5D        DD000017                 if EQ jump es8sQakYwvoxaQejncGTCUOtSIfDkvnG5L68htQnqIo=;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D5E        D17A0005                 r5 = M[r8 + 5];
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D5F        D11A0006                 rMAC = M[r8 + 6];
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D60        D16A0007                 r4 = M[r8 + 7];
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D61        E5F00011                 do P/kydner9une3affa+Xkglqkl0TaZbSX93s7U8PAzFQ=;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D62        67692100                 r4 = r4 - M1, r0 = M[I0,1];
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D63        DD50000D                 if POS jump 8bemDFhCPBejU0Zc1F1PNEQm8o0fl+KwBk+Z2qXwHeI=;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D64        9083007F                 r6 = r1 ASHIFT r5;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D65        03810000                 r6 = r6 + rMAC;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D66        0065000F                 r4 = r3 + Null;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D67        2003004F                 Null = r1 - r2;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D68        DD400005                 if NEG jump kK5L31AqeDJ40ImRPZFS/JRFboouloRBCwAy77q4A24=;
-
- <bfOm/Arm018RANhKXS8VoiU3T09LmCCmTGkybvdpnCw=>
-0x000D69        23380000                 r1 = r1 - r6;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D6A        2003004F                 Null = r1 - r2;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D6B        00340004                 if NEG r1 = r2 + Null;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D6C        DDF00004                 jump 8bemDFhCPBejU0Zc1F1PNEQm8o0fl+KwBk+Z2qXwHeI=;
-
- <kK5L31AqeDJ40ImRPZFS/JRFboouloRBCwAy77q4A24=>
-0x000D6D        03380000                 r1 = r1 + r6;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D6E        2003004F                 Null = r1 - r2;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D6F        00340005                 if POS r1 = r2 + Null;
-
- <8bemDFhCPBejU0Zc1F1PNEQm8o0fl+KwBk+Z2qXwHeI=>
-0x000D70        97230000                 r0 = r0 * r1 (frac);
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D71        030000A1                 Null = Null + Null, M[I4,1] = r0;
-
- <P/kydner9une3affa+Xkglqkl0TaZbSX93s7U8PAzFQ=>
-0x000D72        D56A0007                 M[r8 + 7] = r4;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D73        DDF00008                 jump uAWegGxV38+A3xwAATf+PCHO4q+6XhM/WZ0U8I8qZrg=;
-
- <es8sQakYwvoxaQejncGTCUOtSIfDkvnG5L68htQnqIo=>
-0x000D74        0034000F                 r1 = r2 + Null;
-
- <sonDgmOy1UbFXAOUqOZTwdrPTBUPzIuSxF//R8NEqHU=>
-0x000D75        67C92100                 r10 = r10 - M1, r0 = M[I0,1];
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D76        97230000                 r0 = r0 * r1 (frac);
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D77        E5F00003                 do 61gNxviNkMDt+3lxUpWKWVa2IRC3wKeqs+fLxeld48M=;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D78        030021A1                 Null = Null + Null, r0 = M[I0,1], M[I4,1] = r0;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D79        97230000                 r0 = r0 * r1 (frac);
-
- <61gNxviNkMDt+3lxUpWKWVa2IRC3wKeqs+fLxeld48M=>
-0x000D7A        030000A1                 Null = Null + Null, M[I4,1] = r0;
-
- <uAWegGxV38+A3xwAATf+PCHO4q+6XhM/WZ0U8I8qZrg=>
-0x000D7B        D53A0003                 M[r8 + 3] = r1;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D7C        51C00000                 L0 = Null + 0;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D7D        51E00000                 L4 = Null + 0;
-
- <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000D7E        DDF0FF40                 jump $pop_rLink_and_rts;
-
- <$detect_end_of_aux_stream>
-0x000D7F        F3D00000                 push rLink;
-0x000D80        FD0000FF 09503C1C        r3 = Null + M[$tone_in.aux_input_stream_available];
-0x000D82        DD00FF3C                 if EQ jump $pop_rLink_and_rts;
-0x000D83        01200AAA                 r0 = Null + 2730;
-0x000D84        E1F0FEF0                 call $cbuffer.calc_amount_data;
-0x000D85        81050002                 Null = r3 AND 0x2;
-0x000D86        DD100007                 if NE jump $M.detect_end_of_aux_stream.input_has_received;
-0x000D87        0002000F                 Null = r0 + Null;
-0x000D88        DD00FF36                 if EQ jump $pop_rLink_and_rts;
-0x000D89        85550002                 r3 = r3 OR 0x2;
-0x000D8A        FD0000FF 19503C1C        M[$tone_in.aux_input_stream_available] = r3 + Null;
-0x000D8C        DDF0FF32                 jump $pop_rLink_and_rts;
-
- <$M.detect_end_of_aux_stream.input_has_received>
-0x000D8D        01200AAA                 r0 = Null + 2730;
-0x000D8E        E1F0FF11                 call $_cbuffer_get_write_address;
-0x000D8F        09600C1D                 r4 = Null + M[$M.detect_end_of_aux_stream.last_write_address];
-0x000D90        FD0000FF 09503C1D        r3 = Null + M[$M.detect_end_of_aux_stream.write_move_counter];
-0x000D92        01700000                 r5 = Null + 0;
-0x000D93        2002006F                 Null = r0 - r4;
-0x000D94        E4750020                 if EQ r5 = r3 + 1;
-0x000D95        FD0000FF 19703C1D        M[$M.detect_end_of_aux_stream.write_move_counter] = r5 + Null;
-0x000D97        21070028                 Null = r5 - 40;
-0x000D98        DD40FF26                 if NEG jump $pop_rLink_and_rts;
-0x000D99        01401080                 r2 = Null + 4224;
-0x000D9A        01500000                 r3 = Null + 0;
-0x000D9B        01600000                 r4 = Null + 0;
-0x000D9C        01700000                 r5 = Null + 0;
-0x000D9D        01800000                 r6 = Null + 0;
-0x000D9E        E1F0FD82                 call $message.send_short;
-0x000D9F        FD0000FF 19003C1C        M[$tone_in.aux_input_stream_available] = Null + Null;
-0x000DA1        FD0000FF 19003C1D        M[$M.detect_end_of_aux_stream.write_move_counter] = Null + Null;
-0x000DA3        09200AAC                 r0 = Null + M[0xaac];
-0x000DA4        19200AAB                 M[0xaab] = r0 + Null;
-0x000DA5        DDF0FF19                 jump $pop_rLink_and_rts;
-
- <$audio_copy_handler>
-0x000DA6        F3D00000                 push rLink;
-0x000DA7        09000C20                 Null = Null + M[$one_mic_example.sr_flag];
-0x000DA8        E110FF65                 if NE call $ConfigureFrontEnd;
-0x000DA9        FD0000FF 01A03BAA        r8 = Null + -50262;
-0x000DAB        E1F0F373                 call ALrYtClmXhG4b8GdfG6yhcsEkwc5+93FLGi1D2oh5B0=;
-0x000DAC        E1F0FF8E                 call $DAC_CheckConnectivity;
-0x000DAD        01A00B7A                 r8 = Null + 2938;
-0x000DAE        E1F0F370                 call ALrYtClmXhG4b8GdfG6yhcsEkwc5+93FLGi1D2oh5B0=;
-0x000DAF        09200AAC                 r0 = Null + M[0xaac];
-0x000DB0        19200C1D                 M[$M.detect_end_of_aux_stream.last_write_address] = r0 + Null;
-0x000DB1        FD0000FF 01A03BCF        r8 = Null + -50225;
-0x000DB3        E1F0F36B                 call ALrYtClmXhG4b8GdfG6yhcsEkwc5+93FLGi1D2oh5B0=;
-0x000DB4        E1F0004F                 call $CVC.VolumeControl.Check_Aux_Volume;
-0x000DB5        E1F0FFCA                 call $detect_end_of_aux_stream;
-
- <$M.audio_copy_handler.irq_sco>
-0x000DB6        01900B51                 r7 = Null + 2897;
-0x000DB7        01300BF0                 r1 = Null + 3056;
-0x000DB8        01500DA6                 r3 = Null + 3494;
-0x000DB9        E1F0FE64                 call $sco2_timing.SyncClock;
-0x000DBA        01A00B51                 r8 = Null + 2897;
-0x000DBB        E1F0FDC1                 call $frame_sync.task_scheduler_isr;
-0x000DBC        DDF0FF02                 jump $pop_rLink_and_rts;
-
  <$stream_mix>
-0x000DBD        5020009F                 I2 = Null + r7;
-0x000DBE        51900001                 M1 = Null + 1;
-0x000DBF        F3D00000                 push rLink;
-0x000DC0        02002900                 Null = Null + Null, r0 = M[I2,M1];
-0x000DC1        E1F0FEE8                 call $frmbuffer.get_buffer;
-0x000DC2        5000002F                 I0 = Null + r0;
-0x000DC3        50C0293F                 L0 = Null + r1, r0 = M[I2,M1];
-0x000DC4        E1F0FEE5                 call $frmbuffer.get_buffer;
-0x000DC5        5010002F                 I1 = Null + r0;
-0x000DC6        50D0003F                 L1 = Null + r1;
-0x000DC7        00C5290F                 r10 = r3 + Null, r0 = M[I2,M1];
-0x000DC8        E1F0FEF4                 call $frmbuffer.set_frame_size;
-0x000DC9        E1F0FEE0                 call $frmbuffer.get_buffer;
-0x000DCA        5040692F                 I4 = Null + r0, r4 = M[I2,M1];
-0x000DCB        50E0793F                 L4 = Null + r1, r5 = M[I2,M1];
-0x000DCC        F3D40000                 pop rLink;
-0x000DCD        D2604900                 r4 = M[r4 + Null], r2 = M[I2,M1];
-0x000DCE        D2702100                 r5 = M[r5 + Null], r0 = M[I0,M1];
-0x000DCF        D084350F                 r6 = M[r2 + Null], r1 = M[I1,M1];
-0x000DD0        E5F00005                 do $M.stream_mix.lp_stream_copy;
-0x000DD1        CC12216F                 rMAC = r0 * r4 (SS), r0 = M[I0,M1];
-0x000DD2        AC13357F                 rMAC = rMAC + r1 * r5 (SS), r1 = M[I1,M1];
-0x000DD3        9041008F                 r2 = rMAC ASHIFT r6;
-0x000DD4        030000C1                 Null = Null + Null, M[I4,1] = r2;
+0x000D49        5020009F                 I2 = Null + r7;
+0x000D4A        51900001                 M1 = Null + 1;
+0x000D4B        F3D00000                 push rLink;
+0x000D4C        02002900                 Null = Null + Null, r0 = M[I2,M1];
+0x000D4D        E1F0FF5C                 call $frmbuffer.get_buffer;
+0x000D4E        5000002F                 I0 = Null + r0;
+0x000D4F        50C0293F                 L0 = Null + r1, r0 = M[I2,M1];
+0x000D50        E1F0FF59                 call $frmbuffer.get_buffer;
+0x000D51        5010002F                 I1 = Null + r0;
+0x000D52        50D0003F                 L1 = Null + r1;
+0x000D53        00C5290F                 r10 = r3 + Null, r0 = M[I2,M1];
+0x000D54        E1F0FF68                 call $frmbuffer.set_frame_size;
+0x000D55        E1F0FF54                 call $frmbuffer.get_buffer;
+0x000D56        5040692F                 I4 = Null + r0, r4 = M[I2,M1];
+0x000D57        50E0793F                 L4 = Null + r1, r5 = M[I2,M1];
+0x000D58        F3D40000                 pop rLink;
+0x000D59        D2604900                 r4 = M[r4 + Null], r2 = M[I2,M1];
+0x000D5A        D3700000                 r5 = M[r5 + Null];
+0x000D5B        D084000F                 r6 = M[r2 + Null];
+0x000D5C        44B0000F                 r9 = Null + I0;
+0x000D5D        01A00000                 r8 = Null + 0;
+0x000D5E        00C5000F                 r10 = r3 + Null;
+0x000D5F        E5F00004                 do $M.stream_mix.calc_pwr1;
+0x000D60        03002100                 Null = Null + Null, r0 = M[I0,1];
+0x000D61        E492004F                 r7 = ABS r0;
+0x000D62        03A90000                 r8 = r8 + r7;
+
+ <$M.stream_mix.calc_pwr1>
+0x000D63        500000BF                 I0 = Null + r9;
+0x000D64        FD000026 210A25A0        Null = r8 - 2500000;
+0x000D66        DD400003                 if NEG jump $M.stream_mix.pwr2;
+0x000D67        012001F4                 r0 = Null + 500;
+0x000D68        19200C26                 M[$in1_count] = r0 + Null;
+
+ <$M.stream_mix.pwr2>
+0x000D69        44B0001F                 r9 = Null + I1;
+0x000D6A        01A00000                 r8 = Null + 0;
+0x000D6B        00C5000F                 r10 = r3 + Null;
+0x000D6C        E5F00004                 do $M.stream_mix.calc_pwr2;
+0x000D6D        03002500                 Null = Null + Null, r0 = M[I1,1];
+0x000D6E        E492004F                 r7 = ABS r0;
+0x000D6F        03A90000                 r8 = r8 + r7;
+
+ <$M.stream_mix.calc_pwr2>
+0x000D70        501000BF                 I1 = Null + r9;
+0x000D71        FD000026 210A25A0        Null = r8 - 2500000;
+0x000D73        DD400004                 if NEG jump $M.stream_mix.check_cnt1;
+0x000D74        012001F4                 r0 = Null + 500;
+0x000D75        FD0000FF 19203C26        M[$in2_count] = r0 + Null;
+
+ <$M.stream_mix.check_cnt1>
+0x000D77        09000C26                 Null = Null + M[$in1_count];
+0x000D78        DD500003                 if POS jump $M.stream_mix.dec_cnt1;
+0x000D79        01600000                 r4 = Null + 0;
+0x000D7A        DDF00004                 jump $M.stream_mix.check_cnt2;
+
+ <$M.stream_mix.dec_cnt1>
+0x000D7B        09200C26                 r0 = Null + M[$in1_count];
+0x000D7C        E422003F                 r0 = r0 - 1;
+0x000D7D        19200C26                 M[$in1_count] = r0 + Null;
+
+ <$M.stream_mix.check_cnt2>
+0x000D7E        FD0000FF 09003C26        Null = Null + M[$in2_count];
+0x000D80        DD500003                 if POS jump $M.stream_mix.dec_cnt2;
+0x000D81        01700000                 r5 = Null + 0;
+0x000D82        DDF00006                 jump $M.stream_mix.copy;
+
+ <$M.stream_mix.dec_cnt2>
+0x000D83        FD0000FF 09203C26        r0 = Null + M[$in2_count];
+0x000D85        E422003F                 r0 = r0 - 1;
+0x000D86        FD0000FF 19203C26        M[$in2_count] = r0 + Null;
+
+ <$M.stream_mix.copy>
+0x000D88        00C5000F                 r10 = r3 + Null;
+0x000D89        E5F00007                 do $M.stream_mix.lp_stream_copy;
+0x000D8A        02002100                 Null = Null + Null, r0 = M[I0,M1];
+0x000D8B        CC12006F                 rMAC = r0 * r4 (SS);
+0x000D8C        02003500                 Null = Null + Null, r1 = M[I1,M1];
+0x000D8D        AC13007F                 rMAC = rMAC + r1 * r5 (SS);
+0x000D8E        9041008F                 r2 = rMAC ASHIFT r6;
+0x000D8F        030000C1                 Null = Null + Null, M[I4,1] = r2;
 
  <$M.stream_mix.lp_stream_copy>
-0x000DD5        51C00000                 L0 = Null + 0;
-0x000DD6        51D00000                 L1 = Null + 0;
-0x000DD7        51E00000                 L4 = Null + 0;
-0x000DD8        DC0D000F                 rts;
+0x000D90        51C00000                 L0 = Null + 0;
+0x000D91        51D00000                 L1 = Null + 0;
+0x000D92        51E00000                 L4 = Null + 0;
+0x000D93        DC0D000F                 rts;
+
+ <BNDgaVwUJPX4rJhX3iSHAnah+YJch9wkT1IRfMpWT/w=>
+0x000D94        F3D00000                 push rLink;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000D95        D12A0000                 r0 = M[r8 + 0];
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000D96        D13A0001                 r1 = M[r8 + 1];
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000D97        E1F0F3EB                 call $cbops_multirate.GetTransferAndUpdateOutput;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000D98        00C4000F                 r10 = r2 + Null;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000D99        DDD0FF25                 if LE jump $pop_rLink_and_rts;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000D9A        51900001                 M1 = Null + 1;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000D9B        D12A0000                 r0 = M[r8 + 0];
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000D9C        E1F0F3FB                 call $cbops_multirate.GetBuffer;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000D9D        5000002F                 I0 = Null + r0;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000D9E        50C0003F                 L0 = Null + r1;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000D9F        D12A0001                 r0 = M[r8 + 1];
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DA0        E1F0F3F7                 call $cbops_multirate.GetBuffer;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DA1        5040002F                 I4 = Null + r0;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DA2        50E0003F                 L4 = Null + r1;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DA3        D14A0002                 r2 = M[r8 + 2];
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DA4        D13A0003                 r1 = M[r8 + 3];
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DA5        2003004F                 Null = r1 - r2;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DA6        DD00001A                 if EQ jump sonDgmOy1UbFXAOUqOZTwdrPTBUPzIuSxF//R8NEqHU=;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DA7        D15A0004                 r3 = M[r8 + 4];
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DA8        DD000017                 if EQ jump es8sQakYwvoxaQejncGTCUOtSIfDkvnG5L68htQnqIo=;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DA9        D17A0005                 r5 = M[r8 + 5];
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DAA        D11A0006                 rMAC = M[r8 + 6];
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DAB        D16A0007                 r4 = M[r8 + 7];
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DAC        E5F00011                 do P/kydner9une3affa+Xkglqkl0TaZbSX93s7U8PAzFQ=;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DAD        67692100                 r4 = r4 - M1, r0 = M[I0,1];
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DAE        DD50000D                 if POS jump 8bemDFhCPBejU0Zc1F1PNEQm8o0fl+KwBk+Z2qXwHeI=;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DAF        9083007F                 r6 = r1 ASHIFT r5;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DB0        03810000                 r6 = r6 + rMAC;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DB1        0065000F                 r4 = r3 + Null;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DB2        2003004F                 Null = r1 - r2;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DB3        DD400005                 if NEG jump kK5L31AqeDJ40ImRPZFS/JRFboouloRBCwAy77q4A24=;
+
+ <bfOm/Arm018RANhKXS8VoiU3T09LmCCmTGkybvdpnCw=>
+0x000DB4        23380000                 r1 = r1 - r6;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DB5        2003004F                 Null = r1 - r2;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DB6        00340004                 if NEG r1 = r2 + Null;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DB7        DDF00004                 jump 8bemDFhCPBejU0Zc1F1PNEQm8o0fl+KwBk+Z2qXwHeI=;
+
+ <kK5L31AqeDJ40ImRPZFS/JRFboouloRBCwAy77q4A24=>
+0x000DB8        03380000                 r1 = r1 + r6;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DB9        2003004F                 Null = r1 - r2;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DBA        00340005                 if POS r1 = r2 + Null;
+
+ <8bemDFhCPBejU0Zc1F1PNEQm8o0fl+KwBk+Z2qXwHeI=>
+0x000DBB        97230000                 r0 = r0 * r1 (frac);
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DBC        030000A1                 Null = Null + Null, M[I4,1] = r0;
+
+ <P/kydner9une3affa+Xkglqkl0TaZbSX93s7U8PAzFQ=>
+0x000DBD        D56A0007                 M[r8 + 7] = r4;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DBE        DDF00008                 jump uAWegGxV38+A3xwAATf+PCHO4q+6XhM/WZ0U8I8qZrg=;
+
+ <es8sQakYwvoxaQejncGTCUOtSIfDkvnG5L68htQnqIo=>
+0x000DBF        0034000F                 r1 = r2 + Null;
+
+ <sonDgmOy1UbFXAOUqOZTwdrPTBUPzIuSxF//R8NEqHU=>
+0x000DC0        67C92100                 r10 = r10 - M1, r0 = M[I0,1];
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DC1        97230000                 r0 = r0 * r1 (frac);
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DC2        E5F00003                 do 61gNxviNkMDt+3lxUpWKWVa2IRC3wKeqs+fLxeld48M=;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DC3        030021A1                 Null = Null + Null, r0 = M[I0,1], M[I4,1] = r0;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DC4        97230000                 r0 = r0 * r1 (frac);
+
+ <61gNxviNkMDt+3lxUpWKWVa2IRC3wKeqs+fLxeld48M=>
+0x000DC5        030000A1                 Null = Null + Null, M[I4,1] = r0;
+
+ <uAWegGxV38+A3xwAATf+PCHO4q+6XhM/WZ0U8I8qZrg=>
+0x000DC6        D53A0003                 M[r8 + 3] = r1;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DC7        51C00000                 L0 = Null + 0;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DC8        51E00000                 L4 = Null + 0;
+
+ <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
+0x000DC9        DDF0FEF5                 jump $pop_rLink_and_rts;
+
+ <$detect_end_of_aux_stream>
+0x000DCA        F3D00000                 push rLink;
+0x000DCB        FD0000FF 09503C1C        r3 = Null + M[$tone_in.aux_input_stream_available];
+0x000DCD        DD00FEF1                 if EQ jump $pop_rLink_and_rts;
+0x000DCE        01200AAA                 r0 = Null + 2730;
+0x000DCF        E1F0FEA5                 call $cbuffer.calc_amount_data;
+0x000DD0        81050002                 Null = r3 AND 0x2;
+0x000DD1        DD100007                 if NE jump $M.detect_end_of_aux_stream.input_has_received;
+0x000DD2        0002000F                 Null = r0 + Null;
+0x000DD3        DD00FEEB                 if EQ jump $pop_rLink_and_rts;
+0x000DD4        85550002                 r3 = r3 OR 0x2;
+0x000DD5        FD0000FF 19503C1C        M[$tone_in.aux_input_stream_available] = r3 + Null;
+0x000DD7        DDF0FEE7                 jump $pop_rLink_and_rts;
+
+ <$M.detect_end_of_aux_stream.input_has_received>
+0x000DD8        01200AAA                 r0 = Null + 2730;
+0x000DD9        E1F0FEC6                 call $_cbuffer_get_write_address;
+0x000DDA        09600C1D                 r4 = Null + M[$M.detect_end_of_aux_stream.last_write_address];
+0x000DDB        FD0000FF 09503C1D        r3 = Null + M[$M.detect_end_of_aux_stream.write_move_counter];
+0x000DDD        01700000                 r5 = Null + 0;
+0x000DDE        2002006F                 Null = r0 - r4;
+0x000DDF        E4750020                 if EQ r5 = r3 + 1;
+0x000DE0        FD0000FF 19703C1D        M[$M.detect_end_of_aux_stream.write_move_counter] = r5 + Null;
+0x000DE2        21070028                 Null = r5 - 40;
+0x000DE3        DD40FEDB                 if NEG jump $pop_rLink_and_rts;
+0x000DE4        01401080                 r2 = Null + 4224;
+0x000DE5        01500000                 r3 = Null + 0;
+0x000DE6        01600000                 r4 = Null + 0;
+0x000DE7        01700000                 r5 = Null + 0;
+0x000DE8        01800000                 r6 = Null + 0;
+0x000DE9        E1F0FD37                 call $message.send_short;
+0x000DEA        FD0000FF 19003C1C        M[$tone_in.aux_input_stream_available] = Null + Null;
+0x000DEC        FD0000FF 19003C1D        M[$M.detect_end_of_aux_stream.write_move_counter] = Null + Null;
+0x000DEE        09200AAC                 r0 = Null + M[0xaac];
+0x000DEF        19200AAB                 M[0xaab] = r0 + Null;
+0x000DF0        DDF0FECE                 jump $pop_rLink_and_rts;
+
+ <$audio_copy_handler>
+0x000DF1        F3D00000                 push rLink;
+0x000DF2        09000C20                 Null = Null + M[$one_mic_example.sr_flag];
+0x000DF3        E110FF1A                 if NE call $ConfigureFrontEnd;
+0x000DF4        FD0000FF 01A03BAA        r8 = Null + -50262;
+0x000DF6        E1F0F328                 call ALrYtClmXhG4b8GdfG6yhcsEkwc5+93FLGi1D2oh5B0=;
+0x000DF7        E1F0FF43                 call $DAC_CheckConnectivity;
+0x000DF8        01A00B7A                 r8 = Null + 2938;
+0x000DF9        E1F0F325                 call ALrYtClmXhG4b8GdfG6yhcsEkwc5+93FLGi1D2oh5B0=;
+0x000DFA        09200AAC                 r0 = Null + M[0xaac];
+0x000DFB        19200C1D                 M[$M.detect_end_of_aux_stream.last_write_address] = r0 + Null;
+0x000DFC        FD0000FF 01A03BCF        r8 = Null + -50225;
+0x000DFE        E1F0F320                 call ALrYtClmXhG4b8GdfG6yhcsEkwc5+93FLGi1D2oh5B0=;
+0x000DFF        E1F00033                 call $CVC.VolumeControl.Check_Aux_Volume;
+0x000E00        E1F0FFCA                 call $detect_end_of_aux_stream;
+
+ <$M.audio_copy_handler.irq_sco>
+0x000E01        01900B51                 r7 = Null + 2897;
+0x000E02        01300BF0                 r1 = Null + 3056;
+0x000E03        01500DF1                 r3 = Null + 3569;
+0x000E04        E1F0FE19                 call $sco2_timing.SyncClock;
+0x000E05        01A00B51                 r8 = Null + 2897;
+0x000E06        E1F0FD76                 call $frame_sync.task_scheduler_isr;
+0x000E07        DDF0FEB7                 jump $pop_rLink_and_rts;
 
  <$set_tone_rate_from_vm>
-0x000DD9        F3D00000                 push rLink;
-0x000DDA        01200AAA                 r0 = Null + 2730;
-0x000DDB        E1F0FD91                 call $cbuffer.empty_buffer;
-0x000DDC        E420002F                 r0 = Null + 1;
-0x000DDD        FD0000FF 19203C1C        M[$tone_in.aux_input_stream_available] = r0 + Null;
-0x000DDF        DDF0FEDF                 jump $pop_rLink_and_rts;
+0x000E08        F3D00000                 push rLink;
+0x000E09        01200AAA                 r0 = Null + 2730;
+0x000E0A        E1F0FD62                 call $cbuffer.empty_buffer;
+0x000E0B        E420002F                 r0 = Null + 1;
+0x000E0C        FD0000FF 19203C1C        M[$tone_in.aux_input_stream_available] = r0 + Null;
+0x000E0E        DDF0FEB0                 jump $pop_rLink_and_rts;
 
  <$one_mic_example_reinitialize>
-0x000DE0        F3D00000                 push rLink;
-0x000DE1        01600BC3                 r4 = Null + 3011;
-0x000DE2        E1F0FE66                 call $frame_sync.run_function_table;
-0x000DE3        FD0000FF 19003C1F        M[$one_mic_example.reinit] = Null + Null;
-0x000DE5        DDF0FED9                 jump $pop_rLink_and_rts;
+0x000E0F        F3D00000                 push rLink;
+0x000E10        01600BC3                 r4 = Null + 3011;
+0x000E11        E1F0FE37                 call $frame_sync.run_function_table;
+0x000E12        FD0000FF 19003C1F        M[$one_mic_example.reinit] = Null + Null;
+0x000E14        DDF0FEAA                 jump $pop_rLink_and_rts;
 
  <$sample_rate_message_handler>
-0x000DE6        8133FFFF                 r1 = r1 AND 0xffff;
-0x000DE7        9933000A                 r1 = r1 * 10 (int);
-0x000DE8        19300C1E                 M[$M.audio_config.adc_sampling_rate] = r1 + Null;
-0x000DE9        FD0000FF 19303C1E        M[$M.audio_config.dac_sampling_rate] = r1 + Null;
-0x000DEB        E420002F                 r0 = Null + 1;
-0x000DEC        19200C20                 M[$one_mic_example.sr_flag] = r0 + Null;
-0x000DED        DC0D000F                 rts;
+0x000E15        8133FFFF                 r1 = r1 AND 0xffff;
+0x000E16        9933000A                 r1 = r1 * 10 (int);
+0x000E17        19300C1E                 M[$M.audio_config.adc_sampling_rate] = r1 + Null;
+0x000E18        FD0000FF 19303C1E        M[$M.audio_config.dac_sampling_rate] = r1 + Null;
+0x000E1A        E420002F                 r0 = Null + 1;
+0x000E1B        19200C20                 M[$one_mic_example.sr_flag] = r0 + Null;
+0x000E1C        DC0D000F                 rts;
 
  <XwKegtgsie0Jje7LTTWPwawKlwEjV5Yr2iDnIBqxMlU=>
-0x000DEE        D12A0004                 r0 = M[r8 + 4];
+0x000E1D        D12A0004                 r0 = M[r8 + 4];
 
  <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000DEF        D52A0007                 M[r8 + 7] = r0;
+0x000E1E        D52A0007                 M[r8 + 7] = r0;
 
  <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000DF0        D12A0002                 r0 = M[r8 + 2];
+0x000E1F        D12A0002                 r0 = M[r8 + 2];
 
  <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000DF1        D52A0003                 M[r8 + 3] = r0;
+0x000E20        D52A0003                 M[r8 + 3] = r0;
 
  <HYd6sDwUjpYuoPYUmVZvxO1MB7kFS5zW9RQ84vCurCc=>
-0x000DF2        DC0D000F                 rts;
+0x000E21        DC0D000F                 rts;
 
  <$CVC.VolumeControl.MsgHandler>
-0x000DF3        1930053F                 M[$M.CVC_SYS.Volume] = r1 + Null;
+0x000E22        1930053F                 M[$M.CVC_SYS.Volume] = r1 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000DF4        8155000F                 r3 = r3 AND 0xf;
+0x000E23        8155000F                 r3 = r3 AND 0xf;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000DF5        19500540                 M[tC35iR3ysqWpHgyOKozu0PTb5bWdGnmA861rE22iUWo=] = r3 + Null;
+0x000E24        19500540                 M[tC35iR3ysqWpHgyOKozu0PTb5bWdGnmA861rE22iUWo=] = r3 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000DF6        8166000F                 r4 = r4 AND 0xf;
+0x000E25        8166000F                 r4 = r4 AND 0xf;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000DF7        19600541                 M[YJNaPr+kQB0A9gvsQVajNE5hOW89nU9IQoZB1WMV95U=] = r4 + Null;
+0x000E26        19600541                 M[YJNaPr+kQB0A9gvsQVajNE5hOW89nU9IQoZB1WMV95U=] = r4 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000DF8        2086005F                 r6 = r4 - r3;
+0x000E27        2086005F                 r6 = r4 - r3;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000DF9        0080000D                 if LE r6 = Null + Null;
+0x000E28        0080000D                 if LE r6 = Null + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000DFA        0920000F                 r0 = Null + M[$M.CVC_SYS.InterfacePtr];
+0x000E29        0920000F                 r0 = Null + M[$M.CVC_SYS.InterfacePtr];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000DFB        D1920010                 r7 = M[r0 + 16];
+0x000E2A        D1920010                 r7 = M[r0 + 16];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000DFC        D1880202                 r6 = M[r6 + 514];
+0x000E2B        D1880202                 r6 = M[r6 + 514];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000DFD        D589000D                 M[r7 + 13] = r6;
+0x000E2C        D589000D                 M[r7 + 13] = r6;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000DFE        81340010                 r1 = r2 AND 0x10;
+0x000E2D        81340010                 r1 = r2 AND 0x10;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000DFF        19300547                 M[$M.CVC_SYS.dsp_volume_flag] = r1 + Null;
+0x000E2E        19300547                 M[$M.CVC_SYS.dsp_volume_flag] = r1 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E00        8134000F                 r1 = r2 AND 0xf;
+0x000E2F        8134000F                 r1 = r2 AND 0xf;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E01        19300548                 M[kydWKpgD1q6V6TaXe9pBZyND9As1krMQXXhn7hTvbRw=] = r1 + Null;
+0x000E30        19300548                 M[kydWKpgD1q6V6TaXe9pBZyND9As1krMQXXhn7hTvbRw=] = r1 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E02        DDF00018                 jump $CVC.VolumeControl.SendCodecSettings;
+0x000E31        DDF00018                 jump $CVC.VolumeControl.SendCodecSettings;
 
  <$CVC.VolumeControl.Check_Aux_Volume>
-0x000E03        0920000F                 r0 = Null + M[$M.CVC_SYS.InterfacePtr];
+0x000E32        0920000F                 r0 = Null + M[$M.CVC_SYS.InterfacePtr];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E04        D1920010                 r7 = M[r0 + 16];
+0x000E33        D1920010                 r7 = M[r0 + 16];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E05        D1290004                 r0 = M[r7 + 4];
+0x000E34        D1290004                 r0 = M[r7 + 4];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E06        D1390005                 r1 = M[r7 + 5];
+0x000E35        D1390005                 r1 = M[r7 + 5];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E07        01400541                 r2 = Null + 1345;
+0x000E36        01400541                 r2 = Null + 1345;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E08        01500540                 r3 = Null + 1344;
+0x000E37        01500540                 r3 = Null + 1344;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E09        2003002F                 Null = r1 - r0;
+0x000E38        2003002F                 Null = r1 - r0;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E0A        00450001                 if NE r2 = r3 + Null;
+0x000E39        00450001                 if NE r2 = r3 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E0B        09300542                 r1 = Null + M[gdlFmoCU3cgK55iBgAsZAvtZWT/lygxBDD89My75VNw=];
+0x000E3A        09300542                 r1 = Null + M[gdlFmoCU3cgK55iBgAsZAvtZWT/lygxBDD89My75VNw=];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E0C        19400542                 M[gdlFmoCU3cgK55iBgAsZAvtZWT/lygxBDD89My75VNw=] = r2 + Null;
+0x000E3B        19400542                 M[gdlFmoCU3cgK55iBgAsZAvtZWT/lygxBDD89My75VNw=] = r2 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E0D        2004003F                 Null = r2 - r1;
+0x000E3C        2004003F                 Null = r2 - r1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E0E        DC0D0000                 if EQ rts;
+0x000E3D        DC0D0000                 if EQ rts;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E0F        DDF0000B                 jump $CVC.VolumeControl.SendCodecSettings;
+0x000E3E        DDF0000B                 jump $CVC.VolumeControl.SendCodecSettings;
 
  <$CVC.VolumeControl.Set_DAC_Adjustment>
-0x000E10        09300543                 r1 = Null + M[$M.CVC_SYS.SysDACadjust];
+0x000E3F        09300543                 r1 = Null + M[$M.CVC_SYS.SysDACadjust];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E11        2008003F                 Null = r6 - r1;
+0x000E40        2008003F                 Null = r6 - r1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E12        DC0D0000                 if EQ rts;
+0x000E41        DC0D0000                 if EQ rts;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E13        09200544                 r0 = Null + M[T3s/+HSIfhOygp/ktcbIQFeJ7bL2J9DS/C+wpJf47sU=];
+0x000E42        09200544                 r0 = Null + M[T3s/+HSIfhOygp/ktcbIQFeJ7bL2J9DS/C+wpJf47sU=];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E14        E422003F                 r0 = r0 - 1;
+0x000E43        E422003F                 r0 = r0 - 1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E15        19200544                 M[T3s/+HSIfhOygp/ktcbIQFeJ7bL2J9DS/C+wpJf47sU=] = r0 + Null;
+0x000E44        19200544                 M[T3s/+HSIfhOygp/ktcbIQFeJ7bL2J9DS/C+wpJf47sU=] = r0 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E16        DC0D0005                 if POS rts;
+0x000E45        DC0D0005                 if POS rts;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E17        0120010B                 r0 = Null + 267;
+0x000E46        0120010B                 r0 = Null + 267;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E18        19200544                 M[T3s/+HSIfhOygp/ktcbIQFeJ7bL2J9DS/C+wpJf47sU=] = r0 + Null;
+0x000E47        19200544                 M[T3s/+HSIfhOygp/ktcbIQFeJ7bL2J9DS/C+wpJf47sU=] = r0 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E19        19800543                 M[$M.CVC_SYS.SysDACadjust] = r6 + Null;
+0x000E48        19800543                 M[$M.CVC_SYS.SysDACadjust] = r6 + Null;
 
  <$CVC.VolumeControl.SendCodecSettings>
-0x000E1A        0120000F                 r0 = Null + 15;
+0x000E49        0120000F                 r0 = Null + 15;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E1B        09500542                 r3 = Null + M[gdlFmoCU3cgK55iBgAsZAvtZWT/lygxBDD89My75VNw=];
+0x000E4A        09500542                 r3 = Null + M[gdlFmoCU3cgK55iBgAsZAvtZWT/lygxBDD89My75VNw=];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E1C        D3500000                 r3 = M[r3 + Null];
+0x000E4B        D3500000                 r3 = M[r3 + Null];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E1D        09550543                 r3 = r3 + M[$M.CVC_SYS.SysDACadjust];
+0x000E4C        09550543                 r3 = r3 + M[$M.CVC_SYS.SysDACadjust];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E1E        2005002F                 Null = r3 - r0;
+0x000E4D        2005002F                 Null = r3 - r0;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E1F        00520005                 if POS r3 = r0 + Null;
+0x000E4E        00520005                 if POS r3 = r0 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E20        FD00007F 0160FFFF        r4 = Null + 8388607;
+0x000E4F        FD00007F 0160FFFF        r4 = Null + 8388607;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E22        0170FF66                 r5 = Null + -154;
+0x000E51        0170FF66                 r5 = Null + -154;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E23        09000547                 Null = Null + M[$M.CVC_SYS.dsp_volume_flag];
+0x000E52        09000547                 Null = Null + M[$M.CVC_SYS.dsp_volume_flag];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E24        DD000007                 if EQ jump BQWbmWOVK8GIql6FUsOOtP3w7Q0SG+551Gd3jWS1tmA=;
+0x000E53        DD000007                 if EQ jump BQWbmWOVK8GIql6FUsOOtP3w7Q0SG+551Gd3jWS1tmA=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E25        0085000F                 r6 = r3 + Null;
+0x000E54        0085000F                 r6 = r3 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E26        6565000F                 r4 = 15 - r3;
+0x000E55        6565000F                 r4 = 15 - r3;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E27        19500549                 M[$M.CVC_SYS.dsp_volume_stat] = r3 + Null;
+0x000E56        19500549                 M[$M.CVC_SYS.dsp_volume_stat] = r3 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E28        D1660202                 r4 = M[r4 + 514];
+0x000E57        D1660202                 r4 = M[r4 + 514];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E29        09500548                 r3 = Null + M[kydWKpgD1q6V6TaXe9pBZyND9As1krMQXXhn7hTvbRw=];
+0x000E58        09500548                 r3 = Null + M[kydWKpgD1q6V6TaXe9pBZyND9As1krMQXXhn7hTvbRw=];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E2A        0170FFFE                 r5 = Null + -2;
+0x000E59        0170FFFE                 r5 = Null + -2;
 
  <BQWbmWOVK8GIql6FUsOOtP3w7Q0SG+551Gd3jWS1tmA=>
-0x000E2B        0940021D                 r2 = Null + M[WWeQRk8kT8QojbZ0XGlp3ZDQGYhvYfdWoGw4SBDX/ro=];
+0x000E5A        0940021D                 r2 = Null + M[WWeQRk8kT8QojbZ0XGlp3ZDQGYhvYfdWoGw4SBDX/ro=];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E2C        0920021C                 r0 = Null + M[$M.CVC_SYS.SpiSysControl];
+0x000E5B        0920021C                 r0 = Null + M[$M.CVC_SYS.SpiSysControl];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E2D        81028000                 Null = r0 AND 0x8000;
+0x000E5C        81028000                 Null = r0 AND 0x8000;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E2E        00540001                 if NE r3 = r2 + Null;
+0x000E5D        00540001                 if NE r3 = r2 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E2F        1950054B                 M[$M.CVC_SYS.CurDAC] = r3 + Null;
+0x000E5E        1950054B                 M[$M.CVC_SYS.CurDAC] = r3 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E30        0920000F                 r0 = Null + M[$M.CVC_SYS.InterfacePtr];
+0x000E5F        0920000F                 r0 = Null + M[$M.CVC_SYS.InterfacePtr];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E31        0095000F                 r7 = r3 + Null;
+0x000E60        0095000F                 r7 = r3 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E32        09000547                 Null = Null + M[$M.CVC_SYS.dsp_volume_flag];
+0x000E61        09000547                 Null = Null + M[$M.CVC_SYS.dsp_volume_flag];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E33        00980001                 if NE r7 = r6 + Null;
+0x000E62        00980001                 if NE r7 = r6 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E34        D1320011                 r1 = M[r0 + 17];
+0x000E63        D1320011                 r1 = M[r0 + 17];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E35        D043009F                 r2 = M[r1 + r7];
+0x000E64        D043009F                 r2 = M[r1 + r7];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E36        D1320010                 r1 = M[r0 + 16];
+0x000E65        D1320010                 r1 = M[r0 + 16];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E37        D5430008                 M[r1 + 8] = r2;
+0x000E66        D5430008                 M[r1 + 8] = r2;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E38        D1220000                 r0 = M[r0 + 0];
+0x000E67        D1220000                 r0 = M[r0 + 0];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E39        DC020001                 if NE jump r0;
+0x000E68        DC020001                 if NE jump r0;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E3A        DC0D000F                 rts;
+0x000E69        DC0D000F                 rts;
 
  <va2Z4hY28CJ0fgeySWdyCAT+CKTDxCAX56bTaf7PG94=>
-0x000E3B        F3D00000                 push rLink;
+0x000E6A        F3D00000                 push rLink;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E3C        E404002F                 Null = r2 + 1;
+0x000E6B        E404002F                 Null = r2 + 1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E3D        DD100009                 if NE jump X4Iig4fXSJmYjtmSkUSYUokFzwLOVcgOBe3VU/qg3h8=;
+0x000E6C        DD100009                 if NE jump X4Iig4fXSJmYjtmSkUSYUokFzwLOVcgOBe3VU/qg3h8=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E3E        09200553                 r0 = Null + M[LN/FJSolBenjI0Te7jQDNzSqjjtSQPvspvwFaQftK8Q=];
+0x000E6D        09200553                 r0 = Null + M[LN/FJSolBenjI0Te7jQDNzSqjjtSQPvspvwFaQftK8Q=];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E3F        DD000004                 if EQ jump eRwzt5oG3xJmLD9Eay12y5j6N4zSeJc9/PfryHNnrD8=;
+0x000E6E        DD000004                 if EQ jump eRwzt5oG3xJmLD9Eay12y5j6N4zSeJc9/PfryHNnrD8=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E40        19000553                 M[LN/FJSolBenjI0Te7jQDNzSqjjtSQPvspvwFaQftK8Q=] = Null + Null;
+0x000E6F        19000553                 M[LN/FJSolBenjI0Te7jQDNzSqjjtSQPvspvwFaQftK8Q=] = Null + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E41        0940054C                 r2 = Null + M[$M.CVC_SYS.Last_PsKey];
+0x000E70        0940054C                 r2 = Null + M[$M.CVC_SYS.Last_PsKey];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E42        DDF0005E                 jump OSqg3sJdRww97Bv7V7jXzhaSR3Nj+u83Ei4avHnNygE=;
+0x000E71        DDF0005E                 jump OSqg3sJdRww97Bv7V7jXzhaSR3Nj+u83Ei4avHnNygE=;
 
  <eRwzt5oG3xJmLD9Eay12y5j6N4zSeJc9/PfryHNnrD8=>
-0x000E43        E420002F                 r0 = Null + 1;
+0x000E72        E420002F                 r0 = Null + 1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E44        19200553                 M[LN/FJSolBenjI0Te7jQDNzSqjjtSQPvspvwFaQftK8Q=] = r0 + Null;
+0x000E73        19200553                 M[LN/FJSolBenjI0Te7jQDNzSqjjtSQPvspvwFaQftK8Q=] = r0 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E45        DDF00060                 jump F1iz2rGCO/ljvvawuLTxaaloHdbRL2p+qnIwXgApu44=;
+0x000E74        DDF00060                 jump F1iz2rGCO/ljvvawuLTxaaloHdbRL2p+qnIwXgApu44=;
 
  <X4Iig4fXSJmYjtmSkUSYUokFzwLOVcgOBe3VU/qg3h8=>
-0x000E46        51050001                 I0 = r3 + 1;
+0x000E75        51050001                 I0 = r3 + 1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E47        E4C4003F                 r10 = r2 - 1;
+0x000E76        E4C4003F                 r10 = r2 - 1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E48        5820000F                 I2 = I0 + Null;
+0x000E77        5820000F                 I2 = I0 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E49        E5F00004                 do RORTq59oJlOYCTnGnEwyiCpLdkm0MzKUpYaHLBqZ6qs=;
+0x000E78        E5F00004                 do RORTq59oJlOYCTnGnEwyiCpLdkm0MzKUpYaHLBqZ6qs=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E4A        03002800                 Null = Null + Null, r0 = M[I2,0];
+0x000E79        03002800                 Null = Null + Null, r0 = M[I2,0];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E4B        8122FFFF                 r0 = r0 AND 0xffff;
+0x000E7A        8122FFFF                 r0 = r0 AND 0xffff;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E4C        0300A900                 Null = Null + Null, M[I2,1] = r0;
+0x000E7B        0300A900                 Null = Null + Null, M[I2,1] = r0;
 
  <RORTq59oJlOYCTnGnEwyiCpLdkm0MzKUpYaHLBqZ6qs=>
-0x000E4D        01C00100                 r10 = Null + 256;
+0x000E7C        01C00100                 r10 = Null + 256;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E4E        79220001                 I2 = I2 - 1;
+0x000E7D        79220001                 I2 = I2 - 1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E4F        03002100                 Null = Null + Null, r0 = M[I0,1];
+0x000E7E        03002100                 Null = Null + Null, r0 = M[I0,1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E50        2003002F                 Null = r1 - r0;
+0x000E7F        2003002F                 Null = r1 - r0;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E51        DD100054                 if NE jump F1iz2rGCO/ljvvawuLTxaaloHdbRL2p+qnIwXgApu44=;
+0x000E80        DD100054                 if NE jump F1iz2rGCO/ljvvawuLTxaaloHdbRL2p+qnIwXgApu44=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E52        51900001                 M1 = Null + 1;
+0x000E81        51900001                 M1 = Null + 1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E53        03007100                 Null = Null + Null, r5 = M[I0,1];
+0x000E82        03007100                 Null = Null + Null, r5 = M[I0,1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E54        00A0210F                 r8 = Null + Null, r0 = M[I0,M1];
+0x000E83        00A0210F                 r8 = Null + Null, r0 = M[I0,M1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E55        816200FF                 r4 = r0 AND 0xff;
+0x000E84        816200FF                 r4 = r0 AND 0xff;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E56        006C0000                 if EQ r4 = r10 + Null;
+0x000E85        006C0000                 if EQ r4 = r10 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E57        8D220078                 r0 = r0 LSHIFT -8;
+0x000E86        8D220078                 r0 = r0 LSHIFT -8;
 
  <J0kaxosW4r0CeuAlPluV/tvYuson3FHYzQRN23W2/VA=>
-0x000E58        8DAA007F                 r8 = r8 LSHIFT -1;
+0x000E87        8DAA007F                 r8 = r8 LSHIFT -1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E59        DD100006                 if NE jump iUtREwXrQ/cijcGMx6qqQQSOSIx4Waez5VTC+KfZjE4=;
+0x000E88        DD100006                 if NE jump iUtREwXrQ/cijcGMx6qqQQSOSIx4Waez5VTC+KfZjE4=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E5A        6C02000F                 Null = I2 - I0;
+0x000E89        6C02000F                 Null = I2 - I0;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E5B        DD400017                 if NEG jump rUv+oBCxuqiVZhTliCaaKGQX5Au+seQNZaK2rmxZnwo=;
+0x000E8A        DD400017                 if NEG jump rUv+oBCxuqiVZhTliCaaKGQX5Au+seQNZaK2rmxZnwo=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E5C        0090510F                 r7 = Null + Null, r3 = M[I0,M1];
+0x000E8B        0090510F                 r7 = Null + Null, r3 = M[I0,M1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E5D        FD000000 01A08000        r8 = Null + 32768;
+0x000E8C        FD000000 01A08000        r8 = Null + 32768;
 
  <iUtREwXrQ/cijcGMx6qqQQSOSIx4Waez5VTC+KfZjE4=>
-0x000E5F        800500AF                 Null = r3 AND r8;
+0x000E8E        800500AF                 Null = r3 AND r8;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E60        DD00000F                 if EQ jump fvOLZoGvtdrcjZgUjVIeK6NYxPq5CRppuGC2XQLUydE=;
+0x000E8F        DD00000F                 if EQ jump fvOLZoGvtdrcjZgUjVIeK6NYxPq5CRppuGC2XQLUydE=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E61        FD0000FF 8999FFFF        r7 = r7 XOR 0xffffff;
+0x000E90        FD0000FF 8999FFFF        r7 = r7 XOR 0xffffff;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E63        DD000004                 if EQ jump T/xvFYrDxcAWyFKrTqfOWNTnyVPD/brnBvTj83Sf0Wo=;
+0x000E92        DD000004                 if EQ jump T/xvFYrDxcAWyFKrTqfOWNTnyVPD/brnBvTj83Sf0Wo=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E64        03004100                 Null = Null + Null, r2 = M[I0,1];
+0x000E93        03004100                 Null = Null + Null, r2 = M[I0,1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E65        8D840078                 r6 = r2 LSHIFT -8;
+0x000E94        8D840078                 r6 = r2 LSHIFT -8;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E66        DDF00002                 jump 7b8NTOAd3uzgNCvlKJlJ/121m/OMLQ5G8vG9TFELUE0=;
+0x000E95        DDF00002                 jump 7b8NTOAd3uzgNCvlKJlJ/121m/OMLQ5G8vG9TFELUE0=;
 
  <T/xvFYrDxcAWyFKrTqfOWNTnyVPD/brnBvTj83Sf0Wo=>
-0x000E67        818400FF                 r6 = r2 AND 0xff;
+0x000E96        818400FF                 r6 = r2 AND 0xff;
 
  <7b8NTOAd3uzgNCvlKJlJ/121m/OMLQ5G8vG9TFELUE0=>
-0x000E68        03003100                 Null = Null + Null, r1 = M[I0,1];
+0x000E97        03003100                 Null = Null + Null, r1 = M[I0,1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E69        8D880010                 r6 = r6 LSHIFT 16;
+0x000E98        8D880010                 r6 = r6 LSHIFT 16;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E6A        87380000                 r1 = r1 OR r6;
+0x000E99        87380000                 r1 = r1 OR r6;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E6B        0980000F                 r6 = Null + M[$M.CVC_SYS.InterfacePtr];
+0x000E9A        0980000F                 r6 = Null + M[$M.CVC_SYS.InterfacePtr];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E6C        D188000A                 r6 = M[r6 + 10];
+0x000E9B        D188000A                 r6 = M[r6 + 10];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E6D        09880552                 r6 = r6 + M[tfK5+NMG7CFt+ZHIoPyGGSlA2ViJlEpKqd+4uxyoAUY=];
+0x000E9C        09880552                 r6 = r6 + M[tfK5+NMG7CFt+ZHIoPyGGSlA2ViJlEpKqd+4uxyoAUY=];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E6E        D438002F                 M[r6 + r0] = r1;
+0x000E9D        D438002F                 M[r6 + r0] = r1;
 
  <fvOLZoGvtdrcjZgUjVIeK6NYxPq5CRppuGC2XQLUydE=>
-0x000E6F        E422002F                 r0 = r0 + 1;
+0x000E9E        E422002F                 r0 = r0 + 1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E70        2002006F                 Null = r0 - r4;
+0x000E9F        2002006F                 Null = r0 - r4;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E71        DD40FFE7                 if NEG jump J0kaxosW4r0CeuAlPluV/tvYuson3FHYzQRN23W2/VA=;
+0x000EA0        DD40FFE7                 if NEG jump J0kaxosW4r0CeuAlPluV/tvYuson3FHYzQRN23W2/VA=;
 
  <rUv+oBCxuqiVZhTliCaaKGQX5Au+seQNZaK2rmxZnwo=>
-0x000E72        09400552                 r2 = Null + M[tfK5+NMG7CFt+ZHIoPyGGSlA2ViJlEpKqd+4uxyoAUY=];
+0x000EA1        09400552                 r2 = Null + M[tfK5+NMG7CFt+ZHIoPyGGSlA2ViJlEpKqd+4uxyoAUY=];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E73        200600CF                 Null = r4 - r10;
+0x000EA2        200600CF                 Null = r4 - r10;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E74        004400C0                 if EQ r2 = r2 + r10;
+0x000EA3        004400C0                 if EQ r2 = r2 + r10;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E75        19400552                 M[tfK5+NMG7CFt+ZHIoPyGGSlA2ViJlEpKqd+4uxyoAUY=] = r2 + Null;
+0x000EA4        19400552                 M[tfK5+NMG7CFt+ZHIoPyGGSlA2ViJlEpKqd+4uxyoAUY=] = r2 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E76        0047000F                 r2 = r5 + Null;
+0x000EA5        0047000F                 r2 = r5 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E77        DDF00029                 jump OSqg3sJdRww97Bv7V7jXzhaSR3Nj+u83Ei4avHnNygE=;
+0x000EA6        DDF00029                 jump OSqg3sJdRww97Bv7V7jXzhaSR3Nj+u83Ei4avHnNygE=;
 
  <$sco2_timing.initialize>
-0x000E78        F3D00000                 push rLink;
-0x000E79        19900C24                 M[$M.sco2_timing.sco_data_ptr1] = r7 + Null;
-0x000E7A        FD0000FF 19A03C24        M[$M.sco2_timing.sco_data_ptr2] = r8 + Null;
-0x000E7C        D5090016                 M[r7 + 22] = Null;
-0x000E7D        D50A0016                 M[r8 + 22] = Null;
-0x000E7E        01300BF4                 r1 = Null + 3060;
-0x000E7F        FD000000 01408019        r2 = Null + 32793;
-0x000E81        01500918                 r3 = Null + 2328;
-0x000E82        E1F000C7                 call $message.register_handler;
-0x000E83        FD0000FF 01303BF9        r1 = Null + -50183;
-0x000E85        FD000000 01408015        r2 = Null + 32789;
-0x000E87        015006E9                 r3 = Null + 1769;
-0x000E88        E1F000C1                 call $message.register_handler;
-0x000E89        01300BF8                 r1 = Null + 3064;
-0x000E8A        FD000000 01408016        r2 = Null + 32790;
-0x000E8C        01500936                 r3 = Null + 2358;
-0x000E8D        E1F000BC                 call $message.register_handler;
-0x000E8E        012006AC                 r0 = Null + 1708;
-0x000E8F        19200C26                 M[$cbuffer.write_port_connect_address] = r0 + Null;
-0x000E90        012006C5                 r0 = Null + 1733;
-0x000E91        FD0000FF 19203C26        M[$cbuffer.write_port_disconnect_address] = r0 + Null;
-0x000E93        DDF0FE2B                 jump $pop_rLink_and_rts;
+0x000EA7        F3D00000                 push rLink;
+0x000EA8        19900C24                 M[$M.sco2_timing.sco_data_ptr1] = r7 + Null;
+0x000EA9        FD0000FF 19A03C24        M[$M.sco2_timing.sco_data_ptr2] = r8 + Null;
+0x000EAB        D5090016                 M[r7 + 22] = Null;
+0x000EAC        D50A0016                 M[r8 + 22] = Null;
+0x000EAD        01300BF4                 r1 = Null + 3060;
+0x000EAE        FD000000 01408019        r2 = Null + 32793;
+0x000EB0        01500918                 r3 = Null + 2328;
+0x000EB1        E1F000C7                 call $message.register_handler;
+0x000EB2        FD0000FF 01303BF9        r1 = Null + -50183;
+0x000EB4        FD000000 01408015        r2 = Null + 32789;
+0x000EB6        015006E9                 r3 = Null + 1769;
+0x000EB7        E1F000C1                 call $message.register_handler;
+0x000EB8        01300BF8                 r1 = Null + 3064;
+0x000EB9        FD000000 01408016        r2 = Null + 32790;
+0x000EBB        01500936                 r3 = Null + 2358;
+0x000EBC        E1F000BC                 call $message.register_handler;
+0x000EBD        012006AC                 r0 = Null + 1708;
+0x000EBE        19200C27                 M[$cbuffer.write_port_connect_address] = r0 + Null;
+0x000EBF        012006C5                 r0 = Null + 1733;
+0x000EC0        FD0000FF 19203C27        M[$cbuffer.write_port_disconnect_address] = r0 + Null;
+0x000EC2        DDF0FDFC                 jump $pop_rLink_and_rts;
 
  <$M.cvc_message.LoadParams.func>
-0x000E94        F3D00000                 push rLink;
+0x000EC3        F3D00000                 push rLink;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E95        09A0000F                 r8 = Null + M[$M.CVC_SYS.InterfacePtr];
+0x000EC4        09A0000F                 r8 = Null + M[$M.CVC_SYS.InterfacePtr];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E96        D19A0005                 r7 = M[r8 + 5];
+0x000EC5        D19A0005                 r7 = M[r8 + 5];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E97        1990053C                 M[$M.CVC_SYS.SysMode] = r7 + Null;
+0x000EC6        1990053C                 M[$M.CVC_SYS.SysMode] = r7 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E98        1940053A                 M[$M.CVC_SYS.cvc_bandwidth] = r2 + Null;
+0x000EC7        1940053A                 M[$M.CVC_SYS.cvc_bandwidth] = r2 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E99        F3300000                 push r1;
+0x000EC8        F3300000                 push r1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E9A        D12A000E                 r0 = M[r8 + 14];
+0x000EC9        D12A000E                 r0 = M[r8 + 14];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E9B        E0020001                 if NE call r0;
+0x000ECA        E0020001                 if NE call r0;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E9C        E1F0000B                 call kd8BmrgCQcb/vVKX9u0jqPb2MuENo/L7YyDa+UBkfCo=;
+0x000ECB        E1F0000B                 call kd8BmrgCQcb/vVKX9u0jqPb2MuENo/L7YyDa+UBkfCo=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E9D        19000552                 M[tfK5+NMG7CFt+ZHIoPyGGSlA2ViJlEpKqd+4uxyoAUY=] = Null + Null;
+0x000ECC        19000552                 M[tfK5+NMG7CFt+ZHIoPyGGSlA2ViJlEpKqd+4uxyoAUY=] = Null + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E9E        F3440000                 pop r2;
+0x000ECD        F3440000                 pop r2;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000E9F        1940054C                 M[$M.CVC_SYS.Last_PsKey] = r2 + Null;
+0x000ECE        1940054C                 M[$M.CVC_SYS.Last_PsKey] = r2 + Null;
 
  <OSqg3sJdRww97Bv7V7jXzhaSR3Nj+u83Ei4avHnNygE=>
-0x000EA0        DD000005                 if EQ jump F1iz2rGCO/ljvvawuLTxaaloHdbRL2p+qnIwXgApu44=;
+0x000ECF        DD000005                 if EQ jump F1iz2rGCO/ljvvawuLTxaaloHdbRL2p+qnIwXgApu44=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EA1        01300537                 r1 = Null + 1335;
+0x000ED0        01300537                 r1 = Null + 1335;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EA2        01500E3B                 r3 = Null + 3643;
+0x000ED1        01500E6A                 r3 = Null + 3690;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EA3        E1F0FCB7                 call $pskey.read_key;
+0x000ED2        E1F0FC88                 call $pskey.read_key;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EA4        DDF0FE1A                 jump $pop_rLink_and_rts;
+0x000ED3        DDF0FDEB                 jump $pop_rLink_and_rts;
 
  <F1iz2rGCO/ljvvawuLTxaaloHdbRL2p+qnIwXgApu44=>
-0x000EA5        E1F00143                 call JbqQonuDWNw2zaH/mNFCd4xKayVoYTbsPXOtWHgE2WY=;
+0x000ED4        E1F00143                 call JbqQonuDWNw2zaH/mNFCd4xKayVoYTbsPXOtWHgE2WY=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EA6        DDF0FE18                 jump $pop_rLink_and_rts;
+0x000ED5        DDF0FDE9                 jump $pop_rLink_and_rts;
 
  <kd8BmrgCQcb/vVKX9u0jqPb2MuENo/L7YyDa+UBkfCo=>
-0x000EA7        0960000F                 r4 = Null + M[$M.CVC_SYS.InterfacePtr];
+0x000ED6        0960000F                 r4 = Null + M[$M.CVC_SYS.InterfacePtr];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EA8        51900001                 M1 = Null + 1;
+0x000ED7        51900001                 M1 = Null + 1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EA9        013002F8                 r1 = Null + 760;
+0x000ED8        013002F8                 r1 = Null + 760;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EAA        5000003F                 I0 = Null + r1;
+0x000ED9        5000003F                 I0 = Null + r1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EAB        D1C6000B                 r10 = M[r4 + 11];
+0x000EDA        D1C6000B                 r10 = M[r4 + 11];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EAC        504000CF                 I4 = Null + r10;
+0x000EDB        504000CF                 I4 = Null + r10;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EAD        D1C6000A                 r10 = M[r4 + 10];
+0x000EDC        D1C6000A                 r10 = M[r4 + 10];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EAE        501000CF                 I1 = Null + r10;
+0x000EDD        501000CF                 I1 = Null + r10;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EAF        D1C60009                 r10 = M[r4 + 9];
+0x000EDE        D1C60009                 r10 = M[r4 + 9];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EB0        47C90021                 r10 = r10 + M1, r0 = M[I4,1];
+0x000EDF        47C90021                 r10 = r10 + M1, r0 = M[I4,1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EB1        91CC007F                 r10 = r10 ASHIFT -1;
+0x000EE0        91CC007F                 r10 = r10 ASHIFT -1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EB2        01600008                 r4 = Null + 8;
+0x000EE1        01600008                 r4 = Null + 8;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EB3        E5F00009                 do j5mEZWunYtD/mGAmfNRhwCd7bCjUcim0fTGGGbKSE9M=;
+0x000EE2        E5F00009                 do j5mEZWunYtD/mGAmfNRhwCd7bCjUcim0fTGGGbKSE9M=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EB4        8F266140                 r0 = r0 LSHIFT r4, r4 = M[I0,1], r2 = M[I4,0];
+0x000EE3        8F266140                 r0 = r0 LSHIFT r4, r4 = M[I0,1], r2 = M[I4,0];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EB5        83466100                 r2 = r2 AND r4, r4 = M[I0,1];
+0x000EE4        83466100                 r2 = r2 AND r4, r4 = M[I0,1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EB6        8F466151                 r2 = r2 LSHIFT r4, r4 = M[I0,1], r3 = M[I4,1];
+0x000EE5        8F466151                 r2 = r2 LSHIFT r4, r4 = M[I0,1], r3 = M[I4,1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EB7        87240041                 r0 = r0 OR r2, r2 = M[I4,1];
+0x000EE6        87240041                 r0 = r0 OR r2, r2 = M[I4,1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EB8        83466100                 r2 = r2 AND r4, r4 = M[I0,1];
+0x000EE7        83466100                 r2 = r2 AND r4, r4 = M[I0,1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EB9        8F56A500                 r3 = r3 LSHIFT r4, M[I1,1] = r0;
+0x000EE8        8F56A500                 r3 = r3 LSHIFT r4, M[I1,1] = r0;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EBA        87546121                 r3 = r3 OR r2, r4 = M[I0,1], r0 = M[I4,1];
+0x000EE9        87546121                 r3 = r3 OR r2, r4 = M[I0,1], r0 = M[I4,1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EBB        5000D53F                 I0 = Null + r1, M[I1,M1] = r3;
+0x000EEA        5000D53F                 I0 = Null + r1, M[I1,M1] = r3;
 
  <j5mEZWunYtD/mGAmfNRhwCd7bCjUcim0fTGGGbKSE9M=>
-0x000EBC        51C00000                 L0 = Null + 0;
+0x000EEB        51C00000                 L0 = Null + 0;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EBD        DC0D000F                 rts;
+0x000EEC        DC0D000F                 rts;
 
  <$frame_sync.sco2_initialize>
-0x000EBE        F3D00000                 push rLink;
-0x000EBF        D509000F                 M[r7 + 15] = Null;
-0x000EC0        D5090010                 M[r7 + 16] = Null;
-0x000EC1        D509000D                 M[r7 + 13] = Null;
-0x000EC2        D1390006                 r1 = M[r7 + 6];
-0x000EC3        E410002F                 rMAC = Null + 1;
-0x000EC4        D9030000                 Div = rMAC / r1;
-0x000EC5        D9300001                 r1 = DivResult;
-0x000EC6        9133007F                 r1 = r1 ASHIFT -1;
-0x000EC7        D539000E                 M[r7 + 14] = r1;
-0x000EC8        D1A90009                 r8 = M[r7 + 9];
-0x000EC9        D13A0002                 r1 = M[r8 + 2];
-0x000ECA        D1AA0003                 r8 = M[r8 + 3];
-0x000ECB        00BA000F                 r9 = r8 + Null;
-0x000ECC        E003000F                 call r1;
-0x000ECD        D139000B                 r1 = M[r7 + 11];
-0x000ECE        DD00FDF0                 if EQ jump $pop_rLink_and_rts;
-0x000ECF        D1990011                 r7 = M[r7 + 17];
-0x000ED0        E003000F                 call r1;
-0x000ED1        DDF0FDED                 jump $pop_rLink_and_rts;
+0x000EED        F3D00000                 push rLink;
+0x000EEE        D509000F                 M[r7 + 15] = Null;
+0x000EEF        D5090010                 M[r7 + 16] = Null;
+0x000EF0        D509000D                 M[r7 + 13] = Null;
+0x000EF1        D1390006                 r1 = M[r7 + 6];
+0x000EF2        E410002F                 rMAC = Null + 1;
+0x000EF3        D9030000                 Div = rMAC / r1;
+0x000EF4        D9300001                 r1 = DivResult;
+0x000EF5        9133007F                 r1 = r1 ASHIFT -1;
+0x000EF6        D539000E                 M[r7 + 14] = r1;
+0x000EF7        D1A90009                 r8 = M[r7 + 9];
+0x000EF8        D13A0002                 r1 = M[r8 + 2];
+0x000EF9        D1AA0003                 r8 = M[r8 + 3];
+0x000EFA        00BA000F                 r9 = r8 + Null;
+0x000EFB        E003000F                 call r1;
+0x000EFC        D139000B                 r1 = M[r7 + 11];
+0x000EFD        DD00FDC1                 if EQ jump $pop_rLink_and_rts;
+0x000EFE        D1990011                 r7 = M[r7 + 17];
+0x000EFF        E003000F                 call r1;
+0x000F00        DDF0FDBE                 jump $pop_rLink_and_rts;
 
  <$frame_sync.sco_initialize>
-0x000ED2        F3D00000                 push rLink;
-0x000ED3        D509000F                 M[r7 + 15] = Null;
-0x000ED4        D5090010                 M[r7 + 16] = Null;
-0x000ED5        D509000D                 M[r7 + 13] = Null;
-0x000ED6        D1390006                 r1 = M[r7 + 6];
-0x000ED7        E410002F                 rMAC = Null + 1;
-0x000ED8        D9030000                 Div = rMAC / r1;
-0x000ED9        D9300001                 r1 = DivResult;
-0x000EDA        9133007F                 r1 = r1 ASHIFT -1;
-0x000EDB        D539000E                 M[r7 + 14] = r1;
-0x000EDC        D1A90009                 r8 = M[r7 + 9];
-0x000EDD        D13A0002                 r1 = M[r8 + 2];
-0x000EDE        D1AA0003                 r8 = M[r8 + 3];
-0x000EDF        00BA000F                 r9 = r8 + Null;
-0x000EE0        E003000F                 call r1;
-0x000EE1        D139000B                 r1 = M[r7 + 11];
-0x000EE2        DD00FDDC                 if EQ jump $pop_rLink_and_rts;
-0x000EE3        D1990011                 r7 = M[r7 + 17];
-0x000EE4        E003000F                 call r1;
-0x000EE5        DDF0FDD9                 jump $pop_rLink_and_rts;
+0x000F01        F3D00000                 push rLink;
+0x000F02        D509000F                 M[r7 + 15] = Null;
+0x000F03        D5090010                 M[r7 + 16] = Null;
+0x000F04        D509000D                 M[r7 + 13] = Null;
+0x000F05        D1390006                 r1 = M[r7 + 6];
+0x000F06        E410002F                 rMAC = Null + 1;
+0x000F07        D9030000                 Div = rMAC / r1;
+0x000F08        D9300001                 r1 = DivResult;
+0x000F09        9133007F                 r1 = r1 ASHIFT -1;
+0x000F0A        D539000E                 M[r7 + 14] = r1;
+0x000F0B        D1A90009                 r8 = M[r7 + 9];
+0x000F0C        D13A0002                 r1 = M[r8 + 2];
+0x000F0D        D1AA0003                 r8 = M[r8 + 3];
+0x000F0E        00BA000F                 r9 = r8 + Null;
+0x000F0F        E003000F                 call r1;
+0x000F10        D139000B                 r1 = M[r7 + 11];
+0x000F11        DD00FDAD                 if EQ jump $pop_rLink_and_rts;
+0x000F12        D1990011                 r7 = M[r7 + 17];
+0x000F13        E003000F                 call r1;
+0x000F14        DDF0FDAA                 jump $pop_rLink_and_rts;
 
  <$profiler.register>
-0x000EE6        0930000D                 r1 = Null + M[$profiler.last_addr];
-0x000EE7        D5320000                 M[r0 + 0] = r1;
-0x000EE8        1920000D                 M[$profiler.last_addr] = r0 + Null;
-0x000EE9        D5020004                 M[r0 + 4] = Null;
-0x000EEA        D5020001                 M[r0 + 1] = Null;
-0x000EEB        D5020007                 M[r0 + 7] = Null;
-0x000EEC        D5020008                 M[r0 + 8] = Null;
-0x000EED        D5020009                 M[r0 + 9] = Null;
-0x000EEE        D502000A                 M[r0 + 10] = Null;
-0x000EEF        D502000B                 M[r0 + 11] = Null;
-0x000EF0        D5020010                 M[r0 + 16] = Null;
-0x000EF1        D5020011                 M[r0 + 17] = Null;
-0x000EF2        D5020012                 M[r0 + 18] = Null;
-0x000EF3        D5020013                 M[r0 + 19] = Null;
-0x000EF4        D5020014                 M[r0 + 20] = Null;
-0x000EF5        D5020019                 M[r0 + 25] = Null;
-0x000EF6        D502001A                 M[r0 + 26] = Null;
-0x000EF7        D502001B                 M[r0 + 27] = Null;
-0x000EF8        D502001C                 M[r0 + 28] = Null;
-0x000EF9        D502001D                 M[r0 + 29] = Null;
-0x000EFA        DC0D000F                 rts;
+0x000F15        0930000D                 r1 = Null + M[$profiler.last_addr];
+0x000F16        D5320000                 M[r0 + 0] = r1;
+0x000F17        1920000D                 M[$profiler.last_addr] = r0 + Null;
+0x000F18        D5020004                 M[r0 + 4] = Null;
+0x000F19        D5020001                 M[r0 + 1] = Null;
+0x000F1A        D5020007                 M[r0 + 7] = Null;
+0x000F1B        D5020008                 M[r0 + 8] = Null;
+0x000F1C        D5020009                 M[r0 + 9] = Null;
+0x000F1D        D502000A                 M[r0 + 10] = Null;
+0x000F1E        D502000B                 M[r0 + 11] = Null;
+0x000F1F        D5020010                 M[r0 + 16] = Null;
+0x000F20        D5020011                 M[r0 + 17] = Null;
+0x000F21        D5020012                 M[r0 + 18] = Null;
+0x000F22        D5020013                 M[r0 + 19] = Null;
+0x000F23        D5020014                 M[r0 + 20] = Null;
+0x000F24        D5020019                 M[r0 + 25] = Null;
+0x000F25        D502001A                 M[r0 + 26] = Null;
+0x000F26        D502001B                 M[r0 + 27] = Null;
+0x000F27        D502001C                 M[r0 + 28] = Null;
+0x000F28        D502001D                 M[r0 + 29] = Null;
+0x000F29        DC0D000F                 rts;
 
  <$CVC.PowerUpReset>
-0x000EFB        0920000E                 r0 = Null + M[f760aGMTKZ9Wm9KeZaGGm36pY28NXwCjorap8dYFnd0=];
+0x000F2A        0920000E                 r0 = Null + M[f760aGMTKZ9Wm9KeZaGGm36pY28NXwCjorap8dYFnd0=];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EFC        DC0D0000                 if EQ rts;
+0x000F2B        DC0D0000                 if EQ rts;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EFD        1900000E                 M[f760aGMTKZ9Wm9KeZaGGm36pY28NXwCjorap8dYFnd0=] = Null + Null;
+0x000F2C        1900000E                 M[f760aGMTKZ9Wm9KeZaGGm36pY28NXwCjorap8dYFnd0=] = Null + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EFE        19A0000F                 M[$M.CVC_SYS.InterfacePtr] = r8 + Null;
+0x000F2D        19A0000F                 M[$M.CVC_SYS.InterfacePtr] = r8 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000EFF        1900FE93                 M[0xfffe93] = Null + Null;
+0x000F2E        1900FE93                 M[0xfffe93] = Null + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F00        F3D00000                 push rLink;
+0x000F2F        F3D00000                 push rLink;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F01        D12A0005                 r0 = M[r8 + 5];
+0x000F30        D12A0005                 r0 = M[r8 + 5];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F02        1920053C                 M[$M.CVC_SYS.SysMode] = r0 + Null;
+0x000F31        1920053C                 M[$M.CVC_SYS.SysMode] = r0 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F03        1920053B                 M[$M.CVC_SYS.cur_mode] = r0 + Null;
+0x000F32        1920053B                 M[$M.CVC_SYS.cur_mode] = r0 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F04        D12A0006                 r0 = M[r8 + 6];
+0x000F33        D12A0006                 r0 = M[r8 + 6];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F05        19200545                 M[$M.CVC_SYS.VolState] = r0 + Null;
+0x000F34        19200545                 M[$M.CVC_SYS.VolState] = r0 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F06        D12A0008                 r0 = M[r8 + 8];
+0x000F35        D12A0008                 r0 = M[r8 + 8];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F07        19200546                 M[$M.CVC_SYS.CallState] = r0 + Null;
+0x000F36        19200546                 M[$M.CVC_SYS.CallState] = r0 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F08        1920054A                 M[$M.CVC_SYS.CurCallState] = r0 + Null;
+0x000F37        1920054A                 M[$M.CVC_SYS.CurCallState] = r0 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F09        E1F0FF9E                 call kd8BmrgCQcb/vVKX9u0jqPb2MuENo/L7YyDa+UBkfCo=;
+0x000F38        E1F0FF9E                 call kd8BmrgCQcb/vVKX9u0jqPb2MuENo/L7YyDa+UBkfCo=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F0A        01600240                 r4 = Null + 576;
+0x000F39        01600240                 r4 = Null + 576;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F0B        E1F0FD05                 call $frame_sync.register_handlers;
+0x000F3A        E1F0FCD6                 call $frame_sync.register_handlers;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F0C        DDF0FDB2                 jump $pop_rLink_and_rts;
+0x000F3B        DDF0FD83                 jump $pop_rLink_and_rts;
 
  <$M.cvc_message.SetMode.func>
-0x000F0D        09A0000F                 r8 = Null + M[$M.CVC_SYS.InterfacePtr];
+0x000F3C        09A0000F                 r8 = Null + M[$M.CVC_SYS.InterfacePtr];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F0E        19500546                 M[$M.CVC_SYS.CallState] = r3 + Null;
+0x000F3D        19500546                 M[$M.CVC_SYS.CallState] = r3 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F0F        D14A0007                 r2 = M[r8 + 7];
+0x000F3E        D14A0007                 r2 = M[r8 + 7];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F10        E444003F                 r2 = r2 - 1;
+0x000F3F        E444003F                 r2 = r2 - 1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F11        0003000F                 Null = r1 + Null;
+0x000F40        0003000F                 Null = r1 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F12        00300004                 if NEG r1 = Null + Null;
+0x000F41        00300004                 if NEG r1 = Null + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F13        2004003F                 Null = r2 - r1;
+0x000F42        2004003F                 Null = r2 - r1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F14        00340004                 if NEG r1 = r2 + Null;
+0x000F43        00340004                 if NEG r1 = r2 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F15        0950053C                 r3 = Null + M[$M.CVC_SYS.SysMode];
+0x000F44        0950053C                 r3 = Null + M[$M.CVC_SYS.SysMode];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F16        1930053C                 M[$M.CVC_SYS.SysMode] = r1 + Null;
+0x000F45        1930053C                 M[$M.CVC_SYS.SysMode] = r1 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F17        23530000                 r3 = r3 - r1;
+0x000F46        23530000                 r3 = r3 - r1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F18        0930053D                 r1 = Null + M[$M.CVC_SYS.AlgReInit];
+0x000F47        0930053D                 r1 = Null + M[$M.CVC_SYS.AlgReInit];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F19        87350000                 r1 = r1 OR r3;
+0x000F48        87350000                 r1 = r1 OR r3;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F1A        1930053D                 M[$M.CVC_SYS.AlgReInit] = r1 + Null;
+0x000F49        1930053D                 M[$M.CVC_SYS.AlgReInit] = r1 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F1B        F3D00000                 push rLink;
+0x000F4A        F3D00000                 push rLink;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F1C        D12A0001                 r0 = M[r8 + 1];
+0x000F4B        D12A0001                 r0 = M[r8 + 1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F1D        E002000F                 call r0;
+0x000F4C        E002000F                 call r0;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F1E        E1F00021                 call $cvc_spi_api.UpdateCallState;
+0x000F4D        E1F00021                 call $cvc_spi_api.UpdateCallState;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F1F        DDF0FD9F                 jump $pop_rLink_and_rts;
+0x000F4E        DDF0FD70                 jump $pop_rLink_and_rts;
 ...
 
  <pJXau0q7dUMHFplMECLO15QBSq0iOHNavsIerxSYwJU=>
-0x000F34        F3D00000                 push rLink;
+0x000F63        F3D00000                 push rLink;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F35        5140021C                 I4 = Null + 540;
+0x000F64        5140021C                 I4 = Null + 540;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F36        5000003F                 I0 = Null + r1;
+0x000F65        5000003F                 I0 = Null + r1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F37        01C00004                 r10 = Null + 4;
+0x000F66        01C00004                 r10 = Null + 4;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F38        E5F00003                 do vD9dbwUjtEx4yw00pEQJWPeieUlFSLlnGFWW6r7NR20=;
+0x000F67        E5F00003                 do vD9dbwUjtEx4yw00pEQJWPeieUlFSLlnGFWW6r7NR20=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F39        03002100                 Null = Null + Null, r0 = M[I0,1];
+0x000F68        03002100                 Null = Null + Null, r0 = M[I0,1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F3A        030000A1                 Null = Null + Null, M[I4,1] = r0;
+0x000F69        030000A1                 Null = Null + Null, M[I4,1] = r0;
 
  <vD9dbwUjtEx4yw00pEQJWPeieUlFSLlnGFWW6r7NR20=>
-0x000F3B        E1F00004                 call $cvc_spi_api.UpdateCallState;
+0x000F6A        E1F00004                 call $cvc_spi_api.UpdateCallState;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F3C        E1F0FEDE                 call $CVC.VolumeControl.SendCodecSettings;
+0x000F6B        E1F0FEDE                 call $CVC.VolumeControl.SendCodecSettings;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F3D        01A00000                 r8 = Null + 0;
+0x000F6C        01A00000                 r8 = Null + 0;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F3E        DDF0FD80                 jump $pop_rLink_and_rts;
+0x000F6D        DDF0FD51                 jump $pop_rLink_and_rts;
 
  <$cvc_spi_api.UpdateCallState>
-0x000F3F        0920021C                 r0 = Null + M[$M.CVC_SYS.SpiSysControl];
+0x000F6E        0920021C                 r0 = Null + M[$M.CVC_SYS.SpiSysControl];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F40        09400546                 r2 = Null + M[$M.CVC_SYS.CallState];
+0x000F6F        09400546                 r2 = Null + M[$M.CVC_SYS.CallState];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F41        0950021E                 r3 = Null + M[$M.CVC_SYS.OvrCallState];
+0x000F70        0950021E                 r3 = Null + M[$M.CVC_SYS.OvrCallState];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F42        81024000                 Null = r0 AND 0x4000;
+0x000F71        81024000                 Null = r0 AND 0x4000;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F43        00450001                 if NE r2 = r3 + Null;
+0x000F72        00450001                 if NE r2 = r3 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F44        1940054A                 M[$M.CVC_SYS.CurCallState] = r2 + Null;
+0x000F73        1940054A                 M[$M.CVC_SYS.CurCallState] = r2 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F45        DC0D000F                 rts;
+0x000F74        DC0D000F                 rts;
 
  <$message.register_handler_with_mask>
-0x000F46        8966FFFF                 r4 = r4 XOR 0xffff;
-0x000F47        D5630003                 M[r1 + 3] = r4;
-0x000F48        DDF00003                 jump $M.message.register_handler.mask_field_set;
+0x000F75        8966FFFF                 r4 = r4 XOR 0xffff;
+0x000F76        D5630003                 M[r1 + 3] = r4;
+0x000F77        DDF00003                 jump $M.message.register_handler.mask_field_set;
 
  <$message.register_handler>
-0x000F49        8520FFFF                 r0 = Null OR 0xffff;
-0x000F4A        D5230003                 M[r1 + 3] = r0;
+0x000F78        8520FFFF                 r0 = Null OR 0xffff;
+0x000F79        D5230003                 M[r1 + 3] = r0;
 
  <$M.message.register_handler.mask_field_set>
-0x000F4B        F3D00000                 push rLink;
-0x000F4C        E1F0FD30                 call $block_interrupts;
-0x000F4D        FD0000FF 09203C2A        r0 = Null + M[$message.last_addr];
-0x000F4F        D5230000                 M[r1 + 0] = r0;
-0x000F50        FD0000FF 19303C2A        M[$message.last_addr] = r1 + Null;
-0x000F52        D5430001                 M[r1 + 1] = r2;
-0x000F53        D5530002                 M[r1 + 2] = r3;
-0x000F54        E1F0FCEA                 call $interrupt.unblock;
-0x000F55        DDF0FD69                 jump $pop_rLink_and_rts;
+0x000F7A        F3D00000                 push rLink;
+0x000F7B        E1F0FD01                 call $block_interrupts;
+0x000F7C        FD0000FF 09203C2B        r0 = Null + M[$message.last_addr];
+0x000F7E        D5230000                 M[r1 + 0] = r0;
+0x000F7F        FD0000FF 19303C2B        M[$message.last_addr] = r1 + Null;
+0x000F81        D5430001                 M[r1 + 1] = r2;
+0x000F82        D5530002                 M[r1 + 2] = r3;
+0x000F83        E1F0FCBB                 call $interrupt.unblock;
+0x000F84        DDF0FD3A                 jump $pop_rLink_and_rts;
 
  <$pskey.initialise>
-0x000F56        F3D00000                 push rLink;
-0x000F57        FD0000FF 01303C01        r1 = Null + -50175;
-0x000F59        FD000000 01408007        r2 = Null + 32775;
-0x000F5B        015009BB                 r3 = Null + 2491;
-0x000F5C        E1F0FFED                 call $message.register_handler;
-0x000F5D        01300C00                 r1 = Null + 3072;
-0x000F5E        85408008                 r2 = Null OR 0x8008;
-0x000F5F        015009BB                 r3 = Null + 2491;
-0x000F60        E1F0FFE9                 call $message.register_handler;
-0x000F61        DDF0FD5D                 jump $pop_rLink_and_rts;
+0x000F85        F3D00000                 push rLink;
+0x000F86        FD0000FF 01303C01        r1 = Null + -50175;
+0x000F88        FD000000 01408007        r2 = Null + 32775;
+0x000F8A        015009BB                 r3 = Null + 2491;
+0x000F8B        E1F0FFED                 call $message.register_handler;
+0x000F8C        01300C00                 r1 = Null + 3072;
+0x000F8D        85408008                 r2 = Null OR 0x8008;
+0x000F8E        015009BB                 r3 = Null + 2491;
+0x000F8F        E1F0FFE9                 call $message.register_handler;
+0x000F90        DDF0FD2E                 jump $pop_rLink_and_rts;
 
  <F4QzeAnXZt7mnAShIoJx80SUPt6tBIKeKr7DVm2HtK0=>
-0x000F62        09A0000F                 r8 = Null + M[$M.CVC_SYS.InterfacePtr];
+0x000F91        09A0000F                 r8 = Null + M[$M.CVC_SYS.InterfacePtr];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F63        D1AA000F                 r8 = M[r8 + 15];
+0x000F92        D1AA000F                 r8 = M[r8 + 15];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F64        51900001                 M1 = Null + 1;
+0x000F93        51900001                 M1 = Null + 1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F65        502000AF                 I2 = Null + r8;
+0x000F94        502000AF                 I2 = Null + r8;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F66        5040393F                 I4 = Null + r1, r1 = M[I2,M1];
+0x000F95        5040393F                 I4 = Null + r1, r1 = M[I2,M1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F67        00C3590F                 r10 = r1 + Null, r3 = M[I2,M1];
+0x000F96        00C3590F                 r10 = r1 + Null, r3 = M[I2,M1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F68        00AC000F                 r8 = r10 + Null;
+0x000F97        00AC000F                 r8 = r10 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F69        03003900                 Null = Null + Null, r1 = M[I2,1];
+0x000F98        03003900                 Null = Null + Null, r1 = M[I2,1];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F6A        E5F00003                 do bQ7gPQHn1sE5plK74aFI1ONrp0/h+emrNu99kAKeCBE=;
+0x000F99        E5F00003                 do bQ7gPQHn1sE5plK74aFI1ONrp0/h+emrNu99kAKeCBE=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F6B        D3300000                 r1 = M[r1 + Null];
+0x000F9A        D3300000                 r1 = M[r1 + Null];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F6C        030039B1                 Null = Null + Null, r1 = M[I2,1], M[I4,1] = r1;
+0x000F9B        030039B1                 Null = Null + Null, r1 = M[I2,1], M[I4,1] = r1;
 
  <bQ7gPQHn1sE5plK74aFI1ONrp0/h+emrNu99kAKeCBE=>
-0x000F6D        D035000F                 r1 = M[r3 + Null];
+0x000F9C        D035000F                 r1 = M[r3 + Null];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F6E        DC0D0000                 if EQ rts;
+0x000F9D        DC0D0000                 if EQ rts;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F6F        1830000F                 M[r1] = Null + Null;
+0x000F9E        1830000F                 M[r1] = Null + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F70        E455002F                 r3 = r3 + 1;
+0x000F9F        E455002F                 r3 = r3 + 1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F71        DDF0FFFC                 jump bQ7gPQHn1sE5plK74aFI1ONrp0/h+emrNu99kAKeCBE=;
+0x000FA0        DDF0FFFC                 jump bQ7gPQHn1sE5plK74aFI1ONrp0/h+emrNu99kAKeCBE=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F72        DC0D000F                 rts;
+0x000FA1        DC0D000F                 rts;
 
  <$M.cvc_message.SetParam.func>
-0x000F73        0003000F                 Null = r1 + Null;
+0x000FA2        0003000F                 Null = r1 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F74        DC0D0004                 if NEG rts;
+0x000FA3        DC0D0004                 if NEG rts;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F75        0970000F                 r5 = Null + M[$M.CVC_SYS.InterfacePtr];
+0x000FA4        0970000F                 r5 = Null + M[$M.CVC_SYS.InterfacePtr];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F76        D1870009                 r6 = M[r5 + 9];
+0x000FA5        D1870009                 r6 = M[r5 + 9];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F77        2003008F                 Null = r1 - r6;
+0x000FA6        2003008F                 Null = r1 - r6;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F78        DC0D0005                 if POS rts;
+0x000FA7        DC0D0005                 if POS rts;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F79        8155FFFF                 r3 = r3 AND 0xffff;
+0x000FA8        8155FFFF                 r3 = r3 AND 0xffff;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F7A        8D440010                 r2 = r2 LSHIFT 16;
+0x000FA9        8D440010                 r2 = r2 LSHIFT 16;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F7B        87450000                 r2 = r2 OR r3;
+0x000FAA        87450000                 r2 = r2 OR r3;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F7C        D187000A                 r6 = M[r5 + 10];
+0x000FAB        D187000A                 r6 = M[r5 + 10];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F7D        D448003F                 M[r6 + r1] = r2;
+0x000FAC        D448003F                 M[r6 + r1] = r2;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F7E        03060000                 Null = Null + r4;
+0x000FAD        03060000                 Null = Null + r4;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F7F        DD100069                 if NE jump JbqQonuDWNw2zaH/mNFCd4xKayVoYTbsPXOtWHgE2WY=;
+0x000FAE        DD100069                 if NE jump JbqQonuDWNw2zaH/mNFCd4xKayVoYTbsPXOtWHgE2WY=;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F80        D1870005                 r6 = M[r5 + 5];
+0x000FAF        D1870005                 r6 = M[r5 + 5];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F81        1980053C                 M[$M.CVC_SYS.SysMode] = r6 + Null;
+0x000FB0        1980053C                 M[$M.CVC_SYS.SysMode] = r6 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F82        DC0D000F                 rts;
+0x000FB1        DC0D000F                 rts;
 
  <$M.cvc_message.GetParam.func>
-0x000F83        0053000F                 r3 = r1 + Null;
+0x000FB2        0053000F                 r3 = r1 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F84        0970000F                 r5 = Null + M[$M.CVC_SYS.InterfacePtr];
+0x000FB3        0970000F                 r5 = Null + M[$M.CVC_SYS.InterfacePtr];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F85        0063000F                 r4 = r1 + Null;
+0x000FB4        0063000F                 r4 = r1 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F86        00600004                 if NEG r4 = Null + Null;
+0x000FB5        00600004                 if NEG r4 = Null + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F87        D1870009                 r6 = M[r5 + 9];
+0x000FB6        D1870009                 r6 = M[r5 + 9];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F88        2003008F                 Null = r1 - r6;
+0x000FB7        2003008F                 Null = r1 - r6;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F89        00600005                 if POS r4 = Null + Null;
+0x000FB8        00600005                 if POS r4 = Null + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F8A        D187000A                 r6 = M[r5 + 10];
+0x000FB9        D187000A                 r6 = M[r5 + 10];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F8B        D3860000                 r6 = M[r6 + r4];
+0x000FBA        D3860000                 r6 = M[r6 + r4];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F8C        8D780070                 r5 = r6 LSHIFT -16;
+0x000FBB        8D780070                 r5 = r6 LSHIFT -16;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F8D        8188FFFF                 r6 = r6 AND 0xffff;
+0x000FBC        8188FFFF                 r6 = r6 AND 0xffff;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F8E        F3D00000                 push rLink;
+0x000FBD        F3D00000                 push rLink;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F8F        01401011                 r2 = Null + 4113;
+0x000FBE        01401011                 r2 = Null + 4113;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F90        E1F0FB90                 call $message.send_short;
+0x000FBF        E1F0FB61                 call $message.send_short;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000F91        DDF0FD2D                 jump $pop_rLink_and_rts;
+0x000FC0        DDF0FCFE                 jump $pop_rLink_and_rts;
 
  <$wall_clock.initialise>
-0x000F92        F3D00000                 push rLink;
-0x000F93        01300C04                 r1 = Null + 3076;
-0x000F94        8540801C                 r2 = Null OR 0x801c;
-0x000F95        015007DD                 r3 = Null + 2013;
-0x000F96        E1F0FFB3                 call $message.register_handler;
-0x000F97        FD0000FF 01303C09        r1 = Null + -50167;
-0x000F99        8540801D                 r2 = Null OR 0x801d;
-0x000F9A        01500CC0                 r3 = Null + 3264;
-0x000F9B        E1F0FFAE                 call $message.register_handler;
-0x000F9C        DDF0FD22                 jump $pop_rLink_and_rts;
+0x000FC1        F3D00000                 push rLink;
+0x000FC2        01300C04                 r1 = Null + 3076;
+0x000FC3        8540801C                 r2 = Null OR 0x801c;
+0x000FC4        015007DD                 r3 = Null + 2013;
+0x000FC5        E1F0FFB3                 call $message.register_handler;
+0x000FC6        FD0000FF 01303C09        r1 = Null + -50167;
+0x000FC8        8540801D                 r2 = Null OR 0x801d;
+0x000FC9        01500CC0                 r3 = Null + 3264;
+0x000FCA        E1F0FFAE                 call $message.register_handler;
+0x000FCB        DDF0FCF3                 jump $pop_rLink_and_rts;
 
  <$interrupt.initialise>
-0x000F9D        01200015                 r0 = Null + 21;
-0x000F9E        1920FE14                 M[0xfffe14] = r0 + Null;
-0x000F9F        01200311                 r0 = Null + 785;
-0x000FA0        1920FE15                 M[0xfffe15] = r0 + Null;
-0x000FA1        E420002F                 r0 = Null + 1;
-0x000FA2        1920FE11                 M[0xfffe11] = r0 + Null;
-0x000FA3        1920FE12                 M[0xfffe12] = r0 + Null;
-0x000FA4        1920FE13                 M[0xfffe13] = r0 + Null;
-0x000FA5        1900FE4E                 M[0xfffe4e] = Null + Null;
-0x000FA6        85EE0080                 rFlags = rFlags OR 0x80;
-0x000FA7        DC0D000F                 rts;
-0x000FA8        DDF0F058                 jump $reset;
-0x000FA9        DDF0F059                 jump $interrupt.handler;
+0x000FCC        01200015                 r0 = Null + 21;
+0x000FCD        1920FE14                 M[0xfffe14] = r0 + Null;
+0x000FCE        01200311                 r0 = Null + 785;
+0x000FCF        1920FE15                 M[0xfffe15] = r0 + Null;
+0x000FD0        E420002F                 r0 = Null + 1;
+0x000FD1        1920FE11                 M[0xfffe11] = r0 + Null;
+0x000FD2        1920FE12                 M[0xfffe12] = r0 + Null;
+0x000FD3        1920FE13                 M[0xfffe13] = r0 + Null;
+0x000FD4        1900FE4E                 M[0xfffe4e] = Null + Null;
+0x000FD5        85EE0080                 rFlags = rFlags OR 0x80;
+0x000FD6        DC0D000F                 rts;
+0x000FD7        DDF0F029                 jump $reset;
+0x000FD8        DDF0F02A                 jump $interrupt.handler;
 
  <$stack.initialise>
-0x000FAA        FD0000FF 01B030BF        r9 = Null + -53057;
-0x000FAC        19B0FE67                 M[0xfffe67] = r9 + Null;
-0x000FAD        FD0000FF 01B03000        r9 = Null + -53248;
-0x000FAF        19B0FE66                 M[0xfffe66] = r9 + Null;
-0x000FB0        19B0FE68                 M[0xfffe68] = r9 + Null;
-0x000FB1        19B0FE6A                 M[0xfffe6a] = r9 + Null;
-0x000FB2        E420002F                 r0 = Null + 1;
-0x000FB3        1920FE9F                 M[0xfffe9f] = r0 + Null;
-0x000FB4        DC0D000F                 rts;
+0x000FD9        FD0000FF 01B030BF        r9 = Null + -53057;
+0x000FDB        19B0FE67                 M[0xfffe67] = r9 + Null;
+0x000FDC        FD0000FF 01B03000        r9 = Null + -53248;
+0x000FDE        19B0FE66                 M[0xfffe66] = r9 + Null;
+0x000FDF        19B0FE68                 M[0xfffe68] = r9 + Null;
+0x000FE0        19B0FE6A                 M[0xfffe6a] = r9 + Null;
+0x000FE1        E420002F                 r0 = Null + 1;
+0x000FE2        1920FE9F                 M[0xfffe9f] = r0 + Null;
+0x000FE3        DC0D000F                 rts;
 
  <$cbuffer.initialise>
-0x000FB5        F3D00000                 push rLink;
-0x000FB6        FD0000FF 01303BFD        r1 = Null + -50179;
-0x000FB8        85408001                 r2 = Null OR 0x8001;
-0x000FB9        0150072D                 r3 = Null + 1837;
-0x000FBA        E1F0FF8F                 call $message.register_handler;
-0x000FBB        DDF0FD03                 jump $pop_rLink_and_rts;
+0x000FE4        F3D00000                 push rLink;
+0x000FE5        FD0000FF 01303BFD        r1 = Null + -50179;
+0x000FE7        85408001                 r2 = Null OR 0x8001;
+0x000FE8        0150072D                 r3 = Null + 1837;
+0x000FE9        E1F0FF8F                 call $message.register_handler;
+0x000FEA        DDF0FCD4                 jump $pop_rLink_and_rts;
 
  <bSilAG2DARKuFGIbHPwwNmX4JlR7wrsycb0oA0PYd9Y=>
-0x000FBC        09A0000F                 r8 = Null + M[$M.CVC_SYS.InterfacePtr];
+0x000FEB        09A0000F                 r8 = Null + M[$M.CVC_SYS.InterfacePtr];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FBD        D15A000A                 r3 = M[r8 + 10];
+0x000FEC        D15A000A                 r3 = M[r8 + 10];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FBE        D16A0009                 r4 = M[r8 + 9];
+0x000FED        D16A0009                 r4 = M[r8 + 9];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FBF        D17A000B                 r5 = M[r8 + 11];
+0x000FEE        D17A000B                 r5 = M[r8 + 11];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FC0        1835000F                 M[r1] = r3 + Null;
+0x000FEF        1835000F                 M[r1] = r3 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FC1        D5630001                 M[r1 + 1] = r4;
+0x000FF0        D5630001                 M[r1 + 1] = r4;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FC2        D5730002                 M[r1 + 2] = r5;
+0x000FF1        D5730002                 M[r1 + 2] = r5;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FC3        01A00003                 r8 = Null + 3;
+0x000FF2        01A00003                 r8 = Null + 3;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FC4        DC0D000F                 rts;
+0x000FF3        DC0D000F                 rts;
 
  <djYfVYMsxxe0QyNx+Bw8xvOad7pF0K+iDTphKKfwOnU=>
-0x000FC5        09A0000F                 r8 = Null + M[$M.CVC_SYS.InterfacePtr];
+0x000FF4        09A0000F                 r8 = Null + M[$M.CVC_SYS.InterfacePtr];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FC6        D15A000C                 r3 = M[r8 + 12];
+0x000FF5        D15A000C                 r3 = M[r8 + 12];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FC7        D17A0004                 r5 = M[r8 + 4];
+0x000FF6        D17A0004                 r5 = M[r8 + 4];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FC8        D18A000D                 r6 = M[r8 + 13];
+0x000FF7        D18A000D                 r6 = M[r8 + 13];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FC9        1835000F                 M[r1] = r3 + Null;
+0x000FF8        1835000F                 M[r1] = r3 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FCA        D5730001                 M[r1 + 1] = r5;
+0x000FF9        D5730001                 M[r1 + 1] = r5;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FCB        D5830002                 M[r1 + 2] = r6;
+0x000FFA        D5830002                 M[r1 + 2] = r6;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FCC        01A00003                 r8 = Null + 3;
+0x000FFB        01A00003                 r8 = Null + 3;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FCD        DC0D000F                 rts;
+0x000FFC        DC0D000F                 rts;
 
  <$spi_comm.register_handler>
-0x000FCE        F3D00000                 push rLink;
-0x000FCF        09200C30                 r0 = Null + M[$M.spi_comm.last_addr];
-0x000FD0        D5230000                 M[r1 + 0] = r0;
-0x000FD1        19300C30                 M[$M.spi_comm.last_addr] = r1 + Null;
-0x000FD2        D5430001                 M[r1 + 1] = r2;
-0x000FD3        D5530002                 M[r1 + 2] = r3;
-0x000FD4        DDF0FCEA                 jump $pop_rLink_and_rts;
+0x000FFD        F3D00000                 push rLink;
+0x000FFE        09200C31                 r0 = Null + M[$M.spi_comm.last_addr];
+0x000FFF        D5230000                 M[r1 + 0] = r0;
+0x001000        19300C31                 M[$M.spi_comm.last_addr] = r1 + Null;
+0x001001        D5430001                 M[r1 + 1] = r2;
+0x001002        D5530002                 M[r1 + 2] = r3;
+0x001003        DDF0FCBB                 jump $pop_rLink_and_rts;
 
  <rEP9iJKRZfiRyhKcB9tBlIDlYW0y/RfNy7qBSMUU8ck=>
-0x000FD5        E420002F                 r0 = Null + 1;
+0x001004        E420002F                 r0 = Null + 1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FD6        19200550                 M[$M.CVC_SYS.ssr_started] = r0 + Null;
+0x001005        19200550                 M[$M.CVC_SYS.ssr_started] = r0 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FD7        DC0D000F                 rts;
+0x001006        DC0D000F                 rts;
 
  <Ur0mzKMJjPAIZ/7ze58/6KA/mm8G0NDRWebfZwVWVtw=>
-0x000FD8        1930054D                 M[$M.CVC_SYS.ssr_noise_base] = r1 + Null;
+0x001007        1930054D                 M[$M.CVC_SYS.ssr_noise_base] = r1 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FD9        1940054E                 M[$M.CVC_SYS.ssr_uncert_offset] = r2 + Null;
+0x001008        1940054E                 M[$M.CVC_SYS.ssr_uncert_offset] = r2 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FDA        1950054F                 M[$M.CVC_SYS.ssr_time_out] = r3 + Null;
+0x001009        1950054F                 M[$M.CVC_SYS.ssr_time_out] = r3 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FDB        19600551                 M[$M.CVC_SYS.ssr_aec_initial_adapt] = r4 + Null;
+0x00100A        19600551                 M[$M.CVC_SYS.ssr_aec_initial_adapt] = r4 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FDC        DC0D000F                 rts;
+0x00100B        DC0D000F                 rts;
 
  <XhL2gFkBA4kgmfWGT9AGxdss/9TtKYBFJLU69KQjqmw=>
-0x000FDD        F3D00000                 push rLink;
+0x00100C        F3D00000                 push rLink;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FDE        01401009                 r2 = Null + 4105;
+0x00100D        01401009                 r2 = Null + 4105;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FDF        0950053E                 r3 = Null + M[$M.CVC_SYS.FrameCounter];
+0x00100E        0950053E                 r3 = Null + M[$M.CVC_SYS.FrameCounter];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FE0        E1F0FB40                 call $message.send_short;
+0x00100F        E1F0FB11                 call $message.send_short;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FE1        DDF0FCDD                 jump $pop_rLink_and_rts;
+0x001010        DDF0FCAE                 jump $pop_rLink_and_rts;
 
  <$error>
-0x000FE2        81EEFF7F                 rFlags = rFlags AND 0xff7f;
-0x000FE3        FD0000FF 09B03C28        r9 = Null + M[$error.handler];
-0x000FE5        DC0B0001                 if NE jump r9;
+0x001011        81EEFF7F                 rFlags = rFlags AND 0xff7f;
+0x001012        FD0000FF 09B03C29        r9 = Null + M[$error.handler];
+0x001014        DC0B0001                 if NE jump r9;
 
  <$M.error.error_loop>
-0x000FE6        E400001F                 break;
-0x000FE7        DDF0FFFF                 jump $M.error.error_loop;
+0x001015        E400001F                 break;
+0x001016        DDF0FFFF                 jump $M.error.error_loop;
 
  <JbqQonuDWNw2zaH/mNFCd4xKayVoYTbsPXOtWHgE2WY=>
-0x000FE8        E4A0002F                 r8 = Null + 1;
+0x001017        E4A0002F                 r8 = Null + 1;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FE9        19A0053D                 M[$M.CVC_SYS.AlgReInit] = r8 + Null;
+0x001018        19A0053D                 M[$M.CVC_SYS.AlgReInit] = r8 + Null;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FEA        01A00000                 r8 = Null + 0;
+0x001019        01A00000                 r8 = Null + 0;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FEB        DDF0FE2F                 jump $CVC.VolumeControl.SendCodecSettings;
+0x00101A        DDF0FE2F                 jump $CVC.VolumeControl.SendCodecSettings;
 
  <A6BMcu+LWSVXbnff6BBn9YsPonsw+6EgKlF3Ky4rIY0=>
-0x000FEC        09A0000F                 r8 = Null + M[$M.CVC_SYS.InterfacePtr];
+0x00101B        09A0000F                 r8 = Null + M[$M.CVC_SYS.InterfacePtr];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FED        D12A0002                 r0 = M[r8 + 2];
+0x00101C        D12A0002                 r0 = M[r8 + 2];
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FEE        DC020001                 if NE jump r0;
+0x00101D        DC020001                 if NE jump r0;
 
  <Em5d2bqpc3hD8hKpHqvNI6PMNyaYcLE8D4Se3+MowfI=>
-0x000FEF        DC0D000F                 rts;
+0x00101E        DC0D000F                 rts;
 
  <$message.initialise>
-0x000FF0        0920E000                 r0 = Null + M[0xffe000];
-0x000FF1        19200C2C                 M[$message.last_seq_sent] = r0 + Null;
-0x000FF2        DC0D000F                 rts;
+0x00101F        0920E000                 r0 = Null + M[0xffe000];
+0x001020        19200C2D                 M[$message.last_seq_sent] = r0 + Null;
+0x001021        DC0D000F                 rts;
 
  <$frame_sync.sco_decoder.pcm.initialize>
-0x000FF3        DC0D000F                 rts;
+0x001022        DC0D000F                 rts;
 ========================================================================
 datadump
 ========================================================================
@@ -7406,20 +7463,20 @@ Region: DM1_REGION
         000000 000000 000000 000000 
 
 0x000240	zem9AfoOhXeQMOfWtl251ZvAW1nLCiulgeXanbQk+BU=
-        0003F0 001001 000F0D 000F49 
-        0003F4 001002 000DF3 000F49 
-        0003F8 001004 000F73 000F49 
-        0003FC 001008 000FDD 000F49 
-        00051B 001010 000F83 000F49 
-        00051F 001012 000E94 000F49 
-        000517 001015 000FEC 000F49 
-        0002FD 001007 000F62 000FCE 
-        00052B 00100A 000FC5 000FCE 
-        000534 00100B 000F34 000FCE 
-        00052E 001009 000FE8 000FCE 
-        000531 001008 000FBC 000FCE 
-        000523 001020 000FD5 000F49 
-        000527 001021 000FD8 000F49 
+        0003F0 001001 000F3C 000F78 
+        0003F4 001002 000E22 000F78 
+        0003F8 001004 000FA2 000F78 
+        0003FC 001008 00100C 000F78 
+        00051B 001010 000FB2 000F78 
+        00051F 001012 000EC3 000F78 
+        000517 001015 00101B 000F78 
+        0002FD 001007 000F91 000FFD 
+        00052B 00100A 000FF4 000FFD 
+        000534 00100B 000F63 000FFD 
+        00052E 001009 001017 000FFD 
+        000531 001008 000FEB 000FFD 
+        000523 001020 001004 000F78 
+        000527 001021 001007 000F78 
         000000 
 
 0x000280	$cbops.scratch.mem2
@@ -7872,8 +7929,8 @@ Region: DM1_REGION
         000000 000000 000000 000000 
         000000 000000 000000 000000 
 
-0x000766	$adc_in.resample_op
 0x000766	$adc_in.resample_op.mtu_next
+0x000766	$adc_in.resample_op
         FFFFFF 
 
 0x000767	$adc_in.resample_op.main_next
@@ -7903,8 +7960,8 @@ Region: DM1_REGION
         000000 000000 000000 000000 
         000000 000000 
 
-0x0007B3	$dac_out.resample_op.mtu_next
 0x0007B3	$dac_out.resample_op
+0x0007B3	$dac_out.resample_op.mtu_next
         FF3BC7 
 
 0x0007B4	$dac_out.resample_op.main_next
@@ -8007,7 +8064,7 @@ Region: DM1_REGION
 0x00090E	$sco_data.object
         900001 946001 000ABB 000ACC 
         002000 002000 000000 000000 
-        000000 FF3BEF 00003D 000F20 
+        000000 FF3BEF 00003D 000F4F 
         000000 000000 000000 000000 
         000000 0009C4 94600C FFFFF8 
         000ADD 00001E 000000 000000 
@@ -8017,7 +8074,7 @@ Region: DM1_REGION
 0x00092D	$sco2_data.object
         900002 946002 000AEE 000AFF 
         002000 002000 000000 000000 
-        000000 FF3BF4 00003D 000F20 
+        000000 FF3BF4 00003D 000F4F 
         000000 000000 000000 000000 
         000000 0009D7 94600F FFFFF8 
         000B10 00001E 000000 000000 
@@ -8071,8 +8128,8 @@ Region: DM1_REGION
         000000 000000 000000 000000 
         000000 000000 000000 000000 
 
-0x000994	$cbuffer.read_port_offset_addr
 0x000994	$cbuffer.port_offset_addr
+0x000994	$cbuffer.read_port_offset_addr
         000000 000000 000000 000000 
         000000 000000 000000 000000 
         000000 000000 000000 000000 
@@ -8095,14 +8152,14 @@ Region: DM1_REGION
 
 0x0009C4	$sco_data.plc_obj
         00001C 00001C 000BA7 000ACC 
-        000279 666666 266666 000000 
+        000279 666666 4CCCCD 000000 
         000000 000000 000000 000000 
         000000 000000 000000 000000 
         000000 000000 000000 
 
 0x0009D7	$sco2_data.plc_obj
         0000FE 0000FE FF3BB4 000AFF 
-        000279 666666 266666 000000 
+        000279 666666 4CCCCD 000000 
         000000 000000 000000 000000 
         000000 000000 000000 000000 
         000000 000000 000000 
@@ -8121,8 +8178,8 @@ Region: DM1_REGION
         000000 000000 000000 000000 
         000000 000000 
 
-0x000A0F	$dac_out.auxillary_mix_op
 0x000A0F	$dac_out.auxillary_mix_op.mtu_next
+0x000A0F	$dac_out.auxillary_mix_op
         FFFFFF 
 
 0x000A10	$dac_out.auxillary_mix_op.main_next
@@ -8144,8 +8201,8 @@ Region: DM1_REGION
         000000 000000 000000 000000 
         000A12 000B21 
 
-0x000A33	$cbops.scratch.cbuffer_struc2
 0x000A33	$cbops.scratch.cbuffer_struc2_block
+0x000A33	$cbops.scratch.cbuffer_struc2
         000078 000280 000280 
 
 0x000A36	$cbops.scratch.cbuffer_struc2_debug
@@ -8184,8 +8241,8 @@ Region: DM1_REGION
         000000 000000 000000 000000 
         000000 000000 
 
-0x000A77	$adc_in.sw_copy_op
 0x000A77	$adc_in.sw_copy_op.mtu_next
+0x000A77	$adc_in.sw_copy_op
         00094C 
 
 0x000A78	$adc_in.sw_copy_op.main_next
@@ -8200,8 +8257,8 @@ Region: DM1_REGION
         000000 000000 000000 000000 
         000000 000000 
 
-0x000A88	$dac_out.cbuffer_struc
 0x000A88	$dac_out.cbuffer_struc_block
+0x000A88	$dac_out.cbuffer_struc
         0000F0 000300 000300 
 
 0x000A8B	$dac_out.cbuffer_struc_debug
@@ -8210,8 +8267,8 @@ Region: DM1_REGION
         000000 000000 000000 000000 
         000000 000000 
 
-0x000A99	$dac_out.sw_copy_op
 0x000A99	$dac_out.sw_copy_op.mtu_next
+0x000A99	$dac_out.sw_copy_op
         000B92 
 
 0x000A9A	$dac_out.sw_copy_op.main_next
@@ -8236,8 +8293,8 @@ Region: DM1_REGION
         000000 000000 000000 000000 
         000000 000000 
 
-0x000ABB	$sco_data.port_in.cbuffer_struc
 0x000ABB	$sco_data.port_in.cbuffer_struc_block
+0x000ABB	$sco_data.port_in.cbuffer_struc
         000117 FF3200 FF3200 
 
 0x000ABE	$sco_data.port_in.cbuffer_struc_debug
@@ -8266,8 +8323,8 @@ Region: DM1_REGION
         000000 000000 000000 000000 
         000000 000000 
 
-0x000AEE	$sco2_data.port_in.cbuffer_struc
 0x000AEE	$sco2_data.port_in.cbuffer_struc_block
+0x000AEE	$sco2_data.port_in.cbuffer_struc
         000117 000400 000400 
 
 0x000AF1	$sco2_data.port_in.cbuffer_struc_debug
@@ -8348,8 +8405,8 @@ Region: DM1_REGION
         000000 000000 000000 000000 
         000000 000000 000000 000000 
 
-0x000B92	$dac_out.audio_out_volume.mtu_next
 0x000B92	$dac_out.audio_out_volume
+0x000B92	$dac_out.audio_out_volume.mtu_next
         0007B3 
 
 0x000B93	$dac_out.audio_out_volume.main_next
@@ -8363,7 +8420,7 @@ Region: DM1_REGION
         000000 FFFFFB 0147AE 000000 
 
 0x000B9D	$M.system_config.data.rcv_funcs
-        000B46 000BE8 000000 000DBD 
+        000B46 000BE8 000000 000D49 
         000BD0 000000 000AC5 000BE8 
         000000 000000 
 
@@ -8387,12 +8444,12 @@ Region: DM1_REGION
         000001 000000 
 
 0x000BBA	$interrupt.isr_call_table
-        000A95 000FE2 00059F 000FE2 
-        000FE2 000FE2 000FE2 000FE2 
-        000FE2 
+        000A95 001011 00059F 001011 
+        001011 001011 001011 001011 
+        001011 
 
 0x000BC3	$M.system_config.data.reinitialize_table
-        000ED2 00090E 000000 000EBE 
+        000F01 00090E 000000 000EED 
         00092D 000000 000000 
 
 0x000BCA	$M.system_config.data.snd_pass_thru_obj
@@ -8429,8 +8486,8 @@ Region: DM1_REGION
 0x000BDF	$dac_out.dual_mono_mux.param
         FF3C1B FF3BE9 000BE2 
 
-0x000BE2	$dac_out.dual_mono_demux
 0x000BE2	$dac_out.dual_mono_demux.mtu_next
+0x000BE2	$dac_out.dual_mono_demux
         000000 
 
 0x000BE3	$dac_out.dual_mono_demux.main_next
@@ -8520,34 +8577,37 @@ Region: DM1_REGION
 0x000C25	$M.sco2_timing.sco_rcv_trigger2
         000000 
 
-0x000C26	$cbuffer.write_port_connect_address
+0x000C26	$in1_count
         000000 
 
-0x000C27	$cbuffer.read_port_connect_address
+0x000C27	$cbuffer.write_port_connect_address
         000000 
 
-0x000C28	$cbuffer.auto_mcu_message
+0x000C28	$cbuffer.read_port_connect_address
+        000000 
+
+0x000C29	$cbuffer.auto_mcu_message
         000001 000000 
 
-0x000C2A	$interrupt.total_time
+0x000C2B	$interrupt.total_time
         000000 
 
-0x000C2B	$message.queue_read_ptr
+0x000C2C	$message.queue_read_ptr
         000000 
 
-0x000C2C	$message.last_seq_sent
+0x000C2D	$message.last_seq_sent
         000000 
 
-0x000C2D	$pskey.request_in_progress
+0x000C2E	$pskey.request_in_progress
         000000 
 
-0x000C2E	$timer.id
+0x000C2F	$timer.id
         000001 
 
-0x000C2F	$wall_clock.last_addr
+0x000C30	$wall_clock.last_addr
         FFFFFF 
 
-0x000C30	$M.spi_comm.last_addr
+0x000C31	$M.spi_comm.last_addr
         FFFFFF 
 
 
@@ -9000,8 +9060,8 @@ Region: DM2_REGION
         000000 000000 000000 000000 
         000000 000000 
 
-0xFF350E	JuN8f5NVy7KQLi4eWRWQ6+/OSK+qib799pCV/OiMvHg=
 0xFF350E	$M.iir_resamplev2.Up_1_Down_12.filter
+0xFF350E	JuN8f5NVy7KQLi4eWRWQ6+/OSK+qib799pCV/OiMvHg=
         00000C 
 
 0xFF350F	pfx1KjUFry/IoKT9ApmV+LbXZWd/Yc3X9tOvBaFV5rM=
@@ -9110,8 +9170,8 @@ Region: DM2_REGION
 0xFF3551	eHi4ZckoO9KsiV2A7V6/RXfA226cm8PhDvEvg+omuIE=
         000005 
 
-0xFF3552	$M.iir_resamplev2.Up_441_Down_80.filter
 0xFF3552	K5eK4yXL6MqNxQpA0qRvX9oAkmI0n3bsGQM/wyiCy84=
+0xFF3552	$M.iir_resamplev2.Up_441_Down_80.filter
         000000 
 
 0xFF3553	/GGRPLunwe6/cJi/nDxTaw66VOtsk6yAar+Q4saqjs8=
@@ -9449,8 +9509,8 @@ Region: DM2_REGION
 0xFF37C9	rxEHlpYtKxHeQfqhdGYwdV7Vn8Fnl+5K2oxn4LCP9gA=
         000003 
 
-0xFF37CA	PizQh6Cl1JI8LmYRrHoPYo2B/Db9Vc60wiTj72lXB4A=
 0xFF37CA	$M.iir_resamplev2.Up_80_Down_441.filter
+0xFF37CA	PizQh6Cl1JI8LmYRrHoPYo2B/Db9Vc60wiTj72lXB4A=
         000005 
 
 0xFF37CB	6wlRK1/otiPpPczQ9dRpymZkmvbBdZJ/r4UjTeXNb9E=
@@ -9630,8 +9690,8 @@ Region: DM2_REGION
         2725DC 1F7845 184C53 11B69D 
         0BC6DC 0687CE 01FF49 
 
-0xFF392F	$M.iir_resamplev2.Up_160_Down_441.filter
 0xFF392F	aC4FXoc080wwSibENSu03pEKiXZkrkN+BJbWM3lqr2c=
+0xFF392F	$M.iir_resamplev2.Up_160_Down_441.filter
         000002 
 
 0xFF3930	oq1jxMgRqaJfjYPIb+kKvkkHmHozvbbXCpkZEU85PdI=
@@ -9819,8 +9879,8 @@ Region: DM2_REGION
         7FFFFF 7F451D 7DD238 7BACFF 
         78DDCF 756F81 716F2D 6CEBDE 
 
-0xFF39B1	$M.iir_resamplev2.Up_1_Down_3.filter
 0xFF39B1	XEQbFP3iLsP6VkDQc7eRGVVuHlbzr/zWT7dRzn2BLXU=
+0xFF39B1	$M.iir_resamplev2.Up_1_Down_3.filter
         000003 
 
 0xFF39B2	6ZFkJp0OOq6aRKN/nOaAxvq0VovjyvGrb6qHKzOeFaI=
@@ -9886,8 +9946,8 @@ Region: DM2_REGION
 0xFF39D8	sALG/QIHChajOhVGoqN8ZNXCPOk05GWQfUH39a7QrVM=
         000004 
 
-0xFF39D9	$M.iir_resamplev2.Up_3_Down_1.filter
 0xFF39D9	hYlAJWD/r1b5Q4NmAR4qGUPagHetnC/MaJhAZOcQB6c=
+0xFF39D9	$M.iir_resamplev2.Up_3_Down_1.filter
         000000 
 
 0xFF39DA	Z+seja8nvpfgx18AF0uBOTOzisx/EjRDak5t5K6VpmU=
@@ -9953,8 +10013,8 @@ Region: DM2_REGION
 0xFF3A00	1bWec0vQbNf/wNhCTL0aiinpbvTPDPxTIennB4UXtaw=
         000004 
 
-0xFF3A01	jxFbxuBexMDWJAFfrKGvF54GIWTDSAGmrU0GMNCR4hM=
 0xFF3A01	$M.iir_resamplev2.Up_2_Down_1.filter
+0xFF3A01	jxFbxuBexMDWJAFfrKGvF54GIWTDSAGmrU0GMNCR4hM=
         000000 
 
 0xFF3A02	Jrq2xbjgOcrarWzgjEfgZPJdPIk66CJ/uJpiIjBngak=
@@ -10211,8 +10271,8 @@ Region: DM2_REGION
 0xFF3A94	p2MrFxGh8I952WqDfWqG0sD1Zj1YB+ZzynlHBWUZc4k=
         000003 
 
-0xFF3A95	9zaa7GTtjE2N8PJ0ozasTGxr7p9U0b9hH5yKgR7ABPo=
 0xFF3A95	$M.iir_resamplev2.Up_4_Down_1.filter
+0xFF3A95	9zaa7GTtjE2N8PJ0ozasTGxr7p9U0b9hH5yKgR7ABPo=
         000000 
 
 0xFF3A96	QRsrN+2u8DLc1iXHfTN3dC5ZFOI0RMxT5IhLakbFCUo=
@@ -10413,8 +10473,8 @@ Region: DM2_REGION
         000000 
 
 0xFF3B86	$M.system_config.data.snd_funcs
-        000B46 000BEC 000000 000DBD 
-        000BCA 000000 000DBD FF3BD7 
+        000B46 000BEC 000000 000D49 
+        000BCA 000000 000D49 FF3BD7 
         000000 000AC5 000BEC 000000 
         000000 
 
@@ -10505,11 +10565,11 @@ Region: DM2_REGION
         000005 000003 FFFFF8 
 
 0xFF3BEF	$sco_data.sco_decoder
-        000CB6 000BBD 000FF3 000000 
-        266666 
+        000CB6 000BBD 001022 000000 
+        4CCCCD 
 
 0xFF3BF4	$sco2_data.sco_decoder
-        000CB6 000BBD 000FF3 000000 
+        000CB6 000BBD 001022 000000 
         266666 
 
 0xFF3BF9	$M.sco2_timing.sco_param.message_struc
@@ -10534,7 +10594,7 @@ Region: DM2_REGION
         000000 0008F3 0008FC 
 
 0xFF3C13	$cbops.volume
-        000DEE 000C32 000D49 
+        000E1D 000C32 000D94 
 
 0xFF3C16	$M.system_config.data.send_mode_table
         FF3B86 000000 
@@ -10578,45 +10638,48 @@ Region: DM2_REGION
 0xFF3C25	$M.sco2_timing.rcv_proc_trigger2
         000000 
 
-0xFF3C26	$cbuffer.write_port_disconnect_address
+0xFF3C26	$in2_count
         000000 
 
-0xFF3C27	$cbuffer.read_port_disconnect_address
+0xFF3C27	$cbuffer.write_port_disconnect_address
         000000 
 
-0xFF3C28	$error.handler
+0xFF3C28	$cbuffer.read_port_disconnect_address
         000000 
 
-0xFF3C29	$interrupt.block_count
+0xFF3C29	$error.handler
         000000 
 
-0xFF3C2A	$message.last_addr
+0xFF3C2A	$interrupt.block_count
+        000000 
+
+0xFF3C2B	$message.last_addr
         FFFFFF 
 
-0xFF3C2B	$message.queue_write_ptr
+0xFF3C2C	$message.queue_write_ptr
         000000 
 
-0xFF3C2C	$message.long_message_size
+0xFF3C2D	$message.long_message_size
         000000 
 
-0xFF3C2D	$pskey.last_addr
+0xFF3C2E	$pskey.last_addr
         FFFFFF 
 
-0xFF3C2E	$timer.last_addr
+0xFF3C2F	$timer.last_addr
         FFFFFF 
 
-0xFF3C2F	$M.frame_sync.handlers.LOOP_COUNT
+0xFF3C30	$M.frame_sync.handlers.LOOP_COUNT
         000000 
 
 ========================================================================
 memusage
 ========================================================================
 DATA:
-  DM1_REGION: 3121 of 32768 words used, 29647 words available in 1 blocks
-  DM2_REGION: 3120 of 32768 words used, 29648 words available in 1 blocks
-TOTAL: 6241 of 65536 words used, 59295 words available in 2 blocks
+  DM1_REGION: 3122 of 32768 words used, 29646 words available in 1 blocks
+  DM2_REGION: 3121 of 32768 words used, 29647 words available in 1 blocks
+TOTAL: 6243 of 65536 words used, 59293 words available in 2 blocks
 
 CODE:
-  PM_REGION: 4084 of 11264 words used, 7180 words available in 1 blocks
-TOTAL: 4084 of 11264 words used, 7180 words available in 1 blocks
+  PM_REGION: 4131 of 11264 words used, 7133 words available in 1 blocks
+TOTAL: 4131 of 11264 words used, 7133 words available in 1 blocks
 

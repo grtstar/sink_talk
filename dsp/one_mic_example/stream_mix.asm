@@ -22,9 +22,36 @@
 
 #include "stream_mix.h"
 
-.MODULE $M.stream_mix;
+.MODULE $M.stream_pwr;
     .CODESEGMENT PM;
-    
+    $stream_pwr:
+    //push rLink;
+//    push I0;
+    // r0 = buf ptr
+    // r1 = length
+//    r10 = r1;
+//    I0 = r0;
+//    do calc_pwr;
+//    r0 = M[I0, 1];
+//    r7 = ABS r0;
+//    r8 = r8 + r7;
+//calc_pwr:
+//    null = r8 - 20000;
+//    r0 = 0;
+//    if NEG jump pwr_get;
+    r0 = 1;
+//pwr_get:
+//    pop I0;
+    //pop rLink;
+    rts;
+.ENDMODULE;
+
+.MODULE $M.stream_mix;
+    .DATASEGMENT DM;
+    .VAR $in1_count = 0;
+    .VAR $in2_count = 0;
+    .CODESEGMENT PM;
+
 $stream_mix:
    // Pointer to the stream copy data struc
    I2 = r7;    
@@ -75,16 +102,69 @@ $stream_mix:
                                    
    r4 = M[r4], r2 = M[I2,M1];       // OFFSET_PTR_EXPONENT                   
    // r0 = first input ch1                      
-   r5 = M[r5], r0 = M[I0,M1];       // first sample CH1               
+   r5 = M[r5] ;            
    // r1 = first input ch2
-   r6 = M[r2], r1 = M[I1,M1];       // first sample CH2       
+   r6 = M[r2];
    
+//   r7 = ABS r0; 
+//   null = r7 - 100;
+//   if POS jump copy;
+//   r0 = 0;
    // Sum & Copy
+   r9 = I0;
+   r8 = 0;
+   r10 = r3;
+   do calc_pwr1;
+   r0 = M[I0, 1];
+   r7 = ABS r0;
+   r8 = r8 + r7;
+calc_pwr1:  
+   I0 = r9;
+   null = r8 - 2500000;
+   if NEG jump pwr2;
+   r0 = 500;
+   M[$in1_count] = r0;
+pwr2:   
+   r9 = I1;
+   r8 = 0;
+   r10 = r3;
+   do calc_pwr2;
+   r0 = M[I1, 1];
+   r7 = ABS r0;
+   r8 = r8 + r7;
+calc_pwr2:
+   I1 = r9;
+   null = r8 - 2500000;
+   if NEG jump check_cnt1;
+   r0 = 500;
+   M[$in2_count] = r0;   
+check_cnt1:
+   null = M[$in1_count];
+   if POS jump dec_cnt1;
+   r4 = 0;
+   jump check_cnt2;
+dec_cnt1:
+   r0 = M[$in1_count];
+   r0 = r0 - 1;
+   M[$in1_count] = r0;
+check_cnt2:
+   null = M[$in2_count];
+   if POS jump dec_cnt2;
+   r5 = 0;
+   jump copy;
+dec_cnt2:
+   r0 = M[$in2_count];
+   r0 = r0 - 1;
+   M[$in2_count] = r0; 
+copy:
+   r10 = r3;
    do lp_stream_copy;
-      // CH1 * CH1_Mantisa    
-      rMAC = r0 * r4, r0 = M[I0,M1];   
+      // CH1 * CH1_Mantisa   
+      r0 = M[I0,M1];
+      rMAC = r0 * r4;   
       // CH2 * CH2_Mantisa 
-      rMAC = rMAC + r1 * r5, r1 = M[I1,M1];   
+      r1 = M[I1,M1];
+      rMAC = rMAC + r1 * r5;  
       // Shift for exponent
       r2 = rMAC ASHIFT r6;             
       // Save Output (r2)

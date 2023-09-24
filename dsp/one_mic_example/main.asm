@@ -697,7 +697,7 @@
             $frame_sync.sco_decoder.pcm.process,         // DECODE_FUNC
             $frame_sync.sco_decoder.pcm.initialize,      // RESET_FUNC
             0,                                // DATA_PTR
-            0.3;                              // THRESHOLD (between 0 and 1) //wmsn: this field is for PLC only
+            0.6;                              // THRESHOLD (between 0 and 1) //wmsn: this field is for PLC only
 
 #if uses_PLC
    .VAR/DM1 buffer_speech[$plc100.SP_BUF_LEN_NB];
@@ -734,7 +734,7 @@
 #if uses_16kHz
                    1.0,                               // PER_THRESHOLD_FIELD:  6
 #else
-                   0.3,                               // PER_THRESHOLD_FIELD:  6
+                   0.6,                               // PER_THRESHOLD_FIELD:  6
 #endif
                    0 ...;
 
@@ -860,7 +860,7 @@
 #if uses_16kHz
                    1.0,                               // PER_THRESHOLD_FIELD:  6
 #else
-                   0.3,                               // PER_THRESHOLD_FIELD:  6
+                   0.6,                               // PER_THRESHOLD_FIELD:  6
 #endif
                    0 ...;
 
