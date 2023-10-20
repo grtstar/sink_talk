@@ -25,7 +25,7 @@ NOTES
 #include "csr_cvc_common_dsp_if.h"
 #include "csr_cvc_common_dsp_message_handler.h"
 #include "csr_cvc_common_state_machine.h"
-
+#include "csr_cvc_common_ctx.h"
     /*the task message handler*/
 static void message_handler (Task task, MessageId id, Message message);
 

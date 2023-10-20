@@ -35,7 +35,8 @@ ifneq (, $(findstring -DINCLUDE_CVC,$(DEFS)))
 #  1 mic cVc
 image/cvc_headset/cvc_headset.kap :
 	$(mkdir) image/cvc_headset
-	$(copyfile) ../../kalimba/apps/cvc_headset/image/cvc_headset/cvc_headset.kap $@
+	$(copyfile) dsp/cvc_headset/image/cvc_headset/cvc_headset.kap $@
+    #$(copyfile) ../../kalimba/apps/cvc_headset/image/cvc_headset/cvc_headset.kap $@
 
 #image.fs : image/cvc_headset/cvc_headset.kap
 

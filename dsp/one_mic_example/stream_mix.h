@@ -15,8 +15,9 @@
 .CONST      $stream_mix.OFFSET_PTR_CH1_MANTISSA   3;
 .CONST      $stream_mix.OFFSET_PTR_CH2_MANTISSA   4;
 .CONST      $stream_mix.OFFSET_PTR_EXPONENT       5;
+.CONST      $stream_mix.OFFSET_POWER              6;
 
-.CONST      $stream_mix.STRUC_SIZE                6;
+.CONST      $stream_mix.STRUC_SIZE                7;
 
 #endif // stream_mix_H
 

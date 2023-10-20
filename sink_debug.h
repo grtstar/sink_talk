@@ -84,7 +84,7 @@ void printVmLogsInTestSystem (const char *format, ...);
         /* BLE transport / messages Debug */
         #define DEBUG_BLEx
         /* Button Manager debug */
-        #define DEBUG_BUT_MANx
+        #define DEBUG_BUT_MAN
         /* Low Level Button Parsing Debug */
         #define DEBUG_BUTTONSx
         /* Call Manager Debug */
@@ -161,7 +161,7 @@ void printVmLogsInTestSystem (const char *format, ...);
         /* Debug Subwoofer Debug */
         #define DEBUG_SWATx
         #define DEBUG_TONESx
-        #define DEBUG_USBx
+        #define DEBUG_USB
 
         /* Debug Voice Assistant (VA) module */
         #define DEBUG_VAx

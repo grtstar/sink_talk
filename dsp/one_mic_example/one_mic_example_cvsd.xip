@@ -2,6 +2,8 @@
  <folder name="Header Files" >
   <file path="one_mic_example.h" />
   <file path="stream_copy.h" />
+  <file path="stream_mix.h" />
+  <file path="../../../sink-talk2/dsp/one_mic_example/stream_vad.h" />
  </folder>
  <file path="one_mic_example_config.asm" >
   <properties>
@@ -13,6 +15,7 @@
  <file path="one_mic_example_system.asm" />
  <file path="sco_decode2.asm" />
  <file path="stream_mix.asm" />
+ <file path="stream_vad.asm" />
  <properties currentconfiguration="Release" >
   <configuration name="Release" >
    <property key="BUILDENV" >0</property>

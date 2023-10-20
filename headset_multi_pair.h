@@ -5,6 +5,7 @@
 bool mtIsInquirySession(void);
 bool mtInquiryPair(inquiry_session session, bool remind);
 void mtInquiryStop(void);
+void mtInquiryStopOnly(void);
 uint8* mtGetAdvData(void);
 uint8 mtGetAdvDataLen(void);
 bool sinkMultiTalkPairServiceEnabled(void);

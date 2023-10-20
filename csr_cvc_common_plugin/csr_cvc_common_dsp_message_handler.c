@@ -16,6 +16,7 @@ NOTES
 #include "csr_cvc_common_if.h"
 #include "csr_cvc_common_dsp_if.h"
 #include "csr_cvc_common_state_machine.h"
+#include "csr_cvc_common_ctx.h"
 
 #include <stddef.h>
 #include <string.h>
@@ -174,6 +175,15 @@ void CsrCvcCommonDspMessageHandler( CvcPluginTaskdata *task ,uint16 id, Message 
                 }
                 break;   
 
+                case 29446:
+                {                    
+                    AUDIO_SIGNAL_DETECT_MSG_T *message = PanicUnlessMalloc(sizeof(AUDIO_SIGNAL_DETECT_MSG_T));
+                    CVC_t* CVC = CsrCvcGetCtx();
+                    message->signal_detected = m->a;
+                    MessageSend(CVC->app_task, 29446, message);
+                    PRINT(("Input level: %d -----------------------\n", m->a));
+                }
+                break;
                 default:
                 break;
             }

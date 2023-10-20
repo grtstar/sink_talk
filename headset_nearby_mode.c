@@ -115,7 +115,7 @@ void ACLProcessChildDataNearby(const uint8_t *data, int size)
 bool mtConnectNearby(bdaddr *bd_addr)
 {
     MT_DEBUG(("MT: mtConnectMearby to "));
-    mtInquiryStop();
+    mtInquiryStopOnly();
     MT_DEBUG_ADDR((*bd_addr));
 
     if (mt->mt_device[MT_RIGHT].state < MT_L2CAP_WaitConnect)

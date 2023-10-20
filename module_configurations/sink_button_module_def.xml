@@ -9876,22 +9876,22 @@
                     Id="Pattern Row" >
                     <PatternArrayConfigItem 
                         ShortId="pio_mask" 
-                        DefaultValue="0. | 1." />
+                        DefaultValue="0." />
                     <PatternArrayConfigItem 
                         ShortId="vreg_enabled" 
-                        DefaultValue="True" />
-                    <PatternArrayConfigItem 
-                        ShortId="chg_enabled" 
                         DefaultValue="False" />
                     <PatternArrayConfigItem 
+                        ShortId="chg_enabled" 
+                        DefaultValue="True" />
+                    <PatternArrayConfigItem 
                         ShortId="state_mask" 
-                        DefaultValue="Powering On" />
+                        DefaultValue="Connectable | Connected | Streaming A2DP" />
                     <PatternArrayConfigItem 
                         ShortId="user_event" 
-                        DefaultValue="Enter Driverless DFU Mode" />
+                        DefaultValue="Enter DFU Mode" />
                     <PatternArrayConfigItem 
                         ShortId="type" 
-                        DefaultValue="VVLONG" />
+                        DefaultValue="DOUBLE" />
                 </PatternArrayRow>
                 <PatternArrayRow 
                     Node="Basic" 

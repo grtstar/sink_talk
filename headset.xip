@@ -480,7 +480,7 @@
  <file path="headset.mak" />
  <properties currentconfiguration="Headset-Gaming" >
   <configuration name="Headset-Gaming" >
-   <property key="ahi_transport" >2</property>
+   <property key="ahi_transport" >1</property>
    <property key="ble_power_off_behaviour" >0</property>
    <property key="ble_support" >1</property>
    <property key="board" >0</property>

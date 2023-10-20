@@ -49,6 +49,9 @@
         "pio.h": "c",
         "headset_multi_comm.h": "c",
         "adc_if.h": "c",
-        "aghfp.h": "c"
+        "aghfp.h": "c",
+        "kalimba_if.h": "c",
+        "kalimba_standard_messages.h": "c",
+        "message.h": "c"
     }
 }

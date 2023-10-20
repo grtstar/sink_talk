@@ -70,6 +70,17 @@ void mtInquiryStop(void)
     MessageCancelAll(&theSink.task, EventSysRssiPairReminder);
     sinkBlePowerOffEvent();
 }
+void mtInquiryStopOnly(void)
+{
+#if 0
+    if(inqSesson == inquiry_session_ag || inqSesson == inquiry_session_2talk_pairing)
+    {
+        inquiryStop();
+    }
+    inqSesson = inquiry_session_normal;
+    sinkBlePowerOffEvent();
+#endif
+}
 
 uint8* mtGetAdvData(void)
 {

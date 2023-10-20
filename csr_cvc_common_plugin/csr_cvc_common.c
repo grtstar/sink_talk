@@ -305,6 +305,11 @@ void CsrCvcPluginDisconnect( CvcPluginTaskdata *task )
 
         PRINT(("CVC: Disconnected\n"));
     }
+    {
+        AUDIO_SIGNAL_DETECT_MSG_T *message = PanicUnlessMalloc(sizeof(AUDIO_SIGNAL_DETECT_MSG_T));
+        message->signal_detected = 0;
+        MessageSend(CVC->app_task, 29446, message);
+    }
 
     CVC->cvc_running = FALSE;
     CVC->audio_sink = NULL;

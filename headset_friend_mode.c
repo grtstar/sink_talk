@@ -80,7 +80,7 @@ bool mtConnect(bdaddr *bd_addr)
 {
     MT_DEBUG(("MT: mtConnect to "));
     MT_DEBUG_ADDR((*bd_addr));
-    mtInquiryStop();
+    mtInquiryStopOnly();
     if (RouteTableIsNotSaved(&mt->route_table) || RouteTableIsContain(&mt->route_table, bd_addr))
     {
         if (mt->mt_device[MT_RIGHT].state < MT_L2CAP_WaitConnect)

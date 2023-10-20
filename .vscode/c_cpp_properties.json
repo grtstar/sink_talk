@@ -5,7 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "C:\\ADK_CSR867x.WIN.4.4.0.21\\src\\lib/**",
-                "C:\\ADK_CSR867x.WIN.4.4.0.21\\tools\\include/**"
+                "C:\\ADK_CSR867x.WIN.4.4.0.21\\tools\\include/**",
                 "C:\\ADK_CSR867x.WIN.4.4.0.21\\tools\\include\\firmware"
             ],
             "defines": [
@@ -18,7 +18,8 @@
                 "ENABLE_PEER",
                 "ENABLE_AG",
                 "GATT_ENABLED",
-                "ENABLE_UPGRADE"
+                "ENABLE_UPGRADE",
+                "ENABLE_USB"
             ],
             "windowsSdkVersion": "10.0.19041.0",
             "compilerPath": "C:/Program Files/Microsoft Visual Studio/2022/Preview/VC/Tools/MSVC/14.33.31517/bin/Hostx64/x64/cl.exe",

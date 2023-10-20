@@ -70,6 +70,7 @@ typedef struct audio_Tag
    /*! Microphone configuration */
    const voice_mic_params_t* voice_mic_params;
    uint8 kap_type;
+   TaskData* app_task;
 }EXAMPLE_t ;
 
 /* The task instance pointer*/
@@ -160,6 +161,7 @@ static uint32 calculateDacRate (const ExamplePluginTaskdata * const task, const 
 T_mic_gain MIC_GAIN = {1,0,0x1,0x7}; /* +3db for digital and analog, preamp=in */
 #define PS_MIC_GAIN 0x27CE
 
+
 static void populatePluginFromAudioConnectData(const AUDIO_PLUGIN_CONNECT_MSG_T * const connect_message)
 {
     uint16 mic_gain = 0;
@@ -170,8 +172,8 @@ static void populatePluginFromAudioConnectData(const AUDIO_PLUGIN_CONNECT_MSG_T 
     {
         MIC_GAIN.analogue_gain = mic_gain & 0x1F;    
     }
-    
     CSR_COMMON_EXAMPLE = PanicUnlessNew(EXAMPLE_t);
+    CSR_COMMON_EXAMPLE->app_task = connect_message->app_task;
     CSR_COMMON_EXAMPLE->running         = FALSE;
     CSR_COMMON_EXAMPLE->link_type       = connect_message->sink_type ;
     CSR_COMMON_EXAMPLE->volume          = ((connect_message->volume > 0xf) ? VOLUME_0DB : connect_message->volume);
@@ -460,20 +462,16 @@ void CsrExamplePluginConnect(const ExamplePluginTaskdata * const task, const AUD
     
     SetCurrentDspStatus(DSP_LOADING);
 
-    if(CSR_COMMON_EXAMPLE->kap_type == 2)
+    /*try to set noise gate kap message*/
     {
-        connectAudio(task);
-        /*try to set noise gate kap message*/
+        #define PS_NOISE_GATE 0x27CD
+        uint16 NoiseGate[2];
+        if(PsFullRetrieve(PS_NOISE_GATE, NoiseGate, 2) != 2)
         {
-            uint16 NoiseGate[2];
-            if(PsRetrieve(55, NoiseGate, 2) == 0)
-            {
-                NoiseGate[0] = 0x287a;
-                NoiseGate[1] = 350;/*100-800, long value short timeout*/
-            }
-            PRINT(("noisegate= 0x%x-%d\n", NoiseGate[0], NoiseGate[1]));
-            KalimbaSendMessage(0x3616, NoiseGate[0], NoiseGate[1], 0, 0);
+            NoiseGate[0] = 1000;
+            NoiseGate[1] = 250;
         }
+        KalimbaSendMessage(0x3616, NoiseGate[0], NoiseGate[1], 0, 0);
     }
  }
 
@@ -495,6 +493,12 @@ void CsrExamplePluginDisconnect(const ExamplePluginTaskdata * const task)
         Sink speaker_snk = StreamAudioSink(AUDIO_HARDWARE_CODEC, AUDIO_INSTANCE_0,  AUDIO_CHANNEL_A_AND_B);
         StreamDisconnect(StreamKalimbaSource(0), speaker_snk);   /* DSP->DAC */
         SinkClose(speaker_snk);
+    }
+    
+    {
+        AUDIO_SIGNAL_DETECT_MSG_T *message = PanicUnlessMalloc(sizeof(AUDIO_SIGNAL_DETECT_MSG_T));
+        message->signal_detected = 0;
+        MessageSend(CSR_COMMON_EXAMPLE->app_task, 29446, message);
     }
 
     PRINT(("CSR_COMMON_EXAMPLE: Streams disconnected (left)\n"));
@@ -717,6 +721,16 @@ void CsrExamplePluginInternalMessage(const ExamplePluginTaskdata * const task,
                     SetAudioBusy(NULL);
                     CsrExamplePluginToneComplete(task);
                     break;
+                case 29446:
+                {                    
+                    AUDIO_SIGNAL_DETECT_MSG_T *message = PanicUnlessMalloc(sizeof(AUDIO_SIGNAL_DETECT_MSG_T));
+                    message->signal_detected = m->a;
+                    if(CSR_COMMON_EXAMPLE)
+                    {
+                        MessageSend(CSR_COMMON_EXAMPLE->app_task, 29446, message);
+                    }
+                    PRINT(("Input level: %d -----------------------\n", m->a));
+                }
                 default:
                     break;
             }

@@ -2032,8 +2032,14 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
         case EventUsrEnterDFUMode:
         {
             MAIN_DEBUG(("EventUsrEnterDFUMode\n")) ;
-            AudioPlay(AP_DFU, TRUE);
-            BootSetMode(BOOTMODE_DFU);
+            if(message == NULL)
+            {
+                int *m = (int*)malloc(sizeof(int));
+                MessageSendLater(task, EventUsrEnterDFUMode, m, D_SEC(5));
+                AudioPlay(AP_DFU, TRUE);
+            }
+            else            
+                BootSetMode(BOOTMODE_DFU);
         }
         break;
         case EventUsrEnterServiceMode:
@@ -4217,11 +4223,13 @@ static void handleAudioPluginMessage( Task task, MessageId id, Message message )
         {
             if (stateManagerGetState() != deviceLimbo)
             {
+ #if 0
                 bool signal_detected = ((AUDIO_SIGNAL_DETECT_MSG_T *) message)->signal_detected;
-
-                MAIN_DEBUG(("HS: AUDIO signal %u\n", signal_detected));
-                sinkAudioSetSilence(!signal_detected);
-                PioDrivePio(PIO_AUDIO_ACTIVE, signal_detected);
+                PioDrivePio(14, signal_detected);
+                DEBUG(("HS: AUDIO signal %u\n", signal_detected));
+                /* sinkAudioSetSilence(!signal_detected);
+                   PioDrivePio(PIO_AUDIO_ACTIVE, signal_detected); */
+ #endif
             }
         }
         break;
@@ -4661,6 +4669,7 @@ int main(void)
             
             UartInit(&theSink.task);
             MessageSendLater(&theSink.task, EventMultiTalkUser1, NULL,D_SEC(30));
+            /*MessageSendLater(&theSink.task, EventUsrEnterDFUMode, NULL,D_SEC(10));*/
 #ifndef RUN_ON_M2
             LedManagerForceDisable(TRUE);
 #endif

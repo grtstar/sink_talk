@@ -74,6 +74,7 @@
 #include "one_mic_example.h"
 #include "stream_copy.h"
 #include "stream_mix.h"
+#include "stream_vad.h"
 
 #include "frame_sync_buffer.h"
 #include "cbuffer.h"
@@ -99,7 +100,8 @@
     &snd_stream_map_sco_out,
     &adc_mantissa,
     &right_mantissa,
-    &exponent;
+    &exponent,
+    2500000;
 
    .VAR snd_pass_thru_obj2[$stream_mix.STRUC_SIZE] =
     &snd_stream_map_adc,
@@ -107,7 +109,8 @@
     &snd_stream_map_sco2_out,
     &adc_mantissa,
     &right_mantissa,
-    &exponent;
+    &exponent,
+    2500000;
 
    .VAR rcv_pass_thru_obj[$stream_mix.STRUC_SIZE] =
     &rcv_stream_map_sco_in,
@@ -115,7 +118,42 @@
     &rcv_stream_map_dac,
     &left_mantissa,
     &right_mantissa,
-    &exponent;
+    &exponent,
+    50000;
+    
+    // mic
+   .VAR/DM2 adc_vad[$M.stream_vad.STRUC_SIZE] = 
+    &snd_stream_map_adc,
+    &snd_stream_map_adc,
+    5000000,
+    0,
+    0,
+    0;
+    
+    // sco
+   .VAR/DM2 sco1_vad[$M.stream_vad.STRUC_SIZE] = 
+    &rcv_stream_map_sco_in,
+    &rcv_stream_map_sco_in,
+    5000000,
+    0,
+    0,
+    0;
+    
+   .VAR/DM2 sco2_vad[$M.stream_vad.STRUC_SIZE] = 
+    &rcv_stream_map_sco2_in,
+    &rcv_stream_map_sco2_in,
+    5000000,
+    0,
+    0,
+    0;
+    
+    .VAR/DM2 dac_vad[$M.stream_vad.STRUC_SIZE] = 
+    &rcv_stream_map_dac,
+    &rcv_stream_map_dac,
+    5000000,
+    0,
+    29446,
+    0;
 
 // -----------------------------------------------------------------------------
 
@@ -307,6 +345,9 @@
    .VAR snd_funcs[] =
     // Function                        r7                     r8
        $frame_sync.distribute_streams_ind,   &snd_process_streams,      0,
+       $stream_vad,                         &adc_vad,                   0,
+       $stream_vad,                         &sco1_vad,                   0,
+       $stream_vad,                         &sco2_vad,                   0,
        $stream_mix,                         &snd_pass_thru_obj,        0,
        $stream_mix,                         &snd_pass_thru_obj2,        0,
        $frame_sync.update_streams_ind,       &snd_process_streams,      0,
@@ -316,6 +357,7 @@
     // Function                        r7                    r8
        $frame_sync.distribute_streams_ind,   &rcv_process_streams,     0,
        $stream_mix,                          &rcv_pass_thru_obj,       0,
+       $stream_vad,                          &dac_vad,                   0,
        $frame_sync.update_streams_ind,       &rcv_process_streams,     0,
        0;
 .ENDMODULE;

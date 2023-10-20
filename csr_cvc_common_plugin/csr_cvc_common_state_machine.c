@@ -16,6 +16,13 @@ NOTES
 #include <audio.h>
 #include <stddef.h>
 #include <print.h>
+#include <kalimba.h>
+#include <kalimba_standard_messages.h>
+#include <kalimba_if.h>
+#include <source.h>
+#include <app/vm/vm_if.h>
+#include <vmal.h>
+#include <ps.h>
 
 #define STATE_ERROR(state, id)  \
 { \
@@ -110,6 +117,17 @@ static void handleEventDspLoaded(void)
        the dsp to be sent to the message_handler function. */
     SetCurrentDspStatus(DSP_LOADING);
     cvcSetState(cvc_state_loading);
+
+    {
+        #define PS_NOISE_GATE 0x27CD
+        uint16 NoiseGate[2];
+        if(PsFullRetrieve(PS_NOISE_GATE, NoiseGate, 2) != 2)
+        {
+            NoiseGate[0] = 1000;
+            NoiseGate[1] = 250;
+        }
+        KalimbaSendMessage(0x3616, NoiseGate[0], NoiseGate[1], 0, 0);
+    }
 }
 
 /*******************************************************************************

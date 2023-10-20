@@ -1006,6 +1006,8 @@ $main:
    // initialise the profiler library
    call $profiler.initialise;
 #endif
+    //
+   call $NoiseGate.initialise;
 
 #ifdef USB_DONGLE
 #else
@@ -1375,3 +1377,25 @@ irq_sco:
 
 .ENDMODULE;
 #endif
+
+.MODULE $M.NoiseGate;
+   .CODESEGMENT PM;
+   .DATASEGMENT DM;
+   .VAR  set_noise_gate_message_struc[$message.STRUC_SIZE];
+ 
+$NoiseGate.initialise:
+   $push_rLink_macro;
+   // set up noise gate
+   r1 = &set_noise_gate_message_struc;
+   r2 = 0x3616;
+   r3 = &$set_noise_gate_message_handler;
+   call $message.register_handler;
+   jump $pop_rLink_and_rts;
+$set_noise_gate_message_handler:
+   r1 = r1 LSHIFT 10;
+   M[&$M.system_config.data.adc_vad + 2] = r1;
+   r2 = r2 LSHIFT 10;
+   M[&$M.system_config.data.sco1_vad + 2] = r2;
+   M[&$M.system_config.data.sco2_vad + 2] = r2;
+   rts;
+.ENDMODULE;

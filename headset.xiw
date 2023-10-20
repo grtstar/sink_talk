@@ -3,6 +3,6 @@
  <project path="../../kalimba/apps/a2dp_sink/sbc_decoder.xip" />
  <project path="../../kalimba/apps/a2dp_low_latency_1mic/a2dp_low_latency_1mic.xip" />
  <project path="../../kalimba/apps/a2dp_sink/faststream_decoder.xip" />
- <project path="../../kalimba/apps/cvc_headset/cvc_headset.xip" />
  <project path="dsp/one_mic_example/one_mic_example_cvsd.xip" />
+ <project path="dsp/cvc_headset/cvc_headset.xip" />
 </workspace>
